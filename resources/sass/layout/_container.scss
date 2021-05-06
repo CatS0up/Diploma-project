@@ -1,0 +1,9 @@
+.container {
+    max-width: $max-page-width;
+
+    padding: 15px;
+
+    &--centered {
+        margin: 0 auto;
+    }
+}

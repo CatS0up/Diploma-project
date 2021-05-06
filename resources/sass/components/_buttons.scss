@@ -1,0 +1,12 @@
+.buttons {
+    padding: 10px 20px;
+
+    font-size: 1.1rem;
+    color: white;
+    font-weight: 500;
+    border-radius: 10px;
+
+    &--primary {
+        @include btns-behaviour($primary-color);
+    }
+}

@@ -1,0 +1,15 @@
+$max-page-width: 1350px;
+
+// colors
+$dashboard-bg: #eee;
+$dark-theme-color: #3b3b3b;
+$font-dark-bg: #9b9b9b;
+$light-blue: #0d6efd;
+$primary-color: #669cd1;
+
+// responsive breakpoints
+$breakpoints: (
+    "small": 560px,
+    "medium": 760px,
+    "large": 960px,
+);

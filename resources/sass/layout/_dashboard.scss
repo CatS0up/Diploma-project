@@ -1,0 +1,31 @@
+.dashboard {
+    @include flex();
+
+    &__content {
+        flex-grow: 1;
+    }
+
+    &__header {
+        padding-bottom: 10px;
+    }
+
+    &__stats {
+        padding-top: 50px;
+    }
+
+    // mixins
+    &__titles {
+        font-size: 1.7rem;
+        letter-spacing: 1px;
+    }
+
+    &__sections {
+        &--two-columns {
+            @include media("large") {
+                display: grid;
+                grid-template-columns: 60% auto;
+                align-items: center;
+            }
+        }
+    }
+}

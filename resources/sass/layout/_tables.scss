@@ -1,0 +1,17 @@
+.tables {
+    width: 100%;
+    text-align: left;
+
+    &__header {
+        color: #fff;
+        background-color: #6f7bd9;
+    }
+
+    &__header-cell {
+        padding: 10px 5px;
+    }
+
+    &__cell {
+        padding: 10px 5px;
+    }
+}

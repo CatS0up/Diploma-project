@@ -1,0 +1,30 @@
+html,
+body,
+.site,
+.inner-site {
+    min-height: 100%;
+}
+
+body {
+    font-family: "Lato", sans-serif;
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+button {
+    cursor: pointer;
+}
+
+input {
+    border: none;
+    outline: none;
+}
+
+.site {
+    background-color: $dashboard-bg;
+}
+
+.inner-site {
+    max-width: $max-page-width;
+    margin: 0 auto;
+}
