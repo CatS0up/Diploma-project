@@ -6129,6 +6129,7 @@ readers do not read off random characters that represent icons */
   width: auto;
 }
 
+/* COLORS */
 * {
   margin: 0;
   padding: 0;
@@ -6269,17 +6270,19 @@ input {
     gap: 20px;
   }
 }
+.dashboard__add-form {
+  margin-top: 15px;
+  padding: 20px 10px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.15);
+}
 @media (min-width: 960px) {
-  .dashboard__sections--two-columns {
+  .dashboard__add-form {
     display: grid;
     grid-template-columns: 60% auto;
     align-items: center;
   }
-}
-.dashboard__sections--rounded-container {
-  padding: 20px 10px;
-  background-color: #fff;
-  border-radius: 7px;
 }
 .dashboard__titles {
   padding: 10px 0;
@@ -6436,9 +6439,16 @@ input {
 .profile__data-group {
   padding: 20px;
 }
+.profile__options {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  gap: 10px;
+}
 .profile__headers {
   grid-column: 1/-1;
-  padding: 15px 10px;
   border-bottom: 1px solid lightgray;
 }
 .profile__pictures {
@@ -6452,8 +6462,11 @@ input {
   font-size: 1rem;
   font-weight: 700 !important;
 }
-.profile__icons {
-  padding-right: 5px;
+.profile__buttons {
+  padding: 5px;
+}
+.profile__icons--right-space {
+  padding-right: 6px;
 }
 .profile__lists {
   color: #808080;
@@ -6485,6 +6498,7 @@ input {
 }
 
 .buttons {
+  display: block;
   padding: 5px 10px;
   color: white;
   font-weight: 500;
@@ -6510,6 +6524,13 @@ input {
 }
 .buttons--success:hover, .buttons--success:focus {
   background-color: #25c87c;
+}
+.buttons--delete {
+  background-color: #3b3b3b;
+  transition: 0.2s linear;
+}
+.buttons--delete:hover, .buttons--delete:focus {
+  background-color: #616161;
 }
 
 .links--light {
@@ -6556,7 +6577,7 @@ input {
   margin-bottom: 45px;
   padding: 45px 25px 25px 25px;
   background-color: white;
-  box-shadow: 0 0 35px 5px lightgray;
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.15);
 }
 .cards__body {
   display: flex;

@@ -1,4 +1,5 @@
 .buttons {
+    display: block;
     padding: 5px 10px;
 
     color: white;
@@ -15,5 +16,9 @@
 
     &--success {
         @include bg-behaviour($success-color, 15%);
+    }
+
+    &--delete {
+        @include bg-behaviour($dark-theme-color, 15%);
     }
 }

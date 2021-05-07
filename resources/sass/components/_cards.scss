@@ -5,7 +5,7 @@
     padding: 45px 25px 25px 25px;
 
     background-color: white;
-    box-shadow: 0 0 35px 5px lightgray;
+    box-shadow: 0 0 10px 1px rgba($color: #000000, $alpha: 0.15);
 
     &__body {
         @include flex($direction: column, $align: flex-end);

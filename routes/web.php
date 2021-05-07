@@ -13,22 +13,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard.userList');
-});
+// ADMIN-Level Routes
+Route::prefix('admin')
+    ->name('admin.')
+    ->group(function () {
 
-Route::get('/index', function () {
-    return view('dashboard.index');
-});
+        Route::get('index', function () {
+            return view('dashboard.index');
+        })
+            ->name('index');
 
-Route::get('/user', function () {
-    return view('dashboard.userProfile');
-});
+        Route::get('users', function () {
+            return view('dashboard.userList');
+        })
+            ->name('get.users');
 
-Route::get('/add', function () {
-    return view('dashboard.addBook');
-});
+        Route::get('users/{id}', function () {
+            return view('dashboard.userProfile');
+        })
+            ->name('show.user');
 
-Route::get('/books', function () {
-    return view('dashboard.bookList');
-});
+        Route::get('books', function () {
+            return view('dashboard.bookList');
+        })
+            ->name('get.books');
+
+        Route::get('books/new', function () {
+            return view('dashboard.addBook');
+        })
+            ->name('add.book');
+    });

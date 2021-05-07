@@ -6,7 +6,7 @@
         <header class="headers dashboard__headers">
             <ol class="breadcrumbs dashboard__breadcrumbs">
                 <li class="breadcrumbs__item">
-                    <a href="#" class="links links--light breadcrumbs__links">
+                    <a href="{{ route('admin.index') }}" class="links links--light breadcrumbs__links">
                         Dashboard
                     </a>
                 </li>
@@ -34,12 +34,14 @@
                         </p>
 
                         <p class="profile__info">
-                            <span class="icons profile__icons far fa-envelope"></span>
+                            <span class="icons profile__icons profile__icons--right-space far fa-envelope"
+                                aria-hidden="true"></span>
                             test@gmail.com
                         </p>
 
                         <p class="profile__info">
-                            <span class="icons profile__icons fas fa-phone-volume"></span>
+                            <span class="icons profile__icons profile__icons--right-space fas fa-phone-volume"
+                                aria-hidden="true"></span>
                             123456789
                         </p>
                     </div>
@@ -64,7 +66,8 @@
 
                     <div class="profile__data-group">
                         <h4 class="titles profile__titles profile__titles--group-title">
-                            <span class="icons profile__icons far fa-address-card"></span>
+                            <span class="icons profile__icons profile__icons--right-space far fa-address-card"
+                                aria-hidden="true"></span>
                             Dane Osobowe
                         </h4>
 
@@ -93,7 +96,8 @@
 
                     <div class="profile__data-group">
                         <h4 class="titles profile__titles profile__titles--group-title">
-                            <span class="icons profile__icons fas fa-map-marker-alt"></span>
+                            <span class="icons profile__icons profile__icons--right-space fas fa-map-marker-alt"
+                                aria-hidden="true"></span>
                             Dane adresowe
                         </h4>
 
@@ -123,6 +127,18 @@
                                 123
                             </li>
                         </ul>
+                    </div>
+
+                    <div class="profile__options">
+                        <a href="#" class="buttons buttons--success profile__buttons">
+                            <span role="img" class="icons profile__icons fas fa-user-edit" aria-label="Edytuj"></span>
+                        </a>
+                        <a href="#" class="buttons buttons--danger profile__buttons">
+                            <span role="img" class="icons profile__icons fas fa-ban" aria-label="Zablokuj"></span>
+                        </a>
+                        <a href="#" class="buttons buttons--delete profile__buttons">
+                            <span role="img" class="icons profile__icons fas fa-trash" aria-label="Usuń"></span>
+                        </a>
                     </div>
                 </div>
             </div>

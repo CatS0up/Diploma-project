@@ -19,20 +19,18 @@
         }
     }
 
-    &__sections {
-        &--two-columns {
-            @include media("large") {
-                display: grid;
-                grid-template-columns: 60% auto;
-                align-items: center;
-            }
-        }
+    &__add-form {
+        margin-top: 15px;
+        padding: 20px 10px;
 
-        &--rounded-container {
-            padding: 20px 10px;
+        border-radius: 10px;
+        background-color: #fff;
+        box-shadow: 0 0 10px 1px rgba($color: #000000, $alpha: 0.15);
 
-            background-color: #fff;
-            border-radius: 7px;
+        @include media("large") {
+            display: grid;
+            grid-template-columns: 60% auto;
+            align-items: center;
         }
     }
 

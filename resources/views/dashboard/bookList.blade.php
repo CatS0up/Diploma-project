@@ -6,7 +6,7 @@
         <header class="headers dashboard__headers">
             <ol class="breadcrumbs dashboard__breadcrumbs">
                 <li class="breadcrumbs__item">
-                    <a href="#" class="links links--light breadcrumbs__links">
+                    <a href="{{ route('admin.index') }}" class="links links--light breadcrumbs__links">
                         Dashboard
                     </a>
                 </li>
@@ -18,8 +18,8 @@
 
         <section class="stats dashboard__stats">
             <div class="cards dashboard__cards">
-                <div class="icons icons--xx-large cards__icons cards__icons--orange fas fa-book">
-                </div>
+                <span class="icons icons--xx-large cards__icons cards__icons--orange fas fa-book" aria-hidden="true">
+                </span>
 
                 <div class="cards__body">
                     <h2 class="titles titles--weight-normal cards__titles">
@@ -32,8 +32,9 @@
             </div>
 
             <div class="cards dashboard__cards">
-                <div class="icons icons--xx-large cards__icons cards__icons--purple fas fa-star-half-alt">
-                </div>
+                <span class="icons icons--xx-large cards__icons cards__icons--purple fas fa-star-half-alt"
+                    aria-hidden="true">
+                </span>
 
                 <div class="cards__body">
                     <h2 class="titles titles--weight-normal cards__titles">

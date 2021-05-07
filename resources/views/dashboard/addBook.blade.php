@@ -6,7 +6,7 @@
         <header class="headers dashboard__headers">
             <ol class="breadcrumbs dashboard__breadcrumbs">
                 <li class="breadcrumbs__item">
-                    <a href="#" class="links links--light breadcrumbs__links">
+                    <a href="{{ route('admin.index') }}" class="links links--light breadcrumbs__links">
                         Dashboard
                     </a>
                 </li>
@@ -16,7 +16,7 @@
             </ol>
         </header>
 
-        <section class="dashboard__sections dashboard__sections--two-columns dashboard__sections--rounded-container">
+        <section class="dashboard__add-form">
 
             <form class="forms dashboard__forms" action="#" method="post">
 

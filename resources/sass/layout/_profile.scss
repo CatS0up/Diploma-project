@@ -52,10 +52,14 @@
         padding: 20px;
     }
 
+    &__options {
+        @include flex();
+        gap: 10px;
+    }
+
     // mixins
     &__headers {
         grid-column: 1/-1;
-        padding: 15px 10px;
 
         border-bottom: 1px solid lightgray;
     }
@@ -77,8 +81,14 @@
         }
     }
 
+    &__buttons {
+        padding: 5px;
+    }
+
     &__icons {
-        padding-right: 5px;
+        &--right-space {
+            padding-right: 6px;
+        }
     }
 
     &__lists {
