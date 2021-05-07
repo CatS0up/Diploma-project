@@ -1,12 +1,19 @@
 .buttons {
-    padding: 10px 20px;
+    padding: 5px 10px;
 
-    font-size: 1.1rem;
     color: white;
     font-weight: 500;
-    border-radius: 10px;
+    cursor: pointer;
 
     &--primary {
-        @include btns-behaviour($primary-color);
+        @include bg-behaviour($primary-color, 15%);
+    }
+
+    &--danger {
+        @include bg-behaviour($danger-color, 15%);
+    }
+
+    &--success {
+        @include bg-behaviour($success-color, 15%);
     }
 }

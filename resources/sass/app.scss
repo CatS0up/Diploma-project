@@ -19,16 +19,17 @@
 
 // Layouts
 @import "layout/container";
-@import "layout/sections";
 @import "layout/navigation";
-@import "layout/header";
 @import "layout/sidebar";
 @import "layout/menu";
 @import "layout/dashboard";
 @import "layout/forms";
 @import "layout/tables";
+@import "layout/profile";
+@import "layout/lists";
 
 // Components
+@import "components/headers";
 @import "components/titles";
 @import "components/buttons";
 @import "components/links";

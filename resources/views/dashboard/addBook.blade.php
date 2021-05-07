@@ -3,10 +3,10 @@
 @section('inner-content')
 
     <div class="container dashboard__container">
-        <header class="header dashboard__header">
+        <header class="headers dashboard__headers">
             <ol class="breadcrumbs dashboard__breadcrumbs">
                 <li class="breadcrumbs__item">
-                    <a href="#" class="links breadcrumbs__links">
+                    <a href="#" class="links links--light breadcrumbs__links">
                         Dashboard
                     </a>
                 </li>
@@ -16,7 +16,7 @@
             </ol>
         </header>
 
-        <section class="sections dashboard__sections dashboard__sections--two-columns">
+        <section class="dashboard__sections dashboard__sections--two-columns dashboard__sections--rounded-container">
 
             <form class="forms dashboard__forms" action="#" method="post">
 

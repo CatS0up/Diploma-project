@@ -1,12 +1,26 @@
 .cards {
     position: relative;
-    min-height: 200px;
+    min-height: 150px;
     margin-bottom: 45px;
+    padding: 45px 25px 25px 25px;
 
     background-color: white;
     box-shadow: 0 0 35px 5px lightgray;
 
+    &__body {
+        @include flex($direction: column, $align: flex-end);
+    }
+
+    &__text {
+        font-size: 1.7rem;
+    }
+
     // Mixins
+    &__titles {
+        color: $text-muted-color;
+        font-size: 1.2rem;
+    }
+
     &__icons {
         position: absolute;
         top: -15%;
@@ -14,8 +28,21 @@
         padding: 15px 20px;
 
         color: white;
-        background-color: #fbab7e;
-        background-image: linear-gradient(62deg, #fbab7e 0%, #f7ce68 100%);
         border-radius: 10px;
+
+        &--orange {
+            background-color: #fbab7e;
+            background-image: linear-gradient(62deg, #fbab7e 0%, #f7ce68 100%);
+        }
+
+        &--red {
+            background-color: #ff873b;
+            background-image: linear-gradient(147deg, #ff873b 0%, #ff2525 74%);
+        }
+
+        &--purple {
+            background-color: #2191fd;
+            background-image: linear-gradient(19deg, #2191fd 0%, #b721ff 100%);
+        }
     }
 }

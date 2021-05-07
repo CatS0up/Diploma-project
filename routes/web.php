@@ -14,5 +14,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    return view('dashboard.userList');
+});
+
+Route::get('/index', function () {
     return view('dashboard.index');
+});
+
+Route::get('/user', function () {
+    return view('dashboard.userProfile');
+});
+
+Route::get('/add', function () {
+    return view('dashboard.addBook');
+});
+
+Route::get('/books', function () {
+    return view('dashboard.bookList');
 });

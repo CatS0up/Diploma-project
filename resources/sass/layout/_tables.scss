@@ -1,17 +1,55 @@
 .tables {
     width: 100%;
+    overflow: hidden;
+
     text-align: left;
+    background-color: #fff;
+    border-radius: 10px 10px 10px 10px;
 
     &__header {
         color: #fff;
         background-color: #6f7bd9;
     }
 
+    &__row {
+        @include flex($direction: column);
+
+        @include media("large") {
+            display: table-row;
+        }
+
+        &:nth-child(2n) {
+            background-color: #f8f6ff;
+        }
+    }
+
     &__header-cell {
-        padding: 10px 5px;
+        padding: 10px 15px;
     }
 
     &__cell {
-        padding: 10px 5px;
+        @include flex($justify: space-between);
+        padding: 10px 15px;
+
+        color: $text-muted-color;
+
+        @include media("large") {
+            display: table-cell;
+        }
+
+        &:before {
+            content: attr(data-label);
+            text-transform: uppercase;
+            font-weight: bold;
+
+            @include media("large") {
+                content: "";
+            }
+        }
+    }
+
+    &__group {
+        @include flex($justify: flex-end, $align: center);
+        gap: 10px;
     }
 }

@@ -11,12 +11,12 @@
 
     &__stats {
         padding-top: 50px;
-    }
 
-    // mixins
-    &__titles {
-        font-size: 1.7rem;
-        letter-spacing: 1px;
+        @include media("medium") {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(175px, 1fr));
+            gap: 20px;
+        }
     }
 
     &__sections {
@@ -27,5 +27,21 @@
                 align-items: center;
             }
         }
+
+        &--rounded-container {
+            padding: 20px 10px;
+
+            background-color: #fff;
+            border-radius: 7px;
+        }
+    }
+
+    // mixins
+    &__titles {
+        padding: 10px 0;
+
+        color: $text-muted-color;
+        font-size: 1.7rem;
+        letter-spacing: 1px;
     }
 }

@@ -1,5 +1,9 @@
 .links {
     // mixins
+    &--light {
+        @include color-behaviour($primary-color);
+    }
+
     &__icons {
         padding-right: 5px;
     }

@@ -1,6 +1,13 @@
 .titles {
     text-transform: uppercase;
-    font-weight: 500;
+
+    &--transform-none {
+        text-transform: none;
+    }
+
+    &--weight-normal {
+        font-weight: 500;
+    }
 
     &--to-right {
         text-align: right;

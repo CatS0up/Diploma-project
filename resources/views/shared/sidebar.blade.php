@@ -1,6 +1,6 @@
 <nav class="sidebar">
 
-    <header class="header sidebar__header">
+    <header class="headers sidebar__headers">
         <h2 class="titles sidebar__titles">
             Dashboard
         </h2>

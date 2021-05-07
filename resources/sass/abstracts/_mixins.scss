@@ -17,13 +17,23 @@
     }
 }
 
-// Buttons behaviour
-@mixin btns-behaviour($color, $scale: 10%) {
+// Background, font color behaviour
+@mixin bg-behaviour($color, $scale: 10%) {
     background-color: $color;
     transition: 0.2s linear;
 
     &:hover,
     &:focus {
         background-color: lighten($color, $scale);
+    }
+}
+
+@mixin color-behaviour($color, $scale: 10%) {
+    color: $color;
+    transition: 0.2s linear;
+
+    &:hover,
+    &:focus {
+        color: lighten($color, $scale);
     }
 }
