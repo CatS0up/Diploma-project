@@ -1,0 +1,14 @@
+.logo {
+    @include flex($align: center);
+    gap: 10px;
+
+    &__text {
+        font-size: 1.2rem;
+        font-weight: 700;
+    }
+
+    // mixins
+    &__pictures {
+        max-width: 50px;
+    }
+}

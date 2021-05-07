@@ -13,4 +13,9 @@ class BookController extends Controller
     {
         return view('dashboard.bookList');
     }
+
+    public function create(): View
+    {
+        return view('dashboard.addBook');
+    }
 }

@@ -16,30 +16,21 @@ use Illuminate\Support\Facades\Route;
 // ADMIN-Level Routes
 Route::prefix('admin')
     ->name('admin.')
+    ->namespace('Admin')
     ->group(function () {
 
-        Route::get('index', function () {
-            return view('dashboard.index');
-        })
+        Route::get('index', 'DashboardController')
             ->name('index');
 
-        Route::get('users', function () {
-            return view('dashboard.userList');
-        })
+        Route::get('users', 'UserController@list')
             ->name('get.users');
 
-        Route::get('users/{id}', function () {
-            return view('dashboard.userProfile');
-        })
+        Route::get('users/{id}', 'UserController@show')
             ->name('show.user');
 
-        Route::get('books', function () {
-            return view('dashboard.bookList');
-        })
+        Route::get('books', 'BookController@list')
             ->name('get.books');
 
-        Route::get('books/new', function () {
-            return view('dashboard.addBook');
-        })
+        Route::get('books/new', 'BookController@create')
             ->name('add.book');
     });

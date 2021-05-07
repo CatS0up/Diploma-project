@@ -11,6 +11,9 @@
 
 <body>
     <div id="page" class="site">
+        <header class="headers site__headers">
+            @include('shared.navigation')
+        </header>
 
         <div class="inner-site page__inner-site">
             @yield('content')

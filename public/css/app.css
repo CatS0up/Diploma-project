@@ -6484,6 +6484,22 @@ input {
   font-weight: 700;
 }
 
+.logo {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+}
+.logo__text {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.logo__pictures {
+  max-width: 50px;
+}
+
 .titles {
   text-transform: uppercase;
 }
