@@ -11,7 +11,28 @@
         </div>
     </a>
 
-    <ul class="menu menu--horizontal navigation__menu">
+    <label for="hamburgerToggler" class="hamburger navigation__hamburger">
+        <span class="icons icons--large hamburger__icons fas fa-bars"></span>
+    </label>
+    <input id="hamburgerToggler" type="checkbox" class="toggler navigation__toggler">
 
+    <ul class="menu menu--light navigation__menu">
+        <li class="menu__item">
+            <a href="{{ route('books.show.book') }}" class="link menu__links">
+                Książki
+            </a>
+        </li>
+
+        <li class="menu__item">
+            <a href="{{ route('books.show.book') }}" class="link menu__links">
+                Książki
+            </a>
+        </li>
+
+        <li class="menu__item">
+            <a href="{{ route('books.show.book') }}" class="link menu__links">
+                Książki
+            </a>
+        </li>
     </ul>
 </nav>

@@ -1,6 +1,41 @@
 .navigation {
     &--light {
         background-color: white;
+    }
+
+    &--bordered {
         border-bottom: 1px solid lightgray;
+    }
+
+    // mixins
+    &__hamburger {
+        @include media("medium") {
+            display: none;
+        }
+    }
+
+    &__menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        padding: 15px;
+
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: 0.2s;
+
+        @include media("medium") {
+            position: static;
+            @include flex($align: center);
+            padding: 0;
+
+            transform: scaleY(100%);
+        }
+
+        // actions
+        .toggler:checked ~ & {
+            transform: scaleY(1);
+        }
     }
 }

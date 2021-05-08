@@ -1,4 +1,8 @@
 .menu {
+    &--light {
+        background-color: #fff;
+    }
+
     &__item {
         &--underlined {
             border-bottom: 1px solid gray;

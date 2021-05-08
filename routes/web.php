@@ -13,13 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// ADMIN-Level Routes
+/* ===> ADMIN-LEVEL ROUTES <=== */
+
 Route::prefix('admin')
     ->name('admin.')
     ->namespace('Admin')
     ->group(function () {
 
-        Route::get('index', 'DashboardController')
+        Route::get('home', 'DashboardController')
             ->name('index');
 
         Route::get('users/{id}', 'UserController@show')
@@ -39,4 +40,13 @@ Route::prefix('admin')
 
         Route::get('books/new', 'BookController@create')
             ->name('add.book');
+    });
+
+/* ===> USER-LEVEL/GUEST-LEVEL ROUTES <=== */
+Route::name('books.')
+    ->namespace('Book')
+    ->group(function () {
+
+        Route::get('books', 'BookController@list')
+            ->name('show.book');
     });

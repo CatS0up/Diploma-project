@@ -11,11 +11,11 @@
 
 <body>
     <div id="page" class="site">
-        <header class="headers site__headers">
+        <header class="headers headers--light site__headers">
             @include('shared.navigation')
         </header>
 
-        <div class="inner-site page__inner-site">
+        <div class="site__inner">
             @yield('content')
         </div>
     </div>

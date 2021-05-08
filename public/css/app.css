@@ -6159,14 +6159,9 @@ table {
   border-collapse: collapse;
 }
 
-html,
-body,
-.site,
-.inner-site {
-  min-height: 100%;
-}
-
 body {
+  height: 100vh;
+  background-color: #eee;
   font-family: "Lato", sans-serif;
   line-height: 1.7;
   font-size: 1rem;
@@ -6176,18 +6171,27 @@ button {
   cursor: pointer;
 }
 
-input {
+input,
+textarea {
   border: none;
   outline: none;
 }
 
-.site {
-  background-color: #eee;
-}
-
-.inner-site {
+.site__inner {
   max-width: 1350px;
   margin: 0 auto;
+}
+.site__navigation {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  z-index: 1000;
+  max-width: 1350px;
+  margin: 0 auto;
+  padding: 0 15px;
 }
 
 .container {
@@ -6200,7 +6204,39 @@ input {
 
 .navigation--light {
   background-color: white;
+}
+.navigation--bordered {
   border-bottom: 1px solid lightgray;
+}
+@media (min-width: 760px) {
+  .navigation__hamburger {
+    display: none;
+  }
+}
+.navigation__menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  padding: 15px;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: 0.2s;
+}
+@media (min-width: 760px) {
+  .navigation__menu {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+    padding: 0;
+    transform: scaleY(100%);
+  }
+}
+.toggler:checked ~ .navigation__menu {
+  transform: scaleY(1);
 }
 
 .sidebar {
@@ -6210,6 +6246,7 @@ input {
   min-height: 100%;
   width: 100%;
   padding: 10px;
+  z-index: 999;
   transform: translateX(-100%);
   background-color: #3b3b3b;
   color: #9b9b9b;
@@ -6231,6 +6268,9 @@ input {
   text-align: center;
 }
 
+.menu--light {
+  background-color: #fff;
+}
 .menu__item--underlined {
   border-bottom: 1px solid gray;
 }
@@ -6326,6 +6366,9 @@ input {
   background-color: #edf2f5;
   border-radius: 10px;
   transition: 0.2s linear;
+}
+.forms__input--textarea {
+  resize: none;
 }
 .forms__input:focus {
   background-color: #ccdae3;
@@ -6510,6 +6553,11 @@ input {
   font-weight: 700;
 }
 
+.headers--light {
+  background-color: white;
+  border-bottom: 1px solid lightgray;
+}
+
 .logo {
   display: flex;
   flex-direction: row;
@@ -6543,6 +6591,7 @@ input {
   display: block;
   padding: 5px 10px;
   color: white;
+  font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
 }
@@ -6605,7 +6654,7 @@ input {
   font-size: 2.3rem;
 }
 
-.hamburger__icon-container {
+.hamburger {
   cursor: pointer;
 }
 

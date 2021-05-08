@@ -66,6 +66,8 @@
 
                     <div class="profile__update">
                         <form action="#" class="forms profile__forms">
+                            @csrf
+                            @method('put')
                             <div class="forms__group">
                                 <label class="forms__group-title" for="uid">
                                     Login
@@ -177,6 +179,19 @@
                                     </label>
                                     <input id="houseNumber" class="forms__input" type="text" name="house_number">
                                 </div>
+                            </div>
+
+                            <div class="forms__group">
+                                <label class="forms__group-title" for="description">
+                                    Opis
+                                </label>
+                                <textarea id="description" class="forms__input forms__input--textarea" name="description"
+                                    rows="10"></textarea>
+                            </div>
+
+                            <div class="forms__buttons-group">
+                                <a href="#" class="buttons buttons--delete forms__buttons">Anuluj</a>
+                                <button class="buttons buttons--primary forms__buttons" type="submit">Edytuj</button>
                             </div>
                         </form>
                     </div>

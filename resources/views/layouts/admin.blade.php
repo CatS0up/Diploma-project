@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <main class="dashboard inner-site__dashboard">
+    <main class="dashboard site__dashboard">
         @include('shared.sidebar')
 
         <section class="dashboard__content">

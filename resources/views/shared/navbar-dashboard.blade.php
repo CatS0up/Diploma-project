@@ -1,4 +1,4 @@
-<nav class="navigation navigation--light dashboard__naviagtion">
+<nav class="navigation navigation--light navigation--bordered dashboard__naviagtion">
     <div class="container">
         <div class="hamburger navigation__hamburger">
             <label for="hamburgerToggler" class="hamburger__icon-container">

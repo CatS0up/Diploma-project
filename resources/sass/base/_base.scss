@@ -1,11 +1,7 @@
-html,
-body,
-.site,
-.inner-site {
-    min-height: 100%;
-}
-
 body {
+    height: 100vh;
+
+    background-color: $page-bg-color;
     font-family: "Lato", sans-serif;
     line-height: 1.7;
     font-size: 1rem;
@@ -15,16 +11,8 @@ button {
     cursor: pointer;
 }
 
-input {
+input,
+textarea {
     border: none;
     outline: none;
-}
-
-.site {
-    background-color: $dashboard-bg;
-}
-
-.inner-site {
-    max-width: $max-page-width;
-    margin: 0 auto;
 }

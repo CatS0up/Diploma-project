@@ -37,6 +37,10 @@
         border-radius: 10px;
         transition: 0.2s linear;
 
+        &--textarea {
+            resize: none;
+        }
+
         &:focus {
             background-color: darken(#edf2f5, 10%);
         }

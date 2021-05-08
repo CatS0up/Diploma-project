@@ -76,6 +76,33 @@
                     @endfor
                 </tbody>
             </table>
+
+            <table class="tables dashboard__tables">
+                <thead class="tables__header">
+                    <tr class="tables__row">
+                        <th class="tables__header-cell">
+                            #
+                        </th>
+                        <th class="tables__header-cell">
+                            Gatunek
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody class="tables__body">
+                    @for ($i = 1; $i <= 10; $i++)
+                        <tr class="tables__row">
+                            <th class="tables__header-cell">
+                                {{ $i }}
+                            </th>
+
+                            <td class="tables__cell" data-label="Gatunek">
+                                Horror
+                            </td>
+                        </tr>
+                    @endfor
+                </tbody>
+            </table>
         </section>
 
         <section class="dashboard__sections">
