@@ -18,4 +18,9 @@ class UserController extends Controller
     {
         return view('dashboard.userList');
     }
+
+    public function edit(int $id): View
+    {
+        return view('dashboard.editUser');
+    }
 }

@@ -22,11 +22,17 @@ Route::prefix('admin')
         Route::get('index', 'DashboardController')
             ->name('index');
 
+        Route::get('users/{id}', 'UserController@show')
+            ->name('show.user');
+
+        Route::get('users/{id}/edit', 'UserController@edit')
+            ->name('edit.user');
+
         Route::get('users', 'UserController@list')
             ->name('get.users');
 
-        Route::get('users/{id}', 'UserController@show')
-            ->name('show.user');
+        Route::get('books/{id}', 'BookController@show')
+            ->name('show.book');
 
         Route::get('books', 'BookController@list')
             ->name('get.books');

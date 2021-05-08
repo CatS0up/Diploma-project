@@ -52,4 +52,12 @@
         @include flex($justify: flex-end, $align: center);
         gap: 10px;
     }
+
+    &__footer {
+        display: none;
+
+        @include media("large") {
+            display: table-footer-group;
+        }
+    }
 }

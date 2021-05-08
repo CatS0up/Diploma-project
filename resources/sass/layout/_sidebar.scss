@@ -8,7 +8,7 @@
     padding: 10px;
     // z-index: 999;
 
-    // transform: translateX(-100%);
+    transform: translateX(-100%);
 
     background-color: $dark-theme-color;
     color: $font-dark-bg;
@@ -19,7 +19,7 @@
     }
 
     // mixins
-    &__header {
+    &__headers {
         padding: 25px;
 
         border-bottom: 1px solid gray;

@@ -19,7 +19,6 @@
         <section class="dashboard__add-form">
 
             <form class="forms dashboard__forms" action="#" method="post">
-
                 <div class="forms__group">
                     <label class="forms__group-title" for="title">
                         Tytuł

@@ -52,6 +52,10 @@
         padding: 20px;
     }
 
+    &__update {
+        grid-column: 1/-1;
+    }
+
     &__options {
         @include flex();
         gap: 10px;
@@ -62,6 +66,10 @@
         grid-column: 1/-1;
 
         border-bottom: 1px solid lightgray;
+    }
+
+    &__forms {
+        padding: 0;
     }
 
     &__pictures {

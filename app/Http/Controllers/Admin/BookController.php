@@ -9,6 +9,11 @@ use Illuminate\View\View;
 
 class BookController extends Controller
 {
+    public function show(int $id): View
+    {
+        return view('dashboard.bookItem');
+    }
+
     public function list(): View
     {
         return view('dashboard.bookList');

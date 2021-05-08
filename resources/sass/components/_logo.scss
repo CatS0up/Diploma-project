@@ -1,6 +1,6 @@
 .logo {
     @include flex($align: center);
-    gap: 10px;
+    gap: 8px;
 
     &__text {
         font-size: 1.2rem;
