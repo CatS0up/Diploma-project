@@ -9,9 +9,9 @@
     <title>@yield('title', $appName)</title>
 </head>
 
-<body>
+<body class=@yield('page-bg')>
     <div id="page" class="site">
-        <header class="headers headers--light site__headers">
+        <header class="headers headers--dark site__headers">
             @include('shared.navigation')
         </header>
 

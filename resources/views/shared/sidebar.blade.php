@@ -8,7 +8,7 @@
 
     <ul class="menu sidebar__menu">
         <li class="menu__item menu__item--underlined">
-            <a href="{{ route('admin.index') }}" class="links menu__links">
+            <a href="{{ route('admin.index') }}" class="links links--dashboard menu__links">
                 <span class="links__text">
                     <span class="icons icons--small links__icons fas fa-columns" aria-hidden="true"></span>
                     Dashboard
@@ -18,7 +18,7 @@
         </li>
 
         <li class="menu__item menu__item--underlined">
-            <a href="{{ route('admin.get.books') }}" class="link menu__links">
+            <a href="{{ route('admin.get.books') }}" class="links links--dashboard menu__links">
                 <span class="links__text">
                     <span class="icons icons--small links__icons fas fa-book" aria-hidden="true"></span>
                     Książki
@@ -28,7 +28,7 @@
         </li>
 
         <li class="menu__item menu__item--underlined">
-            <a href="{{ route('admin.get.users') }}" class="links menu__links">
+            <a href="{{ route('admin.get.users') }}" class="links links--dashboard menu__links">
                 <span class="links__text">
                     <span class="icons icons--small links__icons far fa-user" aria-hidden="true"></span>
                     Użytkownicy

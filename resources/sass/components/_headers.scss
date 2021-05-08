@@ -1,6 +1,5 @@
 .headers {
-    &--light {
-        background-color: white;
-        border-bottom: 1px solid lightgray;
+    &--dark {
+        background-color: $dark-theme-color;
     }
 }

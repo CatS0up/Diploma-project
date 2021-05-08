@@ -6,12 +6,13 @@
     min-height: 100%;
     width: 100%;
     padding: 10px;
-    z-index: 999;
+    z-index: 9999;
 
-    transform: translateX(-100%);
+    // transform: translateX(-100%);
 
+    // background-color: $dark-theme-color;
     background-color: $dark-theme-color;
-    color: $font-dark-bg;
+    color: #fff;
 
     @include media("small") {
         position: static;

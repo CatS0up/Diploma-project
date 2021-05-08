@@ -1,7 +1,6 @@
 body {
     height: 100vh;
 
-    background-color: $page-bg-color;
     font-family: "Lato", sans-serif;
     line-height: 1.7;
     font-size: 1rem;
@@ -15,4 +14,8 @@ input,
 textarea {
     border: none;
     outline: none;
+}
+
+.bg-dashboard {
+    background-color: $dashboard-bg-color;
 }

@@ -32,14 +32,14 @@ Route::prefix('admin')
         Route::get('users', 'UserController@list')
             ->name('get.users');
 
-        Route::get('books/{id}', 'BookController@show')
-            ->name('show.book');
-
         Route::get('books', 'BookController@list')
             ->name('get.books');
 
         Route::get('books/new', 'BookController@create')
             ->name('add.book');
+
+        Route::get('books/{id}', 'BookController@show')
+            ->name('show.book');
     });
 
 /* ===> USER-LEVEL/GUEST-LEVEL ROUTES <=== */

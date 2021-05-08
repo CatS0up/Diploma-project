@@ -6,10 +6,6 @@
 
     // mixins
     &__navigation {
-        position: relative;
-        @include flex($justify: space-between, $align: center);
-        z-index: 1000;
-
         max-width: $max-page-width;
         margin: 0 auto;
         padding: 0 15px;

@@ -1,25 +1,7 @@
 .menu {
-    &--light {
-        background-color: #fff;
-    }
-
     &__item {
         &--underlined {
             border-bottom: 1px solid gray;
-        }
-    }
-
-    // mixins
-    &__links {
-        @include flex($justify: space-between, $align: center);
-
-        padding: 13px 7px;
-        transition: 0.2s linear;
-
-        &:hover,
-        &:focus {
-            color: white;
-            background-color: #d2211c;
         }
     }
 }

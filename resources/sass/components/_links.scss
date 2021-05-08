@@ -4,6 +4,29 @@
         @include color-behaviour($primary-color);
     }
 
+    &--menu {
+        display: block;
+        transition: 0.2s linear;
+
+        color: #000;
+
+        @include media("medium") {
+            color: #fff;
+        }
+    }
+
+    &--dashboard {
+        @include flex($justify: space-between, $align: center);
+
+        padding: 13px 7px;
+        transition: 0.2s linear;
+
+        &:hover,
+        &:focus {
+            color: $primary-color;
+        }
+    }
+
     &__icons {
         padding-right: 5px;
     }
