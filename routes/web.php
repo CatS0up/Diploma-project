@@ -50,3 +50,13 @@ Route::name('books.')
         Route::get('books', 'BookController@list')
             ->name('show.book');
     });
+
+// TEMPORARY Routes
+
+Route::get('auth/login', function () {
+    return view('auth.login');
+});
+
+Route::get('auth/register', function () {
+    return view('auth.register');
+});

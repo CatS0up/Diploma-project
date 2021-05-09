@@ -1,0 +1,47 @@
+.dropdown {
+    @include media("medium") {
+        position: relative;
+    }
+
+    &__trigger {
+        user-select: none;
+        cursor: pointer;
+        transition: 0.2s;
+
+        &:hover {
+            color: #000;
+        }
+    }
+
+    &__content {
+        display: none;
+
+        transform-origin: top;
+
+        color: #000;
+        background: #fff;
+        box-shadow: 0 0 10px 1px rgba($color: #000000, $alpha: 0.15);
+
+        @include media("medium") {
+            position: absolute;
+            // Parent height + 10px parent Y-axis padding (top)
+            top: calc(100% + 10px);
+            left: 0;
+
+            // Parent X-axis padding (right) + links X-axis padding (right) = 20px + 30px
+            transform: translateX(-50px);
+        }
+
+        // actions
+        .dropdown__toggler:checked ~ & {
+            display: block;
+        }
+    }
+
+    // mixnis
+    &__icons {
+        &--start {
+            padding-right: 7px;
+        }
+    }
+}

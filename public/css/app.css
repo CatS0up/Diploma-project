@@ -6220,6 +6220,12 @@ textarea {
   top: 100%;
   left: 0;
   right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  gap: 20px;
   padding: 15px;
   transform: scaleY(0);
   transform-origin: top;
@@ -6243,7 +6249,7 @@ textarea {
     border: none;
   }
 }
-.toggler:checked ~ .navigation__menu {
+.navigation__toggler:checked ~ .navigation__menu {
   transform: scaleY(1);
 }
 
@@ -6276,6 +6282,9 @@ textarea {
   text-align: center;
 }
 
+.menu--vertical {
+  display: block;
+}
 .menu__item--underlined {
   border-bottom: 1px solid gray;
 }
@@ -6545,6 +6554,23 @@ textarea {
   font-weight: 700;
 }
 
+.app__auth-form {
+  max-width: 800px;
+  margin-top: 15px;
+  margin: 15px auto 0 auto;
+  padding: 20px 10px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.15);
+}
+@media (min-width: 960px) {
+  .app__auth-form--decorated {
+    display: grid;
+    grid-template-columns: 60% auto;
+    align-items: center;
+  }
+}
+
 .headers--light {
   background-color: #fff;
 }
@@ -6614,6 +6640,10 @@ textarea {
 .buttons--delete:hover, .buttons--delete:focus {
   background-color: #476481;
 }
+.buttons--dropdown {
+  color: #808080;
+  background-color: transparent;
+}
 
 .links--light {
   color: #0082e6;
@@ -6622,8 +6652,16 @@ textarea {
 .links--light:hover, .links--light:focus {
   color: #1a9bff;
 }
-.links--menu {
+.links--dropdown {
   display: block;
+  padding: 7px 30px;
+  transition: 0.2s;
+}
+.links--dropdown:hover, .links--dropdown:focus {
+  color: #fff;
+  background-color: #0082e6;
+}
+.links--menu {
   transition: 0.2s linear;
 }
 .links--menu:hover, .links--menu:focus {
@@ -6748,4 +6786,42 @@ textarea {
 }
 .pictures__img {
   width: 100%;
+}
+
+@media (min-width: 760px) {
+  .dropdown {
+    position: relative;
+  }
+}
+.dropdown__trigger {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.dropdown__trigger:hover {
+  color: #000;
+}
+.dropdown__content {
+  display: none;
+  transform-origin: top;
+  color: #000;
+  background: #fff;
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.15);
+}
+@media (min-width: 760px) {
+  .dropdown__content {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    transform: translateX(-50px);
+  }
+}
+.dropdown__toggler:checked ~ .dropdown__content {
+  display: block;
+}
+.dropdown__icons--start {
+  padding-right: 7px;
 }

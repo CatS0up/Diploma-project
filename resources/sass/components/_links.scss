@@ -4,13 +4,28 @@
         @include color-behaviour($primary-color);
     }
 
-    &--menu {
+    &--dropdown {
         display: block;
+        padding: 7px 30px;
+
+        transition: 0.2s;
+
+        &:hover,
+        &:focus {
+            color: #fff;
+            background-color: $primary-color;
+        }
+    }
+
+    &--menu {
         transition: 0.2s linear;
 
         &:hover,
         &:focus {
             color: #000;
+        }
+
+        @include media("medium") {
         }
     }
 

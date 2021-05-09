@@ -22,4 +22,9 @@
     &--delete {
         @include bg-behaviour($dark-theme-color, 15%);
     }
+
+    &--dropdown {
+        color: $text-muted-color;
+        background-color: transparent;
+    }
 }

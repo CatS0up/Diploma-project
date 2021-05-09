@@ -1,24 +1,21 @@
 @extends('layouts.app')
 
 @section('inner-content')
-    <section class="app__hello-section" style="width: 500px">
-        // Hello section
-    </section>
+    <div class="container app__container">
+        <aside>
+            Genres
+        </aside>
 
-    <aside>
-        Genres
-    </aside>
+        <section>
+            //filters
 
-    <section>
-        //filters
+            // Articles list
 
-        // Articles list
-
-    </section>
+        </section>
 
 
-    <div>
-        // Pagination
+        <div>
+            // Pagination
+        </div>
     </div>
-
 @endsection

@@ -1,4 +1,8 @@
 .menu {
+    &--vertical {
+        display: block;
+    }
+
     &__item {
         &--underlined {
             border-bottom: 1px solid gray;
