@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->char('phone', 9)->unique();
             $table->string('pwd');
             $table->string('avatar')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

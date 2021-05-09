@@ -8,8 +8,7 @@
     &__inline-section {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(150px, auto));
-        // Prophylactically aligment
-        align-items: flex-end;
+        align-content: flex-start;
     }
 
     &__group {

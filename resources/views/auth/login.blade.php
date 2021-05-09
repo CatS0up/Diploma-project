@@ -17,7 +17,7 @@
         </header>
 
         <section class="app__auth-form  app__auth-form--decorated">
-            <form class="forms app__forms" action="#" method="post">
+            <form class="forms app__forms" action="{{ route('auth.login') }}" method="post">
                 @csrf
                 <div class="forms__group">
                     <label class="forms__group-title" for="uid">
@@ -25,6 +25,11 @@
                         <span class="forms__required-info">*</span>
                     </label>
                     <input id="uid" class="forms__input" type="text" name="uid">
+                    @error('uid')
+                        <span class="forms__input-feedback">
+                            {{ $message }}
+                        </span>
+                    @enderror
                 </div>
 
                 <div class="forms__group">
@@ -33,6 +38,11 @@
                         <span class="forms__required-info">*</span>
                     </label>
                     <input id="pwd" class="forms__input" type="password" name="pwd">
+                    @error('pwd')
+                        <span class="forms__input-feedback">
+                            {{ $message }}
+                        </span>
+                    @enderror
                 </div>
 
                 <div class="forms__buttons-group">

@@ -17,45 +17,78 @@
         </header>
 
         <section class="auth-form app__auth-form">
-            <form action="#" class="forms profile__forms">
+            <form class="forms profile__forms" action="{{ route('auth.register') }}" method="post">
                 @csrf
-                @method('put')
                 <div class="forms__group">
                     <label class="forms__group-title" for="uid">
                         Login
+                        <span class="forms__required-info">*</span>
                     </label>
                     <input id="uid" class="forms__input" type="text" name="uid">
+                    @error('uid')
+                        <span class="forms__input-feedback">
+                            {{ $message }}
+                        </span>
+                    @enderror
                 </div>
 
-                <div class="forms__group">
-                    <label class="forms__group-title" for="email">
-                        E-mail
-                    </label>
-                    <input id="email" class="forms__input" type="email" name="email">
+                <div class="forms__inline-section">
+                    <div class="forms__group">
+                        <label class="forms__group-title" for="email">
+                            E-mail
+                            <span class="forms__required-info">*</span>
+                        </label>
+                        <input id="email" class="forms__input" type="email" name="email">
+                        @error('email')
+                            <span class="forms__input-feedback">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="forms__group">
+                        <label class="forms__group-title" for="emailConfirmation">
+                            Powtórz E-mail
+                            <span class="forms__required-info">*</span>
+                        </label>
+                        <input id="emailConfirmation" class="forms__input" type="email" name="email_repeat">
+                    </div>
                 </div>
+
+                <div class="forms__inline-section">
+                    <div class="forms__group">
+                        <label class="forms__group-title" for="pwd">
+                            Hasło
+                            <span class="forms__required-info">*</span>
+                        </label>
+                        <input id="pwd" class="forms__input" type="password" name="pwd">
+                        @error('pwd')
+                            <span class="forms__input-feedback">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="forms__group">
+                        <label class="forms__group-title" for="pwdConfirmation">
+                            Powtórz Hasło
+                            <span class="forms__required-info">*</span>
+                        </label>
+                        <input id="pwdConfirmation" class="forms__input" type="password" name="pwd_confirmation">
+                    </div>
+                </div>
+
 
                 <div class="forms__group">
                     <label class="forms__group-title" for="phone">
                         Numer telefonu
                     </label>
                     <input id="phone" class="forms__input" type="tel" name="phone">
-                </div>
-
-                <div class="forms__inline-section">
-                    <div class="forms__check">
-                        <input id="superAdmin" class="forms__checkbox" type="radio" name="role" value="super_admin">
-                        <label for="superAdmin" class="forms__checkbox-title">Super Admin</label>
-                    </div>
-
-                    <div class="forms__check">
-                        <input id="admin" class="forms__checkbox" type="radio" name="role" value="admin">
-                        <label for="admin" class="forms__checkbox-title">Admin</label>
-                    </div>
-
-                    <div class="forms__check">
-                        <input id="user" class="forms__checkbox" type="radio" name="role" value="user">
-                        <label for="user" class="forms__checkbox-title">User</label>
-                    </div>
+                    @error('phone')
+                        <span class="forms__input-feedback">
+                            {{ $message }}
+                        </span>
+                    @enderror
                 </div>
 
                 <div class="forms__inline-section">
@@ -64,6 +97,11 @@
                             Imię
                         </label>
                         <input id="firstName" class="forms__input" type="text" name="firstname">
+                        @error('firstname')
+                            <span class="forms__input-feedback">
+                                {{ $message }}
+                            </span>
+                        @enderror
                     </div>
 
                     <div class="forms__group">
@@ -71,6 +109,11 @@
                             Nazwisko
                         </label>
                         <input id="lastName" class="forms__input" type="text" name="lastname">
+                        @error('lastname')
+                            <span class="forms__input-feedback">
+                                {{ $message }}
+                            </span>
+                        @enderror
                     </div>
                 </div>
 
@@ -79,6 +122,11 @@
                         Data urodzenia
                     </label>
                     <input id="birthday" class="forms__input" type="date" name="birthday">
+                    @error('birthday')
+                        <span class="forms__input-feedback">
+                            {{ $message }}
+                        </span>
+                    @enderror
                 </div>
 
                 <div class="forms__inline-section">
@@ -99,6 +147,11 @@
                             Miasto
                         </label>
                         <input id="town" class="forms__input" type="text" name="town">
+                        @error('town')
+                            <span class="forms__input-feedback">
+                                {{ $message }}
+                            </span>
+                        @enderror
                     </div>
 
                     <div class="forms__group">
@@ -106,6 +159,11 @@
                             Ulica
                         </label>
                         <input id="street" class="forms__input" type="text" name="street">
+                        @error('street')
+                            <span class="forms__input-feedback">
+                                {{ $message }}
+                            </span>
+                        @enderror
                     </div>
                 </div>
 
@@ -115,6 +173,11 @@
                             Kod pocztowy
                         </label>
                         <input id="zipcode" class="forms__input" type="text" name="zipcode">
+                        @error('zipcode')
+                            <span class="forms__input-feedback">
+                                {{ $message }}
+                            </span>
+                        @enderror
                     </div>
 
                     <div class="forms__group">
@@ -122,6 +185,11 @@
                             Numer budynku
                         </label>
                         <input id="buldingNumber" class="forms__input" type="text" name="building_number">
+                        @error('building_number')
+                            <span class="forms__input-feedback">
+                                {{ $message }}
+                            </span>
+                        @enderror
                     </div>
 
                     <div class="forms__group">
@@ -129,6 +197,11 @@
                             Numer domu
                         </label>
                         <input id="houseNumber" class="forms__input" type="text" name="house_number">
+                        @error('house_number')
+                            <span class="forms__input-feedback">
+                                {{ $message }}
+                            </span>
+                        @enderror
                     </div>
                 </div>
 
@@ -138,6 +211,11 @@
                     </label>
                     <textarea id="description" class="forms__input forms__input--textarea" name="description"
                         rows="10"></textarea>
+                    @error('description')
+                        <span class="forms__input-feedback">
+                            {{ $message }}
+                        </span>
+                    @enderror
                 </div>
 
                 <div class="forms__buttons-group">

@@ -51,12 +51,22 @@ Route::name('books.')
             ->name('show.book');
     });
 
-// TEMPORARY Routes
+/* ===> AUTH ROUTES <=== */
+Route::prefix('auth')
+    ->name('auth.')
+    ->namespace('Auth')
+    ->group(function () {
 
-Route::get('auth/login', function () {
-    return view('auth.login');
-});
+        // Route::get('login', 'Login');
+        Route::get('login', 'LoginController@login')
+            ->name('login.form');
 
-Route::get('auth/register', function () {
-    return view('auth.register');
-});
+        Route::post('login', 'LoginController@authenticate')
+            ->name('login');
+
+        Route::get('register', 'RegisterController@create')
+            ->name('register.form');
+
+        Route::post('register', 'RegisterController@register')
+            ->name('register');
+    });

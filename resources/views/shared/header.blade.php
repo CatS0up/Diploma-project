@@ -41,15 +41,17 @@
 
                     <div class="dropdown__content">
                         <ul class="menu dropdown__menu">
-                            <li class="menu__item">
-                                <a href="#" class="links links--dropdown menu__links">Logowanie</a>
-                            </li>
+                            @guest
+                                <li class="menu__item">
+                                    <a href="{{ route('auth.login.form') }}"
+                                        class="links links--dropdown menu__links">Logowanie</a>
+                                </li>
 
-                            <li class="menu__item">
-                                <a href="#" class="links links--dropdown menu__links">Rejestracja</a>
-                            </li>
-
-                            @auth
+                                <li class="menu__item">
+                                    <a href="{{ route('auth.register.form') }}"
+                                        class="links links--dropdown menu__links">Rejestracja</a>
+                                </li>
+                            @else
                                 <li class="menu__item">
                                     <a href="#" class="links links--dropdown menu__links">Profil</a>
                                 </li>
@@ -61,7 +63,7 @@
                                 <li class="menu__item">
                                     <a href="#" class="links links--dropdown menu__links">Wyloguj</a>
                                 </li>
-                            @endauth
+                            @endguest
                         </ul>
                     </div>
                 </div>

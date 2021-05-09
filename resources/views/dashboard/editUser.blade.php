@@ -65,7 +65,7 @@
                     </header>
 
                     <div class="profile__update">
-                        <form action="#" class="forms profile__forms">
+                        <form class="forms profile__forms" action="#" method="post">
                             @csrf
                             @method('put')
                             <div class="forms__group">
