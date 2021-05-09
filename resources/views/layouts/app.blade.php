@@ -2,25 +2,11 @@
 
 @section('content')
 
-    <section>
-        // Hello Section
-    </section>
+    <main class="app site__app">
 
-    <aside>
-        Genres
-    </aside>
-
-    <section>
-        //filters
-
-        // Articles list
-
-    </section>
-
-
-    <div>
-        // Pagination
-    </div>
-
+        <section class="app__content">
+            @yield('inner-content')
+        </section>
+    </main>
 
 @endsection

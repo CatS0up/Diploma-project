@@ -10,13 +10,14 @@
 
     // transform: translateX(-100%);
 
-    // background-color: $dark-theme-color;
     background-color: $dark-theme-color;
     color: #fff;
 
     @include media("small") {
         position: static;
         max-width: 250px;
+
+        z-index: auto;
     }
 
     // mixins

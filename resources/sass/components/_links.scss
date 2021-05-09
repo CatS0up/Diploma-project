@@ -8,10 +8,9 @@
         display: block;
         transition: 0.2s linear;
 
-        color: #000;
-
-        @include media("medium") {
-            color: #fff;
+        &:hover,
+        &:focus {
+            color: #000;
         }
     }
 

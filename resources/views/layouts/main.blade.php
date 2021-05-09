@@ -11,9 +11,7 @@
 
 <body class=@yield('page-bg')>
     <div id="page" class="site">
-        <header class="headers headers--dark site__headers">
-            @include('shared.navigation')
-        </header>
+        @include('shared.header')
 
         <div class="site__inner">
             @yield('content')

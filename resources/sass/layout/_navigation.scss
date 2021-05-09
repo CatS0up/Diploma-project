@@ -1,10 +1,11 @@
 .navigation {
     position: relative;
     @include flex($justify: space-between, $align: center);
-    padding: 10px;
+    padding: 10px 20px;
     z-index: 999;
 
-    color: #fff;
+    color: $text-muted-color;
+    border-bottom: 1px solid lightgray;
 
     // mixins
     &__hamburger {
@@ -24,13 +25,14 @@
         transform-origin: top;
         transition: 0.2s;
 
+        font-size: 1.1rem;
         background-color: #fff;
         border-bottom: 1px solid lightgray;
 
         @include media("medium") {
             position: static;
             @include flex($align: center);
-            gap: 10px;
+            gap: 30px;
             padding: 0;
 
             transform: scaleY(100%);
