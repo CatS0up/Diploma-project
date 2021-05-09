@@ -7,6 +7,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
+use App\Service\UserCreator;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class RegisterController extends Controller
@@ -16,8 +18,10 @@ class RegisterController extends Controller
         return view('auth.register');
     }
 
-    public function register(RegisterRequest $request, User $userModel)
+    public function register(Request $request, UserCreator $userCreator)
     {
-        // $data = $;
+        $credentials = $request->all();
+
+        $userCreator->create($credentials);
     }
 }

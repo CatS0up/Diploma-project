@@ -15,6 +15,7 @@ class CreatePersonalDetailsTable extends Migration
     {
         Schema::create('personal_details', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->nullable()->constrained();
             $table->string('firstname', 100)->index();
             $table->string('lastname', 150)->index();
             $table->date('birthday');

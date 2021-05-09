@@ -24,7 +24,7 @@
                         Login
                         <span class="forms__required-info">*</span>
                     </label>
-                    <input id="uid" class="forms__input" type="text" name="uid">
+                    <input id="uid" class="forms__input" type="text" name="uid" value="{{ old('uid') }}">
                     @error('uid')
                         <span class="forms__input-feedback">
                             {{ $message }}
@@ -38,7 +38,7 @@
                             E-mail
                             <span class="forms__required-info">*</span>
                         </label>
-                        <input id="email" class="forms__input" type="email" name="email">
+                        <input id="email" class="forms__input" type="email" name="email" value="{{ old('email') }}">
                         @error('email')
                             <span class="forms__input-feedback">
                                 {{ $message }}
@@ -51,7 +51,8 @@
                             Powtórz E-mail
                             <span class="forms__required-info">*</span>
                         </label>
-                        <input id="emailConfirmation" class="forms__input" type="email" name="email_repeat">
+                        <input id="emailConfirmation" class="forms__input" type="email" name="email_confirmation"
+                            value="{{ old('email_confirmation') }}">
                     </div>
                 </div>
 
@@ -61,7 +62,7 @@
                             Hasło
                             <span class="forms__required-info">*</span>
                         </label>
-                        <input id="pwd" class="forms__input" type="password" name="pwd">
+                        <input id="pwd" class="forms__input" type="password" name="pwd" value="{{ old('pwd') }}">
                         @error('pwd')
                             <span class="forms__input-feedback">
                                 {{ $message }}
@@ -74,7 +75,8 @@
                             Powtórz Hasło
                             <span class="forms__required-info">*</span>
                         </label>
-                        <input id="pwdConfirmation" class="forms__input" type="password" name="pwd_confirmation">
+                        <input id="pwdConfirmation" class="forms__input" type="password" name="pwd_confirmation"
+                            value="{{ old('pwd_confirmation') }}">
                     </div>
                 </div>
 
@@ -83,7 +85,7 @@
                     <label class="forms__group-title" for="phone">
                         Numer telefonu
                     </label>
-                    <input id="phone" class="forms__input" type="tel" name="phone">
+                    <input id="phone" class="forms__input" type="tel" name="phone" value="{{ old('phone') }}">
                     @error('phone')
                         <span class="forms__input-feedback">
                             {{ $message }}
@@ -96,7 +98,8 @@
                         <label class="forms__group-title" for="firstName">
                             Imię
                         </label>
-                        <input id="firstName" class="forms__input" type="text" name="firstname">
+                        <input id="firstName" class="forms__input" type="text" name="firstname"
+                            value="{{ old('firstname') }}">
                         @error('firstname')
                             <span class="forms__input-feedback">
                                 {{ $message }}
@@ -108,7 +111,8 @@
                         <label class="forms__group-title" for="lastName">
                             Nazwisko
                         </label>
-                        <input id="lastName" class="forms__input" type="text" name="lastname">
+                        <input id="lastName" class="forms__input" type="text" name="lastname"
+                            value="{{ old('lastname') }}">
                         @error('lastname')
                             <span class="forms__input-feedback">
                                 {{ $message }}
@@ -121,7 +125,7 @@
                     <label class="forms__group-title" for="birthday">
                         Data urodzenia
                     </label>
-                    <input id="birthday" class="forms__input" type="date" name="birthday">
+                    <input id="birthday" class="forms__input" type="date" name="birthday" value="{{ old('birthday') }}">
                     @error('birthday')
                         <span class="forms__input-feedback">
                             {{ $message }}
@@ -146,7 +150,7 @@
                         <label class="forms__group-title" for="town">
                             Miasto
                         </label>
-                        <input id="town" class="forms__input" type="text" name="town">
+                        <input id="town" class="forms__input" type="text" name="town" value="{{ old('town') }}">
                         @error('town')
                             <span class="forms__input-feedback">
                                 {{ $message }}
@@ -158,7 +162,7 @@
                         <label class="forms__group-title" for="street">
                             Ulica
                         </label>
-                        <input id="street" class="forms__input" type="text" name="street">
+                        <input id="street" class="forms__input" type="text" name="street" value="{{ old('street') }}">
                         @error('street')
                             <span class="forms__input-feedback">
                                 {{ $message }}
@@ -172,7 +176,7 @@
                         <label class="forms__group-title" for="zipcode">
                             Kod pocztowy
                         </label>
-                        <input id="zipcode" class="forms__input" type="text" name="zipcode">
+                        <input id="zipcode" class="forms__input" type="text" name="zipcode" value="{{ old('zipcode') }}">
                         @error('zipcode')
                             <span class="forms__input-feedback">
                                 {{ $message }}
@@ -184,7 +188,8 @@
                         <label class="forms__group-title" for="buldingNumber">
                             Numer budynku
                         </label>
-                        <input id="buldingNumber" class="forms__input" type="text" name="building_number">
+                        <input id="buldingNumber" class="forms__input" type="text" name="building_number"
+                            value="{{ old('building_number') }}">
                         @error('building_number')
                             <span class="forms__input-feedback">
                                 {{ $message }}
@@ -196,7 +201,8 @@
                         <label class="forms__group-title" for="houseNumber">
                             Numer domu
                         </label>
-                        <input id="houseNumber" class="forms__input" type="text" name="house_number">
+                        <input id="houseNumber" class="forms__input" type="text" name="house_number"
+                            value="{{ old('house_number') }}">
                         @error('house_number')
                             <span class="forms__input-feedback">
                                 {{ $message }}
@@ -210,7 +216,7 @@
                         Opis
                     </label>
                     <textarea id="description" class="forms__input forms__input--textarea" name="description"
-                        rows="10"></textarea>
+                        rows="10">{{ old('description') }}</textarea>
                     @error('description')
                         <span class="forms__input-feedback">
                             {{ $message }}

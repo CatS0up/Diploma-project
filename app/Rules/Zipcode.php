@@ -25,7 +25,7 @@ class Zipcode implements Rule
      */
     public function passes($attribute, $value)
     {
-        return preg_match('/^d{2}-\d{3}$/', $value);
+        return preg_match('/^\d{2}-\d{3}$/', $value);
     }
 
     /**

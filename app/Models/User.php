@@ -14,6 +14,14 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    protected $fillable = [
+        'uid',
+        'pwd',
+        'email',
+        'phone',
+        'description'
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -42,28 +50,26 @@ class User extends Authenticatable
     /* ===> Relations <=== */
     public function personalDetails()
     {
-        $this->hasOne(PersonalDetail::class);
+        return $this->hasOne(PersonalDetail::class);
     }
 
     public function address()
     {
-        $this->hasOne(Address::class);
+        return $this->hasOne(Address::class);
     }
 
-    public function roles(): void
+    public function roles()
     {
-        $this->hasOne(Role::class);
+        return $this->hasOne(Role::class);
     }
 
-    public function create(array $data)
+    public function addAddress(Address $address): void
     {
-        $this->create(
-            [
-                'uid' => $data['uid'],
-                'pwd' => Hash::make($data['pwd']),
-                'phone' => $data['phone'],
-                'description' => $data['description']
-            ]
-        );
+        $this->address()->save($address);
+    }
+
+    public function addPersonalDetails(PersonalDetail $details): void
+    {
+        $this->personalDetails()->save($details);
     }
 }
