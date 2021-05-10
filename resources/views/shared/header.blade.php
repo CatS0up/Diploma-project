@@ -15,7 +15,7 @@
 
         <ul class="menu navigation__menu">
             <li class="menu__item menu__item--vertical">
-                <a href="{{ route('books.show.book') }}" class="links links--menu menu__links">
+                <a href="{{ route('home') }}" class="links links--menu menu__links">
                     <span class="icons links__icons fas fa-home" aria-hidden="true"></span>
                     Strona główna
                 </a>

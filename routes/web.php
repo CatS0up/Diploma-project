@@ -13,8 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/* ===> ADMIN-LEVEL ROUTES <=== */
+/* HOME */
 
+Route::get('/', 'Book\BookController@list')
+    ->name('home');
+
+/* ===> ADMIN-LEVEL ROUTES <=== */
 Route::prefix('admin')
     ->name('admin.')
     ->namespace('Admin')
@@ -40,15 +44,16 @@ Route::prefix('admin')
 
         Route::get('books/{id}', 'BookController@show')
             ->name('show.book');
+
+        Route::get('genres', 'GenreController@list')
+            ->name('get.genres');
     });
 
 /* ===> USER-LEVEL/GUEST-LEVEL ROUTES <=== */
-Route::name('books.')
+Route::name('book.')
     ->namespace('Book')
     ->group(function () {
-
-        Route::get('books', 'BookController@list')
-            ->name('show.book');
+        Route::get('books', 'BookController@list');
     });
 
 /* ===> AUTH ROUTES <=== */

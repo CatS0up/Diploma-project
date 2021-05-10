@@ -6342,7 +6342,7 @@ textarea {
 .forms__inline-section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, auto));
-  align-items: flex-end;
+  align-content: flex-start;
 }
 .forms__group {
   display: flex;

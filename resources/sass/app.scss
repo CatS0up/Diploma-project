@@ -1,8 +1,46 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+
+// Icons
+@import "~@fortawesome/fontawesome-free/scss/brands";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
 
 // Variables
-@import 'variables';
+@import "abstracts/variables";
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+// Mixins
+@import "abstracts/mixins";
+
+// Base
+@import "base/reset";
+@import "base/base";
+
+// Layouts
+@import "layout/site";
+@import "layout/container";
+@import "layout/navigation";
+@import "layout/sidebar";
+@import "layout/menu";
+@import "layout/dashboard";
+@import "layout/forms";
+@import "layout/tables";
+@import "layout/profile";
+@import "layout/lists";
+@import "layout/app";
+
+// Components
+@import "components/headers";
+@import "components/logo";
+@import "components/titles";
+@import "components/buttons";
+@import "components/links";
+@import "components/icons";
+@import "components/hamburger";
+@import "components/toggler";
+@import "components/cards";
+@import "components/text";
+@import "components/breadcrumbs";
+@import "components/pictures";
+@import "components/dropdown";

@@ -74,12 +74,12 @@
                         <ul class="lists profile__lists">
                             <li class="lists__item lists__item--labeled-vertical">
                                 <span class="lists__item-label">Imię:</span>
-                                Damian
+                                Firstname
                             </li>
 
                             <li class="lists__item lists__item--labeled-vertical">
                                 <span class="lists__item-label">Nazwisko:</span>
-                                Woźniak
+                                Surname
                             </li>
 
                             <li class="lists__item lists__item--labeled-vertical">
@@ -89,7 +89,7 @@
 
                             <li class="lists__item lists__item--labeled-vertical">
                                 <span class="lists__item-label">Płeć:</span>
-                                Chłop
+                                M
                             </li>
                         </ul>
                     </div>
@@ -104,22 +104,22 @@
                         <ul class="lists profile__lists">
                             <li class="lists__item lists__item--labeled-vertical">
                                 <span class="lists__item-label">Miasto:</span>
-                                Derby
+                                Town
                             </li>
 
                             <li class="lists__item lists__item--labeled-vertical">
                                 <span class="lists__item-label">Ulica:</span>
-                                Jakaś tam
+                                Street
                             </li>
 
                             <li class="lists__item lists__item--labeled-vertical">
                                 <span class="lists__item-label">Kod pocztowy:</span>
-                                21-044
+                                xx-xxx
                             </li>
 
                             <li class="lists__item lists__item--labeled-vertical">
                                 <span class="lists__item-label">Numer domu:</span>
-                                653
+                                123
                             </li>
 
                             <li class="lists__item lists__item--labeled-vertical">

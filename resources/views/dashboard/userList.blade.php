@@ -26,7 +26,7 @@
                         Użytkownicy:
                     </h2>
                     <p class="cards__text">
-                        69
+                        12
                     </p>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                         Zablokowani:
                     </h2>
                     <p class="cards__text">
-                        666
+                        60
                     </p>
                 </div>
             </div>
@@ -95,7 +95,7 @@
                             </th>
 
                             <td class="tables__cell" data-label="Użytkownik">
-                                Typ jakiś
+                                User
                             </td>
                             <td class="tables__cell" data-label="Rola">
                                 Admin
@@ -175,7 +175,7 @@
                             </th>
 
                             <td class="tables__cell" data-label="Użytkownik">
-                                Typ jakiś
+                                User
                             </td>
                             <td class="tables__cell" data-label="Rola">
                                 Admin
