@@ -109,6 +109,20 @@
                 </div>
 
                 <div class="forms__group">
+                    <label class="forms__group-title" for="genres">
+                        Gatunek/Gatunki
+                        <span class="forms__required-info">*</span>
+                    </label>
+                    <input id="genres" class="forms__input" type="text" name="genres" value="{{ old('genres') }}">
+
+                    @error('genres')
+                        <span class="forms__input-feedback">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="forms__group">
                     <label class="forms__group-title" for="publishingDate">
                         Data wydania
                         <span class="forms__required-info">*</span>
@@ -140,7 +154,7 @@
 
                 <div class="forms__buttons-group">
                     <a class="buttons buttons--primary forms__buttons" href="{{ route('admin.get.books') }}">Anuluj</a>
-                    <button class="buttons buttons--primary forms__buttons">Dodaj</button>
+                    <button class="buttons buttons--primary forms__buttons" type="submit">Dodaj</button>
                 </div>
             </form>
 

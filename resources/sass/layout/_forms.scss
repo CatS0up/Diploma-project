@@ -1,6 +1,11 @@
 .forms {
     padding: 20px;
 
+    &--inline {
+        @include flex($align: center);
+        padding: 0;
+    }
+
     &__required-info {
         color: red;
     }
@@ -38,6 +43,10 @@
 
         &--textarea {
             resize: none;
+        }
+
+        &--bordered {
+            border: 1px solid lightgray;
         }
 
         &:focus {

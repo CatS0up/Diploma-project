@@ -11,4 +11,6 @@ interface GenreRepository
 {
     public function all(): Collection;
     public function allPaginated(int $limit = 15): Paginator;
+    public function create(string $name): void;
+    public function delete(int $id): void;
 }

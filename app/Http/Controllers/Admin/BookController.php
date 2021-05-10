@@ -27,5 +27,6 @@ class BookController extends Controller
 
     public function insert(NewBookRequest $request): void
     {
+        $data = $request->validated();
     }
 }

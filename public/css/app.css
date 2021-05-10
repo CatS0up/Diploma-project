@@ -6336,6 +6336,14 @@ textarea {
 .forms {
   padding: 20px;
 }
+.forms--inline {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: 0;
+}
 .forms__required-info {
   color: red;
 }
@@ -6370,6 +6378,9 @@ textarea {
 }
 .forms__input--textarea {
   resize: none;
+}
+.forms__input--bordered {
+  border: 1px solid lightgray;
 }
 .forms__input:focus {
   background-color: #ccdae3;
@@ -6456,6 +6467,9 @@ textarea {
   .tables__footer {
     display: table-footer-group;
   }
+}
+.tables__forms {
+  padding: 0;
 }
 
 .profile {

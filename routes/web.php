@@ -50,6 +50,12 @@ Route::prefix('admin')
 
         Route::get('genres', 'GenreController@list')
             ->name('get.genres');
+
+        Route::post('genres/new', 'GenreController@insert')
+            ->name('insert.genre');
+
+        Route::delete('genres/{id}', 'GenreController@destroy')
+            ->name('delete.genre');
     });
 
 /* ===> USER-LEVEL/GUEST-LEVEL ROUTES <=== */
