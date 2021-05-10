@@ -21,7 +21,7 @@
                         Książki:
                     </h2>
                     <p class="cards__text">
-                        666
+                        111
                     </p>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                         Użytkownicy:
                     </h2>
                     <p class="cards__text">
-                        69
+                        22
                     </p>
                 </div>
             </div>
@@ -90,7 +90,7 @@
                             Sowa
                         </td>
                         <td class="tables__cell" data-label="Ocena">
-                            6/9
+                            5/5
                         </td>
                         <td class="tables__cell" data-label="Opcje">
                             <a href="#" class="links links--light tables__links">Szczegóły</a>

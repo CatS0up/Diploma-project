@@ -20,7 +20,6 @@ class CreatePersonalDetailsTable extends Migration
             $table->string('lastname', 150)->index();
             $table->date('birthday');
             $table->char('gender')->nullable();
-            $table->timestamps();
         });
     }
 

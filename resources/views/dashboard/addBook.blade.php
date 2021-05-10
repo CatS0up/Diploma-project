@@ -18,53 +18,128 @@
 
         <section class="dashboard__add-form">
 
-            <form class="forms dashboard__forms" action="#" method="post">
+            <form class="forms dashboard__forms" action="{{ route('admin.insert.book') }}" method="post"
+                enctype="multipart/form-data">
                 @csrf
                 <div class="forms__group">
+
+                    <div class="forms__inline-section">
+                        <div class="forms__group">
+                            <label class="forms__group-title" for="bookCover">
+                                Okładka
+                            </label>
+                            <input id="bookCover" class="forms__file" type="file" name="cover">
+
+                            @error('cover')
+                                <span class="forms__input-feedback">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="forms__group">
+                            <label class="forms__group-title" for="bookPdf">
+                                PDF
+                                <span class="forms__required-info">*</span>
+                            </label>
+                            <input id="bookPdf" class="forms__file" type="file" name="pdf">
+
+                            @error('pdf')
+                                <span class="forms__input-feedback">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
                     <label class="forms__group-title" for="title">
                         Tytuł
                         <span class="forms__required-info">*</span>
                     </label>
-                    <input id="title" class="forms__input" type="text" name="title">
+                    <input id="title" class="forms__input" type="text" name="title" value="{{ old('title') }}">
+
+                    @error('title')
+                        <span class="forms__input-feedback">
+                            {{ $message }}
+                        </span>
+                    @enderror
                 </div>
 
                 <div class="forms__group">
-                    <label class="forms__group-title" for="title">
+                    <label class="forms__group-title" for="isbn">
                         ISBN
                         <span class="forms__required-info">*</span>
                     </label>
-                    <input id="title" class="forms__input" type="text" name="title">
+                    <input id="isbn" class="forms__input" type="text" name="isbn" value="{{ old('isbn') }}">
+
+                    @error('isbn')
+                        <span class="forms__input-feedback">
+                            {{ $message }}
+                        </span>
+                    @enderror
                 </div>
 
                 <div class="forms__group">
-                    <label class="forms__group-title" for="title">
+                    <label class="forms__group-title" for="publisher">
                         Wydawnictwo
                         <span class="forms__required-info">*</span>
                     </label>
-                    <input id="title" class="forms__input" type="text" name="title">
-                    <span class="forms__input-feedback">
-                        Fraza zawiera niedozwolone znaki
-                    </span>
+                    <input id="publisher" class="forms__input" type="text" name="publisher"
+                        value="{{ old('publisher') }}">
+
+                    @error('publisher')
+                        <span class="forms__input-feedback">
+                            {{ $message }}
+                        </span>
+                    @enderror
                 </div>
 
                 <div class="forms__group">
-                    <label class="forms__group-title" for="title">
+                    <label class="forms__group-title" for="authors">
                         Autor/Autorzy
                         <span class="forms__required-info">*</span>
                     </label>
-                    <input id="title" class="forms__input" type="text" name="title">
+                    <input id="authors" class="forms__input" type="text" name="authors" value="{{ old('authors') }}">
+
+                    @error('authors')
+                        <span class="forms__input-feedback">
+                            {{ $message }}
+                        </span>
+                    @enderror
                 </div>
 
                 <div class="forms__group">
-                    <label class="forms__group-title" for="title">
+                    <label class="forms__group-title" for="publishingDate">
                         Data wydania
                         <span class="forms__required-info">*</span>
                     </label>
-                    <input id="title" class="forms__input" type="date" name="title">
+                    <input id="publishingDate" class="forms__input" type="date" name="publishing_date"
+                        value="{{ old('publishing_date') }}">
+
+                    @error('publishing_date')
+                        <span class="forms__input-feedback">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="forms__group">
+                    <label class="forms__group-title" for="description">
+                        Opis
+                        <span class="forms__required-info">*</span>
+                    </label>
+                    <textarea id="description" class="forms__input forms__input--textarea" name="description"
+                        rows="10">{{ old('description') }}</textarea>
+
+                    @error('description')
+                        <span class="forms__input-feedback">
+                            {{ $message }}
+                        </span>
+                    @enderror
                 </div>
 
                 <div class="forms__buttons-group">
-                    <button class="buttons buttons--primary forms__buttons">Anuluj</button>
+                    <a class="buttons buttons--primary forms__buttons" href="{{ route('admin.get.books') }}">Anuluj</a>
                     <button class="buttons buttons--primary forms__buttons">Dodaj</button>
                 </div>
             </form>

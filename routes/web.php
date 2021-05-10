@@ -42,6 +42,9 @@ Route::prefix('admin')
         Route::get('books/new', 'BookController@create')
             ->name('add.book');
 
+        Route::post('books/new', 'BookController@insert')
+            ->name('insert.book');
+
         Route::get('books/{id}', 'BookController@show')
             ->name('show.book');
 
@@ -53,6 +56,7 @@ Route::prefix('admin')
 Route::name('book.')
     ->namespace('Book')
     ->group(function () {
+
         Route::get('books', 'BookController@list');
     });
 
