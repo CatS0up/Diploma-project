@@ -6,14 +6,25 @@
         padding: 0;
     }
 
+    &--two-columns {
+        @include media("medium") {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));
+        }
+    }
+
     &__required-info {
         color: red;
     }
 
     &__inline-section {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, auto));
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
         align-content: flex-start;
+    }
+
+    &__fullsize-section {
+        grid-column: 1/-1;
     }
 
     &__group {
@@ -63,5 +74,9 @@
     &__buttons-group {
         @include flex($justify: space-between);
         padding: 10px;
+
+        &--full-form-size {
+            grid-column: 1/-1;
+        }
     }
 }

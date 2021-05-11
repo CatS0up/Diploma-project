@@ -12,5 +12,7 @@ interface UserRepository
 {
     public function get(int $id): User;
     public function all(): ?Collection;
+    public function allPrivilaged(): Collection;
+    public function allNormal(): ?Collection;
     public function allPaginated(int $limit): Paginator;
 }

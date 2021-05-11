@@ -17,7 +17,7 @@ class BookController extends Controller
 
     public function list(): View
     {
-        return view('dashboard.bookList');
+        return view('dashboard.bookList', ['boo']);
     }
 
     public function create(): View

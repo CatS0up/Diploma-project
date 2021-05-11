@@ -6,8 +6,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
+use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
 class LoginController extends Controller
@@ -17,13 +18,23 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function authenticate(LoginRequest $request)
+    public function authenticate(LoginRequest $request): RedirectResponse
     {
         $credentials = $request->validated();
+
+        $user = User::whereIn('uid', [$credentials['uid']])->first();
+
+        Auth::loginUsingId($user->id);
+
+        return redirect()
+            ->route('home')
+            ->with('success', 'Jesteś zalogowany.');
     }
 
-    // public function logout(): Redirect
-    // {
-    //     # code...
-    // }
+    public function logout(): RedirectResponse
+    {
+        Auth::logout();
+
+        return redirect()->route('home');
+    }
 }

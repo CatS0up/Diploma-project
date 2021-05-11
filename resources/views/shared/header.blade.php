@@ -61,7 +61,8 @@
                                 </li>
 
                                 <li class="menu__item">
-                                    <a href="#" class="links links--dropdown menu__links">Wyloguj</a>
+                                    <a href="{{ route('auth.logout') }}"
+                                        class="links links--dropdown menu__links">Wyloguj</a>
                                 </li>
                             @endguest
                         </ul>

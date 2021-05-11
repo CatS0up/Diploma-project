@@ -2,10 +2,17 @@
 
 namespace App\Rules;
 
+use App\Models\User;
 use Illuminate\Contracts\Validation\Rule;
 
-class Zipcode implements Rule
+class Login implements Rule
 {
+    /**
+     * Create a new rule instance.
+     *
+     * @return void
+     */
+
     /**
      * Determine if the validation rule passes.
      *
@@ -15,7 +22,10 @@ class Zipcode implements Rule
      */
     public function passes($attribute, $value)
     {
-        return preg_match('/^\d{2}-\d{3}$/', $value);
+        $record = User::uid($value)
+            ->get();
+
+        return $record->isNotEmpty();
     }
 
     /**
@@ -25,6 +35,6 @@ class Zipcode implements Rule
      */
     public function message()
     {
-        return 'Akceptowalny format xx-xxx.';
+        return 'Użytkownik nie został znaleziony.';
     }
 }

@@ -29,7 +29,7 @@ class NewBookRequest extends FormRequest
             'pdf' => 'required|file|mimes:pdf',
             'title' => 'required|regex:/^[a-zA-Z ]*$/',
             'isbn' => ['required', 'numeric', new Isbn()],
-            'publisher' => 'required|regex:/^[a-zA-Z0-9 ]*$/',
+            'publisher' => 'required|regex:/^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ ]*$/',
             'authors' => 'required|regex:/^[^,\s][^\,]*[^,\s]*$/',
             'genres' => 'required|regex:/^[^,\s][^\,]*[^,\s]*$/',
             'publishing_date' => 'required|date',

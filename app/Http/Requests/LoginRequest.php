@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\Login;
+use App\Rules\PasswordVerify;
 use Illuminate\Foundation\Http\FormRequest;
 
 class LoginRequest extends FormRequest
@@ -24,8 +26,8 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'uid' => 'required',
-            'pwd' => 'required'
+            'uid' => ['required', new Login()],
+            'pwd' => ['required', new PasswordVerify($this->input('uid'))]
         ];
     }
 

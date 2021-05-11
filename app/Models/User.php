@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -71,5 +72,24 @@ class User extends Authenticatable
     public function addPersonalDetails(PersonalDetail $details): void
     {
         $this->personalDetails()->save($details);
+    }
+
+
+    /* ===> Scopes <=== */
+    public function scopeUid(Builder $query, string $uid): Builder
+    {
+        return $query->where('uid', $uid)
+            ->orWhere('email', $uid)
+            ->orWhere('phone', $uid);
+    }
+
+    public function scopePrivilaged(Builder $query): Builder
+    {
+        return $query->whereIn('id', [2, 3]);
+    }
+
+    public function scopeNormal(Builder $query): Builder
+    {
+        return $query->where('id', 1);
     }
 }

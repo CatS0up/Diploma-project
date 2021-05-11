@@ -25,20 +25,20 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'uid' => ['required', 'alpha_num', 'max:150', 'unique:users'],
-            'email' => ['required',, 'email', 'max:320', 'unique:users', 'confirmed'],
-            'pwd' => ['required', 'min:10', 'confirmed'],
-            'phone' => ['required', 'numeric', 'min:9', 'unique:users'],
-            'firstname' => ['required', 'string'],
-            'lastname' => ['required', 'string'],
-            'birthday' => ['required', 'date'],
-            'gender' => ['nullable'],
-            'town' => ['required', 'string'],
-            'street' => ['nullable', 'string'],
-            'zipcode' => ['required', new Zipcode()],
-            'house_number' => ['nullable', 'numeric'],
-            'building_number' => ['nullable', 'numeric'],
-            'description' => ['nullable', 'string']
+            'uid' => 'required|alpha_num|min:3|unique:users|max:70',
+            'email' => 'required|email|min:3|unique:users|max:320|confirmed',
+            'pwd' => 'required|min:10|regex:/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/|confirmed',
+            'phone' => 'required|numeric|digits:9',
+            'firstname' => 'required|regex:/^[A-ZŻŹĆĄŚĘŁÓŃ]+[a-zzżźćńółęąś]*$/',
+            'lastname' => 'required|regex:/^[A-ZŻŹĆĄŚĘŁÓŃ]+[a-zzżźćńółęąś]*$/',
+            'birthday' => 'required|date|before:today',
+            'gender' => 'nullable',
+            'town' => 'required|regex:/^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ ]*$/',
+            'street' => 'nullable',
+            'zipcode' => new Zipcode(),
+            'building_number' => 'nullable|alpha_num',
+            'house_number' => 'required|alpha_num',
+            'description' => 'nullable|max:255'
         ];
     }
 }

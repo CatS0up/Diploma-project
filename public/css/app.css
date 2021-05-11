@@ -6344,13 +6344,22 @@ textarea {
   flex-wrap: nowrap;
   padding: 0;
 }
+@media (min-width: 760px) {
+  .forms--two-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));
+  }
+}
 .forms__required-info {
   color: red;
 }
 .forms__inline-section {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, auto));
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   align-content: flex-start;
+}
+.forms__fullsize-section {
+  grid-column: 1/-1;
 }
 .forms__group {
   display: flex;
@@ -6397,6 +6406,9 @@ textarea {
   align-items: stretch;
   flex-wrap: nowrap;
   padding: 10px;
+}
+.forms__buttons-group--full-form-size {
+  grid-column: 1/-1;
 }
 
 .tables {
@@ -6583,6 +6595,15 @@ textarea {
     grid-template-columns: 60% auto;
     align-items: center;
   }
+}
+.app__register-form {
+  max-width: 1000px;
+  margin-top: 15px;
+  margin: 15px auto 0 auto;
+  padding: 20px 10px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.15);
 }
 
 .headers--light {

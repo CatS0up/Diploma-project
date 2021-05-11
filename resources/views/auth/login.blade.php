@@ -24,7 +24,7 @@
                         Login/E-mail
                         <span class="forms__required-info">*</span>
                     </label>
-                    <input id="uid" class="forms__input" type="text" name="uid">
+                    <input id="uid" class="forms__input" type="text" name="uid" value="{{ old('uid') }}">
                     @error('uid')
                         <span class="forms__input-feedback">
                             {{ $message }}
@@ -37,7 +37,7 @@
                         Hasło
                         <span class="forms__required-info">*</span>
                     </label>
-                    <input id="pwd" class="forms__input" type="password" name="pwd">
+                    <input id="pwd" class="forms__input" type="password" name="pwd" value="{{ old('pwd') }}">
                     @error('pwd')
                         <span class="forms__input-feedback">
                             {{ $message }}

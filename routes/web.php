@@ -79,6 +79,9 @@ Route::prefix('auth')
         Route::post('login', 'LoginController@authenticate')
             ->name('login');
 
+        Route::get('logout', 'LoginController@logout')
+            ->name('logout');
+
         Route::get('register', 'RegisterController@create')
             ->name('register.form');
 

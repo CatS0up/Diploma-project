@@ -28,6 +28,20 @@ class UserRepository implements UserRepositoryInterface
         return $this->userModel->get() ?? [];
     }
 
+    public function allPrivilaged(): Collection
+    {
+        return $this->userModel
+            ->privilaged()
+            ->get();
+    }
+
+    public function allNormal(): ?Collection
+    {
+        return $this->userModel
+            ->normal()
+            ->get() ?? [];
+    }
+
     public function allPaginated(int $limit): Paginator
     {
         return $this->userModel->paginate($limit);
