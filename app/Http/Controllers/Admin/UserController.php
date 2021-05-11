@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AccountDataRequest;
 use App\Repository\UserRepository;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class UserController extends Controller
@@ -19,7 +21,10 @@ class UserController extends Controller
 
     public function show(int $id): View
     {
-        return view('dashboard.userProfile');
+        return view(
+            'dashboard.userProfile',
+            ['user' => $this->userRepository->get($id)]
+        );
     }
 
     public function list(): View
@@ -32,6 +37,14 @@ class UserController extends Controller
 
     public function edit(int $id): View
     {
-        return view('dashboard.editUser');
+        return view(
+            'dashboard.editUser',
+            ['user' => $this->userRepository->get($id)]
+        );
+    }
+
+    public function update(AccountDataRequest $request, int $id): RedirectResponse
+    {
+        return redirect()->route('admin.edit.user', ['id' => $id]);
     }
 }

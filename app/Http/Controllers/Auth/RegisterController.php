@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\RegisterRequest;
-use App\Service\UserCreator;
+use App\Http\Requests\AccountDataRequest;
+use App\Repository\UserRepository;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class RegisterController extends Controller
@@ -16,10 +17,16 @@ class RegisterController extends Controller
         return view('auth.register');
     }
 
-    public function register(RegisterRequest $request, UserCreator $userCreator)
-    {
+    public function register(
+        AccountDataRequest $request,
+        UserRepository $userRepository
+    ): RedirectResponse {
         $credentials = $request->validated();
 
-        $userCreator->create($credentials);
+        $userRepository->create($credentials);
+
+        return redirect()
+            ->route('auth.login')
+            ->with('success', 'Konto zostało pomyslnie utworzone.');
     }
 }

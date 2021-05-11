@@ -15,4 +15,5 @@ interface UserRepository
     public function allPrivilaged(): Collection;
     public function allNormal(): ?Collection;
     public function allPaginated(int $limit): Paginator;
+    public function create(array $data): User;
 }

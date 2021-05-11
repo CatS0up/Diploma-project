@@ -15,6 +15,8 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    public $timestamps = false;
+
     protected $fillable = [
         'uid',
         'pwd',
@@ -51,17 +53,17 @@ class User extends Authenticatable
     /* ===> Relations <=== */
     public function personalDetails()
     {
-        return $this->hasOne(PersonalDetail::class);
+        return $this->hasOne(PersonalDetail::class, 'user_id', 'id');
     }
 
     public function address()
     {
-        return $this->hasOne(Address::class);
+        return $this->hasOne(Address::class, 'user_id', 'id');
     }
 
-    public function roles()
+    public function role()
     {
-        return $this->hasOne(Role::class);
+        return $this->belongsTo(Role::class);
     }
 
     public function addAddress(Address $address): void

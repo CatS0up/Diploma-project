@@ -33,7 +33,11 @@
                     <label for="dropdownToggler" class="dropdown__trigger">
                         <span class="icons dropdown__icons dropdown__icons--start fas fa-user"
                             aria-hidden="true"></span>
-                        Konto
+                        @guest
+                            Konto
+                        @else
+                            {{ Auth::user()->uid }}
+                        @endguest
                         <span class="icons icons--small dropdown__icons fas fa-chevron-down"></span>
                     </label>
                     <input id="dropdownToggler" type="checkbox" class="toggler dropdown__toggler">

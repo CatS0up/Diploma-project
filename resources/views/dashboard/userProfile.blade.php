@@ -10,8 +10,13 @@
                         Dashboard
                     </a>
                 </li>
+                <li class="breadcrumbs__item">
+                    <a href="{{ route('admin.get.books') }}" class="links links--light breadcrumbs__links">
+                        Książki
+                    </a>
+                </li>
                 <li class="breadcrumbs__item breadcrumbs__item--active">
-                    Typek jakiś
+                    {{ $user->uid }}
                 </li>
             </ol>
         </header>
@@ -25,24 +30,32 @@
                     <div class="profile__account-group profile__account-group--text-centered">
 
                         <div class="pictures pictures--centered profile__pictures">
-                            <img class="pictures__img" src="{{ asset('img/avatar_placeholder.jpg') }}"
-                                alt="Avatar użytkownika.">
+                            @if ($user->avatar)
+                                Test
+                            @else
+                                <img class="pictures__img" src="{{ asset('img/avatar_placeholder.jpg') }}"
+                                    alt="Avatar użytkownika.">
+                            @endif
                         </div>
 
                         <p class="profile__nickname">
-                            Admin
+                            {{ $user->uid }}
+                        </p>
+
+                        <p class="profile__info">
+                            {{ $user->role->name }}
                         </p>
 
                         <p class="profile__info">
                             <span class="icons profile__icons profile__icons--right-space far fa-envelope"
                                 aria-hidden="true"></span>
-                            test@gmail.com
+                            {{ $user->email }}
                         </p>
 
                         <p class="profile__info">
                             <span class="icons profile__icons profile__icons--right-space fas fa-phone-volume"
                                 aria-hidden="true"></span>
-                            123456789
+                            {{ $user->phone }}
                         </p>
                     </div>
 
@@ -52,16 +65,15 @@
                         </h5>
 
                         <p class="profile__description">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas ipsa, quos facilis quia hic ea
-                            provident non, fugiat rerum facere dignissimos minima commodi mollitia, in eius tempore
-                            corrupti! Consectetur, ratione?
+                            {{ $user->description }}
                         </p>
                     </div>
                 </div>
 
                 <div class="profile__data">
                     <header class="headers profile__headers">
-                        <h3 class="titles titles--transform-none profile__titles profile__titles--subtitle">ID Konta: 1</h3>
+                        <h3 class="titles titles--transform-none profile__titles profile__titles--subtitle">ID Konta:
+                            {{ $user->id }}</h3>
                     </header>
 
                     <div class="profile__data-group">
@@ -74,22 +86,22 @@
                         <ul class="lists profile__lists">
                             <li class="lists__item lists__item--labeled-vertical">
                                 <span class="lists__item-label">Imię:</span>
-                                Firstname
+                                {{ $user->personalDetails->firstname }}
                             </li>
 
                             <li class="lists__item lists__item--labeled-vertical">
                                 <span class="lists__item-label">Nazwisko:</span>
-                                Surname
+                                {{ $user->personalDetails->lastname }}
                             </li>
 
                             <li class="lists__item lists__item--labeled-vertical">
                                 <span class="lists__item-label">Data urodzenia:</span>
-                                1998-10-11
+                                {{ $user->personalDetails->birthday }}
                             </li>
 
                             <li class="lists__item lists__item--labeled-vertical">
                                 <span class="lists__item-label">Płeć:</span>
-                                M
+                                {{ $user->personalDetails->gender ?? '(brak)' }}
                             </li>
                         </ul>
                     </div>
@@ -104,37 +116,35 @@
                         <ul class="lists profile__lists">
                             <li class="lists__item lists__item--labeled-vertical">
                                 <span class="lists__item-label">Miasto:</span>
-                                Town
+                                {{ $user->address->town }}
                             </li>
 
                             <li class="lists__item lists__item--labeled-vertical">
                                 <span class="lists__item-label">Ulica:</span>
-                                Street
+                                {{ $user->address->street ?? '(brak)' }}
                             </li>
 
                             <li class="lists__item lists__item--labeled-vertical">
                                 <span class="lists__item-label">Kod pocztowy:</span>
-                                xx-xxx
+                                {{ $user->address->zipcode }}
                             </li>
 
                             <li class="lists__item lists__item--labeled-vertical">
                                 <span class="lists__item-label">Numer domu:</span>
-                                123
+                                {{ $user->address->house_number }}
                             </li>
 
                             <li class="lists__item lists__item--labeled-vertical">
                                 <span class="lists__item-label">Numer budynku:</span>
-                                123
+                                {{ $user->address->building_number ?? '(brak)' }}
                             </li>
                         </ul>
                     </div>
 
                     <div class="profile__options">
-                        <a href="#" class="buttons buttons--success profile__buttons">
+                        <a class="buttons buttons--success profile__buttons"
+                            href="{{ route('admin.edit.user', ['id' => $user->id]) }}">
                             <span role="img" class="icons profile__icons fas fa-user-edit" aria-label="Edytuj"></span>
-                        </a>
-                        <a href="#" class="buttons buttons--danger profile__buttons">
-                            <span role="img" class="icons profile__icons fas fa-ban" aria-label="Zablokuj"></span>
                         </a>
                         <a href="#" class="buttons buttons--delete profile__buttons">
                             <span role="img" class="icons profile__icons fas fa-trash" aria-label="Usuń"></span>

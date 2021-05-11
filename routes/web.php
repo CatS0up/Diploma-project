@@ -33,6 +33,9 @@ Route::prefix('admin')
         Route::get('users/{id}/edit', 'UserController@edit')
             ->name('edit.user');
 
+        Route::put('users/{id}/edit', 'UserController@update')
+            ->name('update.user');
+
         Route::get('users', 'UserController@list')
             ->name('get.users');
 

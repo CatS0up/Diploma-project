@@ -14,7 +14,6 @@ class Address extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'user_id',
         'town',
         'street',
         'zipcode',
@@ -24,6 +23,6 @@ class Address extends Model
 
     public function users()
     {
-        $this->hasMany(User::class);
+        $this->belongsTo(User::class);
     }
 }

@@ -12,8 +12,9 @@ class PersonalDetail extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = [
-        'user_id',
         'firstname',
         'lastname',
         'birthday',

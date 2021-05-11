@@ -147,7 +147,7 @@
                 <thead class="tables__header">
                     <tr class="tables__row">
                         <th class="tables__header-cell">
-                            #
+                            ID
                         </th>
                         <th class="tables__header-cell">
                             Użytkownik
@@ -168,17 +168,17 @@
                 </thead>
 
                 <tbody class="tables__body">
-                    @for ($i = 1; $i <= 10; $i++)
+                    @foreach ($users as $user)
                         <tr class="tables__row">
-                            <th class="tables__header-cell" data-label="Lp.">
-                                {{ $i }}
+                            <th class="tables__header-cell" data-label="ID">
+                                {{ $user->id }}
                             </th>
 
                             <td class="tables__cell" data-label="Użytkownik">
-                                User
+                                {{ $user->uid }}
                             </td>
                             <td class="tables__cell" data-label="Rola">
-                                Admin
+                                {{ $user->role->name }}
                             </td>
                             <td class="tables__cell" data-label="Ostatnia aktywność">
                                 2005-05-06 21:37:11
@@ -188,19 +188,20 @@
                             </td>
                             <td class="tables__cell" data-label="Opcje">
                                 <div class="tables__group">
-                                    <a class="buttons buttons--primary tables__buttons">Profil</a>
+                                    <a class="buttons buttons--primary tables__buttons"
+                                        href="{{ route('admin.show.user', ['id' => $user->id]) }}">Profil</a>
                                     <a class="buttons buttons--success tables__buttons">Edycja</a>
                                     <a class="buttons buttons--danger tables__buttons">Usuń</a>
                                 </div>
                             </td>
                         </tr>
-                    @endfor
+                    @endforeach
                 </tbody>
 
                 <tfoot class="tables__footer">
                     <tr class="tables__row">
                         <th class="tables__header-cell">
-                            #
+                            ID
                         </th>
                         <th class="tables__header-cell">
                             Użytkownik

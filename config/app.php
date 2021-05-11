@@ -1,6 +1,7 @@
 <?php
 
 use App\Providers\GenresServiceProvider;
+use App\Providers\UsersServiceProvider;
 
 return [
 
@@ -177,7 +178,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        GenresServiceProvider::class
+        GenresServiceProvider::class,
+        UsersServiceProvider::class
 
     ],
 

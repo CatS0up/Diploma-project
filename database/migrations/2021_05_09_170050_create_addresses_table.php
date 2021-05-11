@@ -18,9 +18,9 @@ class CreateAddressesTable extends Migration
             $table->foreignId('user_id')->nullable()->constrained();
             $table->string('town', 255)->index();
             $table->char('zipcode', 6);
-            $table->smallInteger('house_number');
+            $table->string('house_number', 4);
             $table->string('street', 200)->nullable();
-            $table->smallInteger('building_number')->nullable();
+            $table->string('building_number', 4)->nullable();
         });
     }
 

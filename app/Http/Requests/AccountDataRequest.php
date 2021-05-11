@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Rules\Zipcode;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterRequest extends FormRequest
+class AccountDataRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
