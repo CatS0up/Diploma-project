@@ -26,7 +26,7 @@
                         Użytkownicy:
                     </h2>
                     <p class="cards__text">
-                        12
+                        {{ $stats['count'] }}
                     </p>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                         Członkowie zespołu:
                     </h2>
                     <p class="cards__text">
-                        5
+                        {{ $stats['privilagedCount'] }}
                     </p>
                 </div>
             </div>
@@ -88,17 +88,17 @@
                 </thead>
 
                 <tbody class="tables__body">
-                    @for ($i = 1; $i <= 10; $i++)
+                    @foreach ($privilagedUsers as $user)
                         <tr class="tables__row">
                             <th class="tables__header-cell" data-label="Lp.">
-                                {{ $i }}
+                                {{ $loop->iteration }}
                             </th>
 
                             <td class="tables__cell" data-label="Użytkownik">
-                                User
+                                {{ $user->uid }}
                             </td>
                             <td class="tables__cell" data-label="Rola">
-                                Admin
+                                {{ $user->role->name }}
                             </td>
                             <td class="tables__cell" data-label="Ostatnia aktywność">
                                 2005-05-06 21:37:11
@@ -108,11 +108,12 @@
                             </td>
                             <td class="tables__cell" data-label="Opcje">
                                 <div class="tables__group">
-                                    <a class="buttons buttons--primary tables__buttons">Profil</a>
+                                    <a class="buttons buttons--primary tables__buttons"
+                                        href="{{ route('admin.show.user', ['id' => $user->id]) }}">Profil</a>
                                 </div>
                             </td>
                         </tr>
-                    @endfor
+                    @endforeach
                 </tbody>
 
                 <tfoot class="tables__footer">
@@ -188,10 +189,12 @@
                             </td>
                             <td class="tables__cell" data-label="Opcje">
                                 <div class="tables__group">
-                                    <a class="buttons buttons--primary tables__buttons"
-                                        href="{{ route('admin.show.user', ['id' => $user->id]) }}">Profil</a>
-                                    <a class="buttons buttons--success tables__buttons">Edycja</a>
-                                    <a class="buttons buttons--danger tables__buttons">Usuń</a>
+                                    <form class="forms tables__forms"
+                                        action="{{ route('admin.delete.user', ['id' => $user->id]) }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="buttons buttons--danger forms__buttons">Usuń</button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>

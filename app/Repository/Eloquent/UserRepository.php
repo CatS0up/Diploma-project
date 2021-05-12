@@ -19,9 +19,73 @@ class UserRepository implements UserRepositoryInterface
         $this->userModel = $userModel;
     }
 
-    public function get(int $id): User
+    public function create(array $data): User
+    {
+        $this->userModel->uid = $data['uid'];
+        $this->userModel->pwd = Hash::make($data['pwd']);
+        $this->userModel->email = $data['email'];
+        $this->userModel->phone = $data['phone'];
+        $this->userModel->description = $data['description'] ?? null;
+        $this->userModel->save();
+
+        $this->userModel->address()->create([
+            'town' => $data['town'],
+            'street' => $data['street'] ?? null,
+            'zipcode' => $data['zipcode'],
+            'building_number' => $data['building_number'],
+            'house_number' => $data['house_number'] ?? null
+        ]);
+
+        $this->userModel->personalDetails()->create([
+            'firstname' => $data['firstname'],
+            'lastname' => $data['lastname'],
+            'birthday' => $data['birthday'],
+            'gender' => $data['gender'] ?? null
+        ]);
+
+        return $this->userModel;
+    }
+
+    public function get(int $id): ?User
     {
         return $this->userModel->find($id);
+    }
+
+    public function update(array $data)
+    {
+        $model = $this->userModel->find($data['id']);
+        $model->role_id = $data['role'];
+        $model->uid = $data['uid'];
+        $model->email = $data['email'];
+        $model->phone = $data['phone'];
+        $model->description = $data['description'] ?? null;
+        $model->save();
+
+        $model->address()->update([
+            'town' => $data['town'],
+            'street' => $data['street'] ?? null,
+            'zipcode' => $data['zipcode'],
+            'building_number' => $data['building_number'],
+            'house_number' => $data['house_number'] ?? null
+        ]);
+
+        $model->personalDetails()->update([
+            'firstname' => $data['firstname'],
+            'lastname' => $data['lastname'],
+            'birthday' => $data['birthday'],
+            'gender' => $data['gender'] ?? null
+        ]);
+    }
+
+    public function delete(int $id): bool
+    {
+        $user = $this->userModel->find($id);
+
+        $user->address()->delete();
+        $user->personalDetails()->delete();
+        $user->delete();
+
+        return empty($user);
     }
 
     public function all(): ?Collection
@@ -48,30 +112,11 @@ class UserRepository implements UserRepositoryInterface
         return $this->userModel->paginate($limit);
     }
 
-    public function create(array $data): User
+    public function stats(): array
     {
-        $this->userModel->uid = $data['uid'];
-        $this->userModel->pwd = Hash::make($data['pwd']);
-        $this->userModel->email = $data['email'];
-        $this->userModel->phone = $data['phone'];
-        $this->userModel->description = $data['description'] ?? null;
-        $this->userModel->save();
-
-        $this->userModel->address()->create([
-            'town' => $data['town'],
-            'street' => $data['street'] ?? null,
-            'zipcode' => $data['zipcode'],
-            'building_number' => $data['building_number'],
-            'house_number' => $data['house_number'] ?? null
-        ]);
-
-        $this->userModel->personalDetails()->create([
-            'firstname' => $data['firstname'],
-            'lastname' => $data['lastname'],
-            'birthday' => $data['birthday'],
-            'gender' => $data['gender'] ?? null
-        ]);
-
-        return $this->userModel;
+        return [
+            'count' => $this->userModel->count(),
+            'privilagedCount' => $this->userModel->privilaged()->count()
+        ];
     }
 }

@@ -20,6 +20,7 @@ Route::get('/', 'Book\BookController@list')
 
 /* ===> ADMIN-LEVEL ROUTES <=== */
 Route::prefix('admin')
+    ->middleware(['auth'])
     ->name('admin.')
     ->namespace('Admin')
     ->group(function () {
@@ -27,10 +28,12 @@ Route::prefix('admin')
         Route::get('home', 'DashboardController')
             ->name('index');
 
-        Route::get('users/{id}', 'UserController@show')
+        Route::middleware('VerifyUserExist')
+            ->get('users/{id}', 'UserController@show')
             ->name('show.user');
 
-        Route::get('users/{id}/edit', 'UserController@edit')
+        Route::middleware('VerifyUserExist')
+            ->get('users/{id}/edit', 'UserController@edit')
             ->name('edit.user');
 
         Route::put('users/{id}/edit', 'UserController@update')
@@ -38,6 +41,9 @@ Route::prefix('admin')
 
         Route::get('users', 'UserController@list')
             ->name('get.users');
+
+        Route::delete('users/{id}', 'UserController@destroy')
+            ->name('delete.user');
 
         Route::get('books', 'BookController@list')
             ->name('get.books');

@@ -83,7 +83,7 @@
                             </td>
                             <td class="tables__cell" data-label="Opcje">
                                 <div class="tables__group">
-                                    <form lass="forms tables__forms"
+                                    <form class="forms tables__forms"
                                         action="{{ route('admin.delete.genre', ['id' => $genre->id]) }}" method="post">
                                         @csrf
                                         @method('delete')

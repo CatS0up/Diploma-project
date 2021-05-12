@@ -93,6 +93,12 @@
                                 </label>
                                 <input id="uid" class="forms__input" type="text" name="uid"
                                     value="{{ old('uid', $user->uid) }}">
+
+                                @error('uid')
+                                    <span class="forms__input-feedback">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
                             </div>
 
                             <div class="forms__group">
@@ -101,6 +107,12 @@
                                 </label>
                                 <input id="email" class="forms__input" type="email" name="email"
                                     value="{{ old('email', $user->email) }}">
+
+                                @error('email')
+                                    <span class="forms__input-feedback">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
                             </div>
 
                             <div class="forms__group">
@@ -109,6 +121,12 @@
                                 </label>
                                 <input id="phone" class="forms__input" type="tel" name="phone"
                                     value="{{ old('phone', $user->phone) }}">
+
+                                @error('phone')
+                                    <span class="forms__input-feedback">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
                             </div>
 
                             @php
@@ -142,6 +160,12 @@
                                     </label>
                                     <input id="firstName" class="forms__input" type="text" name="firstname"
                                         value="{{ old('firstname', $user->personalDetails->firstname) }}">
+
+                                    @error('firstname')
+                                        <span class="forms__input-feedback">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
                                 </div>
 
                                 <div class="forms__group">
@@ -150,6 +174,12 @@
                                     </label>
                                     <input id="lastName" class="forms__input" type="text" name="lastname"
                                         value="{{ old('lastname', $user->personalDetails->lastname) }}">
+
+                                    @error('lastname')
+                                        <span class="forms__input-feedback">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -159,6 +189,12 @@
                                 </label>
                                 <input id="birthday" class="forms__input" type="date" name="birthday"
                                     value="{{ old('firstname', $user->personalDetails->birthday) }}">
+
+                                @error('birthday')
+                                    <span class="forms__input-feedback">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
                             </div>
 
                             @php
@@ -185,6 +221,12 @@
                                     </label>
                                     <input id="town" class="forms__input" type="text" name="town"
                                         value="{{ old('town', $user->address->town) }}">
+
+                                    @error('town')
+                                        <span class="forms__input-feedback">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
                                 </div>
 
                                 <div class="forms__group">
@@ -193,6 +235,12 @@
                                     </label>
                                     <input id="street" class="forms__input" type="text" name="street"
                                         value="{{ old('street', $user->address->street) }}">
+
+                                    @error('street')
+                                        <span class="forms__input-feedback">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -203,6 +251,12 @@
                                     </label>
                                     <input id="zipcode" class="forms__input" type="text" name="zipcode"
                                         value="{{ old('zipcode', $user->address->zipcode) }}">
+
+                                    @error('zipcode')
+                                        <span class="forms__input-feedback">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
                                 </div>
 
                                 <div class="forms__group">
@@ -211,6 +265,12 @@
                                     </label>
                                     <input id="buldingNumber" class="forms__input" type="text" name="building_number"
                                         value="{{ old('building_number', $user->address->building_number) }}">
+
+                                    @error('building_number')
+                                        <span class="forms__input-feedback">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
                                 </div>
 
                                 <div class="forms__group">
@@ -219,6 +279,12 @@
                                     </label>
                                     <input id="houseNumber" class="forms__input" type="text" name="house_number"
                                         value="{{ old('house_number', $user->address->house_number) }}">
+
+                                    @error('house_number')
+                                        <span class="forms__input-feedback">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -228,6 +294,12 @@
                                 </label>
                                 <textarea id="description" class="forms__input forms__input--textarea" name="description"
                                     rows="10">{{ old('description', $user->description) }}</textarea>
+
+                                @error('description')
+                                    <span class="forms__input-feedback">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
                             </div>
 
                             <div class="forms__buttons-group">

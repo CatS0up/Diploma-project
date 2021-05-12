@@ -10,10 +10,13 @@ use Illuminate\Support\Collection;
 
 interface UserRepository
 {
-    public function get(int $id): User;
+    public function create(array $data): User;
+    public function get(int $id): ?User;
+    public function delete(int $id): bool;
+    public function update(array $data);
     public function all(): ?Collection;
     public function allPrivilaged(): Collection;
     public function allNormal(): ?Collection;
     public function allPaginated(int $limit): Paginator;
-    public function create(array $data): User;
+    public function stats(): array;
 }

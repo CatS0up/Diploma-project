@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Rules\Zipcode;
 use Illuminate\Foundation\Http\FormRequest;
 
-class AccountDataRequest extends FormRequest
+class RegisterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,7 +28,7 @@ class AccountDataRequest extends FormRequest
             'uid' => 'required|alpha_num|min:3|unique:users|max:70',
             'email' => 'required|email|min:3|unique:users|max:320|confirmed',
             'pwd' => 'required|min:10|regex:/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/|confirmed',
-            'phone' => 'required|numeric|digits:9',
+            'phone' => 'required|numeric|digits:9|unique:users',
             'firstname' => 'required|regex:/^[A-ZŻŹĆĄŚĘŁÓŃ]+[a-zzżźćńółęąś]*$/',
             'lastname' => 'required|regex:/^[A-ZŻŹĆĄŚĘŁÓŃ]+[a-zzżźćńółęąś]*$/',
             'birthday' => 'required|date|before:today',

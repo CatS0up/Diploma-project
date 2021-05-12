@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AccountDataRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Repository\UserRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -18,7 +18,7 @@ class RegisterController extends Controller
     }
 
     public function register(
-        AccountDataRequest $request,
+        RegisterRequest $request,
         UserRepository $userRepository
     ): RedirectResponse {
         $credentials = $request->validated();

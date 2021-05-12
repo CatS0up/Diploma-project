@@ -146,7 +146,8 @@
                             href="{{ route('admin.edit.user', ['id' => $user->id]) }}">
                             <span role="img" class="icons profile__icons fas fa-user-edit" aria-label="Edytuj"></span>
                         </a>
-                        <a href="#" class="buttons buttons--delete profile__buttons">
+                        <a href="{{ route('admin.delete.user', ['id' => $user->id]) }}"
+                            class="buttons buttons--delete profile__buttons">
                             <span role="img" class="icons profile__icons fas fa-trash" aria-label="Usuń"></span>
                         </a>
                     </div>
