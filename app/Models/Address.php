@@ -21,6 +21,7 @@ class Address extends Model
         'house_number'
     ];
 
+    /* ===> Relations <=== */
     public function users()
     {
         $this->belongsTo(User::class);

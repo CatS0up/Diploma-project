@@ -2,8 +2,12 @@
     padding: 20px;
 
     &--inline {
-        @include flex($align: center);
+        display: grid;
         padding: 0;
+
+        @include media("medium") {
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        }
     }
 
     &--two-columns {

@@ -8,13 +8,13 @@ use Illuminate\Support\Facades\Hash;
 
 class PasswordVerify implements Rule
 {
-    private string $uid;
+    private ?string $uid;
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-    public function __construct(string $uid)
+    public function __construct(?string $uid)
     {
         $this->uid = $uid;
     }

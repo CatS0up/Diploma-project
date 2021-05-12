@@ -21,6 +21,7 @@ class PersonalDetail extends Model
         'gender'
     ];
 
+    /* ===> Relations <=== */
     public function user()
     {
         return $this->belongsTo(User::class);

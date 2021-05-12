@@ -30,8 +30,8 @@ class NewBookRequest extends FormRequest
             'title' => 'required|regex:/^[a-zA-Z ]*$/',
             'isbn' => ['required', 'numeric', new Isbn()],
             'publisher' => 'required|regex:/^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ ]*$/',
-            'authors' => 'required|regex:/^[^,\s][^\,]*[^,\s]*$/',
-            'genres' => 'required|regex:/^[^,\s][^\,]*[^,\s]*$/',
+            'authors' => 'required',
+            'genres' => 'required',
             'publishing_date' => 'required|date',
             'description' => 'required'
         ];
@@ -57,10 +57,10 @@ class NewBookRequest extends FormRequest
             'publisher.regex' => 'Pole akceptuje jedynie cyfry, małe/wielkie litery oraz spacje.',
 
             'authors.required' => 'Pole autora nie może być puste.',
-            'authors.regex' => 'Lista autorów powinna być oddzielona przecinkami.',
+            // 'authors.regex' => 'Lista autorów powinna być oddzielona przecinkami.',
 
             'genres.required' => 'Gatunek nie może być pusty.',
-            'genres.regex' => 'Lista gatunków powinna być oddzielona przecinkami.',
+            // 'genres.regex' => 'Lista gatunków powinna być oddzielona przecinkami.',
 
             'publishing_date.required' => 'Data wydania nie może być pusta.',
             'publishing_date.date' => 'Pole musi być datą.',

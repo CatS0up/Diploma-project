@@ -9,9 +9,16 @@ class Author extends Model
 {
     use HasFactory;
 
-    /* ===> Scopes <=== */
+    public $timestamps = false;
+
+    protected $fillable = [
+        'firstname',
+        'lastname',
+    ];
+
+    /* ===> Relations <=== */
     public function books()
     {
-        return $this->belongsToMany('users', 'BookAuthors');
+        return $this->belongsToMany('books', 'BookAuthors');
     }
 }

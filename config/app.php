@@ -1,5 +1,6 @@
 <?php
 
+use App\Providers\BooksServiceProvider;
 use App\Providers\GenresServiceProvider;
 use App\Providers\UsersServiceProvider;
 
@@ -179,7 +180,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         GenresServiceProvider::class,
-        UsersServiceProvider::class
+        UsersServiceProvider::class,
+        BooksServiceProvider::class
 
     ],
 

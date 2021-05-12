@@ -6171,7 +6171,8 @@ button {
 }
 
 input,
-textarea {
+textarea,
+select {
   border: none;
   outline: none;
 }
@@ -6337,12 +6338,13 @@ textarea {
   padding: 20px;
 }
 .forms--inline {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  flex-wrap: nowrap;
+  display: grid;
   padding: 0;
+}
+@media (min-width: 760px) {
+  .forms--inline {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
 }
 @media (min-width: 760px) {
   .forms--two-columns {
