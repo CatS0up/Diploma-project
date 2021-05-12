@@ -3,6 +3,10 @@
         margin: 0 auto;
     }
 
+    &--small {
+        max-width: 50px;
+    }
+
     &__img {
         width: 100%;
     }

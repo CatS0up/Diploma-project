@@ -38,6 +38,7 @@ class RegisterRequest extends FormRequest
             'zipcode' => new Zipcode(),
             'building_number' => 'nullable|alpha_num',
             'house_number' => 'required|alpha_num',
+            'avatar' => 'nullable|file|image',
             'description' => 'nullable|max:255'
         ];
     }

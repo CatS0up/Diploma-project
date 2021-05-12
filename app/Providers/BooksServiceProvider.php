@@ -15,7 +15,10 @@ class BooksServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(BookRepository::class, EloquentBookRepository::class);
+        $this->app->singleton(
+            BookRepository::class,
+            EloquentBookRepository::class
+        );
     }
 
     /**

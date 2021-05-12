@@ -25,6 +25,7 @@ class UserRepository implements UserRepositoryInterface
         $this->userModel->pwd = Hash::make($data['pwd']);
         $this->userModel->email = $data['email'];
         $this->userModel->phone = $data['phone'];
+        $this->userModel->avatar = $data['avatar'] ?? null;
         $this->userModel->description = $data['description'] ?? null;
         $this->userModel->save();
 

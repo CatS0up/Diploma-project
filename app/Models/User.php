@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -41,14 +40,6 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
 
     /* ===> Relations <=== */
     public function personalDetails()
@@ -97,5 +88,16 @@ class User extends Authenticatable
         return $query
             ->with('role')
             ->where('role_id', 1);
+    }
+
+    /* ===> Methods <=== */
+    public function isSuperadmin(): bool
+    {
+        return (int) $this->role()->id === 3;
+    }
+
+    public function isAdmin(): bool
+    {
+        return in_array((int) $this->role()->id, [2, 3]);
     }
 }

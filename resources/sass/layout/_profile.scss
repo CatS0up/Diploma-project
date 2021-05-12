@@ -1,4 +1,4 @@
-.profile {
+.show {
     display: grid;
     gap: 20px;
 
@@ -10,7 +10,7 @@
         grid-template-columns: 1fr 2fr;
     }
 
-    &__account {
+    &__main-info {
         padding: 25px;
 
         background-color: #fff;
@@ -18,13 +18,13 @@
         box-shadow: 0 0 10px 1px rgba($color: #000000, $alpha: 0.15);
     }
 
-    &__account-group {
+    &__main-info-group {
         &--text-centered {
             text-align: center;
         }
     }
 
-    &__nickname {
+    &__name {
         font-size: 1.4rem;
     }
 
@@ -57,7 +57,7 @@
     }
 
     &__options {
-        @include flex();
+        @include flex($align: center);
         gap: 10px;
     }
 
@@ -73,10 +73,12 @@
     }
 
     &__pictures {
-        max-width: 100px;
+        &--avatar {
+            max-width: 100px;
 
-        border-radius: 50%;
-        overflow: hidden;
+            border-radius: 50%;
+            overflow: hidden;
+        }
     }
 
     &__titles {

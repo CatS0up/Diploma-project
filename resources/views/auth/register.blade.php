@@ -17,9 +17,22 @@
         </header>
 
         <section class="auth-form app__register-form">
-            <form class="forms forms--two-columns profile__forms" action="{{ route('auth.register') }}" method="post">
+            <form class="forms forms--two-columns profile__forms" action="{{ route('auth.register') }}" method="post"
+                enctype="multipart/form-data">
                 @csrf
                 <div class="forms__fullsize-section">
+                    <div class="forms__group">
+                        <label class="forms__group-title" for="avatar">
+                            Avatar
+                        </label>
+                        <input id="avatar" class="forms__file" type="file" name="avatar" value="{{ old('avatar') }}">
+                        @error('avatar')
+                            <span class="forms__input-feedback">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+
                     <div class="forms__group">
                         <label class="forms__group-title" for="uid">
                             Login

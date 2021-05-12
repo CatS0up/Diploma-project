@@ -29,7 +29,7 @@ class NewBookRequest extends FormRequest
             'pdf' => 'required|file|mimes:pdf',
             'title' => 'required|regex:/^[a-zA-Z ]*$/',
             'isbn' => ['required', 'numeric', new Isbn()],
-            'publisher' => 'required|regex:/^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ ]*$/',
+            'publisher' => 'required',
             'authors' => 'required',
             'genres' => 'required',
             'publishing_date' => 'required|date',
@@ -54,7 +54,6 @@ class NewBookRequest extends FormRequest
             'isbn.numeric' => 'Pole akceptuje jedynie wartości liczbowe.',
 
             'publisher.required' => 'Wydawca nie może być pusty.',
-            'publisher.regex' => 'Pole akceptuje jedynie cyfry, małe/wielkie litery oraz spacje.',
 
             'authors.required' => 'Pole autora nie może być puste.',
             // 'authors.regex' => 'Lista autorów powinna być oddzielona przecinkami.',

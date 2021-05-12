@@ -2,6 +2,7 @@
 
 use App\Providers\BooksServiceProvider;
 use App\Providers\GenresServiceProvider;
+use App\Providers\PublishersServiceProvider;
 use App\Providers\UsersServiceProvider;
 
 return [
@@ -84,7 +85,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'pl',
 
     /*
     |--------------------------------------------------------------------------
@@ -110,7 +111,7 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    'faker_locale' => 'pl_PL',
 
     /*
     |--------------------------------------------------------------------------
@@ -181,7 +182,8 @@ return [
 
         GenresServiceProvider::class,
         UsersServiceProvider::class,
-        BooksServiceProvider::class
+        BooksServiceProvider::class,
+        PublishersServiceProvider::class
 
     ],
 

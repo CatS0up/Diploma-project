@@ -48,6 +48,16 @@
         }
     }
 
+    &__item {
+        @include flex($direction: column, $align: center);
+        gap: 10px;
+
+        @include media("large") {
+            flex-direction: row;
+            align-items: center;
+        }
+    }
+
     &__group {
         @include flex($justify: flex-end, $align: center);
         gap: 10px;

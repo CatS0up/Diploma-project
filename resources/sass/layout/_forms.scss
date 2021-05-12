@@ -79,8 +79,9 @@
         @include flex($justify: space-between);
         padding: 10px;
 
-        &--full-form-size {
-            grid-column: 1/-1;
+        &--content-to-left {
+            justify-content: flex-start;
+            gap: 10px;
         }
     }
 }

@@ -80,21 +80,6 @@
                 </div>
 
                 <div class="forms__group">
-                    <label class="forms__group-title" for="publisher">
-                        Wydawnictwo
-                        <span class="forms__required-info">*</span>
-                    </label>
-                    <input id="publisher" class="forms__input" type="text" name="publisher"
-                        value="{{ old('publisher') }}">
-
-                    @error('publisher')
-                        <span class="forms__input-feedback">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-
-                <div class="forms__group">
                     <label class="forms__group-title" for="authors">
                         Autor/Autorzy
                         <span class="forms__required-info">*</span>
@@ -122,19 +107,35 @@
                     @enderror
                 </div>
 
-                <div class="forms__group">
-                    <label class="forms__group-title" for="publishingDate">
-                        Data wydania
-                        <span class="forms__required-info">*</span>
-                    </label>
-                    <input id="publishingDate" class="forms__input" type="date" name="publishing_date"
-                        value="{{ old('publishing_date') }}">
+                <div class="forms__inline-section">
+                    <div class="forms__group">
+                        <label class="forms__group-title" for="publisher">
+                            Wydawnictwo
+                            <span class="forms__required-info">*</span>
+                        </label>
+                        <select id="publisher" class="forms__input forms__input--bordered" name="publisher">
+                            @foreach ($publishers as $publisher)
+                                <option value="{{ $publisher->id }}"
+                                    {{ $publisher->id == old('publisher') ? 'selected' : null }}>{{ $publisher->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
 
-                    @error('publishing_date')
-                        <span class="forms__input-feedback">
-                            {{ $message }}
-                        </span>
-                    @enderror
+                    <div class="forms__group">
+                        <label class="forms__group-title" for="publishingDate">
+                            Data wydania
+                            <span class="forms__required-info">*</span>
+                        </label>
+                        <input id="publishingDate" class="forms__input" type="date" name="publishing_date"
+                            value="{{ old('publishing_date') }}">
+
+                        @error('publishing_date')
+                            <span class="forms__input-feedback">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
                 </div>
 
                 <div class="forms__group">

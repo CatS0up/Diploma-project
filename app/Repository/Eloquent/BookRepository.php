@@ -16,9 +16,9 @@ class BookRepository implements BookRepositoryInterface
         $this->bookModel = $bookModel;
     }
 
-    public function create(array $data): void
+    public function create(array $data): Book
     {
-        $this->bookModel->publisher_id = 1;
+        $this->bookModel->publisher_id = $data['publisher'];
         $this->bookModel->title = $data['title'];
         $this->bookModel->isbn = $data['isbn'];
         $this->bookModel->file = $data['pdf'];
@@ -28,19 +28,33 @@ class BookRepository implements BookRepositoryInterface
         $this->bookModel->save();
 
         $this->bookModel->genres()->firstOrCreate(
-            [
-                ['name' => $data['genres']]
-            ]
+            ['name' => $data['genres']]
         );
 
         $authorExploded = explode(' ', $data['authors']);
         $this->bookModel->authors()->firstOrCreate(
             [
-                [
-                    'firstname' => $authorExploded[0],
-                    'lastname' => $authorExploded[1]
-                ]
+                'firstname' => $authorExploded[0],
+                'lastname' => $authorExploded[1]
+
             ]
         );
+
+        return $this->bookModel;
+    }
+
+
+    public function get(int $id): ?Book
+    {
+        return $this->bookModel->find($id);
+    }
+
+    public function update(array $data)
+    {
+    }
+
+    public function delete(int $id): bool
+    {
+        return true;
     }
 }

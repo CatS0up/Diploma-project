@@ -2,11 +2,11 @@
 
 namespace App\Providers;
 
-use App\Repository\Eloquent\UserRepository as EloquentUserRepository;
-use App\Repository\UserRepository;
+use App\Repository\Eloquent\PublisherRepository as EloquentPublisherRepository;
+use App\Repository\PublisherRepository;
 use Illuminate\Support\ServiceProvider;
 
-class UsersServiceProvider extends ServiceProvider
+class PublishersServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -16,8 +16,8 @@ class UsersServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(
-            UserRepository::class,
-            EloquentUserRepository::class
+            PublisherRepository::class,
+            EloquentPublisherRepository::class
         );
     }
 

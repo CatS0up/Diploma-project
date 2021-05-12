@@ -30,60 +30,61 @@
         <section class="dashboard__sections">
             <h2 class="titles titles--weight-normal dashboard__titles">Profil</h2>
 
-            <div class="profile dashboard__profile">
+            <div class="show dashboard__show">
 
-                <div class="profile__account">
-                    <div class="profile__account-group profile__account-group--text-centered">
+                <div class="show__main-info">
+                    <div class="show__main-info-group show__main-info-group--text-centered">
 
-                        <div class="pictures pictures--centered profile__pictures">
+                        <div class="pictures pictures--centered show__pictures show__pictures--avatar">
                             @if ($user->avatar)
-                                Test
+                                <img class="pictures__img" src="{{ asset('avatars/' . $user->avatar) }}"
+                                    alt="Avatar użytkownika.">
                             @else
                                 <img class="pictures__img" src="{{ asset('img/avatar_placeholder.jpg') }}"
                                     alt="Avatar użytkownika.">
                             @endif
                         </div>
 
-                        <p class="profile__nickname">
+                        <p class="show__name">
                             {{ $user->uid }}
                         </p>
 
-                        <p class="profile__info">
+                        <p class="show__info">
                             {{ $user->role->name }}
                         </p>
 
-                        <p class="profile__info">
-                            <span class="icons profile__icons profile__icons--right-space far fa-envelope"
+                        <p class="show__info">
+                            <span class="icons show__icons show__icons--right-space far fa-envelope"
                                 aria-hidden="true"></span>
                             {{ $user->email }}
                         </p>
 
-                        <p class="profile__info">
-                            <span class="icons profile__icons profile__icons--right-space fas fa-phone-volume"
+                        <p class="show__info">
+                            <span class="icons show__icons show__icons--right-space fas fa-phone-volume"
                                 aria-hidden="true"></span>
                             {{ $user->phone }}
                         </p>
                     </div>
 
-                    <div class="profile__account-group">
-                        <h5 class="titles titles--transform-none profile__titles profile__titles--group-titles">
+                    <div class="show__main-info-group">
+                        <h5 class="titles titles--transform-none show__titles show__titles--group-titles">
                             Opis
                         </h5>
 
-                        <p class="profile__description">
+                        <p class="show__description">
                             {{ $user->description ?? '(brak)' }}
                         </p>
                     </div>
                 </div>
 
-                <div class="profile__data">
-                    <header class="headers profile__headers">
-                        <h3 class="titles titles--transform-none profile__titles profile__titles--subtitle">ID Konta:
+                <div class="show__data">
+                    <header class="headers show__headers">
+                        <h3 class="titles titles--transform-none show__titles show__titles--subtitle">ID Konta:
                             {{ $user->id }}</h3>
                     </header>
 
-                    <div class="profile__update">
-                        <form class="forms profile__forms" action="{{ route('admin.update.user', ['id' => $user->id]) }}"
+                    <div class="show__update">
+                        <form class="forms show__forms" action="{{ route('admin.update.user', ['id' => $user->id]) }}"
                             method="post">
                             @csrf
                             @method('put')
