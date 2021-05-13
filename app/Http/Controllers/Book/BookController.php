@@ -5,17 +5,39 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Book;
 
 use App\Http\Controllers\Controller;
+use App\Repository\BookRepository;
+use App\Repository\GenreRepository;
+use App\Repository\PublisherRepository;
+use App\Service\FileService;
 use Illuminate\View\View;
 
 class BookController extends Controller
 {
-    public function show(int $id): View
+    private BookRepository $bookRepostiory;
+
+    public function __construct(BookRepository $bookRepository)
     {
-        return view('book.show');
+        $this->bookRepostiory = $bookRepository;
     }
 
-    public function list(): View
+    public function show(int $id): View
     {
-        return view('book.list');
+        return view('book.show', ['book' => $this->bookRepostiory->get($id)]);
+    }
+
+    public function list(GenreRepository $genreRepository, PublisherRepository $publisherRepository): View
+    {
+        return view('book.list', [
+            'genres' => $genreRepository->all(),
+            'publishers' => $publisherRepository->all(),
+            'books' => $this->bookRepostiory->all()
+        ]);
+    }
+
+    public function download(FileService $file, int $id)
+    {
+        $book = $this->bookRepostiory->get($id);
+
+        return $file->download($book->file, $book->title);
     }
 }

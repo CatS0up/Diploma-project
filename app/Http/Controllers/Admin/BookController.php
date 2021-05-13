@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NewBookRequest;
 use App\Repository\BookRepository;
+use App\Repository\GenreRepository;
 use App\Repository\PublisherRepository;
 use App\Service\FileService;
 use Illuminate\Http\RedirectResponse;
@@ -26,9 +27,15 @@ class BookController extends Controller
         return view('dashboard.bookItem', ['book' => $this->bookResposiotry->get($id)]);
     }
 
-    public function list(): View
-    {
-        return view('dashboard.bookList', ['boo']);
+    public function list(
+        PublisherRepository $publisherRepository,
+        GenreRepository $genreRepository
+    ): View {
+        return view('dashboard.bookList', [
+            'books' => $this->bookResposiotry->all(),
+            'publishers' => $publisherRepository->all(),
+            'genres' => $genreRepository->all()
+        ]);
     }
 
     public function create(PublisherRepository $publisherRepository): View

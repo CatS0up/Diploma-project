@@ -37,7 +37,7 @@
 
                         <div class="pictures pictures--centered show__pictures show__pictures--avatar">
                             @if ($user->avatar)
-                                <img class="pictures__img" src="{{ asset('avatars/' . $user->avatar) }}"
+                                <img class="pictures__img" src="{{ Storage::url($user->avatar) }}"
                                     alt="Avatar użytkownika.">
                             @else
                                 <img class="pictures__img" src="{{ asset('img/avatar_placeholder.jpg') }}"

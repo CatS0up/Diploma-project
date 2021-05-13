@@ -1,7 +1,14 @@
 .lists {
     &__item {
+        @include flex();
+
         &--labeled-vertical {
-            @include flex($direction: column);
+            flex-direction: column;
+        }
+
+        &--labeled-horizontal {
+            flex-direction: row;
+            justify-content: space-between;
         }
     }
 

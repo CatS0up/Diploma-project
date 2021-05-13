@@ -72,7 +72,15 @@ Route::name('book.')
     ->namespace('Book')
     ->group(function () {
 
-        Route::get('books', 'BookController@list');
+        Route::get('books', 'BookController@list')
+            ->name('get.books');
+
+        Route::get('books/{id}', 'BookController@show')
+            ->name('show');
+
+        Route::middleware('auth')
+            ->get('books/{id}/download', 'BookController@download')
+            ->name('download');
     });
 
 /* ===> AUTH ROUTES <=== */

@@ -6,6 +6,7 @@ namespace App\Repository\Eloquent;
 
 use App\Models\Book;
 use App\Repository\BookRepository as BookRepositoryInterface;
+use Illuminate\Support\Collection;
 
 class BookRepository implements BookRepositoryInterface
 {
@@ -56,5 +57,10 @@ class BookRepository implements BookRepositoryInterface
     public function delete(int $id): bool
     {
         return true;
+    }
+
+    public function all(): Collection
+    {
+        return $this->bookModel->get();
     }
 }

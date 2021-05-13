@@ -51,14 +51,13 @@
             <h2 class="titles titles--weight-normal dashboard__titles">Książki</h2>
 
             <div class="dashboard__actions">
-                <form class="forms forms--inline dashboard__forms" action="{{ route('admin.insert.genre') }}"
-                    method="post">
+                <form class="forms forms--inline dashboard__forms" action="{{ route('admin.get.books') }}" method="get">
                     @csrf
                     <div class="forms__group">
-                        <input id="bookGenre" class="forms__input forms__input--bordered" type="search" name="genre"
-                            value="{{ old('genres') }}" placeholder="Wyszukaj">
+                        <input id="bookGenre" class="forms__input forms__input--bordered" type="search" name="q"
+                            value="{{ old('q') }}" placeholder="Wyszukaj">
 
-                        @error('genre')
+                        @error('q')
                             <span class="forms__input-feedback">
                                 {{ $message }}
                             </span>
@@ -66,18 +65,21 @@
                     </div>
 
                     <div class="forms__group">
-                        <select class="forms__input forms__input--bordered" name="genre">
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="mercedes">Mercedes</option>
-                            <option value="audi">Audi</option>
+                        <select class="forms__input forms__input--bordered" name="publisher">
+                            <option value="all">Wszystkie</option>
+                            @foreach ($publishers as $publisher)
+                                <option value="{{ $publisher->id }}">{{ $publisher->name }}</option>
+                            @endforeach
                         </select>
+                    </div>
 
-                        @error('genre')
-                            <span class="forms__input-feedback">
-                                {{ $message }}
-                            </span>
-                        @enderror
+                    <div class="forms__group">
+                        <select class="forms__input forms__input--bordered" name="genre">
+                            <option value="all">Wszystkie</option>
+                            @foreach ($genres as $genre)
+                                <option value="{{ $genre->id }}">{{ $genre->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="forms__buttons-group forms__buttons-group--content-to-left">
@@ -94,13 +96,22 @@
                     <thead class="tables__header">
                         <tr class="tables__row">
                             <th class="tables__header-cell">
-                                ID
+                                #
                             </th>
                             <th class="tables__header-cell">
-                                Użytkownik
+                                Książka
                             </th>
                             <th class="tables__header-cell">
-                                Rola
+                                ISBN
+                            </th>
+                            <th class="tables__header-cell">
+                                Autorzy
+                            </th>
+                            <th class="tables__header-cell">
+                                Wydawca
+                            </th>
+                            <th class="tables__header-cell">
+                                Gatunki
                             </th>
                             <th class="tables__header-cell">
                                 Opcje
@@ -109,41 +120,80 @@
                     </thead>
 
                     <tbody class="tables__body">
-                        {{-- @foreach ($users as $user) --}}
-                        <tr class="tables__row">
-                            <th class="tables__header-cell" data-label="ID">
-                                ID
-                            </th>
+                        @foreach ($books as $book)
+                            <tr class="tables__row">
+                                <th class="tables__header-cell" data-label="ID">
+                                    {{ $loop->iteration }}
+                                </th>
 
-                            <td class="tables__cell" data-label="Użytkownik">
-                                Tytuł
-                            </td>
-                            <td class="tables__cell" data-label="Rola">
-                                Ocena
-                            </td>
-                            <td class="tables__cell" data-label="Opcje">
-                                <div class="tables__group">
-                                    <form class="forms tables__forms" action="#" method="post">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="buttons buttons--danger forms__buttons">Usuń</button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                        {{-- @endforeach --}}
+                                <td class="tables__cell" data-label="Użytkownik">
+                                    <div class="tables__item">
+                                        <div class="pictures pictures--small pictures--avatar tables__pictures">
+                                            @if ($book->cover)
+                                                <img class="pictures__img" src="{{ Storage::url($book->cover) }}"
+                                                    alt="Okładka książki.">
+                                            @else
+                                                <img class="pictures__img"
+                                                    src="{{ asset('img/avatar_placeholder.jpg') }}"
+                                                    alt="Okładka książki.">
+                                            @endif
+                                        </div>
+                                        {{ $book->title }}
+                                    </div>
+                                </td>
+
+                                <td class="tables__cell" data-label="ISBN">
+                                    {{ $book->isbn }}
+                                </td>
+
+                                <td class="tables__cell" data-label="Autorzy">
+                                    @foreach ($book->authors as $author)
+                                        {{ $author->firstname . ' ' . $author->lastname }}
+                                    @endforeach
+                                </td>
+
+                                <td class="tables__cell" data-label="Wydawca">
+                                    {{ $book->publisher->name }}
+                                </td>
+
+                                <td class="tables__cell" data-label="Gatunki">
+                                    @foreach ($book->genres as $genre)
+                                        {{ $genre->name }}
+                                    @endforeach
+                                </td>
+
+                                <td class="tables__cell" data-label="Opcje">
+                                    <div class="tables__group">
+                                        <form class="forms tables__forms" action="#" method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="buttons buttons--danger forms__buttons">Usuń</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
 
                     <tfoot class="tables__footer">
                         <tr class="tables__row">
                             <th class="tables__header-cell">
-                                ID
+                                #
                             </th>
                             <th class="tables__header-cell">
-                                Użytkownik
+                                Książka
                             </th>
                             <th class="tables__header-cell">
-                                Rola
+                                ISBN
+                            </th>
+                            <th class="tables__header-cell">
+                                Autorzy
+                            </th>
+                            <th class="tables__header-cell">
+                                Wydawca
+                            </th>
+                            <th class="tables__header-cell">
+                                Gatunki
                             </th>
                             <th class="tables__header-cell">
                                 Opcje

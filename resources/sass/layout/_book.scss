@@ -1,0 +1,50 @@
+.book {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: flex-start;
+    gap: 5px;
+    padding-top: 15px;
+
+    @include media("small") {
+        grid-template-columns: max(300px) 1fr;
+    }
+
+    @include media("large") {
+        align-items: stretch;
+    }
+
+    &__titles {
+        color: #000;
+    }
+
+    &__details {
+        padding: 20px;
+
+        color: $text-muted-color;
+        border: 1px solid lightgray;
+    }
+
+    &__options {
+        @include flex();
+        gap: 10px;
+    }
+
+    // mixins
+    &__pictures {
+        padding: 20px;
+
+        border: 1px solid lightgray;
+    }
+
+    &__titles {
+        padding-bottom: 15px;
+    }
+
+    &__description {
+        padding-bottom: 15px;
+    }
+
+    &__lists {
+        padding-bottom: 15px;
+    }
+}

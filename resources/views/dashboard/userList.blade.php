@@ -98,7 +98,7 @@
                                 <div class="tables__item">
                                     <div class="pictures pictures--small pictures--avatar tables__pictures">
                                         @if ($user->avatar)
-                                            <img class="pictures__img" src="{{ asset('avatars/' . $user->avatar) }}"
+                                            <img class="pictures__img" src="{{ Storage::url($user->avatar) }}"
                                                 alt="Avatar użytkownika.">
                                         @else
                                             <img class="pictures__img" src="{{ asset('img/avatar_placeholder.jpg') }}"
@@ -196,7 +196,7 @@
                                 <div class="tables__item">
                                     <div class="pictures pictures--small pictures--avatar tables__pictures">
                                         @if ($user->avatar)
-                                            <img class="pictures__img" src="{{ asset('avatars/' . $user->avatar) }}"
+                                            <img class="pictures__img" src="{{ Storage::url($user->avatar) }}"
                                                 alt="Avatar użytkownika.">
                                         @else
                                             <img class="pictures__img" src="{{ asset('img/avatar_placeholder.jpg') }}"
