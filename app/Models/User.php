@@ -93,11 +93,11 @@ class User extends Authenticatable
     /* ===> Methods <=== */
     public function isSuperadmin(): bool
     {
-        return (int) $this->role()->id === 3;
+        return (int) $this->role_id === 3;
     }
 
     public function isAdmin(): bool
     {
-        return in_array((int) $this->role()->id, [2, 3]);
+        return in_array((int) $this->role_id, [2, 3]);
     }
 }

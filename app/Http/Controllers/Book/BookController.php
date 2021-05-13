@@ -9,6 +9,7 @@ use App\Repository\BookRepository;
 use App\Repository\GenreRepository;
 use App\Repository\PublisherRepository;
 use App\Service\FileService;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class BookController extends Controller
@@ -25,12 +26,16 @@ class BookController extends Controller
         return view('book.show', ['book' => $this->bookRepostiory->get($id)]);
     }
 
-    public function list(GenreRepository $genreRepository, PublisherRepository $publisherRepository): View
-    {
+    public function list(
+        Request $request,
+        GenreRepository $genreRepository,
+        PublisherRepository $publisherRepository
+    ): View {
         return view('book.list', [
             'genres' => $genreRepository->all(),
             'publishers' => $publisherRepository->all(),
-            'books' => $this->bookRepostiory->all()
+            'books' => $this->bookRepostiory->all(),
+            'phrase' => $request->query('q')
         ]);
     }
 

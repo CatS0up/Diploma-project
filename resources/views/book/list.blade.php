@@ -14,14 +14,17 @@
             <aside class="app__categories">
                 <ul class="lists app__lists">
                     @foreach ($genres as $genre)
-                        <li>{{ $genre->name }}</li>
+                        <li class="lists__item">
+                            <a class="links lists__links"
+                                href="{{ route('book.show', ['id' => $genre->id]) }}">{{ $genre->name }}</a>
+                        </li>
                     @endforeach
                 </ul>
             </aside>
 
             <section class="app__book-list">
                 <div class="app__actions">
-                    <form class="forms forms--inline dashboard__forms" action="{{ route('admin.get.books') }}"
+                    <form class="forms forms--inline dashboard__forms" action="{{ route('book.get.books') }}"
                         method="get">
                         @csrf
                         <div class="forms__group">
@@ -46,10 +49,14 @@
 
                         <div class="forms__buttons-group forms__buttons-group--content-to-left">
                             <button class="buttons buttons--primary forms__buttons" type="submit">Filtruj</button>
-                            <a class="buttons buttons--success forms__buttons"
-                                href="{{ route('admin.add.book') }}">Dodaj</a>
                         </div>
                     </form>
+
+                    @isset($phrase)
+                        <div class="app__search-info">
+                            Wyniki wyszukiwania dla: {{ $phrase }}
+                        </div>
+                    @endisset
                 </div>
 
                 <div class="app__items">
@@ -69,7 +76,7 @@
                                 @endif
                             </div>
 
-                            <ul class="lists book-thumbnails__lists">
+                            <ul class="lists book-thumbnails__lists book-thumbnails__lists">
                                 <li class="lists__item lists__item--labeled-horizontal">
                                     <span class="lists__item-label">Wydawca:</span>
                                     {{ $book->publisher->name }}
@@ -91,7 +98,9 @@
                             </ul>
 
                             <div class="book-thumbnails__options">
-
+                                <a class="buttons buttons--primary" href="#">Dodaj do biblioteki</a>
+                                <a class="buttons buttons--primary"
+                                    href="{{ route('book.show', ['id' => $book->id]) }}">Pokaż</a>
                             </div>
                         </article>
                     @endforeach

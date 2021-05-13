@@ -20,14 +20,14 @@
                     Strona główna
                 </a>
             </li>
-
-            <li class="menu__item menu__item--vertical">
-                <a href="{{ route('admin.index') }}" class="links links--menu menu__links">
-                    <span class="icons links__icons fas fa-columns" aria-hidden="true"></span>
-                    Dashboard
-                </a>
-            </li>
-
+            @can('admin-level')
+                <li class="menu__item menu__item--vertical">
+                    <a href="{{ route('admin.index') }}" class="links links--menu menu__links">
+                        <span class="icons links__icons fas fa-columns" aria-hidden="true"></span>
+                        Dashboard
+                    </a>
+                </li>
+            @endcan
             <li class="menu__item menu__item--vertical">
                 <div class="dropdown menu__dropdown">
                     <label for="dropdownToggler" class="dropdown__trigger">

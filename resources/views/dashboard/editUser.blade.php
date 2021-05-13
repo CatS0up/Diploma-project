@@ -134,26 +134,27 @@
                                 $role = old('role', $user->role->id);
                             @endphp
 
-                            <div class="forms__inline-section">
-                                <div class="forms__check">
-                                    <input id="superAdmin" class="forms__checkbox" type="radio" name="role" value="3"
-                                        {{ $role == 3 ? 'checked' : null }}>
-                                    <label for="superAdmin" class="forms__checkbox-title">Super Admin</label>
-                                </div>
+                            @can('superadmin-level')
+                                <div class="forms__inline-section">
+                                    <div class="forms__check">
+                                        <input id="superAdmin" class="forms__checkbox" type="radio" name="role" value="3"
+                                            {{ $role == 3 ? 'checked' : null }}>
+                                        <label for="superAdmin" class="forms__checkbox-title">Super Admin</label>
+                                    </div>
 
-                                <div class="forms__check">
-                                    <input id="admin" class="forms__checkbox" type="radio" name="role" value="2"
-                                        {{ $role == 2 ? 'checked' : null }}>
-                                    <label for="admin" class="forms__checkbox-title">Admin</label>
-                                </div>
+                                    <div class="forms__check">
+                                        <input id="admin" class="forms__checkbox" type="radio" name="role" value="2"
+                                            {{ $role == 2 ? 'checked' : null }}>
+                                        <label for="admin" class="forms__checkbox-title">Admin</label>
+                                    </div>
 
-                                <div class="forms__check">
-                                    <input id="user" class="forms__checkbox" type="radio" name="role" value="1"
-                                        {{ $role == 1 ? 'checked' : null }}>
-                                    <label for="user" class="forms__checkbox-title">User</label>
+                                    <div class="forms__check">
+                                        <input id="user" class="forms__checkbox" type="radio" name="role" value="1"
+                                            {{ $role == 1 ? 'checked' : null }}>
+                                        <label for="user" class="forms__checkbox-title">User</label>
+                                    </div>
                                 </div>
-                            </div>
-
+                            @endcan
                             <div class="forms__inline-section">
                                 <div class="forms__group">
                                     <label class="forms__group-title" for="firstName">

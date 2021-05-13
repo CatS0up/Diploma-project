@@ -37,8 +37,19 @@
             display: grid;
 
             @include media("medium") {
-                grid-template-columns: 1fr 2fr;
+                grid-template-columns: 1fr 5fr;
             }
+        }
+    }
+
+    &__items {
+        display: grid;
+        justify-content: center;
+        gap: 20px;
+        padding-top: 20px;
+
+        @include media("small") {
+            grid-template-columns: repeat(auto-fit, 260px);
         }
     }
 }

@@ -20,7 +20,7 @@ Route::get('/', 'Book\BookController@list')
 
 /* ===> ADMIN-LEVEL ROUTES <=== */
 Route::prefix('admin')
-    ->middleware(['auth'])
+    ->middleware(['auth', 'can:admin-level'])
     ->name('admin.')
     ->namespace('Admin')
     ->group(function () {

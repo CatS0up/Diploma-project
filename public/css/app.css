@@ -6638,7 +6638,18 @@ select {
 }
 @media (min-width: 760px) {
   .app__sections--columns-2 {
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 5fr;
+  }
+}
+.app__items {
+  display: grid;
+  justify-content: center;
+  gap: 20px;
+  padding-top: 20px;
+}
+@media (min-width: 560px) {
+  .app__items {
+    grid-template-columns: repeat(auto-fit, 260px);
   }
 }
 
@@ -6950,4 +6961,11 @@ select {
 .book-thumbnails {
   padding: 20px;
   border: 1px solid lightgray;
+}
+.book-thumbnails__options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  flex-wrap: nowrap;
 }
