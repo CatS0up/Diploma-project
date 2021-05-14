@@ -151,13 +151,13 @@
 
                     <div class="forms__inline-section">
                         <div class="forms__check">
-                            <input id="male" class="forms__checkbox" type="radio" name="gender" value="m">
-                            <label for="male" class="forms__checkbox-title">Mężczyzna</label>
+                            <input id="male" class="forms__radio" type="radio" name="gender" value="m">
+                            <label for="male" class="forms__radio-title">Mężczyzna</label>
                         </div>
 
                         <div class="forms__check">
-                            <input id="female" class="forms__checkbox" type="radio" name="gender" value="k">
-                            <label for="female" class="forms__checkbox-title">Kobieta</label>
+                            <input id="female" class="forms__radio" type="radio" name="gender" value="k">
+                            <label for="female" class="forms__radio-title">Kobieta</label>
                         </div>
                     </div>
                 </div>

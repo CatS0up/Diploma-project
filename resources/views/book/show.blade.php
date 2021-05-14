@@ -67,7 +67,9 @@
                     </ul>
 
                     <div class="book__options">
-                        <a href="#" class="buttons buttons--success">Dodaj do biblioteki</a>
+                        @auth
+                            <a href="#" class="buttons buttons--success">Dodaj do biblioteki</a>
+                        @endauth
                         <a href="{{ route('book.download', ['id' => $book->id]) }}"
                             class="buttons buttons--primary">Pobierz</a>
                     </div>

@@ -66,7 +66,7 @@
                         </h5>
 
                         <p class="show__description">
-                            {{ $user->description }}
+                            {{ $user->description ?? '(brak)' }}
                         </p>
                     </div>
                 </div>

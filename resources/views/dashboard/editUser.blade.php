@@ -137,21 +137,21 @@
                             @can('superadmin-level')
                                 <div class="forms__inline-section">
                                     <div class="forms__check">
-                                        <input id="superAdmin" class="forms__checkbox" type="radio" name="role" value="3"
+                                        <input id="superAdmin" class="forms__radio" type="radio" name="role" value="3"
                                             {{ $role == 3 ? 'checked' : null }}>
-                                        <label for="superAdmin" class="forms__checkbox-title">Super Admin</label>
+                                        <label for="superAdmin" class="forms__radio-title">Super Admin</label>
                                     </div>
 
                                     <div class="forms__check">
-                                        <input id="admin" class="forms__checkbox" type="radio" name="role" value="2"
+                                        <input id="admin" class="forms__radio" type="radio" name="role" value="2"
                                             {{ $role == 2 ? 'checked' : null }}>
-                                        <label for="admin" class="forms__checkbox-title">Admin</label>
+                                        <label for="admin" class="forms__radio-title">Admin</label>
                                     </div>
 
                                     <div class="forms__check">
-                                        <input id="user" class="forms__checkbox" type="radio" name="role" value="1"
+                                        <input id="user" class="forms__radio" type="radio" name="role" value="1"
                                             {{ $role == 1 ? 'checked' : null }}>
-                                        <label for="user" class="forms__checkbox-title">User</label>
+                                        <label for="user" class="forms__radio-title">User</label>
                                     </div>
                                 </div>
                             @endcan
@@ -204,15 +204,15 @@
                             @endphp
                             <div class="forms__inline-section">
                                 <div class="forms__check">
-                                    <input id="male" class="forms__checkbox" type="radio" name="gender" value="m"
+                                    <input id="male" class="forms__radio" type="radio" name="gender" value="m"
                                         {{ $gender === 'm' ? 'checked' : null }}>
-                                    <label for="male" class="forms__checkbox-title">Mężczyzna</label>
+                                    <label for="male" class="forms__radio-title">Mężczyzna</label>
                                 </div>
 
                                 <div class="forms__check">
-                                    <input id="female" class="forms__checkbox" type="radio" name="gender" value="k"
+                                    <input id="female" class="forms__radio" type="radio" name="gender" value="k"
                                         {{ $gender === 'k' ? 'checked' : null }}>
-                                    <label for="female" class="forms__checkbox-title">Kobieta</label>
+                                    <label for="female" class="forms__radio-title">Kobieta</label>
                                 </div>
                             </div>
 

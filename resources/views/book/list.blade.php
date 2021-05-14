@@ -7,6 +7,9 @@
                 <li class="breadcrumbs__item breadcrumbs__item--active">
                     Strona główna
                 </li>
+                <li class="breadcrumbs__item breadcrumbs__item--active">
+                    Książki
+                </li>
             </ol>
         </header>
 
@@ -98,7 +101,9 @@
                             </ul>
 
                             <div class="book-thumbnails__options">
-                                <a class="buttons buttons--primary" href="#">Dodaj do biblioteki</a>
+                                @auth
+                                    <a class="buttons buttons--primary" href="#">Dodaj do biblioteki</a>
+                                @endauth
                                 <a class="buttons buttons--primary"
                                     href="{{ route('book.show', ['id' => $book->id]) }}">Pokaż</a>
                             </div>

@@ -6343,7 +6343,7 @@ select {
 }
 @media (min-width: 760px) {
   .forms--inline {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   }
 }
 @media (min-width: 760px) {
@@ -6377,7 +6377,7 @@ select {
 .forms__group-title {
   padding-bottom: 5px;
 }
-.forms__checkbox-title {
+.forms__radio-title {
   padding-left: 5px;
 }
 .forms__input {
@@ -6405,7 +6405,7 @@ select {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: stretch;
+  align-items: center;
   flex-wrap: nowrap;
   padding: 10px;
 }
@@ -6565,7 +6565,8 @@ select {
   padding: 0;
 }
 .show__pictures--avatar {
-  max-width: 100px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   overflow: hidden;
 }
@@ -6968,4 +6969,12 @@ select {
   justify-content: space-between;
   align-items: stretch;
   flex-wrap: nowrap;
+}
+
+.notifications {
+  padding: 30px 0;
+  font-size: 2rem;
+  color: #808080;
+  font-weight: 500;
+  text-align: center;
 }

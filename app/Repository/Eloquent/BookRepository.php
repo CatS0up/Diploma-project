@@ -6,10 +6,16 @@ namespace App\Repository\Eloquent;
 
 use App\Models\Book;
 use App\Repository\BookRepository as BookRepositoryInterface;
+use App\Repository\Filterable;
+use App\Repository\Maintable;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 
-class BookRepository implements BookRepositoryInterface
+class BookRepository implements BookRepositoryInterface, Maintable, Filterable
 {
+    private const RELATIONS = ['genres', 'authors', 'publisher'];
+
     private Book $bookModel;
 
     public function __construct(Book $bookModel)
@@ -61,6 +67,39 @@ class BookRepository implements BookRepositoryInterface
 
     public function all(): Collection
     {
-        return $this->bookModel->get();
+        return $this->bookModel
+            ->with(self::RELATIONS)
+            ->get();
+    }
+
+    public function allPaginated(int $limit = self::LIMIT): Paginator
+    {
+        return $this->bookModel->paginate($limit);
+    }
+
+    public function filterBy(array $filters, int $limit = self::LIMIT)
+    {
+        $query = $this->bookModel
+            ->with(self::RELATIONS);
+
+        if ($filters['q']) {
+            $query->whereRaw('title LIKE ?', ["{$filters['q']}%"]);
+        }
+
+        if ($filters['publisher'] !== self::PUBLISHER_ALL) {
+            $query->whereHas('publisher', fn (Builder $q) => $q->where('name', $filters['publisher']));
+        }
+
+        if ($filters['genre'] !== self::GENRE_ALL) {
+            $query->whereHas('genres', fn (Builder $q) => $q->where('name', $filters['genre']));
+        }
+
+        if ($sort = $filters['sort']) {
+            $sort = in_array($sort, ['asc', 'desc']) ? $sort : self::SORT_DEFAULT;
+
+            $query->orderBy('title', $sort);
+        }
+
+        return $query->paginate($limit);
     }
 }

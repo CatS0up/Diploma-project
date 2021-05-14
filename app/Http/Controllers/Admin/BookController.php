@@ -10,6 +10,7 @@ use App\Repository\BookRepository;
 use App\Repository\GenreRepository;
 use App\Repository\PublisherRepository;
 use App\Service\FileService;
+use App\Service\FiltersFormatter;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -28,13 +29,20 @@ class BookController extends Controller
     }
 
     public function list(
+        FiltersFormatter $filtersFormatter,
         PublisherRepository $publisherRepository,
         GenreRepository $genreRepository
     ): View {
+        $filters = $filtersFormatter->format(
+            ['q', 'publisher', 'genre', 'sort'],
+            ['sort' => 'asc']
+        );
+
         return view('dashboard.bookList', [
-            'books' => $this->bookResposiotry->all(),
+            'books' => $this->bookResposiotry->filterBy($filters),
             'publishers' => $publisherRepository->all(),
-            'genres' => $genreRepository->all()
+            'genres' => $genreRepository->all(),
+            'filters' => $filters
         ]);
     }
 

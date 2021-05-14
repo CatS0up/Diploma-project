@@ -6,7 +6,7 @@
         padding: 0;
 
         @include media("medium") {
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         }
     }
 
@@ -44,7 +44,7 @@
         padding-bottom: 5px;
     }
 
-    &__checkbox-title {
+    &__radio-title {
         padding-left: 5px;
     }
 
@@ -76,7 +76,7 @@
     }
 
     &__buttons-group {
-        @include flex($justify: space-between);
+        @include flex($justify: space-between, $align: center);
         padding: 10px;
 
         &--content-to-left {

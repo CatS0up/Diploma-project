@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace App\Repository\Eloquent;
 
 use App\Models\User;
+use App\Repository\Maintable;
 use App\Repository\UserRepository as UserRepositoryInterface;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
 
-class UserRepository implements UserRepositoryInterface
+class UserRepository implements UserRepositoryInterface, Maintable
 {
     private User $userModel;
 

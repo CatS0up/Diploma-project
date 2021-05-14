@@ -26,6 +26,7 @@ class LoginController extends Controller
         $user = User::whereIn('uid', [$credentials['uid']])->first();
 
         $user->actived_at = Carbon::now();
+        $user->save();
 
         Auth::loginUsingId($user->id);
 
