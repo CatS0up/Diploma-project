@@ -30,8 +30,13 @@
     }
 
     &__sections {
-        max-width: 1000px;
+        max-width: 1200px;
         margin: 0 auto;
+        padding-top: 15px;
+
+        &--medium-width {
+            max-width: 1000px;
+        }
 
         &--columns-2 {
             display: grid;
@@ -42,14 +47,15 @@
         }
     }
 
-    &__items {
+    // mixins
+    &__lists {
         display: grid;
-        justify-content: center;
-        gap: 20px;
+        justify-content: space-between;
+        gap: 10px;
         padding-top: 20px;
 
         @include media("small") {
-            grid-template-columns: repeat(auto-fit, 260px);
+            grid-template-columns: repeat(auto-fit, 300px);
         }
     }
 }

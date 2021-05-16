@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NewBookRequest;
 use App\Repository\BookRepository;
+use App\Repository\Filterable;
 use App\Repository\GenreRepository;
 use App\Repository\PublisherRepository;
 use App\Service\FileService;
@@ -35,11 +36,16 @@ class BookController extends Controller
     ): View {
         $filters = $filtersFormatter->format(
             ['q', 'publisher', 'genre', 'sort'],
-            ['sort' => 'asc']
+            [
+                'sort' => Filterable::SORT_DEFAULT,
+                'publisher' => BookRepository::PUBLISHER_ALL,
+                'genre' => BookRepository::GENRE_ALL
+            ]
         );
 
         return view('dashboard.bookList', [
             'books' => $this->bookResposiotry->filterBy($filters),
+            'stats' => $this->bookResposiotry->stats(),
             'publishers' => $publisherRepository->all(),
             'genres' => $genreRepository->all(),
             'filters' => $filters

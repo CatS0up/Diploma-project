@@ -26,7 +26,7 @@
                         Książki:
                     </h2>
                     <p class="cards__text">
-                        976
+                        {{ $stats['count'] }}
                     </p>
                 </div>
             </div>
@@ -51,7 +51,7 @@
             <h2 class="titles titles--weight-normal dashboard__titles">Książki</h2>
 
             <div class="dashboard__actions">
-                <form class="forms forms--inline dashboard__forms" action="{{ route('admin.get.books') }}" method="get">
+                <form class="forms forms--inline app__forms" action="{{ url()->current() }}" method="get">
                     @csrf
                     <div class="forms__group">
                         <label class="forms__group-title" for="search">
@@ -59,12 +59,6 @@
                         </label>
                         <input id="search" class="forms__input forms__input--bordered" type="search" name="q"
                             value="{{ $filters['q'] }}">
-
-                        @error('q')
-                            <span class="forms__input-feedback">
-                                {{ $message }}
-                            </span>
-                        @enderror
                     </div>
 
                     <div class="forms__group">
@@ -96,15 +90,17 @@
                     </div>
 
                     <div class="forms__inline-section">
+                        <span class="forms__section-name forms__section-name--all-cols">Sortuj (Po tytule)</span>
+
                         <div class="forms__check">
                             <input id="ascending" class="forms__radio" type="radio" name="sort" value="asc"
-                                {{ $filters['sort'] === 'asc' ? 'checked' : null }}>
+                                {{ !($filters['sort'] === 'asc') ?: 'checked' }}>
                             <label for="ascending" class="forms__radio-title">Rosnąco</label>
                         </div>
 
                         <div class="forms__check">
                             <input id="descending" class="forms__radio" type="radio" name="sort" value="desc"
-                                {{ $filters['sort'] === 'desc' ? 'checked' : null }}>
+                                {{ !($filters['sort'] === 'desc') ?: 'checked' }}>
                             <label for="descending" class="forms__radio-title">Malejąco</label>
                         </div>
                     </div>
@@ -114,130 +110,129 @@
                         <a class="buttons buttons--success forms__buttons" href="{{ route('admin.add.book') }}">Nowa</a>
                     </div>
                 </form>
+
             </div>
 
-            <section class="dashboard__sections">
-                @if ($books->total() > 0)
-                    <table class="tables dashboard__tables">
-                        <thead class="tables__header">
+            @if ($books->total() > 0)
+                <table class="tables dashboard__tables">
+                    <thead class="tables__header">
+                        <tr class="tables__row">
+                            <th class="tables__header-cell">
+                                #
+                            </th>
+                            <th class="tables__header-cell">
+                                Książka
+                            </th>
+                            <th class="tables__header-cell">
+                                ISBN
+                            </th>
+                            <th class="tables__header-cell">
+                                Autorzy
+                            </th>
+                            <th class="tables__header-cell">
+                                Wydawca
+                            </th>
+                            <th class="tables__header-cell">
+                                Gatunki
+                            </th>
+                            <th class="tables__header-cell">
+                                Opcje
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="tables__body">
+                        @foreach ($books as $book)
                             <tr class="tables__row">
                                 <th class="tables__header-cell">
-                                    #
+                                    {{ $loop->iteration }}
                                 </th>
-                                <th class="tables__header-cell">
-                                    Książka
-                                </th>
-                                <th class="tables__header-cell">
-                                    ISBN
-                                </th>
-                                <th class="tables__header-cell">
-                                    Autorzy
-                                </th>
-                                <th class="tables__header-cell">
-                                    Wydawca
-                                </th>
-                                <th class="tables__header-cell">
-                                    Gatunki
-                                </th>
-                                <th class="tables__header-cell">
-                                    Opcje
-                                </th>
-                            </tr>
-                        </thead>
 
-                        <tbody class="tables__body">
-                            @foreach ($books as $book)
-                                <tr class="tables__row">
-                                    <th class="tables__header-cell tables__header-cell--labeled" data-label="#">
-                                        {{ $loop->iteration }}
-                                    </th>
-
-                                    <td class="tables__cell" data-label="Użytkownik">
-                                        <div class="tables__item">
-                                            <div class="pictures pictures--small pictures--avatar tables__pictures">
-                                                @if ($book->cover)
-                                                    <img class="pictures__img" src="{{ Storage::url($book->cover) }}"
-                                                        alt="Okładka książki.">
-                                                @else
-                                                    <img class="pictures__img"
-                                                        src="{{ asset('img/avatar_placeholder.jpg') }}"
-                                                        alt="Okładka książki.">
-                                                @endif
-                                            </div>
-                                            {{ $book->title }}
+                                <td class="tables__cell" data-label="Książka">
+                                    <div class="tables__item">
+                                        <div class="pictures pictures--small pictures--avatar tables__pictures">
+                                            @if ($book->cover)
+                                                <img class="pictures__img" src="{{ Storage::url($book->cover) }}"
+                                                    alt="Okładka książki.">
+                                            @else
+                                                <img class="pictures__img"
+                                                    src="{{ asset('img/avatar_placeholder.jpg') }}"
+                                                    alt="Okładka książki.">
+                                            @endif
                                         </div>
-                                    </td>
+                                        {{ $book->title }}
+                                    </div>
+                                </td>
 
-                                    <td class="tables__cell" data-label="ISBN">
-                                        {{ $book->isbn }}
-                                    </td>
+                                <td class="tables__cell" data-label="ISBN">
+                                    {{ $book->isbn }}
+                                </td>
 
-                                    <td class="tables__cell" data-label="Autorzy">
-                                        @foreach ($book->authors as $author)
-                                            {{ $author->firstname . ' ' . $author->lastname }}
-                                        @endforeach
-                                    </td>
+                                <td class="tables__cell" data-label="Autorzy">
+                                    @foreach ($book->authors as $author)
+                                        {{ $author->firstname . ' ' . $author->lastname }}
+                                    @endforeach
+                                </td>
 
-                                    <td class="tables__cell" data-label="Wydawca">
-                                        {{ $book->publisher->name }}
-                                    </td>
+                                <td class="tables__cell" data-label="Wydawca">
+                                    {{ $book->publisher->name }}
+                                </td>
 
-                                    <td class="tables__cell" data-label="Gatunki">
-                                        @foreach ($book->genres as $genre)
-                                            {{ $genre->name }}
-                                        @endforeach
-                                    </td>
+                                <td class="tables__cell" data-label="Gatunki">
+                                    @foreach ($book->genres as $genre)
+                                        {{ $genre->name }}
+                                    @endforeach
+                                </td>
 
-                                    <td class="tables__cell" data-label="Opcje">
-                                        <div class="tables__group">
-                                            <a class="buttons buttons--primary tables__buttons"
-                                                href="{{ route('admin.show.book', ['id' => $book->id]) }}">Pokaż</a>
+                                <td class="tables__cell" data-label="Opcje">
+                                    <div class="tables__group">
+                                        <a class="buttons buttons--primary tables__buttons"
+                                            href="{{ route('admin.show.book', ['id' => $book->id]) }}">Pokaż</a>
 
-                                            <form class="forms tables__forms" action="#" method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="buttons buttons--danger forms__buttons">Usuń</button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-
-                        <tfoot class="tables__footer">
-                            <tr class="tables__row">
-                                <th class="tables__header-cell">
-                                    #
-                                </th>
-                                <th class="tables__header-cell">
-                                    Książka
-                                </th>
-                                <th class="tables__header-cell">
-                                    ISBN
-                                </th>
-                                <th class="tables__header-cell">
-                                    Autorzy
-                                </th>
-                                <th class="tables__header-cell">
-                                    Wydawca
-                                </th>
-                                <th class="tables__header-cell">
-                                    Gatunki
-                                </th>
-                                <th class="tables__header-cell">
-                                    Opcje
-                                </th>
+                                        <form class="forms tables__forms" action="#" method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="buttons buttons--danger forms__buttons">Usuń</button>
+                                        </form>
+                                    </div>
+                                </td>
                             </tr>
-                        </tfoot>
-                    </table>
-                @else
-                    <div class="notifications dashboard__notifications">
-                        <span class="icons icons--x-large notifications__icons far fa-folder-open"
-                            aria-hidden="true"></span>
-                        Brak książek
-                    </div>
-                @endif
-            </section>
+                        @endforeach
+                    </tbody>
+
+                    <tfoot class="tables__footer">
+                        <tr class="tables__row">
+                            <th class="tables__header-cell">
+                                #
+                            </th>
+                            <th class="tables__header-cell">
+                                Książka
+                            </th>
+                            <th class="tables__header-cell">
+                                ISBN
+                            </th>
+                            <th class="tables__header-cell">
+                                Autorzy
+                            </th>
+                            <th class="tables__header-cell">
+                                Wydawca
+                            </th>
+                            <th class="tables__header-cell">
+                                Gatunki
+                            </th>
+                            <th class="tables__header-cell">
+                                Opcje
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+            @else
+                <div class="notifications dashboard__notifications">
+                    <span class="icons icons--x-large notifications__icons far fa-folder-open" aria-hidden="true"></span>
+                    Brak książek
+                </div>
+            @endif
+        </section>
     </div>
 
 @endsection

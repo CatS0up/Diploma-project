@@ -7,7 +7,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AccountDataRequest;
 use App\Http\Requests\UserUpdateByAdminRequest;
+use App\Repository\Filterable;
 use App\Repository\UserRepository;
+use App\Service\FiltersFormatter;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
@@ -31,14 +33,19 @@ class UserController extends Controller
         );
     }
 
-    public function list(): View
+    public function list(FiltersFormatter $filtersFormatter): View
     {
+        $filters = $filtersFormatter->format(
+            ['q', 'sort'],
+            ['sort' => Filterable::SORT_DEFAULT]
+        );
         return view(
             'dashboard.userList',
             [
-                'users' => $this->userRepository->allNormal(),
+                'users' => $this->userRepository->filterBy($filters),
                 'privilagedUsers' => $this->userRepository->allPrivilaged(),
-                'stats' => $this->userRepository->stats()
+                'stats' => $this->userRepository->stats(),
+                'filters' => $filters
             ]
         );
     }

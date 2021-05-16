@@ -5,7 +5,9 @@
     <main class="app site__app">
 
         <section class="app__content">
-            @yield('inner-content')
+            <div class="container app__container">
+                @yield('inner-content')
+            </div>
         </section>
     </main>
 

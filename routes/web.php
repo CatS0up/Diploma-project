@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Book\BookController;
+use App\Models\Book;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +26,6 @@ Route::get('/', 'Book\BookController@list')
 Route::prefix('admin')
     ->middleware(['auth', 'can:admin-level'])
     ->name('admin.')
-    ->namespace('Admin')
     ->group(function () {
 
         Route::get('home', 'DashboardController')
@@ -67,41 +70,47 @@ Route::prefix('admin')
             ->name('delete.genre');
     });
 
-/* ===> USER-LEVEL/GUEST-LEVEL ROUTES <=== */
+/* ===> GUEST-LEVEL ROUTES <=== */
 Route::name('book.')
-    ->namespace('Book')
     ->group(function () {
 
-        Route::get('books', 'BookController@list')
+        Route::get('books', [BookController::class => 'list'])
             ->name('get.books');
 
-        Route::get('books/{id}', 'BookController@show')
+        Route::get('books/{id}', [BookController::class => 'show'])
             ->name('show');
 
         Route::middleware('auth')
-            ->get('books/{id}/download', 'BookController@download')
+            ->get('books/{id}/download', [BookController::class => 'download'])
             ->name('download');
+    });
+
+/* ===> USER-LEVEL ROUTES <=== */
+Route::prefix('users')
+    ->middleware(['auth'])
+    ->group(function () {
+
+        // Route::get('profile', 'ProfileController');
     });
 
 /* ===> AUTH ROUTES <=== */
 Route::prefix('auth')
     ->name('auth.')
-    ->namespace('Auth')
     ->group(function () {
 
         // Route::get('login', 'Login');
-        Route::get('login', 'LoginController@login')
+        Route::get('login', [LoginController::class => 'login'])
             ->name('login.form');
 
-        Route::post('login', 'LoginController@authenticate')
+        Route::post('login', [LoginController::class => 'authenticate'])
             ->name('login');
 
-        Route::get('logout', 'LoginController@logout')
+        Route::get('logout', [LoginController::class => 'logout'])
             ->name('logout');
 
-        Route::get('register', 'RegisterController@create')
+        Route::get('register', [RegisterController::class => 'create'])
             ->name('register.form');
 
-        Route::post('register', 'RegisterController@register')
+        Route::post('register', [RegisterController::class => 'register'])
             ->name('register');
     });

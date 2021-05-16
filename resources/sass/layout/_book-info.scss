@@ -1,0 +1,57 @@
+.book-info {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+
+    @include media("small") {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    @include media("medium") {
+        grid-template-columns: 1fr 2fr;
+    }
+
+    &__thumbnail {
+        padding: 10px;
+
+        border: 1px solid lightgray;
+    }
+
+    &__details {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, auto) 1fr;
+        padding: 25px;
+
+        border: 1px solid lightgray;
+
+        @include media("medium") {
+            grid-template-columns: 1fr 2fr;
+        }
+    }
+
+    &__description {
+        padding: 15px 0;
+
+        color: $text-muted-color;
+
+        @include media("large") {
+            padding: 0;
+        }
+    }
+
+    &__options {
+        grid-column: 1/-1;
+        @include flex($align: flex-end);
+        gap: 5px;
+    }
+
+    // mixins
+    &__titles {
+        grid-column: 1/-1;
+    }
+
+    &__lists {
+        color: $text-muted-color;
+    }
+}

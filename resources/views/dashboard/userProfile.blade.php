@@ -143,14 +143,24 @@
                     </div>
 
                     <div class="show__options">
-                        <a class="buttons buttons--success show__buttons"
+                        <a class="buttons buttons--bg-no buttons--success-text show__buttons"
                             href="{{ route('admin.edit.user', ['id' => $user->id]) }}">
-                            <span role="img" class="icons show__icons fas fa-user-edit" aria-label="Edytuj"></span>
+                            <span role="img" class="icons show__icons fas fa-user-edit" aria-label="Edycja"></span>
                         </a>
-                        <a href="{{ route('admin.delete.user', ['id' => $user->id]) }}"
-                            class="buttons buttons--delete show__buttons">
-                            <span role="img" class="icons show__icons fas fa-trash" aria-label="Usuń"></span>
+
+                        <a class="buttons buttons--bg-no buttons--danger-text show__buttons"
+                            href="{{ route('admin.edit.user', ['id' => $user->id]) }}">
+                            <span role="img" class="icons show__icons fas fa-ban" aria-label="Banuj"></span>
                         </a>
+
+                        <form class="forms tables__forms" action="{{ route('admin.delete.user', ['id' => $user->id]) }}"
+                            method="post">
+                            @csrf
+                            @method('delete')
+                            <button class="buttons buttons--bg-no buttons--delete-text show__buttons">
+                                <span role="img" class="icons show__icons fas fa-trash" aria-label="Usuń"></span>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

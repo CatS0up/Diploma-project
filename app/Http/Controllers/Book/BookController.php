@@ -6,10 +6,11 @@ namespace App\Http\Controllers\Book;
 
 use App\Http\Controllers\Controller;
 use App\Repository\BookRepository;
+use App\Repository\Filterable;
 use App\Repository\GenreRepository;
 use App\Repository\PublisherRepository;
 use App\Service\FileService;
-use Illuminate\Http\Request;
+use App\Service\FiltersFormatter;
 use Illuminate\View\View;
 
 class BookController extends Controller
@@ -27,15 +28,24 @@ class BookController extends Controller
     }
 
     public function list(
-        Request $request,
+        FiltersFormatter $filters,
         GenreRepository $genreRepository,
         PublisherRepository $publisherRepository
     ): View {
+        $filters = $filters->format(
+            ['q', 'publisher', 'genre', 'sort'],
+            [
+                'sort' => Filterable::SORT_DEFAULT,
+                'publisher' => BookRepository::PUBLISHER_ALL,
+                'genre' => BookRepository::GENRE_ALL
+            ]
+        );
+
         return view('book.list', [
             'genres' => $genreRepository->all(),
             'publishers' => $publisherRepository->all(),
-            'books' => $this->bookRepostiory->all(),
-            'phrase' => $request->query('q')
+            'books' => $this->bookRepostiory->filterBy($filters),
+            'filters' =>  $filters
         ]);
     }
 

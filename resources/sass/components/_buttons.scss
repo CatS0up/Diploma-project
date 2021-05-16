@@ -1,7 +1,10 @@
 .buttons {
     display: block;
-    padding: 5px 10px;
+    padding: 3px 10px;
+    min-height: 1.6rem;
+    box-sizing: content-box;
 
+    border-radius: 5px;
     color: white;
     font-size: 0.9rem;
     font-weight: 500;
@@ -21,6 +24,24 @@
 
     &--delete {
         @include bg-behaviour($dark-theme-color, 15%);
+    }
+
+    &--success-text {
+        @include color-behaviour($success-color);
+    }
+
+    &--danger-text {
+        @include color-behaviour($danger-color, 15%);
+    }
+
+    &--delete-text {
+        @include color-behaviour($dark-theme-color, 20%);
+    }
+
+    &--bg-no {
+        padding: 0;
+
+        background-color: transparent;
     }
 
     &--dropdown {

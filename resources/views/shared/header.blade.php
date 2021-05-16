@@ -1,4 +1,4 @@
-<header class="headers headers--light site__headers">
+<header class="headers headers--light headers--border-bottom site__headers">
     <nav class="navigation site__navigation">
         <a href="/" class="links logo__links">
             <div class="logo navigation__logo">

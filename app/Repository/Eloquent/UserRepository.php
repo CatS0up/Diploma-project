@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace App\Repository\Eloquent;
 
 use App\Models\User;
+use App\Repository\Filterable;
 use App\Repository\Maintable;
 use App\Repository\UserRepository as UserRepositoryInterface;
-use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
 
-class UserRepository implements UserRepositoryInterface, Maintable
+class UserRepository implements UserRepositoryInterface, Maintable, Filterable
 {
     private User $userModel;
 
@@ -98,6 +99,7 @@ class UserRepository implements UserRepositoryInterface, Maintable
     public function allPrivilaged(): Collection
     {
         return $this->userModel
+            ->with(['role', 'personalDetails'])
             ->privilaged()
             ->get();
     }
@@ -109,9 +111,26 @@ class UserRepository implements UserRepositoryInterface, Maintable
             ->get() ?? [];
     }
 
-    public function allPaginated(int $limit): Paginator
+    public function allPaginated(int $limit = self::LIMIT): Paginator
     {
         return $this->userModel->paginate($limit);
+    }
+
+    public function filterBy(array $filters, int $limit = self::LIMIT)
+    {
+        $query = $this->userModel
+            ->with('personalDetails')
+            ->normal();
+
+
+        if ($filters['q']) {
+            $phrase = "{$filters['q']}%";
+
+            $query->where('uid', 'like', $phrase)
+                ->orWhere('email', 'like', $phrase);
+        }
+
+        return $query->paginate($limit);
     }
 
     public function stats(): array

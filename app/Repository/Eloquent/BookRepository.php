@@ -14,8 +14,6 @@ use Illuminate\Support\Collection;
 
 class BookRepository implements BookRepositoryInterface, Maintable, Filterable
 {
-    private const RELATIONS = ['genres', 'authors', 'publisher'];
-
     private Book $bookModel;
 
     public function __construct(Book $bookModel)
@@ -83,7 +81,15 @@ class BookRepository implements BookRepositoryInterface, Maintable, Filterable
             ->with(self::RELATIONS);
 
         if ($filters['q']) {
-            $query->whereRaw('title LIKE ?', ["{$filters['q']}%"]);
+            $phrase = "{$filters['q']}%";
+
+            $query->where('title', 'like', $phrase)
+                ->orWhere('isbn', 'like', $phrase)
+                ->orWhereHas(
+                    'authors',
+                    fn (Builder $q) => $q->where('firstname', 'like', $phrase)
+                        ->orWhere('lastname', 'like', $phrase)
+                );
         }
 
         if ($filters['publisher'] !== self::PUBLISHER_ALL) {
@@ -101,5 +107,12 @@ class BookRepository implements BookRepositoryInterface, Maintable, Filterable
         }
 
         return $query->paginate($limit);
+    }
+
+    public function stats(): array
+    {
+        return [
+            'count' => $this->bookModel->count()
+        ];
     }
 }

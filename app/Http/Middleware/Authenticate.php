@@ -15,7 +15,9 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (!$request->expectsJson()) {
-            return route('auth.login');
+            return redirect()
+                ->route('auth.login')
+                ->with('warning', 'Seckaj dostępna tylko dla zalogowanych użytkowników.');
         }
     }
 }

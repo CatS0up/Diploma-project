@@ -79,14 +79,12 @@ class User extends Authenticatable
     public function scopePrivilaged(Builder $query): Builder
     {
         return $query
-            ->with('role')
             ->whereIn('role_id', [2, 3]);
     }
 
     public function scopeNormal(Builder $query): Builder
     {
         return $query
-            ->with('role')
             ->where('role_id', 1);
     }
 

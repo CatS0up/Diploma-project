@@ -24,7 +24,15 @@
     &__inline-section {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-        align-content: flex-start;
+        align-content: center;
+    }
+
+    &__section-name {
+        padding: 0 10px;
+
+        &--all-cols {
+            grid-column: 1/-1;
+        }
     }
 
     &__fullsize-section {
@@ -34,6 +42,10 @@
     &__group {
         @include flex($direction: column);
         padding: 10px;
+
+        &--inline {
+            padding: 0;
+        }
     }
 
     &__check {
