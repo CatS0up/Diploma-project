@@ -68,4 +68,20 @@ class BookController extends Controller
 
         return redirect()->route('admin.get.books');
     }
+
+    public function edit(PublisherRepository $publisherRepository, int $id): View
+    {
+        return view('dashboard.editBook', [
+            'book' => $this->bookResposiotry->get($id),
+            'publishers' => $publisherRepository->all()
+        ]);
+    }
+
+    public function destroy(int $id): RedirectResponse
+    {
+        $this->bookResposiotry->delete($id);
+
+        return redirect()->route('admin.get.books')
+            ->with('Książka została pomyślnie usunięta.');
+    }
 }

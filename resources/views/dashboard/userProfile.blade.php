@@ -134,11 +134,6 @@
                                 <span class="lists__item-label">Numer domu:</span>
                                 {{ $user->address->house_number }}
                             </li>
-
-                            <li class="lists__item lists__item--labeled-vertical">
-                                <span class="lists__item-label">Numer budynku:</span>
-                                {{ $user->address->building_number ?? '(brak)' }}
-                            </li>
                         </ul>
                     </div>
 
@@ -153,14 +148,16 @@
                             <span role="img" class="icons show__icons fas fa-ban" aria-label="Banuj"></span>
                         </a>
 
-                        <form class="forms tables__forms" action="{{ route('admin.delete.user', ['id' => $user->id]) }}"
-                            method="post">
-                            @csrf
-                            @method('delete')
-                            <button class="buttons buttons--bg-no buttons--delete-text show__buttons">
-                                <span role="img" class="icons show__icons fas fa-trash" aria-label="Usuń"></span>
-                            </button>
-                        </form>
+                        @can('delete', $user)
+                            <form class="forms tables__forms" action="{{ route('admin.delete.user', ['id' => $user->id]) }}"
+                                method="post">
+                                @csrf
+                                @method('delete')
+                                <button class="buttons buttons--bg-no buttons--delete-text show__buttons">
+                                    <span role="img" class="icons show__icons fas fa-trash" aria-label="Usuń"></span>
+                                </button>
+                            </form>
+                        @endcan
                     </div>
                 </div>
             </div>

@@ -72,9 +72,21 @@
                         Pobierz
                     </a>
 
-                    <a href="#" class="buttons buttons--primary book-info__books">
-                        Dodaj do biblioteki
-                    </a>
+                    @auth
+                        @if ($userHasBook)
+                            <form class="forms tables__forms" action="{{ route('me.remove.book', ['id' => $book->id]) }}"
+                                method="post">
+                                @csrf
+                                <button class="buttons buttons--danger forms__buttons">Usuń z biblioteki</button>
+                            </form>
+                        @else
+                            <form class="forms tables__forms" action="{{ route('me.add.book', ['id' => $book->id]) }}"
+                                method="post">
+                                @csrf
+                                <button class="buttons buttons--primary forms__buttons">Dodaj do biblioteki</button>
+                            </form>
+                        @endif
+                    @endauth
                 </div>
             </div>
         </div>

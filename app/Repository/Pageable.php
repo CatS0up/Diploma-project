@@ -10,5 +10,5 @@ interface Pageable
 {
     public const LIMIT = 15;
 
-    public function allPaginated(int $limit = self::LIMIT): Paginator;
+    public function allPaginated(int $limit = self::LIMIT);
 }

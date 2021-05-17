@@ -7,9 +7,9 @@ namespace App\Repository\Eloquent;
 use App\Models\Genre;
 use App\Repository\GenreRepository as GenreRepositoryInterface;
 use App\Repository\Pageable;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Countable;
-use Illuminate\Pagination\Paginator;
 
 class GenreRepository implements GenreRepositoryInterface, Countable, Pageable
 {
@@ -25,7 +25,7 @@ class GenreRepository implements GenreRepositoryInterface, Countable, Pageable
         return $this->genreModel->get();
     }
 
-    public function allPaginated(int $limit = self::LIMIT): Paginator
+    public function allPaginated(int $limit = self::LIMIT)
     {
         return $this->genreModel->paginate($limit);
     }

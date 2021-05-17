@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
             [
                 RolesSeeder::class,
                 GenresSeeder::class,
-                PublishersSeeder::class
+                PublishersSeeder::class,
+                UsersSeeder::class
             ]
         );
     }

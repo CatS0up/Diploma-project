@@ -11,8 +11,8 @@
                     </a>
                 </li>
                 <li class="breadcrumbs__item">
-                    <a href="{{ route('admin.get.books') }}" class="links links--light breadcrumbs__links">
-                        Książki
+                    <a href="{{ route('admin.get.users') }}" class="links links--light breadcrumbs__links">
+                        Użytkownicy
                     </a>
                 </li>
                 <li class="breadcrumbs__item">
@@ -88,6 +88,19 @@
                             method="post">
                             @csrf
                             @method('put')
+                            <div class="forms__group">
+                                <label class="forms__group-title" for="avatar">
+                                    Avatar
+                                </label>
+                                <input id="avatar" class="forms__file" type="file" name="avatar"
+                                    value="{{ old('avatar') }}">
+                                @error('avatar')
+                                    <span class="forms__input-feedback">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
+                            </div>
+
                             <div class="forms__group">
                                 <label class="forms__group-title" for="uid">
                                     Login
@@ -255,20 +268,6 @@
                                         value="{{ old('zipcode', $user->address->zipcode) }}">
 
                                     @error('zipcode')
-                                        <span class="forms__input-feedback">
-                                            {{ $message }}
-                                        </span>
-                                    @enderror
-                                </div>
-
-                                <div class="forms__group">
-                                    <label class="forms__group-title" for="buldingNumber">
-                                        Numer budynku
-                                    </label>
-                                    <input id="buldingNumber" class="forms__input" type="text" name="building_number"
-                                        value="{{ old('building_number', $user->address->building_number) }}">
-
-                                    @error('building_number')
                                         <span class="forms__input-feedback">
                                             {{ $message }}
                                         </span>

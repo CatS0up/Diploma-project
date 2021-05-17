@@ -60,6 +60,11 @@ class BookRepository implements BookRepositoryInterface, Maintable, Filterable
 
     public function delete(int $id): bool
     {
+        $book = $this->bookModel->find($id);
+        $book->authors()->detach();
+        $book->genres()->detach();
+        $book->delete();
+
         return true;
     }
 

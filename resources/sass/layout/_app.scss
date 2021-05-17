@@ -50,8 +50,7 @@
     // mixins
     &__lists {
         display: grid;
-        justify-content: space-between;
-        gap: 10px;
+        gap: 20px;
         padding-top: 20px;
 
         @include media("small") {

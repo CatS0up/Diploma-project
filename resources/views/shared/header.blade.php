@@ -61,7 +61,8 @@
                                 </li>
 
                                 <li class="menu__item">
-                                    <a href="#" class="links links--dropdown menu__links">Książki</a>
+                                    <a href="{{ route('me.get.books') }}"
+                                        class="links links--dropdown menu__links">Książki</a>
                                 </li>
 
                                 <li class="menu__item">

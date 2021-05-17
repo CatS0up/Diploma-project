@@ -42,14 +42,19 @@ class User extends Authenticatable
 
 
     /* ===> Relations <=== */
+    public function books()
+    {
+        return $this->belongsToMany(Book::class, 'userBooks');
+    }
+
     public function personalDetails()
     {
-        return $this->hasOne(PersonalDetail::class, 'user_id', 'id');
+        return $this->hasOne(PersonalDetail::class);
     }
 
     public function address()
     {
-        return $this->hasOne(Address::class, 'user_id', 'id');
+        return $this->hasOne(Address::class);
     }
 
     public function role()
@@ -89,6 +94,26 @@ class User extends Authenticatable
     }
 
     /* ===> Methods <=== */
+    public function clearData(): void
+    {
+        $this->personalDetails()->$this->delete();
+    }
+
+    public function addBook(Book $book): void
+    {
+        $this->books()->save($book);
+    }
+
+    public function bookAmount(): int
+    {
+        return $this->books()->count();
+    }
+
+    public function removeBook(Book $book): void
+    {
+        $this->books()->detach($book);
+    }
+
     public function isSuperadmin(): bool
     {
         return (int) $this->role_id === 3;
@@ -97,5 +122,10 @@ class User extends Authenticatable
     public function isAdmin(): bool
     {
         return in_array((int) $this->role_id, [2, 3]);
+    }
+
+    public function hasBook(int $bookId): bool
+    {
+        return (bool) $this->books()->where('userBooks.book_id', $bookId)->first();
     }
 }

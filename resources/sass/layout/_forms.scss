@@ -22,9 +22,11 @@
     }
 
     &__inline-section {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-        align-content: center;
+        @include media("small") {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            align-content: center;
+        }
     }
 
     &__section-name {

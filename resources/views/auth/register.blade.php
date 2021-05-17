@@ -33,17 +33,31 @@
                         @enderror
                     </div>
 
-                    <div class="forms__group">
-                        <label class="forms__group-title" for="uid">
-                            Login
-                            <span class="forms__required-info">*</span>
-                        </label>
-                        <input id="uid" class="forms__input" type="text" name="uid" value="{{ old('uid') }}">
-                        @error('uid')
-                            <span class="forms__input-feedback">
-                                {{ $message }}
-                            </span>
-                        @enderror
+                    <div class="forms__inline-section">
+                        <div class="forms__group">
+                            <label class="forms__group-title" for="uid">
+                                Login
+                                <span class="forms__required-info">*</span>
+                            </label>
+                            <input id="uid" class="forms__input" type="text" name="uid" value="{{ old('uid') }}">
+                            @error('uid')
+                                <span class="forms__input-feedback">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="forms__group">
+                            <label class="forms__group-title" for="phone">
+                                Numer telefonu
+                            </label>
+                            <input id="phone" class="forms__input" type="tel" name="phone" value="{{ old('phone') }}">
+                            @error('phone')
+                                <span class="forms__input-feedback">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
                     </div>
 
                     <div class="forms__inline-section">
@@ -92,18 +106,6 @@
                             <input id="pwdConfirmation" class="forms__input" type="password" name="pwd_confirmation"
                                 value="{{ old('pwd_confirmation') }}">
                         </div>
-                    </div>
-
-                    <div class="forms__group">
-                        <label class="forms__group-title" for="phone">
-                            Numer telefonu
-                        </label>
-                        <input id="phone" class="forms__input" type="tel" name="phone" value="{{ old('phone') }}">
-                        @error('phone')
-                            <span class="forms__input-feedback">
-                                {{ $message }}
-                            </span>
-                        @enderror
                     </div>
                 </div>
 
@@ -208,19 +210,6 @@
                             <label class="forms__group-title" for="buldingNumber">
                                 Numer budynku
                             </label>
-                            <input id="buldingNumber" class="forms__input" type="text" name="building_number"
-                                value="{{ old('building_number') }}">
-                            @error('building_number')
-                                <span class="forms__input-feedback">
-                                    {{ $message }}
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="forms__group">
-                            <label class="forms__group-title" for="houseNumber">
-                                Numer domu
-                            </label>
                             <input id="houseNumber" class="forms__input" type="text" name="house_number"
                                 value="{{ old('house_number') }}">
                             @error('house_number')
@@ -246,8 +235,8 @@
                 </div>
 
                 <div class="forms__buttons-group forms__buttons-group forms__fullsize-section">
-                    <a href="#" class="buttons buttons--delete forms__buttons">Anuluj</a>
-                    <button class="buttons buttons--primary forms__buttons" type="submit">Edytuj</button>
+                    <a href="{{ route('home') }}" class="buttons buttons--delete forms__buttons">Anuluj</a>
+                    <button class="buttons buttons--primary forms__buttons" type="submit">Zarejestruj</button>
                 </div>
             </form>
         </section>

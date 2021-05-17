@@ -10,69 +10,83 @@
                         Strona główna
                     </a>
                 </li>
-                <li class="breadcrumbs__item">
-                    <a href="{{ route('book.get.books') }}" class="links links--light breadcrumbs__links">
-                        Książki
-                    </a>
-                </li>
                 <li class="breadcrumbs__item breadcrumbs__item--active">
-                    {{ $book->title }}
+                    Moje książki
                 </li>
             </ol>
         </header>
 
-        <section class="app__sections">
-            <div class="book app__book">
-                <div class="pictures book__pictures">
-                    @if ($book->cover)
-                        <img class="pictures__img" src="{{ Storage::url($book->cover) }}" alt="Okładka książki.">
-                    @else
-                        <img class="pictures__img" src="{{ asset('img/avatar_placeholder.jpg') }}" alt="Okładka książki.">
-                    @endif
-                </div>
 
-                <div class="book__details">
-                    <h1 class="titles book__titles">
-                        {{ $book->title }}
-                    </h1>
+        <section class="app__sections ">
+            <div class="app__items">
+                @if ($books->total() > 0)
+                    <ul class="lists app__lists">
+                        @foreach ($books as $book)
+                            <li class="lists__item">
+                                <div class="book-preview lists__book-preview">
+                                    <div class="book-preview__header">
+                                        <h3 class="titles book-preview__titles">
+                                            {{ $book->title }}
+                                        </h3>
 
-                    <p class="book__description">
-                        {{ $book->description }}
-                    </p>
+                                        <div class="pictures book-preview__pictures">
+                                            @if ($book->cover)
+                                                <img class="pictures__img" src="{{ Storage::url($book->cover) }}"
+                                                    alt="Okładka książki.">
+                                            @else
+                                                <img class="pictures__img" src="{{ asset('img/avatar_placeholder.jpg') }}"
+                                                    alt="Okładka książki.">
+                                            @endif
+                                        </div>
+                                    </div>
 
-                    <ul class="lists book__lists">
-                        <li class="lists__item lists__item--labeled-horizontal">
-                            <span class="lists__item-label">ISBN:</span>
-                            {{ $book->isbn }}
-                        </li>
+                                    <div class="book-preview__body">
+                                        <div class="book-preview__info">
+                                            <ul class="lists book-preview__lists">
+                                                <li class="lists__item lists__item--labeled-horizontal">
+                                                    <span class="lists__item-label">ISBN</span>
+                                                    {{ $book->isbn }}
+                                                </li>
 
-                        <li class="lists__item lists__item--labeled-horizontal">
-                            <span class="lists__item-label">Data Wydania:</span>
-                            {{ $book->publishing_date }}
-                        </li>
+                                                <li class="lists__item lists__item--labeled-horizontal">
+                                                    <span class="lists__item-label">Wydawca</span>
+                                                    {{ $book->publisher->name }}
+                                                </li>
 
-                        <li class="lists__item lists__item--labeled-horizontal">
-                            <span class="lists__item-label">Autorzy:</span>
-                            @foreach ($book->authors as $author)
-                                {{ $author->firstname . ' ' . $author->lastname }}
-                            @endforeach
-                        </li>
+                                                <li class="lists__item lists__item--labeled-horizontal">
+                                                    <span class="lists__item-label">Autorzy</span>
+                                                    @foreach ($book->authors as $author)
+                                                        {{ $author->firstname . ' ' . $author->lastname }}
+                                                    @endforeach
+                                                </li>
 
-                        <li class="lists__item lists__item--labeled-horizontal">
-                            <span class="lists__item-label">Gatunki:</span>
-                            @foreach ($book->genres as $genre)
-                                {{ $genre->name }}
-                            @endforeach
-                        </li>
+                                                <li class="lists__item lists__item--labeled-horizontal">
+                                                    <span class="lists__item-label">Gatunki</span>
+                                                    {{ $book->genres->implode('name', ',') }}
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="book-preview__options">
+                                            <a href="{{ route('book.show', ['id' => $book->id]) }}"
+                                                class="links links--light book-preview__links">Szczegóły</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        @endforeach
                     </ul>
-
-                    <div class="book__options">
-                        <a href="#" class="buttons buttons--success">Dodaj do biblioteki</a>
-                        <a href="{{ route('book.download', ['id' => $book->id]) }}"
-                            class="buttons buttons--primary">Pobierz</a>
+                @else
+                    <div class="notifications dashboard__notifications">
+                        <span class="icons icons--x-large notifications__icons far fa-folder-open"
+                            aria-hidden="true"></span>
+                        Brak książek
                     </div>
-                </div>
+                @endif
             </div>
+
+        </section>
+
         </section>
     </div>
 @endsection

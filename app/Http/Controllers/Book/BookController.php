@@ -11,6 +11,7 @@ use App\Repository\GenreRepository;
 use App\Repository\PublisherRepository;
 use App\Service\FileService;
 use App\Service\FiltersFormatter;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class BookController extends Controller
@@ -24,7 +25,12 @@ class BookController extends Controller
 
     public function show(int $id): View
     {
-        return view('book.show', ['book' => $this->bookRepostiory->get($id)]);
+        $user =  Auth::user();
+
+        return view('book.show', [
+            'book' => $this->bookRepostiory->get($id),
+            'userHasBook' => $user ? $user->hasBook($id) : true,
+        ]);
     }
 
     public function list(

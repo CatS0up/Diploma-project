@@ -117,12 +117,14 @@
 
                                                     <li class="lists__item lists__item--labeled-horizontal">
                                                         <span class="lists__item-label">Autorzy</span>
-                                                        {{ $book->publisher->name }}
+                                                        @foreach ($book->authors as $author)
+                                                            {{ $author->firstname . ' ' . $author->lastname }}
+                                                        @endforeach
                                                     </li>
 
                                                     <li class="lists__item lists__item--labeled-horizontal">
                                                         <span class="lists__item-label">Gatunki</span>
-                                                        {{ $book->isbn }}
+                                                        {{ $book->genres->implode('name', ',') }}
                                                     </li>
                                                 </ul>
                                             </div>

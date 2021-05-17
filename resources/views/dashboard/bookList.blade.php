@@ -189,7 +189,8 @@
                                         <a class="buttons buttons--primary tables__buttons"
                                             href="{{ route('admin.show.book', ['id' => $book->id]) }}">Pokaż</a>
 
-                                        <form class="forms tables__forms" action="#" method="post">
+                                        <form class="forms tables__forms"
+                                            action="{{ route('admin.delete.book', ['id' => $book->id]) }}" method="post">
                                             @csrf
                                             @method('delete')
                                             <button class="buttons buttons--danger forms__buttons">Usuń</button>

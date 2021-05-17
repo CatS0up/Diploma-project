@@ -1,5 +1,7 @@
 .show {
     display: grid;
+    grid-template-rows: auto;
+    align-items: flex-start;
     gap: 20px;
 
     @include media("large") {
@@ -41,6 +43,7 @@
     &__data {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
+        align-content: flex-start;
         padding: 25px;
         border-radius: 10px;
 
@@ -50,6 +53,10 @@
 
     &__data-group {
         padding: 20px;
+
+        &--full-size {
+            grid-column: 1/-1;
+        }
     }
 
     &__update {

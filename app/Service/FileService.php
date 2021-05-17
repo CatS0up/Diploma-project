@@ -20,6 +20,11 @@ class FileService
         return $file->store($dir, 'local');
     }
 
+    public function update(UploadedFile $file): void
+    {
+        # code...
+    }
+
     public function download(string $file, string $filename = 'file'): StreamedResponse
     {
         return Storage::download($file, $filename);

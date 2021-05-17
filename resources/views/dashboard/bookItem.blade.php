@@ -101,16 +101,42 @@
                         </ul>
                     </div>
 
-                    {{-- <div class="show__options">
-                        <a class="buttons buttons--success show__buttons"
+
+                    <div class="show__data-group show__data-group--full-size">
+                        <h4 class="titles show__titles show__titles--group-title">
+                            <span class="icons show__icons show__icons--right-space fas fa-file" aria-hidden="true"></span>
+                            Pliki
+                        </h4>
+
+                        <ul class="lists show__lists">
+                            <li class="lists__item lists__item--labeled-vertical">
+                                <span class="lists__item-label">Okładka</span>
+                                {{ $book->cover }}
+                            </li>
+
+                            <li class="lists__item lists__item--labeled-vertical">
+                                <span class="lists__item-label">PDF</span>
+                                {{ $book->file }}
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <div class="show__options">
+                        <a class="buttons buttons--bg-no buttons--success-text show__buttons"
                             href="{{ route('admin.edit.book', ['id' => $book->id]) }}">
-                            <span role="img" class="icons show__icons fas fa-user-edit" aria-label="Edytuj"></span>
+                            <span role="img" class="icons show__icons far fa-edit" aria-label="Edycja"></span>
                         </a>
-                        <a href="{{ route('admin.delete.book', ['id' => $book->id]) }}"
-                            class="buttons buttons--delete show__buttons">
-                            <span role="img" class="icons show__icons fas fa-trash" aria-label="Usuń"></span>
-                        </a>
-                    </div> --}}
+
+                        <form class="forms tables__forms" action="{{ route('admin.edit.book', ['id' => $book->id]) }}"
+                            method="post">
+                            @csrf
+                            @method('delete')
+                            <button class="buttons buttons--bg-no buttons--delete-text show__buttons">
+                                <span role="img" class="icons show__icons fas fa-trash" aria-label="Usuń"></span>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>

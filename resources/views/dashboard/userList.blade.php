@@ -208,7 +208,6 @@
 
                     <div class="forms__buttons-group forms__buttons-group--content-to-left">
                         <button class="buttons buttons--primary forms__buttons" type="submit">Filtruj</button>
-                        <a class="buttons buttons--success forms__buttons" href="{{ route('admin.add.book') }}">Nowa</a>
                     </div>
                 </form>
 
@@ -274,7 +273,7 @@
                                     {{ $user->personalDetails->lastname }}
                                 </td>
                                 <td class="tables__cell" data-label="Aktywny">
-                                    0
+                                    {{ $user->bookAmount() }}
                                 </td>
                                 <td class="tables__cell" data-label="Opcje">
                                     <div class="tables__group">
@@ -321,7 +320,7 @@
             @else
                 <div class="notifications dashboard__notifications">
                     <span class="icons icons--x-large notifications__icons far fa-folder-open" aria-hidden="true"></span>
-                    Brak książek
+                    Brak zarejestrowanych użytkowników
                 </div>
             @endif
         </section>

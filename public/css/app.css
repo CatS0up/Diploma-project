@@ -6354,10 +6354,12 @@ select {
 .forms__required-info {
   color: red;
 }
-.forms__inline-section {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  align-content: center;
+@media (min-width: 560px) {
+  .forms__inline-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    align-content: center;
+  }
 }
 .forms__section-name {
   padding: 0 10px;
@@ -6511,6 +6513,8 @@ select {
 
 .show {
   display: grid;
+  grid-template-rows: auto;
+  align-items: flex-start;
   gap: 20px;
 }
 @media (min-width: 960px) {
@@ -6546,6 +6550,7 @@ select {
 .show__data {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  align-content: flex-start;
   padding: 25px;
   border-radius: 10px;
   background-color: #fff;
@@ -6553,6 +6558,9 @@ select {
 }
 .show__data-group {
   padding: 20px;
+}
+.show__data-group--full-size {
+  grid-column: 1/-1;
 }
 .show__update {
   grid-column: 1/-1;
@@ -6656,8 +6664,7 @@ select {
 }
 .app__lists {
   display: grid;
-  justify-content: space-between;
-  gap: 10px;
+  gap: 20px;
   padding-top: 20px;
 }
 @media (min-width: 560px) {

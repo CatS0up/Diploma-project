@@ -59,4 +59,53 @@ class UserUpdateByAdminRequest extends FormRequest
             'description' => 'nullable|max:255'
         ];
     }
+    public function messages()
+    {
+        return [
+            'uid.required' => 'Login nie może być pusty.',
+            'uid.alpha_num' => 'Login może się składać jedynie z liter i cyfr.',
+            'uid.unique' => 'Podany login jest już wykorzystywany.',
+            'uid.min' => 'Minimalna długość wynosi :min.',
+            'uid.max' => 'Maksymalna długość wynosi :max.',
+
+            'email.required' => 'E-mail nie może być pusty.',
+            'email.email' => 'Proszę wprowadzić poprawny adres e-mail.',
+            'email.min' => 'Minimalna długość wynosi :min.',
+            'email.unique' => 'Podany e-mail jest już wykorzystywany',
+            'email.max' => 'Maksymalna długość wynosi :max',
+            'email.confirmed' => 'Podane adresy e-mail nie zgadzają się.',
+
+            'pwd.required' => 'Hasło nie może być puste.',
+            'pwd.min' => 'Minimalna długość wynosi :min.',
+            'pwd.regex' => 'Hasło powinno zawierać min. 1 małą, 1 wielką literę, 1 cyfrę oraz 1 znak specjalny.',
+
+            'phone.required' => 'Numer telefonu nie może być pusty.',
+            'phone.numeric' => 'Pole akceptuje jedynie wartości numeryczne.',
+            'phone.digits' => 'Numer telefonu powinien składać się dokładnie z 9 znaków.',
+            'phone.unique' => 'Podany numer jest już przypisany do innego użytkownika.',
+
+            'firstname.required' =>  'Imię nie może być puste.',
+            'firstname.regex' =>  'Imię powinno zaczynać się od wielkiej litery oraz może składać się wyłącznie z liter.',
+
+            'lastname.required' =>  'Nazwisko nie może być puste.',
+            'lastname.regex' =>  'Nazwisko powinno zaczynać się od wielkiej litery oraz może składać się wyłącznie z liter.',
+
+            'birthday.required' => 'Data urodzenia nie może byc pusta.',
+            'birthday.date' => 'Proszę wprowadzić poprawną datę.',
+            'birthday.before' => 'Proszę wprowadzić wcześniejszą datę.',
+
+            'town.required' => 'Miasto nie może być puste.',
+            'town.regex' => 'Nazwa miasta może składać się jedynie z liter i spacji.',
+
+            'building_number.alpha_num' => 'Numer budynku może składać się jedynie z liter oraz cyfr.',
+
+            'house_number.required' => 'Numer mieszkania nie może być pusty.',
+            'house_number.required' => 'Numer domu może składać się jedynie z liter oraz cyfr.',
+
+            'avatar.file' => 'Wysyłanie pliku nie powiodło się.',
+            'avatar.image' => 'Avatar musi być plikiem graficznym.',
+
+            'description.max' => 'Opis może składać się maksymalnie z :max znaków.'
+        ];
+    }
 }
