@@ -2,17 +2,17 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\User;
+use App\Models\Book;
 use Closure;
 use Illuminate\Http\Request;
 
 class VerifyUserExist
 {
-    private User $userModel;
+    private Book $bookModel;
 
-    public function __construct(User $userModel)
+    public function __construct(Book $bookModel)
     {
-        $this->userModel = $userModel;
+        $this->bookModel = $bookModel;
     }
     /**
      * Handle an incoming request.
@@ -23,7 +23,7 @@ class VerifyUserExist
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!$this->userModel->find($request->route('id')))
+        if (!$this->bookModel->find($request->route('id')))
             abort('404');
 
         return $next($request);

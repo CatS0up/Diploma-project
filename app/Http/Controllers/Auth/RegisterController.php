@@ -25,7 +25,8 @@ class RegisterController extends Controller
     ): RedirectResponse {
         $data = $request->validated();
 
-        $data['avatar'] = $file->savePublic('avatars', $data['avatar']);
+        if (isset($data['avatar']))
+            $data['avatar'] = $file->savePublic('avatars', $data['avatar']);
 
         $userRepository->create($data);
 

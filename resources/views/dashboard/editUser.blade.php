@@ -85,9 +85,10 @@
 
                     <div class="show__update">
                         <form class="forms show__forms" action="{{ route('admin.update.user', ['id' => $user->id]) }}"
-                            method="post">
+                            method="post" enctype="multipart/form-data">
                             @csrf
                             @method('put')
+
                             <div class="forms__group">
                                 <label class="forms__group-title" for="avatar">
                                     Avatar
@@ -99,6 +100,21 @@
                                         {{ $message }}
                                     </span>
                                 @enderror
+                            </div>
+
+                            <div class="forms__inline-section">
+                                <span class="forms__section-name forms__section-name--all-cols">Reset avatara</span>
+                                <div class="forms__check">
+                                    <input id="resetAvatarTrue" class="forms__radio" type="radio" name="reset_avatar"
+                                        value="true">
+                                    <label for="resetAvatarTrue" class="forms__radio-title">Tak</label>
+                                </div>
+
+                                <div class="forms__check">
+                                    <input id="resetAvatarFalse" class="forms__radio" type="radio" name="reset_avatar"
+                                        value="false" checked>
+                                    <label for="resetAvatarFalse" class="forms__radio-title">Nie</label>
+                                </div>
                             </div>
 
                             <div class="forms__group">

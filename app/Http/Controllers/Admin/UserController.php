@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AccountDataRequest;
 use App\Http\Requests\UserUpdateByAdminRequest;
 use App\Repository\Filterable;
 use App\Repository\UserRepository;
 use App\Service\FiltersFormatter;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class UserController extends Controller
@@ -25,11 +25,9 @@ class UserController extends Controller
 
     public function show(int $id): View|Response
     {
-        $user = $this->userRepository->get($id);
-
         return view(
             'dashboard.userProfile',
-            ['user' => $user]
+            ['user' => $this->userRepository->get($id)]
         );
     }
 
@@ -61,6 +59,19 @@ class UserController extends Controller
     public function update(UserUpdateByAdminRequest $request, int $id): RedirectResponse
     {
         $data = $request->validated();
+
+        if (isset($data['avatar'])) {
+            $path = $data['avatar']->store('avatars', 'public');
+
+            Storage::disk('public')->delete($this->userRepository->get($id)->avatar);
+            $data['avatar'] = $path;
+        } else if ($data['reset_avatar'] == 'true') {
+            $user = $this->userRepository->get($id);
+            Storage::disk('public')->delete($user->avatar);
+            $user->avatar = null;
+            $user->save();
+        }
+
         $data['id'] = $id;
 
         $this->userRepository->update($data);
@@ -69,13 +80,13 @@ class UserController extends Controller
             ->route(
                 'admin.show.user',
                 ['id' => $id]
-            );
+            )->with('success', 'Profil użytkownika został zaktualizowany.');
     }
 
     public function destroy(int $id): RedirectResponse
     {
         $this->userRepository->delete($id);
 
-        return back();
+        return back()->with('success', 'Użytkownik został pomyślnie usunięty.');
     }
 }

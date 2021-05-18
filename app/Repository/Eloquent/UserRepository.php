@@ -35,7 +35,6 @@ class UserRepository implements UserRepositoryInterface, Maintable, Filterable
             'town' => $data['town'],
             'street' => $data['street'] ?? null,
             'zipcode' => $data['zipcode'],
-            'building_number' => $data['building_number'],
             'house_number' => $data['house_number'] ?? null
         ]);
 
@@ -57,10 +56,11 @@ class UserRepository implements UserRepositoryInterface, Maintable, Filterable
     public function update(array $data)
     {
         $model = $this->userModel->find($data['id']);
-        $model->role_id = $data['role'];
+        $model->role_id = $data['role'] ?? $model->role_id;
         $model->uid = $data['uid'];
         $model->email = $data['email'];
         $model->phone = $data['phone'];
+        $model->avatar = $data['avatar'] ?? $model->avatar;
         $model->description = $data['description'] ?? null;
         $model->save();
 
@@ -68,7 +68,6 @@ class UserRepository implements UserRepositoryInterface, Maintable, Filterable
             'town' => $data['town'],
             'street' => $data['street'] ?? null,
             'zipcode' => $data['zipcode'],
-            'building_number' => $data['building_number'],
             'house_number' => $data['house_number'] ?? null
         ]);
 

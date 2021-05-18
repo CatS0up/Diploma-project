@@ -2,18 +2,12 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class VerifyUserExist
+class Authentication
 {
-    private User $userModel;
-
-    public function __construct(User $userModel)
-    {
-        $this->userModel = $userModel;
-    }
     /**
      * Handle an incoming request.
      *
@@ -23,8 +17,10 @@ class VerifyUserExist
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!$this->userModel->find($request->route('id')))
-            abort('404');
+        if (Auth::guest())
+            return redirect()
+                ->route('auth.login')
+                ->with('info', 'Sekcja dostępna jedynie dla zalogowanych użytkoników.');
 
         return $next($request);
     }

@@ -26,6 +26,8 @@ class UserUpdateByAdminRequest extends FormRequest
     public function rules()
     {
         return [
+            'avatar' => 'nullable|file|image',
+            'reset_avatar' => 'required',
             'uid' => [
                 'required',
                 'alpha_num',
@@ -46,7 +48,7 @@ class UserUpdateByAdminRequest extends FormRequest
                 'digits:9',
                 Rule::unique('users')->ignore($this->route('id'))
             ],
-            'role' => 'required',
+            'role' => 'nullable',
             'firstname' => 'required|regex:/^[A-ZŻŹĆĄŚĘŁÓŃ]+[a-zzżźćńółęąś]*$/',
             'lastname' => 'required|regex:/^[A-ZŻŹĆĄŚĘŁÓŃ]+[a-zzżźćńółęąś]*$/',
             'birthday' => 'required|date|before:today',
@@ -55,13 +57,16 @@ class UserUpdateByAdminRequest extends FormRequest
             'street' => 'nullable',
             'zipcode' => new Zipcode(),
             'building_number' => 'nullable|alpha_num',
-            'house_number' => 'required|alpha_num',
+            'house_number' =>  ['required', 'regex:/([A-Za-z0-9]+)|([A-Za-z0-9]+\/[A-Za-z0-9]+)/'],
             'description' => 'nullable|max:255'
         ];
     }
     public function messages()
     {
         return [
+            'avatar.file' => 'Wysyłanie pliku nie powiodło się.',
+            'avatar.image' => 'Avatar musi być plikiem graficznym.',
+            'reset_avatar.required' => 'Wybierz opcje avatara.',
             'uid.required' => 'Login nie może być pusty.',
             'uid.alpha_num' => 'Login może się składać jedynie z liter i cyfr.',
             'uid.unique' => 'Podany login jest już wykorzystywany.',
@@ -100,10 +105,7 @@ class UserUpdateByAdminRequest extends FormRequest
             'building_number.alpha_num' => 'Numer budynku może składać się jedynie z liter oraz cyfr.',
 
             'house_number.required' => 'Numer mieszkania nie może być pusty.',
-            'house_number.required' => 'Numer domu może składać się jedynie z liter oraz cyfr.',
-
-            'avatar.file' => 'Wysyłanie pliku nie powiodło się.',
-            'avatar.image' => 'Avatar musi być plikiem graficznym.',
+            'house_number.regex' => 'Numer domu powinien być zgodny z formatem xx/xx lub xx.',
 
             'description.max' => 'Opis może składać się maksymalnie z :max znaków.'
         ];

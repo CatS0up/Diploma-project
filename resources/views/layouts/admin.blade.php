@@ -8,6 +8,7 @@
         @include('shared.sidebar')
 
         <section class="dashboard__content">
+            @include('shared.messages')
 
             @yield('inner-content')
         </section>

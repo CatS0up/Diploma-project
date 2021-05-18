@@ -107,7 +107,7 @@
 
                     <div class="forms__buttons-group forms__buttons-group--content-to-left">
                         <button class="buttons buttons--primary forms__buttons" type="submit">Filtruj</button>
-                        <a class="buttons buttons--success forms__buttons" href="{{ route('admin.add.book') }}">Nowa</a>
+                        <a class="buttons buttons--success forms__buttons" href="{{ route('admin.add.book') }}">Dodaj</a>
                     </div>
                 </form>
 

@@ -36,14 +36,13 @@ class BookRepository implements BookRepositoryInterface, Maintable, Filterable
             ['name' => $data['genres']]
         );
 
-        $authorExploded = explode(' ', $data['authors']);
-        $this->bookModel->authors()->firstOrCreate(
-            [
-                'firstname' => $authorExploded[0],
-                'lastname' => $authorExploded[1]
+        $authorsList = preg_split('/ ?[,] ?/', $data['authors']);
 
-            ]
-        );
+        foreach ($authorsList as $author) {
+            $data =  explode(' ', $author);
+
+            $this->bookModel->authors()->firstOrCreate(['firstname' => $data[0], 'lastname' =>  $data[1]]);
+        }
 
         return $this->bookModel;
     }

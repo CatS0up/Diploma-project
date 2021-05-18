@@ -7,28 +7,27 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use App\Service\Auth;
 
 class LoginController extends Controller
 {
+    private Auth $auth;
+
+    public function __construct(Auth $auth)
+    {
+        $this->auth = $auth;
+    }
+
     public function login(): View
     {
         return view('auth.login');
     }
 
-    public function authenticate(LoginRequest $request): RedirectResponse
+    public function authenticate(LoginRequest $request, User $userModel): RedirectResponse
     {
-        $credentials = $request->validated();
-
-        $user = User::whereIn('uid', [$credentials['uid']])->first();
-
-        $user->actived_at = Carbon::now();
-        $user->save();
-
-        Auth::loginUsingId($user->id);
+        $this->auth->authenticate($request, $userModel);
 
         return redirect()
             ->route('home')
@@ -37,8 +36,10 @@ class LoginController extends Controller
 
     public function logout(): RedirectResponse
     {
-        Auth::logout();
+        $this->auth->logout();
 
-        return redirect()->route('home');
+        return redirect()
+            ->route('home')
+            ->with('info', 'Zostałeś wylogowany.');
     }
 }

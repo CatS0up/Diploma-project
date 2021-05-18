@@ -115,14 +115,17 @@
                                                         {{ $book->publisher->name }}
                                                     </li>
 
-                                                    <li class="lists__item lists__item--labeled-horizontal">
+                                                    <li class="lists__item lists__item--labeled-vertical">
                                                         <span class="lists__item-label">Autorzy</span>
                                                         @foreach ($book->authors as $author)
                                                             {{ $author->firstname . ' ' . $author->lastname }}
+                                                            @if (!$loop->last)
+                                                                {{ ', ' }}
+                                                            @endif
                                                         @endforeach
                                                     </li>
 
-                                                    <li class="lists__item lists__item--labeled-horizontal">
+                                                    <li class="lists__item lists__item--labeled-vertical">
                                                         <span class="lists__item-label">Gatunki</span>
                                                         {{ $book->genres->implode('name', ',') }}
                                                     </li>

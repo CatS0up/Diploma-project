@@ -35,22 +35,23 @@ Route::prefix('admin')
         Route::get('home', DashboardController::class)
             ->name('index');
 
-        Route::middleware('VerifyUserExist')
-            ->get('users/{id}', [UserController::class, 'show'])
-            ->name('show.user');
+        Route::middleware(['verifyUserExist'])
+            ->group(function () {
+                Route::get('users/{id}', [UserController::class, 'show'])
+                    ->name('show.user');
 
-        Route::middleware('VerifyUserExist')
-            ->get('users/{id}/edit', [UserController::class, 'edit'])
-            ->name('edit.user');
+                Route::get('users/{id}/edit', [UserController::class, 'edit'])
+                    ->name('edit.user');
 
-        Route::put('users/{id}/edit', [UserController::class, 'update'])
-            ->name('update.user');
+                Route::put('users/{id}/edit', [UserController::class, 'update'])
+                    ->name('update.user');
+
+                Route::delete('users/{id}', [UserController::class, 'destroy'])
+                    ->name('delete.user');
+            });
 
         Route::get('users', [UserController::class, 'list'])
             ->name('get.users');
-
-        Route::delete('users/{id}', [UserController::class, 'destroy'])
-            ->name('delete.user');
 
         Route::get('books', [AdminBookController::class, 'list'])
             ->name('get.books');

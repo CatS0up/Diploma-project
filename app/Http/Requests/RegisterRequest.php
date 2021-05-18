@@ -36,7 +36,7 @@ class RegisterRequest extends FormRequest
             'town' => 'required|regex:/^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ ]*$/',
             'street' => 'nullable',
             'zipcode' => new Zipcode(),
-            'house_number' => ['required', 'regex:/([A-Za-z0-9]+)|([A-Za-z0-9]+\/[A-Za-z0-9]+)/'],
+            'house_number' => ['required', 'regex:/^([A-Za-z0-9]+)|([A-Za-z0-9]+\/[A-Za-z0-9]+)$/'],
             'avatar' => 'nullable|file|image',
             'description' => 'nullable|max:255'
         ];

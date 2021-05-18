@@ -56,10 +56,10 @@ class NewBookRequest extends FormRequest
             'publisher.required' => 'Wydawca nie może być pusty.',
 
             'authors.required' => 'Pole autora nie może być puste.',
-            // 'authors.regex' => 'Lista autorów powinna być oddzielona przecinkami.',
+            'authors.regex' => 'Lista autorów powinna być oddzielona przecinkami.',
 
             'genres.required' => 'Gatunek nie może być pusty.',
-            // 'genres.regex' => 'Lista gatunków powinna być oddzielona przecinkami.',
+            'genres.regex' => 'Lista gatunków powinna być oddzielona przecinkami.',
 
             'publishing_date.required' => 'Data wydania nie może być pusta.',
             'publishing_date.date' => 'Pole musi być datą.',

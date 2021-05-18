@@ -51,7 +51,7 @@
                 </div>
             </form>
 
-            <div class="pictures dashboard__pictures">
+            <div class="pictures app__pictures">
                 <img class="pictures__img" src="{{ asset('img/registration_img.jpg') }}" alt="Stos książek.">
             </div>
         </section>
