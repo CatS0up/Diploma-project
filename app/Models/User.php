@@ -62,14 +62,9 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
-    public function addAddress(Address $address): void
+    public function review()
     {
-        $this->address()->save($address);
-    }
-
-    public function addPersonalDetails(PersonalDetail $details): void
-    {
-        $this->personalDetails()->save($details);
+        return $this->hasOne(Review::class);
     }
 
 

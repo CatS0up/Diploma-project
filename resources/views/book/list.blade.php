@@ -96,7 +96,7 @@
                                                         alt="Okładka książki.">
                                                 @else
                                                     <img class="pictures__img"
-                                                        src="{{ asset('img/avatar_placeholder.jpg') }}"
+                                                        src="{{ asset('img/book_cover.png') }}"
                                                         alt="Okładka książki.">
                                                 @endif
                                             </div>

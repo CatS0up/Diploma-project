@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Repository\Eloquent;
 
+use App\Models\Author;
 use App\Models\Book;
+use App\Models\Genre;
 use App\Repository\BookRepository as BookRepositoryInterface;
 use App\Repository\Filterable;
 use App\Repository\Maintable;
@@ -15,10 +17,17 @@ use Illuminate\Support\Collection;
 class BookRepository implements BookRepositoryInterface, Maintable, Filterable
 {
     private Book $bookModel;
+    private Genre $genreModel;
+    private Author $authorModel;
 
-    public function __construct(Book $bookModel)
-    {
+    public function __construct(
+        Book $bookModel,
+        Genre $genreModel,
+        Author $authorModel
+    ) {
         $this->bookModel = $bookModel;
+        $this->genreModel = $genreModel;
+        $this->authorModel = $authorModel;
     }
 
     public function create(array $data): Book
@@ -32,17 +41,30 @@ class BookRepository implements BookRepositoryInterface, Maintable, Filterable
         $this->bookModel->cover = $data['cover'] ?? null;
         $this->bookModel->save();
 
-        $this->bookModel->genres()->firstOrCreate(
-            ['name' => $data['genres']]
-        );
-
-        $authorsList = preg_split('/ ?[,] ?/', $data['authors']);
-
-        foreach ($authorsList as $author) {
-            $data =  explode(' ', $author);
-
-            $this->bookModel->authors()->firstOrCreate(['firstname' => $data[0], 'lastname' =>  $data[1]]);
+        if (!$genre = $this->genreModel->whereIn('name', [$data['genre']])->first()) {
+            $genre = $this->genreModel;
+            $genre->name = $data['genre'];
+            $genre->save();
         }
+
+        $this->bookModel->genres()->save($genre);
+
+        $authorData = explode(' ', $data['author']);
+
+        $author = $this->authorModel->where([
+            ['firstname', $authorData[0]],
+            ['lastname', $authorData[1]]
+        ])->first();
+
+        if (!$author) {
+            $author = $this->authorModel;
+            $author->firstname = $authorData[0];
+            $author->lastname = $authorData[1];
+            $author->save();
+        }
+
+
+        $this->bookModel->authors()->save($author);
 
         return $this->bookModel;
     }
@@ -60,8 +82,6 @@ class BookRepository implements BookRepositoryInterface, Maintable, Filterable
     public function delete(int $id): bool
     {
         $book = $this->bookModel->find($id);
-        $book->authors()->detach();
-        $book->genres()->detach();
         $book->delete();
 
         return true;

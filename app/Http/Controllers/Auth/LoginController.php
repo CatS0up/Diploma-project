@@ -9,13 +9,13 @@ use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
-use App\Service\Auth;
+use App\Service\User\AuthService;
 
 class LoginController extends Controller
 {
-    private Auth $auth;
+    private AuthService $auth;
 
-    public function __construct(Auth $auth)
+    public function __construct(AuthService $auth)
     {
         $this->auth = $auth;
     }
@@ -27,7 +27,8 @@ class LoginController extends Controller
 
     public function authenticate(LoginRequest $request, User $userModel): RedirectResponse
     {
-        $this->auth->authenticate($request, $userModel);
+
+        $this->auth->authenticate($request->validated(), $userModel);
 
         return redirect()
             ->route('home')

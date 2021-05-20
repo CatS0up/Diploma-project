@@ -1,0 +1,10 @@
+.reviews {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-top: 15px;
+
+    // mixins
+    &__lists {
+        padding: 20px 0;
+    }
+}

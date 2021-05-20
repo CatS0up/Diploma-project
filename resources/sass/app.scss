@@ -32,6 +32,7 @@
 @import "layout/categories";
 @import "layout/book-preview";
 @import "layout/book-info";
+@import "layout/user-profile";
 
 // Components
 @import "components/headers";
@@ -49,3 +50,6 @@
 @import "components/dropdown";
 @import "components/notifications";
 @import "components/messages";
+@import "components/rate";
+@import "components/reviews";
+@import "components/review";

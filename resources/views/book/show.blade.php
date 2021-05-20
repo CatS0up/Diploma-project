@@ -22,7 +22,7 @@
                     @if ($book->cover)
                         <img class="pictures__img" src="{{ Storage::url($book->cover) }}" alt="Okładka książki.">
                     @else
-                        <img class="pictures__img" src="{{ asset('img/avatar_placeholder.jpg') }}" alt="Okładka książki.">
+                        <img class="pictures__img" src="{{ asset('img/book_cover.png') }}" alt="Okładka książki.">
                     @endif
                 </div>
             </div>
@@ -33,6 +33,15 @@
                 </h1>
 
                 <ul class="lists book-info__lists">
+                    <li class="lists__item lists__item--labeled-vertical">
+                        <span class="lists__item-label">Ocena</span>
+                        <div class="rate book-info__rate">
+                            @for ($i = 0; $i < 5; $i++)
+                                <span class="icons icons--small rate__star rate__icons fas fa-star"></span>
+                            @endfor
+                        </div>
+                    </li>
+
                     <li class="lists__item lists__item--labeled-vertical">
                         <span class="lists__item-label">ISBN</span>
                         {{ $book->isbn }}
@@ -93,7 +102,116 @@
 
     </section>
 
-    <section class="app__sections app__sections--medium-width">
-        <h2 class="titles app__titles">Recenzje</h2>
+    <section class="reviews app__reviews">
+        <header class="headers reviews__headers">
+            <h2 class="titles app__titles">Recenzje</h2>
+
+            <section class="reviews__list">
+                <ul class="lists reviews__lists">
+                    @foreach ($reviews as $review)
+                        <li class="lists__item">
+                            <div class="review reviews__review">
+                                <header class="headers review__headers">
+                                    <h3 class="titles review__titles">{{ $review->title }}</h3>
+
+                                    <div class="rate review__rate">
+                                        @for ($i = 0; $i < 5; $i++)
+                                            <span
+                                                class="icons icons--small rate__star rate__icons {{ $i < $review->rate ? 'fas fa-star' : 'far fa-star' }}"></span>
+                                        @endfor
+                                    </div>
+                                </header>
+
+                                <section class="review__body">
+                                    <div class="pictures pictures--small review__pictures">
+                                        @if ($review->user->avatar)
+                                            <img class="pictures__img" src="{{ Storage::url($review->user->avatar) }}"
+                                                alt="Avatar użytkownika.">
+                                        @else
+                                            <img class="pictures__img" src="{{ asset('img/avatar_placeholder.jpg') }}"
+                                                alt="Avatar użytkownika.">
+                                        @endif
+                                    </div>
+
+                                    <div class="review__info-group">
+                                        <section class="review__info">
+                                            <span class="review__author-info">
+                                                {{ $review->user->uid }}
+                                            </span>
+                                            <br>
+                                            <span class="review__info-item">
+                                                {{ $review->added_at }}
+                                            </span>
+                                        </section>
+                                    </div>
+
+                                    <p class="review__text">
+                                        {{ $review->text_content }}
+                                    </p>
+                                </section>
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
+            </section>
+
+            <section class="reviews__actions">
+                <h3 class="titles reviews__titles">Dodaj recenzję</h3>
+                <form class="forms reviews__forms" action="{{ route('reviews.add') }}" method="post">
+                    @csrf
+                    <div class="forms__group">
+                        <input id="bookId" class="forms__input-hidden" type="hidden" name="book_id"
+                            value="{{ $book->id }}">
+                    </div>
+
+                    <div class="forms__inline-section">
+                        <div class="forms__check">
+                            @for ($i = 0; $i < 5; $i++)
+                                <input id="rate{{ $i + 1 }}" class="forms__radio forms__radio--hidden" type="radio"
+                                    name="rate" value="{{ $i + 1 }}" {{ $i === 4 ? 'checked' : null }}>
+                                <label for="rate{{ $i + 1 }}" class="forms__radio-title">
+                                    <span class="icons icons--small rate__star rate__icons far fa-star"
+                                        data-rating="icon"></span>
+                                </label>
+                            @endfor
+                        </div>
+                    </div>
+
+                    <div class="forms__group">
+                        <label class="forms__group-title" for="genres">
+                            Tytuł
+                            <span class="forms__required-info">*</span>
+                        </label>
+                        <input id="title" class="forms__input" type="text" name="title" value="{{ old('title') }}">
+
+                        @error('title')
+                            <span class="forms__input-feedback">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="forms__group">
+                        <label class="forms__group-title" for="review">
+                            Recenzja
+                            <span class="forms__required-info">*</span>
+                        </label>
+                        <textarea id="review" class="forms__input forms__input--textarea" name="review"
+                            rows="10"></textarea>
+
+                        @error('review')
+                            <span class="forms__input-feedback">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+
+
+                    <div class="forms__buttons-group">
+                        <button class="buttons buttons--primary forms__buttons" type="submit">Dodaj</button>
+                    </div>
+                </form>
+            </section>
+        </header>
     </section>
 @endsection

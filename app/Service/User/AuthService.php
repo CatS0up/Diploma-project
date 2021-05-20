@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Service;
+namespace App\Service\User;
 
 use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Auth\AuthManager;
 
-class Auth
+class AuthService
 {
     private AuthManager $authManager;
 
@@ -19,11 +19,9 @@ class Auth
     }
 
     public function authenticate(
-        LoginRequest $request,
+        array $credentials,
         User $userModel
     ): bool {
-        $credentials = $request->validated();
-
         $user = $userModel->uid($credentials['uid'])->first();
 
         $user->actived_at = Carbon::now();

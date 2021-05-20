@@ -7,7 +7,9 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Book\BookController;
+use App\Http\Controllers\Book\ReviewController;
 use App\Http\Controllers\User\BookController as UserBookController;
+use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -81,19 +83,38 @@ Route::prefix('admin')
             ->name('delete.genre');
     });
 
-/* ==, GUEST-LEVEL ROUTES <=== */
-Route::name('book.')
+/* ===> GUEST-LEVEL ROUTES <=== */
+Route::prefix('books')
+    ->name('book.')
     ->group(function () {
 
         Route::get('books', [BookController::class, 'list'])
             ->name('get.books');
 
-        Route::get('books/{id}', [BookController::class, 'show'])
-            ->name('show');
+        Route::middleware(['verifyBookExist'])->group(function () {
+            Route::get('{id}', [BookController::class, 'show'])
+                ->name('show');
 
-        Route::middleware('auth')
-            ->get('books/{id}/download', [BookController::class, 'download'])
-            ->name('download');
+            Route::middleware('auth')
+                ->get('{id}/download', [BookController::class, 'download'])
+                ->name('download');
+        });
+    });
+
+/* ===> PROFILE ROUTES <=== */
+Route::prefix('users')
+    ->middleware(['auth', 'verifyUserExist'])
+    ->get('{id}', [ProfileController::class, 'show'])
+    ->name('profile.show');
+
+/* ===> REVIEWS ROUTES <=== */
+Route::prefix('reviews')
+    ->middleware(['auth'])
+    ->name('reviews.')
+    ->group(function () {
+
+        Route::post('reviews/new', [ReviewController::class, 'add'])
+            ->name('add');
     });
 
 /* ===> LOGGED USER ROUTES <=== */

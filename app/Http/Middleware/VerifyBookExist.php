@@ -6,7 +6,7 @@ use App\Models\Book;
 use Closure;
 use Illuminate\Http\Request;
 
-class VerifyUserExist
+class VerifyBookExist
 {
     private Book $bookModel;
 

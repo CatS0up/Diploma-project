@@ -39,7 +39,7 @@
                             @if ($book->cover)
                                 <img class="pictures__img" src="{{ Storage::url($book->cover) }}" alt="Okładka książki.">
                             @else
-                                <img class="pictures__img" src="{{ asset('img/avatar_placeholder.jpg') }}"
+                                <img class="pictures__img" src="{{ asset('img/book_cover.png') }}"
                                     alt="Okładka książki.">
                             @endif
                         </div>
@@ -80,7 +80,7 @@
                             @csrf
                             <div class="forms__group">
 
-                                {{-- <div class="forms__inline-section">
+                                <div class="forms__inline-section">
                                     <div class="forms__group">
                                         <label class="forms__group-title" for="bookCover">
                                             Okładka
@@ -97,7 +97,6 @@
                                     <div class="forms__group">
                                         <label class="forms__group-title" for="bookPdf">
                                             PDF
-                                            <span class="forms__required-info">*</span>
                                         </label>
                                         <input id="bookPdf" class="forms__file" type="file" name="pdf">
 
@@ -107,7 +106,23 @@
                                             </span>
                                         @enderror
                                     </div>
-                                </div> --}}
+                                </div>
+
+                                 <div class="forms__inline-section">
+                                <span class="forms__section-name forms__section-name--all-cols">Reset okładki</span>
+                                <div class="forms__check">
+                                    <input id="resetCoverBook" class="forms__radio" type="radio" name="reset_cover"
+                                        value="true">
+                                    <label for="resetAvatarTrue" class="forms__radio-title">Tak</label>
+                                </div>
+
+                                <div class="forms__check">
+                                    <input id="resetCoverBook" class="forms__radio" type="radio" name="reset_cover"
+                                        value="false" checked>
+                                    <label for="resetCoverBook" class="forms__radio-title">Nie</label>
+                                </div>
+                            </div>
+
 
                                 <label class="forms__group-title" for="title">
                                     Tytuł

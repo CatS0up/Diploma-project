@@ -83,8 +83,6 @@ class UserRepository implements UserRepositoryInterface, Maintable, Filterable
     {
         $user = $this->userModel->find($id);
 
-        $user->address()->delete();
-        $user->personalDetails()->delete();
         $user->delete();
 
         return empty($user);

@@ -1,4 +1,9 @@
 .pictures {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    align-items: stretch;
+
     &--centered {
         margin: 0 auto;
     }

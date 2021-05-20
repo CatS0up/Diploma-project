@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NewBookRequest;
+use App\Http\Requests\UpdateBookRequest;
 use App\Repository\BookRepository;
 use App\Repository\Filterable;
 use App\Repository\GenreRepository;
@@ -61,12 +62,15 @@ class BookController extends Controller
     {
         $data = $request->validated();
 
-        $data['cover'] = $file->savePublic('covers', $request['cover']);
+        if (isset($data['cover']))
+            $data['cover'] = $file->savePublic('covers', $request['cover']);
+
         $data['pdf'] = $file->saveLocal('pdfs', $request['pdf']);
 
         $this->bookResposiotry->create($data);
 
-        return redirect()->route('admin.get.books');
+        return redirect()->route('admin.get.books')
+            ->with('success', 'Nowa książka została dodana.');
     }
 
     public function edit(PublisherRepository $publisherRepository, int $id): View
@@ -77,11 +81,38 @@ class BookController extends Controller
         ]);
     }
 
+    public function update(UpdateBookRequest $request, int $id): RedirectResponse
+    {
+        $data = $request->validated();
+
+        if (isset($data['avatar'])) {
+            $path = $data['avatar']->store('avatars', 'public');
+
+            Storage::disk('public')->delete($this->userRepository->get($id)->avatar);
+            $data['avatar'] = $path;
+        } else if ($data['reset_avatar'] == 'true') {
+            $user = $this->userRepository->get($id);
+            Storage::disk('public')->delete($user->avatar);
+            $user->avatar = null;
+            $user->save();
+        }
+
+        $data['id'] = $id;
+
+        $this->userRepository->update($data);
+
+        return redirect()
+            ->route(
+                'admin.show.user',
+                ['id' => $id]
+            )->with('success', 'Profil użytkownika został zaktualizowany.');
+    }
+
     public function destroy(int $id): RedirectResponse
     {
         $this->bookResposiotry->delete($id);
 
         return redirect()->route('admin.get.books')
-            ->with('Książka została pomyślnie usunięta.');
+            ->with('success', 'Książka została pomyślnie usunięta.');
     }
 }

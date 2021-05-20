@@ -28,8 +28,7 @@ class AlterUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('blocked');
-            $table->dropColumn('actived_at');
+            $table->dropColumn(['is_blocked', 'actived_at']);
         });
     }
 }

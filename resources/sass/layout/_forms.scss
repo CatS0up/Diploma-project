@@ -58,6 +58,12 @@
         padding-bottom: 5px;
     }
 
+    &__radio {
+        &--hidden {
+            display: none;
+        }
+    }
+
     &__radio-title {
         padding-left: 5px;
     }

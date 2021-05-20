@@ -20,9 +20,13 @@ class FileService
         return $file->store($dir, 'local');
     }
 
-    public function update(UploadedFile $file): void
+    public function updatePublic(?UploadedFile $file, string $dir): void
     {
-        # code...
+       if(isset($file)) {
+        $path = $file->store('avatars', 'public');
+
+        Storage::disk('public')->delete($this->userRepository->get($id)->avatar);
+       }
     }
 
     public function download(string $file, string $filename = 'file'): StreamedResponse

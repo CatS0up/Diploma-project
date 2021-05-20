@@ -33,7 +33,7 @@
                             @if ($book->cover)
                                 <img class="pictures__img" src="{{ Storage::url($book->cover) }}" alt="Okładka książki.">
                             @else
-                                <img class="pictures__img" src="{{ asset('img/avatar_placeholder.jpg') }}"
+                                <img class="pictures__img" src="{{ asset('img/book_cover.png') }}"
                                     alt="Okładka książki.">
                             @endif
                         </div>
@@ -111,7 +111,7 @@
                         <ul class="lists show__lists">
                             <li class="lists__item lists__item--labeled-vertical">
                                 <span class="lists__item-label">Okładka</span>
-                                {{ $book->cover }}
+                                {{ $book->cover ?? '(brak)' }}
                             </li>
 
                             <li class="lists__item lists__item--labeled-vertical">

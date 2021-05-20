@@ -80,13 +80,13 @@
                 </div>
 
                 <div class="forms__group">
-                    <label class="forms__group-title" for="authors">
-                        Autor/Autorzy
+                    <label class="forms__group-title" for="author">
+                        Autor
                         <span class="forms__required-info">*</span>
                     </label>
-                    <input id="authors" class="forms__input" type="text" name="authors" value="{{ old('authors') }}">
+                    <input id="author" class="forms__input" type="text" name="author" value="{{ old('author') }}">
 
-                    @error('authors')
+                    @error('author')
                         <span class="forms__input-feedback">
                             {{ $message }}
                         </span>
@@ -94,13 +94,13 @@
                 </div>
 
                 <div class="forms__group">
-                    <label class="forms__group-title" for="genres">
-                        Gatunek/Gatunki
+                    <label class="forms__group-title" for="genre">
+                        Gatunek
                         <span class="forms__required-info">*</span>
                     </label>
-                    <input id="genres" class="forms__input" type="text" name="genres" value="{{ old('genres') }}">
+                    <input id="genre" class="forms__input" type="text" name="genre" value="{{ old('genre') }}">
 
-                    @error('genres')
+                    @error('genre')
                         <span class="forms__input-feedback">
                             {{ $message }}
                         </span>
@@ -116,7 +116,8 @@
                         <select id="publisher" class="forms__input forms__input--bordered" name="publisher">
                             @foreach ($publishers as $publisher)
                                 <option value="{{ $publisher->id }}"
-                                    {{ $publisher->id == old('publisher') ? 'selected' : null }}>{{ $publisher->name }}
+                                    {{ $publisher->id == old('publisher') ? 'selected' : null }}>
+                                    {{ $publisher->name }}
                                 </option>
                             @endforeach
                         </select>

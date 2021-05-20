@@ -26,9 +26,11 @@ class BookController extends Controller
     public function show(int $id): View
     {
         $user =  Auth::user();
+        $book = $this->bookRepostiory->get($id);
 
         return view('book.show', [
-            'book' => $this->bookRepostiory->get($id),
+            'book' => $book,
+            'reviews' => $book->reviews()->get(),
             'userHasBook' => $user ? $user->hasBook($id) : true,
         ]);
     }

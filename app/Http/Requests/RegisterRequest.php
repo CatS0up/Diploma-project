@@ -33,7 +33,7 @@ class RegisterRequest extends FormRequest
             'lastname' => 'required|regex:/^[A-ZŻŹĆĄŚĘŁÓŃ]+[a-zzżźćńółęąś]*$/',
             'birthday' => 'required|date|before:today',
             'gender' => 'nullable',
-            'town' => 'required|regex:/^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ ]*$/',
+            'town' => 'required|regex:/^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ\- ]*$/',
             'street' => 'nullable',
             'zipcode' => new Zipcode(),
             'house_number' => ['required', 'regex:/^([A-Za-z0-9]+)|([A-Za-z0-9]+\/[A-Za-z0-9]+)$/'],
@@ -42,7 +42,7 @@ class RegisterRequest extends FormRequest
         ];
     }
 
-    function messages()
+    public function messages()
     {
         return [
             'uid.required' => 'Login nie może być pusty.',

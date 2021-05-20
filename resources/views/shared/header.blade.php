@@ -57,7 +57,8 @@
                                 </li>
                             @else
                                 <li class="menu__item">
-                                    <a href="#" class="links links--dropdown menu__links">Profil</a>
+                                    <a href="{{ route('profile.show', ['id' => Auth::user()->id]) }}"
+                                        class="links links--dropdown menu__links">Profil</a>
                                 </li>
 
                                 <li class="menu__item">

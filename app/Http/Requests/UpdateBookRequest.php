@@ -4,8 +4,9 @@ namespace App\Http\Requests;
 
 use App\Rules\Isbn;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class NewBookRequest extends FormRequest
+class UpdateBookRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,9 +27,14 @@ class NewBookRequest extends FormRequest
     {
         return [
             'cover' => 'nullable|file|image',
-            'pdf' => 'required|file|mimes:pdf',
-            'title' => 'required|regex:/^[a-zA-Z ]*$/',
-            'isbn' => ['required', 'numeric', new Isbn()],
+            'pdf' => 'nullable|file|mimes:pdf',
+            'title' => 'required|regex:/^[a-zA-Zzzżźćńółęąś- ]*$/',
+            'isbn' => [
+                'required',
+                'numeric',
+                new Isbn(),
+                Rule::unique('books')->ignore($this->route('id'))
+            ],
             'publisher' => 'required',
             'author' => 'required',
             'genre' => 'required',
@@ -36,10 +42,9 @@ class NewBookRequest extends FormRequest
             'description' => 'required'
         ];
     }
-
     public function messages()
     {
-        return  [
+        return [
             'cover.file' => 'Wysyłanie pliku nie powiodło się.',
             'cover.image' => 'Okładka musi być plikiem graficznym.',
 
