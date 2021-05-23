@@ -40,7 +40,7 @@
                     method="post">
                     @csrf
                     <div class="forms__group">
-                        <input id="bookGenre" class="forms__input forms__input--bordered" type="text" name="genre"
+                        <input id="bookGenre" class="forms__input forms__input--bordered" type="text" name="name"
                             value="{{ old('genres') }}" placeholder="Nowy gatunek">
 
                         @error('genre')

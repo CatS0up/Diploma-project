@@ -28,6 +28,24 @@ class AddressService
         return $this->addressModel;
     }
 
+    final public function update(int $id, array $data): Address
+    {
+        $this->addressModel = $this->addressModel->find($id);
+
+        $this->addressModel->town = $data['town']
+            ?? $this->addressModel->town;
+        $this->addressModel->street = $data['street']
+            ?? $this->addressModel->street;
+        $this->addressModel->zipcode = $data['zipcode']
+            ?? $this->addressModel->zipcode;
+        $this->addressModel->house_number = $data['house_number']
+            ??  $this->addressModel->house_number;
+
+        $this->addressModel->save();
+
+        return $this->addressModel;
+    }
+
     public function acceptableFields(): array
     {
         return self::FIELD_NAMES;

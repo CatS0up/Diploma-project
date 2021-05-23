@@ -6227,7 +6227,6 @@ select {
   flex-wrap: nowrap;
   gap: 20px;
   padding: 15px;
-  transform: scaleY(0);
   transform-origin: top;
   transition: 0.2s;
   font-size: 1.1rem;
@@ -6335,6 +6334,7 @@ select {
 
 .forms {
   padding: 20px;
+  overflow-wrap: break-word;
 }
 .forms--inline {
   display: grid;

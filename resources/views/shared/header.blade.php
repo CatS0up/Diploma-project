@@ -56,10 +56,10 @@
                                         class="links links--dropdown menu__links">Rejestracja</a>
                                 </li>
                             @else
-                                <li class="menu__item">
+                                {{-- <li class="menu__item">
                                     <a href="{{ route('profile.show', ['id' => Auth::user()->id]) }}"
                                         class="links links--dropdown menu__links">Profil</a>
-                                </li>
+                                </li> --}}
 
                                 <li class="menu__item">
                                     <a href="{{ route('me.get.books') }}"

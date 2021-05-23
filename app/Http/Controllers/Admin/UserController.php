@@ -7,27 +7,28 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserUpdateByAdminRequest;
 use App\Repository\Filterable;
-use App\Repository\UserRepository;
 use App\Service\FiltersFormatter;
+use App\Service\User\ListingService;
+use App\Service\User\UserService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class UserController extends Controller
 {
-    private UserRepository $userRepository;
+    private UserService $user;
+    private ListingService $userList;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserService $user, ListingService $userList)
     {
-        $this->userRepository = $userRepository;
+        $this->user = $user;
+        $this->userList = $userList;
     }
 
-    public function show(int $id): View|Response
+    public function show(int $id): View
     {
         return view(
             'dashboard.userProfile',
-            ['user' => $this->userRepository->get($id)]
+            ['user' => $this->user->findById($id)]
         );
     }
 
@@ -40,9 +41,9 @@ class UserController extends Controller
         return view(
             'dashboard.userList',
             [
-                'users' => $this->userRepository->filterBy($filters),
-                'privilagedUsers' => $this->userRepository->allPrivilaged(),
-                'stats' => $this->userRepository->stats(),
+                'users' => $this->userList->filterBy($filters),
+                'privilaged' => $this->userList->allPrivilaged(),
+                'stats' => $this->userList->stats(),
                 'filters' => $filters
             ]
         );
@@ -52,7 +53,7 @@ class UserController extends Controller
     {
         return view(
             'dashboard.editUser',
-            ['user' => $this->userRepository->get($id)]
+            ['user' => $this->user->findById($id)]
         );
     }
 
@@ -60,21 +61,7 @@ class UserController extends Controller
     {
         $data = $request->validated();
 
-        if (isset($data['avatar'])) {
-            $path = $data['avatar']->store('avatars', 'public');
-
-            Storage::disk('public')->delete($this->userRepository->get($id)->avatar);
-            $data['avatar'] = $path;
-        } else if ($data['reset_avatar'] == 'true') {
-            $user = $this->userRepository->get($id);
-            Storage::disk('public')->delete($user->avatar);
-            $user->avatar = null;
-            $user->save();
-        }
-
-        $data['id'] = $id;
-
-        $this->userRepository->update($data);
+        $this->user->update($id, $data);
 
         return redirect()
             ->route(

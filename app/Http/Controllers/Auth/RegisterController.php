@@ -22,12 +22,8 @@ class RegisterController extends Controller
     public function register(
         RegisterRequest $request,
         UserService $user,
-        FileService $file
     ): RedirectResponse {
         $data = $request->validated();
-
-        if (isset($data['avatar']))
-            $data['avatar'] = $file->savePublic('avatars', $data['avatar']);
 
         $user->create($data);
 

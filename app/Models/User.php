@@ -119,6 +119,11 @@ class User extends Authenticatable
         return in_array((int) $this->role_id, [2, 3]);
     }
 
+    public function hasAvatar(): bool
+    {
+        return (bool) $this->avatar;
+    }
+
     public function hasBook(int $bookId): bool
     {
         return (bool) $this->books()->where('userBooks.book_id', $bookId)->first();

@@ -26,7 +26,7 @@
                         Użytkownicy:
                     </h2>
                     <p class="cards__text">
-                        {{ $stats['count'] }}
+                        {{ $stats['all_amount'] }}
                     </p>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                         Członkowie zespołu:
                     </h2>
                     <p class="cards__text">
-                        {{ $stats['privilagedCount'] }}
+                        {{ $stats['privilaged_amount'] }}
                     </p>
                 </div>
             </div>
@@ -91,7 +91,7 @@
                 </thead>
 
                 <tbody class="tables__body">
-                    @foreach ($privilagedUsers as $user)
+                    @foreach ($privilaged as $user)
                         <tr class="tables__row">
                             <th class="tables__header-cell" data-label="ID">
                                 {{ $user->id }}

@@ -28,6 +28,24 @@ class PersonalDataService
         return $this->personalDetailsModel;
     }
 
+    final public function update(int $id, array $data): PersonalDetail
+    {
+        $this->personalDetailsModel = $this->personalDetailsModel->find($id);
+
+        $this->personalDetailsModel->firstname = $data['firstname']
+            ?? $this->personalDetailsModel->firstname;
+        $this->personalDetailsModel->lastname = $data['lastname']
+            ?? $this->personalDetailsModel->lastname;
+        $this->personalDetailsModel->birthday = $data['birthday']
+            ??  $this->personalDetailsModel->birthda;
+        $this->personalDetailsModel->gender = $data['gender']
+            ?? $this->personalDetailsModel->gender;
+
+        $this->personalDetailsModel->save();
+
+        return $this->personalDetailsModel;
+    }
+
     public function acceptableFields(): array
     {
         return self::FIELD_NAMES;

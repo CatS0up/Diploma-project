@@ -104,7 +104,7 @@ Route::prefix('books')
 /* ===> PROFILE ROUTES <=== */
 Route::prefix('users')
     ->middleware(['auth', 'verifyUserExist'])
-    ->get('{id}', [ProfileController::class, 'show'])
+    ->get('{uid}', [ProfileController::class, 'show'])
     ->name('profile.show');
 
 /* ===> REVIEWS ROUTES <=== */
@@ -126,10 +126,10 @@ Route::prefix('me')
         Route::get('books', [UserBookController::class, 'list'])
             ->name('get.books');
 
-        Route::post('books/{id}/add', [UserBookController::class, 'add'])
+        Route::post('books/{slug}/add', [UserBookController::class, 'add'])
             ->name('add.book');
 
-        Route::post('books/{id}/remove', [UserBookController::class, 'remove'])
+        Route::post('books/{slug}/remove', [UserBookController::class, 'remove'])
             ->name('remove.book');
     });
 

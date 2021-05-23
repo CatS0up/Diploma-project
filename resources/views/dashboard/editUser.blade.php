@@ -93,7 +93,7 @@
                                 <label class="forms__group-title" for="avatar">
                                     Avatar
                                 </label>
-                                <input id="avatar" class="forms__file" type="file" name="avatar"
+                                <input id="avatar" class="forms__input-file" type="file" name="avatar"
                                     value="{{ old('avatar') }}">
                                 @error('avatar')
                                     <span class="forms__input-feedback">
@@ -106,13 +106,13 @@
                                 <span class="forms__section-name forms__section-name--all-cols">Reset avatara</span>
                                 <div class="forms__check">
                                     <input id="resetAvatarTrue" class="forms__radio" type="radio" name="reset_avatar"
-                                        value="true">
+                                        value="yes">
                                     <label for="resetAvatarTrue" class="forms__radio-title">Tak</label>
                                 </div>
 
                                 <div class="forms__check">
                                     <input id="resetAvatarFalse" class="forms__radio" type="radio" name="reset_avatar"
-                                        value="false" checked>
+                                        value="no" checked>
                                     <label for="resetAvatarFalse" class="forms__radio-title">Nie</label>
                                 </div>
                             </div>

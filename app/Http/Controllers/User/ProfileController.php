@@ -5,20 +5,23 @@ declare(strict_types=1);
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Repository\UserRepository;
+use App\Service\User\UserService;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    private UserRepository $userRepostiory;
+    private UserService $user;
 
-    public function __construct(UserRepository $userRepostiory)
+    public function __construct(UserService $user)
     {
-        $this->userRepostiory = $userRepostiory;
+        $this->user = $user;
     }
 
-    public function show(int $id): View
+    public function show(string $uid): View
     {
-        return view('user.profile', ['user' => $this->userRepostiory->get($id)]);
+        return view(
+            'user.profile',
+            ['user' => $this->user->findByUid($uid)]
+        );
     }
 }

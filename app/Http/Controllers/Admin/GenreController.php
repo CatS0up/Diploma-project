@@ -6,33 +6,34 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NewGenreRequest;
-use App\Repository\GenreRepository;
+use App\Service\Book\GenreService;
+use App\Service\Book\ListingGenreService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class GenreController extends Controller
 {
-    private GenreRepository $genreRepository;
+    private GenreService $genre;
 
-    public function __construct(GenreRepository $genreRepository)
+    public function __construct(GenreService $genre)
     {
-        $this->genreRepository = $genreRepository;
+        $this->genre = $genre;
     }
 
-    public function list(): View
+    public function list(ListingGenreService $genreList): View
     {
         return view(
             'dashboard.genreList',
             [
-                'genres' => $this->genreRepository->allPaginated(),
-                'amount' => $this->genreRepository->count()
+                'genres' => $genreList->allPaginated(),
+                'amount' => 2000
             ]
         );
     }
 
     public function insert(NewGenreRequest $request): RedirectResponse
     {
-        $this->genreRepository->create($request->validated()['genre']);
+        $this->genre->create($request->validated());
 
         return redirect()
             ->route('admin.get.genres')
@@ -41,7 +42,7 @@ class GenreController extends Controller
 
     public function destroy(int $id): RedirectResponse
     {
-        $this->genreRepository->delete($id);
+        $this->genre->delete($id);
 
         return redirect()
             ->route('admin.get.genres')
