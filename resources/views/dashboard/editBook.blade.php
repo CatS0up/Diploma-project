@@ -39,8 +39,7 @@
                             @if ($book->cover)
                                 <img class="pictures__img" src="{{ Storage::url($book->cover) }}" alt="Okładka książki.">
                             @else
-                                <img class="pictures__img" src="{{ asset('img/book_cover.png') }}"
-                                    alt="Okładka książki.">
+                                <img class="pictures__img" src="{{ asset('img/book_cover.png') }}" alt="Okładka książki.">
                             @endif
                         </div>
 
@@ -75,9 +74,11 @@
                     </header>
 
                     <div class="show__update">
-                        <form class="forms dashboard__forms" action="{{ route('admin.insert.book') }}" method="post"
+                        <form class="forms dashboard__forms"
+                            action="{{ route('admin.update.book', ['id' => $book->id]) }}" method="post"
                             enctype="multipart/form-data">
                             @csrf
+                            @method('put')
                             <div class="forms__group">
 
                                 <div class="forms__inline-section">
@@ -108,20 +109,20 @@
                                     </div>
                                 </div>
 
-                                 <div class="forms__inline-section">
-                                <span class="forms__section-name forms__section-name--all-cols">Reset okładki</span>
-                                <div class="forms__check">
-                                    <input id="resetCoverBook" class="forms__radio" type="radio" name="reset_cover"
-                                        value="true">
-                                    <label for="resetAvatarTrue" class="forms__radio-title">Tak</label>
-                                </div>
+                                <div class="forms__inline-section">
+                                    <span class="forms__section-name forms__section-name--all-cols">Reset okładki</span>
+                                    <div class="forms__check">
+                                        <input id="resetCoverBookTrue" class="forms__radio" type="radio" name="reset_cover"
+                                            value="yes">
+                                        <label for="resetCoverBookTrue" class="forms__radio-title">Tak</label>
+                                    </div>
 
-                                <div class="forms__check">
-                                    <input id="resetCoverBook" class="forms__radio" type="radio" name="reset_cover"
-                                        value="false" checked>
-                                    <label for="resetCoverBook" class="forms__radio-title">Nie</label>
+                                    <div class="forms__check">
+                                        <input id="resetCoverBookFalse" class="forms__radio" type="radio" name="reset_cover"
+                                            value="no" checked>
+                                        <label for="resetCoverBookFalse" class="forms__radio-title">Nie</label>
+                                    </div>
                                 </div>
-                            </div>
 
 
                                 <label class="forms__group-title" for="title">
@@ -129,7 +130,7 @@
                                     <span class="forms__required-info">*</span>
                                 </label>
                                 <input id="title" class="forms__input" type="text" name="title"
-                                    value="{{ old('title') }}">
+                                    value="{{ old('title', $book->title) }}">
 
                                 @error('title')
                                     <span class="forms__input-feedback">
@@ -143,7 +144,8 @@
                                     ISBN
                                     <span class="forms__required-info">*</span>
                                 </label>
-                                <input id="isbn" class="forms__input" type="text" name="isbn" value="{{ old('isbn') }}">
+                                <input id="isbn" class="forms__input" type="text" name="isbn"
+                                    value="{{ old('isbn', $book->isbn) }}">
 
                                 @error('isbn')
                                     <span class="forms__input-feedback">
@@ -154,13 +156,13 @@
 
                             <div class="forms__group">
                                 <label class="forms__group-title" for="authors">
-                                    Autor/Autorzy
+                                    Autor
                                     <span class="forms__required-info">*</span>
                                 </label>
-                                <input id="authors" class="forms__input" type="text" name="authors"
-                                    value="{{ old('authors') }}">
+                                <input id="authors" class="forms__input" type="text" name="author"
+                                    value="{{ old('author', $book->authors->implode('fullname', '')) }}">
 
-                                @error('authors')
+                                @error('author')
                                     <span class="forms__input-feedback">
                                         {{ $message }}
                                     </span>
@@ -169,19 +171,22 @@
 
                             <div class="forms__group">
                                 <label class="forms__group-title" for="genres">
-                                    Gatunek/Gatunki
+                                    Gatunek
                                     <span class="forms__required-info">*</span>
                                 </label>
-                                <input id="genres" class="forms__input" type="text" name="genres"
-                                    value="{{ old('genres') }}">
+                                <input id="genres" class="forms__input" type="text" name="genre"
+                                    value="{{ old('genre', $book->genres->implode('name', '')) }}">
 
-                                @error('genres')
+                                @error('genre')
                                     <span class="forms__input-feedback">
                                         {{ $message }}
                                     </span>
                                 @enderror
                             </div>
 
+                            @php
+                                $publisher_id = old('publisher', $book->publisher_id);
+                            @endphp
                             <div class="forms__inline-section">
                                 <div class="forms__group">
                                     <label class="forms__group-title" for="publisher">
@@ -191,7 +196,7 @@
                                     <select id="publisher" class="forms__input forms__input--bordered" name="publisher">
                                         @foreach ($publishers as $publisher)
                                             <option value="{{ $publisher->id }}"
-                                                {{ $publisher->id == old('publisher') ? 'selected' : null }}>
+                                                {{ $publisher->id == $publisher_id ? 'selected' : null }}>
                                                 {{ $publisher->name }}
                                             </option>
                                         @endforeach
@@ -204,7 +209,7 @@
                                         <span class="forms__required-info">*</span>
                                     </label>
                                     <input id="publishingDate" class="forms__input" type="date" name="publishing_date"
-                                        value="{{ old('publishing_date') }}">
+                                        value="{{ old('publishing_date', $book->publishing_date) }}">
 
                                     @error('publishing_date')
                                         <span class="forms__input-feedback">
@@ -220,7 +225,7 @@
                                     <span class="forms__required-info">*</span>
                                 </label>
                                 <textarea id="description" class="forms__input forms__input--textarea" name="description"
-                                    rows="10">{{ old('description') }}</textarea>
+                                    rows="10">{{ old('description', $book->description) }}</textarea>
 
                                 @error('description')
                                     <span class="forms__input-feedback">

@@ -133,7 +133,7 @@
                                             </div>
 
                                             <div class="book-preview__options">
-                                                <a href="{{ route('book.show', ['id' => $book->id]) }}"
+                                                <a href="{{ route('book.show', ['slug' => $book->slug]) }}"
                                                     class="links links--light book-preview__links">Szczegóły</a>
                                             </div>
                                         </div>

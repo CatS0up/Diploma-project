@@ -8,14 +8,30 @@ use App\Models\Book;
 use App\Service\BookListing;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 
 class ListingService implements BookListing
 {
     private Book $bookModel;
+    private StatsService $stats;
 
-    public function __construct(Book $bookModel)
+    public function __construct(Book $bookModel, StatsService $stats)
     {
         $this->bookModel = $bookModel;
+        $this->stats = $stats;
+    }
+
+    public function stats(): array
+    {
+        return $this->stats->countStats();
+    }
+
+    public function latest(int $limit = 5): Collection
+    {
+        return $this->bookModel
+            ->orderBy('created_at', 'desc')
+            ->limit($limit)
+            ->get();
     }
 
     public function filterBy(array $filters, int $limit = 15): LengthAwarePaginator

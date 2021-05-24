@@ -5,62 +5,58 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Book;
 
 use App\Http\Controllers\Controller;
-use App\Repository\BookRepository;
-use App\Repository\Filterable;
-use App\Repository\GenreRepository;
-use App\Repository\PublisherRepository;
-use App\Service\FileService;
+use App\Service\Book\BookService;
+use App\Service\Book\ListingGenreService;
+use App\Service\Book\ListingPublisherService;
+use App\Service\Book\ListingService;
+use App\Service\BookListing;
 use App\Service\FiltersFormatter;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\AuthManager;
 use Illuminate\View\View;
 
 class BookController extends Controller
 {
-    private BookRepository $bookRepostiory;
+    private BookService $book;
+    private ListingService $bookList;
 
-    public function __construct(BookRepository $bookRepository)
+    public function __construct(BookService $book, ListingService $bookList)
     {
-        $this->bookRepostiory = $bookRepository;
+        $this->book = $book;
+        $this->bookList = $bookList;
     }
 
-    public function show(int $id): View
+    public function show(AuthManager $auth, string $slug): View
     {
-        $user =  Auth::user();
-        $book = $this->bookRepostiory->get($id);
+        $user = $auth->user();
+
+        $book = $this->book->findBySlug($slug);
 
         return view('book.show', [
             'book' => $book,
             'reviews' => $book->reviews()->get(),
-            'userHasBook' => $user ? $user->hasBook($id) : true,
+            'userHasBook' => !isset($user) ?: $user->hasBook()
         ]);
     }
 
     public function list(
         FiltersFormatter $filters,
-        GenreRepository $genreRepository,
-        PublisherRepository $publisherRepository
+        ListingGenreService $genreList,
+        ListingPublisherService $publisherList
     ): View {
         $filters = $filters->format(
             ['q', 'publisher', 'genre', 'sort'],
             [
-                'sort' => Filterable::SORT_DEFAULT,
-                'publisher' => BookRepository::PUBLISHER_ALL,
-                'genre' => BookRepository::GENRE_ALL
+                'sort' => BookListing::SORT_DEFAULT,
+                'publisher' => BookListing::TYPE_ALL,
+                'genre' => BookListing::TYPE_ALL
             ]
         );
 
         return view('book.list', [
-            'genres' => $genreRepository->all(),
-            'publishers' => $publisherRepository->all(),
-            'books' => $this->bookRepostiory->filterBy($filters),
+            'genres' => $genreList->all(),
+            'publishers' => $publisherList->all(),
+            'books' => $this->bookList->filterBy($filters),
             'filters' =>  $filters
         ]);
-    }
-
-    public function download(FileService $file, int $id)
-    {
-        $book = $this->bookRepostiory->get($id);
-
-        return $file->download($book->file, $book->title);
     }
 }

@@ -7,103 +7,86 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NewBookRequest;
 use App\Http\Requests\UpdateBookRequest;
-use App\Repository\BookRepository;
-use App\Repository\Filterable;
-use App\Repository\GenreRepository;
-use App\Repository\PublisherRepository;
-use App\Service\FileService;
+use App\Service\Book\BookService;
+use App\Service\Book\ListingGenreService;
+use App\Service\Book\ListingPublisherService;
+use App\Service\Book\ListingService;
+use App\Service\BookListing;
 use App\Service\FiltersFormatter;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class BookController extends Controller
 {
-    private BookRepository $bookResposiotry;
+    private BookService $book;
+    private ListingService $bookList;
 
-    public function __construct(BookRepository $bookResposiotry)
+    public function __construct(BookService $book, ListingService $bookList)
     {
-        $this->bookResposiotry = $bookResposiotry;
+        $this->book = $book;
+        $this->bookList = $bookList;
     }
 
     public function show(int $id): View
     {
-        return view('dashboard.bookItem', ['book' => $this->bookResposiotry->get($id)]);
+        return view('dashboard.bookItem', ['book' => $this->book->findById($id)]);
     }
 
     public function list(
         FiltersFormatter $filtersFormatter,
-        PublisherRepository $publisherRepository,
-        GenreRepository $genreRepository
+        ListingPublisherService $publisherList,
+        ListingGenreService $genreList
     ): View {
         $filters = $filtersFormatter->format(
             ['q', 'publisher', 'genre', 'sort'],
             [
-                'sort' => Filterable::SORT_DEFAULT,
-                'publisher' => BookRepository::PUBLISHER_ALL,
-                'genre' => BookRepository::GENRE_ALL
+                'sort' => BookListing::SORT_DEFAULT,
+                'publisher' => BookListing::TYPE_ALL,
+                'genre' => BookListing::TYPE_ALL
             ]
         );
 
         return view('dashboard.bookList', [
-            'books' => $this->bookResposiotry->filterBy($filters),
-            'stats' => $this->bookResposiotry->stats(),
-            'publishers' => $publisherRepository->all(),
-            'genres' => $genreRepository->all(),
+            'books' => $this->bookList->filterBy($filters),
+            'stats' => $this->bookList->stats(),
+            'publishers' => $publisherList->all(),
+            'genres' => $genreList->all(),
             'filters' => $filters
         ]);
     }
 
-    public function create(PublisherRepository $publisherRepository): View
+    public function create(ListingPublisherService $publisherList): View
     {
-        return view('dashboard.addBook', ['publishers' => $publisherRepository->all()]);
+        return view('dashboard.addBook', ['publishers' => $publisherList->all()]);
     }
 
-    public function insert(NewBookRequest $request, FileService $file): RedirectResponse
+    public function insert(NewBookRequest $request): RedirectResponse
     {
         $data = $request->validated();
 
-        if (isset($data['cover']))
-            $data['cover'] = $file->savePublic('covers', $request['cover']);
-
-        $data['pdf'] = $file->saveLocal('pdfs', $request['pdf']);
-
-        $this->bookResposiotry->create($data);
+        $this->book->create($data);
 
         return redirect()->route('admin.get.books')
             ->with('success', 'Nowa książka została dodana.');
     }
 
-    public function edit(PublisherRepository $publisherRepository, int $id): View
+    public function edit(ListingPublisherService $publisherList, int $id): View
     {
         return view('dashboard.editBook', [
-            'book' => $this->bookResposiotry->get($id),
-            'publishers' => $publisherRepository->all()
+            'book' => $this->book->findById($id),
+            'publishers' => $publisherList->all()
         ]);
     }
 
     public function update(UpdateBookRequest $request, int $id): RedirectResponse
     {
-        $data = $request->validated();
+        $data = $request->all();
 
-        if (isset($data['avatar'])) {
-            $path = $data['avatar']->store('avatars', 'public');
-
-            Storage::disk('public')->delete($this->userRepository->get($id)->avatar);
-            $data['avatar'] = $path;
-        } else if ($data['reset_avatar'] == 'true') {
-            $user = $this->userRepository->get($id);
-            Storage::disk('public')->delete($user->avatar);
-            $user->avatar = null;
-            $user->save();
-        }
-
-        $data['id'] = $id;
-
-        $this->userRepository->update($data);
+        $this->book->update($id, $data);
 
         return redirect()
             ->route(
-                'admin.show.user',
+                'admin.show.book',
                 ['id' => $id]
             )->with('success', 'Profil użytkownika został zaktualizowany.');
     }

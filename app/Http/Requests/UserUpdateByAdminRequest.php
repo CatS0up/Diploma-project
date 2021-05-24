@@ -67,7 +67,7 @@ class UserUpdateByAdminRequest extends FormRequest
             'avatar.file' => 'Wysyłanie pliku nie powiodło się.',
             'avatar.image' => 'Avatar musi być plikiem graficznym.',
 
-            'reset_avatar.required' => 'Wybierz opcje avatara.',
+            'reset_avatar.required' => 'Wybierz opcję resetowania avatara.',
 
             'uid.required' => 'Login nie może być pusty.',
             'uid.alpha_num' => 'Login może się składać jedynie z liter i cyfr.',

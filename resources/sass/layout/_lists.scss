@@ -16,4 +16,10 @@
         color: #000;
         font-weight: 700;
     }
+
+    // mixins
+    &__info-item {
+        flex-grow: 1;
+        margin: 5px 0;
+    }
 }

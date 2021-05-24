@@ -14,8 +14,6 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    public $timestamps = false;
-
     protected $fillable = [
         'uid',
         'pwd',
@@ -89,10 +87,6 @@ class User extends Authenticatable
     }
 
     /* ===> Methods <=== */
-    public function clearData(): void
-    {
-        $this->personalDetails()->$this->delete();
-    }
 
     public function addBook(Book $book): void
     {

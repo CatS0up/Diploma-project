@@ -26,7 +26,7 @@
                         Książki:
                     </h2>
                     <p class="cards__text">
-                        {{ $stats['count'] }}
+                        {{ $stats['all_amount'] }}
                     </p>
                 </div>
             </div>
@@ -38,10 +38,10 @@
 
                 <div class="cards__body">
                     <h2 class="titles titles--weight-normal cards__titles">
-                        Książki 7+:
+                        Książki 4+:
                     </h2>
                     <p class="cards__text">
-                        65
+                        {{ $stats['best_amount'] }}
                     </p>
                 </div>
             </div>
@@ -155,8 +155,7 @@
                                                 <img class="pictures__img" src="{{ Storage::url($book->cover) }}"
                                                     alt="Okładka książki.">
                                             @else
-                                                <img class="pictures__img"
-                                                    src="{{ asset('img/book_cover.png') }}"
+                                                <img class="pictures__img" src="{{ asset('img/book_cover.png') }}"
                                                     alt="Okładka książki.">
                                             @endif
                                         </div>

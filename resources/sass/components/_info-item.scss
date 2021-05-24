@@ -1,0 +1,20 @@
+.info-item {
+    @include flex();
+    gap: 15px;
+    padding: 15px;
+
+    background-color: #fff;
+    border: 1px solid lightgray;
+
+    &__body {
+        @include flex($direction: column);
+        flex-grow: 1;
+    }
+
+    &__timestamp {
+        align-self: flex-end;
+
+        color: $text-muted-color;
+        font-size: 0.8rem;
+    }
+}

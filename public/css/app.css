@@ -6227,6 +6227,7 @@ select {
   flex-wrap: nowrap;
   gap: 20px;
   padding: 15px;
+  transform: scaleY(0);
   transform-origin: top;
   transition: 0.2s;
   font-size: 1.1rem;
@@ -6304,11 +6305,25 @@ select {
 .dashboard__stats {
   padding-top: 50px;
 }
+@media (min-width: 560px) {
+  .dashboard__stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 1fr);
+    gap: 20px;
+  }
+}
 @media (min-width: 760px) {
   .dashboard__stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
+  }
+}
+@media (min-width: 960px) {
+  .dashboard__activity-stats {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 .dashboard__add-form {
@@ -6622,6 +6637,10 @@ select {
 .lists__item-label {
   color: #000;
   font-weight: 700;
+}
+.lists__info-item {
+  flex-grow: 1;
+  margin: 5px 0;
 }
 
 .app__auth-form {
@@ -6986,7 +7005,7 @@ select {
   min-height: 150px;
   margin-bottom: 45px;
   padding: 45px 25px 25px 25px;
-  background-color: white;
+  background-color: #fff;
   box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.15);
 }
 .cards__body {
@@ -7015,6 +7034,10 @@ select {
   background-color: #fbab7e;
   background-image: linear-gradient(62deg, #fbab7e 0%, #f7ce68 100%);
 }
+.cards__icons--orange-two {
+  background-color: #fad961;
+  background-image: linear-gradient(90deg, #fad961 0%, #f76b1c 100%);
+}
 .cards__icons--red {
   background-color: #ff873b;
   background-image: linear-gradient(147deg, #ff873b 0%, #ff2525 74%);
@@ -7022,6 +7045,10 @@ select {
 .cards__icons--purple {
   background-color: #2191fd;
   background-image: linear-gradient(19deg, #2191fd 0%, #b721ff 100%);
+}
+.cards__icons--blue {
+  background-color: #8bc6ec;
+  background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
 }
 
 .text--large {
@@ -7227,4 +7254,29 @@ select {
 }
 .review__rate {
   justify-self: flex-end;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  gap: 15px;
+  padding: 15px;
+  background-color: #fff;
+  border: 1px solid lightgray;
+}
+.info-item__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  flex-grow: 1;
+}
+.info-item__timestamp {
+  align-self: flex-end;
+  color: #808080;
+  font-size: 0.8rem;
 }

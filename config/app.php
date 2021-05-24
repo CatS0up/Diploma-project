@@ -1,6 +1,7 @@
 <?php
 
 use App\Providers\BooksServiceProvider;
+use App\Providers\DashboardServiceProvider;
 use App\Providers\GenresServiceProvider;
 use App\Providers\PublishersServiceProvider;
 use App\Providers\UsersServiceProvider;
@@ -183,7 +184,8 @@ return [
         GenresServiceProvider::class,
         UsersServiceProvider::class,
         BooksServiceProvider::class,
-        PublishersServiceProvider::class
+        PublishersServiceProvider::class,
+        DashboardServiceProvider::class
 
     ],
 

@@ -21,6 +21,7 @@ class CreateBooksTable extends Migration
             $table->string('isbn', 13)->unique();
             $table->string('file');
             $table->text('description');
+            $table->timestamps();
             $table->date('publishing_date')->nullable();
             $table->string('cover')->nullable();
         });

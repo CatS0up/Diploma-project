@@ -27,7 +27,7 @@ class NewBookRequest extends FormRequest
         return [
             'cover' => 'nullable|file|image',
             'pdf' => 'required|file|mimes:pdf',
-            'title' => 'required|regex:/^[a-zA-Z ]*$/',
+            'title' => 'required|regex:/^[a-zA-ZzżźćńółęąśŻŹĆĄŚĘŁÓŃ\- ]*$/',
             'isbn' => ['required', 'numeric', new Isbn()],
             'publisher' => 'required',
             'author' => 'required',

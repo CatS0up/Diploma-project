@@ -24,16 +24,16 @@ class NewGenreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:genres,name|max:70'
+            'genre' => 'required|unique:genres,name|max:70'
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Gatunek nie może być pusty.',
-            'name.unique' => 'Taki gatunek juz istnieje.',
-            'name.max' => 'Maksymalna długość nazyw gatunku :max.'
+            'genre.required' => 'Gatunek nie może być pusty.',
+            'genre.unique' => 'Taki gatunek juz istnieje.',
+            'genre.max' => 'Maksymalna długość nazyw gatunku :max.'
         ];
     }
 }

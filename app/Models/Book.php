@@ -9,8 +9,6 @@ class Book extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
-
     /* ===> Relations <=== */
     public function authors()
     {
@@ -30,5 +28,11 @@ class Book extends Model
     public function reviews()
     {
         return $this->hasMany(Review::class);
+    }
+
+    /* ===> Methods <=== */
+    public function hasCover(): bool
+    {
+        return (bool) $this->cover;
     }
 }

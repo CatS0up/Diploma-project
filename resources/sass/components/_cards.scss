@@ -4,7 +4,7 @@
     margin-bottom: 45px;
     padding: 45px 25px 25px 25px;
 
-    background-color: white;
+    background-color: #fff;
     box-shadow: 0 0 10px 1px rgba($color: #000000, $alpha: 0.15);
 
     &__body {
@@ -35,6 +35,11 @@
             background-image: linear-gradient(62deg, #fbab7e 0%, #f7ce68 100%);
         }
 
+        &--orange-two {
+            background-color: #fad961;
+            background-image: linear-gradient(90deg, #fad961 0%, #f76b1c 100%);
+        }
+
         &--red {
             background-color: #ff873b;
             background-image: linear-gradient(147deg, #ff873b 0%, #ff2525 74%);
@@ -43,6 +48,11 @@
         &--purple {
             background-color: #2191fd;
             background-image: linear-gradient(19deg, #2191fd 0%, #b721ff 100%);
+        }
+
+        &--blue {
+            background-color: #8bc6ec;
+            background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
         }
     }
 }

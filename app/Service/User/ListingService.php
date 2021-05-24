@@ -10,9 +10,9 @@ use Illuminate\Support\Collection;
 class ListingService
 {
     private User $userModel;
-    private ListingStatsService $stats;
+    private StatsService $stats;
 
-    public function __construct(User $userModel, ListingStatsService $stats)
+    public function __construct(User $userModel, StatsService $stats)
     {
         $this->userModel = $userModel;
         $this->stats = $stats;
@@ -21,6 +21,15 @@ class ListingService
     public function stats(): array
     {
         return $this->stats->countStats();
+    }
+
+
+    public function latest(int $limit = 5): Collection
+    {
+        return $this->userModel
+            ->orderBy('created_at', 'desc')
+            ->limit($limit)
+            ->get();
     }
 
     public function allPrivilaged(): Collection

@@ -22,4 +22,10 @@ class Genre extends Model
     {
         return $this->belongsToMany('books', 'BookGenres');
     }
+
+    /* ===> Mutators <=== */
+    public function setNameAttribute(string $name): void
+    {
+        $this->attributes['name'] = ucwords($name);
+    }
 }

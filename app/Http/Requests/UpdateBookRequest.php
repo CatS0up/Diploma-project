@@ -28,13 +28,8 @@ class UpdateBookRequest extends FormRequest
         return [
             'cover' => 'nullable|file|image',
             'pdf' => 'nullable|file|mimes:pdf',
-            'title' => 'required|regex:/^[a-zA-Zzzżźćńółęąś- ]*$/',
-            'isbn' => [
-                'required',
-                'numeric',
-                new Isbn(),
-                Rule::unique('books')->ignore($this->route('id'))
-            ],
+            'title' => 'required|regex:/^[a-zA-ZzżźćńółęąśŻŹĆĄŚĘŁÓŃ\- ]*$/',
+            'isbn' => ['required', 'numeric', new Isbn(), Rule::unique('books')->ignore($this->route('id'))],
             'publisher' => 'required',
             'author' => 'required',
             'genre' => 'required',
@@ -48,9 +43,10 @@ class UpdateBookRequest extends FormRequest
             'cover.file' => 'Wysyłanie pliku nie powiodło się.',
             'cover.image' => 'Okładka musi być plikiem graficznym.',
 
-            'pdf.required' => 'Każda książka musi posiadać swój plik.',
             'pdf.file' => 'Wysyłanie pliku nie powiodło się.',
             'pdf.mimes' => 'Plik musi być w formacie .pdf.',
+
+            'reset_cover.required' => 'Wybierz opcję resetowania okładki.',
 
             'title.required' => 'Tytuł nie może być pusty.',
             'title.regex' => 'Tytuł może składać się z liter, spacji oraz zawierać znak "-".',

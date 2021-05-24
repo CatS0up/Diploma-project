@@ -16,6 +16,11 @@ class ListingGenreService
         $this->genreModel = $genreModel;
     }
 
+    public function all(): Collection
+    {
+        return $this->genreModel->all();
+    }
+
     public function allPaginated(int $limit = 15): Collection
     {
         return $this->genreModel->get();

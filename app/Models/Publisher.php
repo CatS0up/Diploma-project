@@ -20,4 +20,10 @@ class Publisher extends Model
     {
         return $this->hasMany(Book::class);
     }
+
+    /* ===> Mutators <=== */
+    public function setNameAttribute(string $name): void
+    {
+        $this->attributes['name'] = ucwords($name);
+    }
 }

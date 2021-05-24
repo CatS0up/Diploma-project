@@ -27,7 +27,7 @@
             </div>
 
             <div class="cards dashboard__cards">
-                <span class="icons icons--xx-large cards__icons cards__icons--orange fas fa-users" aria-hidden="true">
+                <span class="icons icons--xx-large cards__icons cards__icons--purple fas fa-users" aria-hidden="true">
                 </span>
 
                 <div class="cards__body">
@@ -53,72 +53,114 @@
                     </p>
                 </div>
             </div>
+
+            <div class="cards dashboard__cards">
+                <span class="icons icons--xx-large cards__icons cards__icons--blue fas fa-journal-whills"
+                    aria-hidden="true">
+                </span>
+
+                <div class="cards__body">
+                    <h2 class="titles titles--weight-normal cards__titles">
+                        Gatunki:
+                    </h2>
+                    <p class="cards__text">
+                        5
+                    </p>
+                </div>
+            </div>
+
+            <div class="cards dashboard__cards">
+                <span class="icons icons--xx-large cards__icons cards__icons--red fas fa-at" aria-hidden="true">
+                </span>
+
+                <div class="cards__body">
+                    <h2 class="titles titles--weight-normal cards__titles">
+                        Autorzy:
+                    </h2>
+                    <p class="cards__text">
+                        5
+                    </p>
+                </div>
+            </div>
+
+            <div class="cards dashboard__cards">
+                <span class="icons icons--xx-large cards__icons cards__icons--orange-two fas fa-book-open"
+                    aria-hidden="true">
+                </span>
+
+                <div class="cards__body">
+                    <h2 class="titles titles--weight-normal cards__titles">
+                        Wydawcy:
+                    </h2>
+                    <p class="cards__text">
+                        5
+                    </p>
+                </div>
+            </div>
         </section>
 
-        <table class="tables dashboard__tables">
-            <thead class="tables__header">
-                <tr class="tables__row">
-                    <th class="tables__header-cell">
-                        #
-                    </th>
-                    <th class="tables__header-cell">
-                        Tytuł
-                    </th>
-                    <th class="tables__header-cell">
-                        Wydawnictwo
-                    </th>
-                    <th class="tables__header-cell">
-                        Ocena
-                    </th>
-                    <th class="tables__header-cell">
-                        Opcje
-                    </th>
-                </tr>
-            </thead>
+        <section class="dashboard__sections">
+            <h2 class="titles titles--weight-normal dashboard__titles">Ostatnia aktywność</h2>
 
-            <tbody class="tables__body">
-                @for ($i = 1; $i <= 10; $i++)
-                    <tr class="tables__row">
-                        <th class="tables__header-cell" data-label="Lp.">
-                            {{ $i }}
-                        </th>
+            <div class="dashboard__activity-stats">
+                <ul class="lists dashboard__lists">
+                    @for ($i = 0; $i < 5; $i++)
+                        <li class="lists__item">
+                            <div class="info-item lists__info-item">
+                                <div class="picutres pictures--small info-item__pictures">
+                                    {{-- @if ($book->cover) --}}
+                                    {{-- <img class="pictures__img" src="{{ Storage::url($book->cover) }}"
+                                            alt="Okładka książki.">
+                                    @else --}}
+                                    <img class="pictures__img" src="{{ asset('img/book_cover.png') }}"
+                                        alt="Okładka książki.">
+                                    {{-- @endif --}}
+                                </div>
 
-                        <td class="tables__cell" data-label="Książka">
-                            Jakiś tam tytuł
-                        </td>
-                        <td class="tables__cell" data-label="Wydawnictwo">
-                            Sowa
-                        </td>
-                        <td class="tables__cell" data-label="Ocena">
-                            5/5
-                        </td>
-                        <td class="tables__cell" data-label="Opcje">
-                            <a href="#" class="links links--light tables__links">Szczegóły</a>
-                        </td>
-                    </tr>
-                @endfor
-            </tbody>
+                                <div class="info-item__body">
+                                    <span class="info-item__timestamp">
+                                        2021-11-10 21:34:11
+                                    </span>
 
-            <tfoot class="tables__footer">
-                <tr class="tables__row">
-                    <th class="tables__header-cell">
-                        #
-                    </th>
-                    <th class="tables__header-cell">
-                        Książka
-                    </th>
-                    <th class="tables__header-cell">
-                        Wydawnictwo
-                    </th>
-                    <th class="tables__header-cell">
-                        Ocena
-                    </th>
-                    <th class="tables__header-cell">
-                        Opcje
-                    </th>
-                </tr>
-            </tfoot>
-        </table>
+                                    <p class="info-item__message">
+                                        <a href="#" class="links links--light info-item__links">Książka</a> została dodana.
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                    @endfor
+                </ul>
+
+                <ul class="lists dashboard__lists">
+                    @for ($i = 0; $i < 5; $i++)
+                        <li class="lists__item">
+                            <div class="info-item lists__info-item">
+                                <div class="picutres pictures--small info-item__pictures">
+                                    {{-- @if ($user->avatar)
+                                    <img class="pictures__img" src="{{ Storage::url($user->avatar) }}"
+                                        alt="Avatar użytkownika.">
+                                @else --}}
+                                    <img class="pictures__img" src="{{ asset('img/avatar_placeholder.jpg') }}"
+                                        alt="Avatar użytkownika.">
+                                    {{-- @endif --}}
+                                </div>
+
+                                <div class="info-item__body">
+                                    <span class="info-item__timestamp">
+                                        2021-11-10 21:34:11
+                                    </span>
+
+                                    <p class="info-item__message">
+                                        <a href="#" class="links links--light info-item__links">Test</a> założył konto w
+                                        serwisie!
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                    @endfor
+                </ul>
+            </div>
+        </section>
 
     </div>
 

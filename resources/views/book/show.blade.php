@@ -76,10 +76,10 @@
                 </p>
 
                 <div class="book-info__options">
-                    <a href="{{ route('book.download', ['id' => $book->id]) }}"
+                    {{-- <a href="{{ route('book.download', ['id' => $book->id]) }}"
                         class="buttons buttons--primary book-info__books">
                         Pobierz
-                    </a>
+                    </a> --}}
 
                     @auth
                         @if ($userHasBook)

@@ -1,0 +1,31 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Service\Book;
+
+use App\Models\Publisher;
+
+class PublisherService
+{
+    private const FIELD_NAMES = ['publisher'];
+
+    private Publisher $publisherModel;
+
+    public function __construct(Publisher $publisherModel)
+    {
+        $this->publisherModel = $publisherModel;
+    }
+
+    public function create(array $data): Publisher
+    {
+        $this->publisherModel->firstOrCreate(['name' => $data['publisher']]);
+
+        return $this->publisherModel;
+    }
+
+    public function acceptableFields(): array
+    {
+        return self::FIELD_NAMES;
+    }
+}

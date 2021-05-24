@@ -33,8 +33,7 @@
                             @if ($book->cover)
                                 <img class="pictures__img" src="{{ Storage::url($book->cover) }}" alt="Okładka książki.">
                             @else
-                                <img class="pictures__img" src="{{ asset('img/book_cover.png') }}"
-                                    alt="Okładka książki.">
+                                <img class="pictures__img" src="{{ asset('img/book_cover.png') }}" alt="Okładka książki.">
                             @endif
                         </div>
 
@@ -128,8 +127,7 @@
                             <span role="img" class="icons show__icons far fa-edit" aria-label="Edycja"></span>
                         </a>
 
-                        <form class="forms tables__forms" action="{{ route('admin.edit.book', ['id' => $book->id]) }}"
-                            method="post">
+                        <form class="forms tables__forms" action="#" method="post">
                             @csrf
                             @method('delete')
                             <button class="buttons buttons--bg-no buttons--delete-text show__buttons">

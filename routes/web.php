@@ -64,6 +64,12 @@ Route::prefix('admin')
         Route::post('books/new', [AdminBookController::class, 'insert'])
             ->name('insert.book');
 
+        Route::get('books/{id}/edit', [AdminBookController::class, 'edit'])
+            ->name('edit.book');
+
+        Route::put('books/{id}/edit', [AdminBookController::class, 'update'])
+            ->name('update.book');
+
         Route::delete('books/{id}/delete', [AdminBookController::class, 'destroy'])
             ->name('delete.book');
 
@@ -92,12 +98,12 @@ Route::prefix('books')
             ->name('get.books');
 
         Route::middleware(['verifyBookExist'])->group(function () {
-            Route::get('{id}', [BookController::class, 'show'])
+            Route::get('{slug}', [BookController::class, 'show'])
                 ->name('show');
 
-            Route::middleware('auth')
-                ->get('{id}/download', [BookController::class, 'download'])
-                ->name('download');
+            // Route::middleware('auth')
+            //     ->get('{slug}/download', [BookController::class, 'download'])
+            //     ->name('download');
         });
     });
 
