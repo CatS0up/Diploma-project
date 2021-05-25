@@ -76,20 +76,21 @@
                 </p>
 
                 <div class="book-info__options">
-                    {{-- <a href="{{ route('book.download', ['id' => $book->id]) }}"
+                    <a href="{{ route('book.download', ['id' => $book->id]) }}"
                         class="buttons buttons--primary book-info__books">
                         Pobierz
-                    </a> --}}
+                    </a>
 
                     @auth
                         @if ($userHasBook)
-                            <form class="forms tables__forms" action="{{ route('me.remove.book', ['id' => $book->id]) }}"
+                            <form class="forms tables__forms" action="{{ route('me.remove.book', ['slug' => $book->slug]) }}"
                                 method="post">
                                 @csrf
+                                @method('delete')
                                 <button class="buttons buttons--danger forms__buttons">Usuń z biblioteki</button>
                             </form>
                         @else
-                            <form class="forms tables__forms" action="{{ route('me.add.book', ['id' => $book->id]) }}"
+                            <form class="forms tables__forms" action="{{ route('me.add.book', ['slug' => $book->slug]) }}"
                                 method="post">
                                 @csrf
                                 <button class="buttons buttons--primary forms__buttons">Dodaj do biblioteki</button>

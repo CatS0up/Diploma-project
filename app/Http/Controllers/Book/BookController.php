@@ -34,7 +34,7 @@ class BookController extends Controller
         return view('book.show', [
             'book' => $book,
             'reviews' => $book->reviews()->get(),
-            'userHasBook' => !isset($user) ?: $user->hasBook()
+            'userHasBook' => !isset($user) ?: $user->hasBook($book->id)
         ]);
     }
 

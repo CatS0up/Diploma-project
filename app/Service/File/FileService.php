@@ -47,4 +47,9 @@ class FileService
 
         return Storage::disk($this->disk)->missing($pathToFile);
     }
+
+    public function download(string $pathTofile): void
+    {
+        return Storage::download($pathTofile);
+    }
 }

@@ -30,8 +30,4 @@ class Genre extends Model
     }
 
     /* ===> Methods <=== */
-    public function countBooks(): int
-    {
-        return $this->books()->count();
-    }
 }

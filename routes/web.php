@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Book\BookController;
+use App\Http\Controllers\Book\DownloadController;
 use App\Http\Controllers\Book\ReviewController;
 use App\Http\Controllers\User\BookController as UserBookController;
 use App\Http\Controllers\User\ProfileController;
@@ -121,9 +122,9 @@ Route::prefix('books')
             Route::get('{slug}', [BookController::class, 'show'])
                 ->name('show');
 
-            // Route::middleware('auth')
-            //     ->get('{slug}/download', [BookController::class, 'download'])
-            //     ->name('download');
+            Route::middleware('auth')
+                ->get('books/{slug}/download', DownloadController::class)
+                ->name('download.book');
         });
     });
 
@@ -155,7 +156,7 @@ Route::prefix('me')
         Route::post('books/{slug}/add', [UserBookController::class, 'add'])
             ->name('add.book');
 
-        Route::post('books/{slug}/remove', [UserBookController::class, 'remove'])
+        Route::delete('books/{slug}/remove', [UserBookController::class, 'remove'])
             ->name('remove.book');
     });
 

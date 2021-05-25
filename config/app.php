@@ -181,10 +181,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        GenresServiceProvider::class,
-        UsersServiceProvider::class,
-        BooksServiceProvider::class,
-        PublishersServiceProvider::class,
         DashboardServiceProvider::class
 
     ],
