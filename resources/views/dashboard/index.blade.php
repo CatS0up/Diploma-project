@@ -21,7 +21,7 @@
                         Książki:
                     </h2>
                     <p class="cards__text">
-                        111
+                        {{ $stats['books_amount'] }}
                     </p>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                         Użytkownicy:
                     </h2>
                     <p class="cards__text">
-                        22
+                        {{ $stats['users_amount'] }}
                     </p>
                 </div>
             </div>
@@ -49,7 +49,7 @@
                         Członkowie zespołu:
                     </h2>
                     <p class="cards__text">
-                        5
+                        {{ $stats['privilaged_amount'] }}
                     </p>
                 </div>
             </div>
@@ -64,7 +64,7 @@
                         Gatunki:
                     </h2>
                     <p class="cards__text">
-                        5
+                        {{ $stats['genres_amount'] }}
                     </p>
                 </div>
             </div>
@@ -78,7 +78,7 @@
                         Autorzy:
                     </h2>
                     <p class="cards__text">
-                        5
+                        {{ $stats['authors_amount'] }}
                     </p>
                 </div>
             </div>
@@ -93,7 +93,7 @@
                         Wydawcy:
                     </h2>
                     <p class="cards__text">
-                        5
+                        {{ $stats['publishers_amount'] }}
                     </p>
                 </div>
             </div>
@@ -103,61 +103,74 @@
             <h2 class="titles titles--weight-normal dashboard__titles">Ostatnia aktywność</h2>
 
             <div class="dashboard__activity-stats">
+                @if ($latest['books']->isNotEmpty())
+                    <ul class="lists dashboard__lists">
+                        @foreach ($latest['books'] as $book)
+                            <li class="lists__item">
+                                <div class="info-item lists__info-item">
+                                    <div class="picutres pictures--small info-item__pictures">
+                                        @if ($book->cover)
+                                            <img class="pictures__img" src="{{ Storage::url($book->cover) }}"
+                                                alt="Okładka książki.">
+                                        @else
+                                            <img class="pictures__img" src="{{ asset('img/book_cover.png') }}"
+                                                alt="Okładka książki.">
+                                        @endif
+                                    </div>
+
+                                    <div class="info-item__body">
+                                        <span class="info-item__timestamp">
+                                            {{ $book->created_at }}
+                                        </span>
+
+                                        <p class="info-item__message">
+                                            <a href="{{ route('admin.show.book', ['id' => $book->id]) }}"
+                                                class="links links--light info-item__links">{{ $book->title }}</a>
+                                            została
+                                            dodana.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                @else
+                    <div class="notifications dashboard__notifications">
+                        <span class="icons icons--x-large notifications__icons far fa-folder-open"
+                            aria-hidden="true"></span>
+                        Brak książek
+                    </div>
+                @endif
+
                 <ul class="lists dashboard__lists">
-                    @for ($i = 0; $i < 5; $i++)
+                    @foreach ($latest['users'] as $user)
                         <li class="lists__item">
                             <div class="info-item lists__info-item">
                                 <div class="picutres pictures--small info-item__pictures">
-                                    {{-- @if ($book->cover) --}}
-                                    {{-- <img class="pictures__img" src="{{ Storage::url($book->cover) }}"
-                                            alt="Okładka książki.">
-                                    @else --}}
-                                    <img class="pictures__img" src="{{ asset('img/book_cover.png') }}"
-                                        alt="Okładka książki.">
-                                    {{-- @endif --}}
+                                    @if ($user->avatar)
+                                        <img class="pictures__img" src="{{ Storage::url($user->avatar) }}"
+                                            alt="Avatar użytkownika.">
+                                    @else
+                                        <img class="pictures__img" src="{{ asset('img/avatar_placeholder.jpg') }}"
+                                            alt="Avatar użytkownika.">
+                                    @endif
                                 </div>
 
                                 <div class="info-item__body">
                                     <span class="info-item__timestamp">
-                                        2021-11-10 21:34:11
+                                        {{ $user->created_at }}
                                     </span>
 
                                     <p class="info-item__message">
-                                        <a href="#" class="links links--light info-item__links">Książka</a> została dodana.
+                                        <a href="{{ route('admin.show.user', ['id' => $user->id]) }}"
+                                            class="links links--light info-item__links">{{ $user->uid }}</a>
+                                        założył konto w
+                                        serwisie.
                                     </p>
                                 </div>
                             </div>
                         </li>
-                    @endfor
-                </ul>
-
-                <ul class="lists dashboard__lists">
-                    @for ($i = 0; $i < 5; $i++)
-                        <li class="lists__item">
-                            <div class="info-item lists__info-item">
-                                <div class="picutres pictures--small info-item__pictures">
-                                    {{-- @if ($user->avatar)
-                                    <img class="pictures__img" src="{{ Storage::url($user->avatar) }}"
-                                        alt="Avatar użytkownika.">
-                                @else --}}
-                                    <img class="pictures__img" src="{{ asset('img/avatar_placeholder.jpg') }}"
-                                        alt="Avatar użytkownika.">
-                                    {{-- @endif --}}
-                                </div>
-
-                                <div class="info-item__body">
-                                    <span class="info-item__timestamp">
-                                        2021-11-10 21:34:11
-                                    </span>
-
-                                    <p class="info-item__message">
-                                        <a href="#" class="links links--light info-item__links">Test</a> założył konto w
-                                        serwisie!
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                    @endfor
+                    @endforeach
                 </ul>
             </div>
         </section>

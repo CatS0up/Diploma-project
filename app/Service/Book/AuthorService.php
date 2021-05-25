@@ -17,6 +17,14 @@ class AuthorService
         $this->authorModel = $authorModel;
     }
 
+    public function createSingle(array $data): Author
+    {
+        return $this->authorModel->firstOrCreate([
+            'firstname' => $data['firstname'],
+            'lastname' => $data['lastname']
+        ]);
+    }
+
     public function create(array $data): Author
     {
         $dataExploded = explode(' ', $data['author']);
@@ -37,6 +45,11 @@ class AuthorService
                 'lastname' => $dataExploded[1]
             ]
         );
+    }
+
+    public function delete(int $id): bool
+    {
+        return $this->authorModel->find($id)->delete();
     }
 
     public function acceptableFields(): array

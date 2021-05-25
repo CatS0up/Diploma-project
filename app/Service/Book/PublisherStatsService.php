@@ -15,7 +15,14 @@ class PublisherStatsService
         $this->publisherModel = $publisherModel;
     }
 
-    public function count(): int
+    public function countStats(): array
+    {
+        return [
+            'all_amount' => $this->allCount()
+        ];
+    }
+
+    public function allCount(): int
     {
         return $this->publisherModel->count();
     }

@@ -11,7 +11,7 @@
                     </a>
                 </li>
                 <li class="breadcrumbs__item breadcrumbs__item--active">
-                    Gatunki
+                    Autorzy
                 </li>
             </ol>
         </header>
@@ -23,7 +23,7 @@
 
                 <div class="cards__body">
                     <h2 class="titles titles--weight-normal cards__titles">
-                        Gatunki:
+                        Autorzy:
                     </h2>
                     <p class="cards__text">
                         {{ $stats['all_amount'] }}
@@ -33,17 +33,28 @@
         </section>
 
         <section class="dashboard__sections">
-            <h2 class="titles titles--weight-normal dashboard__titles">Gatunki</h2>
+            <h2 class="titles titles--weight-normal dashboard__titles">Autorzy</h2>
 
             <div class="dashboard__actions">
-                <form class="forms forms--inline dashboard__forms" action="{{ route('admin.insert.genre') }}"
+                <form class="forms forms--inline dashboard__forms" action="{{ route('admin.insert.author') }}"
                     method="post">
                     @csrf
                     <div class="forms__group">
-                        <input id="bookGenre" class="forms__input forms__input--bordered" type="text" name="name"
-                            value="{{ old('name') }}" placeholder="Nowy gatunek">
+                        <input id="authorFirstname" class="forms__input forms__input--bordered" type="text" name="firstname"
+                            value="{{ old('firstname') }}" placeholder="Imię">
 
-                        @error('genre')
+                        @error('firstname')
+                            <span class="forms__input-feedback">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="forms__group">
+                        <input id="authorLastname" class="forms__input forms__input--bordered" type="text" name="lastname"
+                            value="{{ old('lastname') }}" placeholder="Nazwisko">
+
+                        @error('lastname')
                             <span class="forms__input-feedback">
                                 {{ $message }}
                             </span>
@@ -56,15 +67,18 @@
                 </form>
             </div>
 
-            @if ($genres->isNotEmpty())
+            @if ($authors->isNotEmpty())
                 <table class="tables dashboard__tables">
                     <thead class="tables__header">
                         <tr class="tables__row">
                             <th class="tables__header-cell">
-                                #
+                                ID
                             </th>
                             <th class="tables__header-cell">
-                                Gatunek
+                                Imię
+                            </th>
+                            <th class="tables__header-cell">
+                                Nazwisko
                             </th>
                             <th class="tables__header-cell">
                                 Opcje
@@ -73,19 +87,24 @@
                     </thead>
 
                     <tbody class="tables__body">
-                        @foreach ($genres as $genre)
+                        @foreach ($authors as $author)
                             <tr class="tables__row">
                                 <th class="tables__header-cell">
-                                    {{ $loop->iteration }}
+                                    {{ $author->id }}
                                 </th>
 
-                                <td class="tables__cell" data-label="Gatunek">
-                                    {{ $genre->name }}
+                                <td class="tables__cell" data-label="Imię">
+                                    {{ $author->firstname }}
                                 </td>
+
+                                <td class="tables__cell" data-label="Nazwisko">
+                                    {{ $author->lastname }}
+                                </td>
+
                                 <td class="tables__cell" data-label="Opcje">
                                     <div class="tables__group">
                                         <form class="forms tables__forms"
-                                            action="{{ route('admin.delete.genre', ['id' => $genre->id]) }}"
+                                            action="{{ route('admin.delete.author', ['id' => $author->id]) }}"
                                             method="post">
                                             @csrf
                                             @method('delete')
@@ -100,10 +119,13 @@
                     <tfoot class="tables__footer">
                         <tr class="tables__row">
                             <th class="tables__header-cell">
-                                #
+                                ID
                             </th>
                             <th class="tables__header-cell">
-                                Gatunek
+                                Imię
+                            </th>
+                            <th class="tables__header-cell">
+                                Nazwisko
                             </th>
                             <th class="tables__header-cell">
                                 Opcje
@@ -114,11 +136,9 @@
             @else
                 <div class="notifications dashboard__notifications">
                     <span class="icons icons--x-large notifications__icons far fa-folder-open" aria-hidden="true"></span>
-                    Brak gatunków
+                    Brak autorów
                 </div>
             @endif
-
-            {{ $genres->links() }}
     </div>
 
 @endsection

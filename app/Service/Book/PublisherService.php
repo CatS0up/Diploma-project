@@ -24,6 +24,11 @@ class PublisherService
         return $this->publisherModel;
     }
 
+    public function delete(int $id): bool
+    {
+        return $this->publisherModel->find($id)->delete();
+    }
+
     public function acceptableFields(): array
     {
         return self::FIELD_NAMES;

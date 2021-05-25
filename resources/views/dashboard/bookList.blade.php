@@ -113,7 +113,7 @@
 
             </div>
 
-            @if ($books->total() > 0)
+            @if ($books->isNotEmpty())
                 <table class="tables dashboard__tables">
                     <thead class="tables__header">
                         <tr class="tables__row">
@@ -232,6 +232,8 @@
                     Brak książek
                 </div>
             @endif
+
+            {{ $books->links() }}
         </section>
     </div>
 

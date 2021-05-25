@@ -323,6 +323,8 @@
                     Brak zarejestrowanych użytkowników
                 </div>
             @endif
+
+            {{ $users->links() }}
         </section>
     </div>
 

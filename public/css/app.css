@@ -6823,6 +6823,43 @@ select {
   flex-grow: 1;
 }
 
+.pagination {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  padding-top: 10px;
+}
+.pagination__lists {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  gap: 5px;
+  margin: 0 auto;
+}
+.pagination__links {
+  padding: 5px 10px;
+  text-align: center;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  background-color: #fff;
+  transition: 0.2s;
+}
+.pagination__links--active {
+  font-weight: 500;
+  color: #fff;
+  background-color: #0082e6;
+  border: 1px solid transparent;
+}
+.pagination__links--none-active:hover {
+  color: #fff;
+  background-color: #0082e6;
+  border: 1px solid transparent;
+}
+
 .headers--light {
   background-color: #fff;
 }

@@ -20,7 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('email', 320)->unique()->index();
             $table->char('phone', 9)->unique();
             $table->string('pwd');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
             $table->string('avatar')->nullable();
             $table->text('description')->nullable();
         });

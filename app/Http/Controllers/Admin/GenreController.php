@@ -26,7 +26,7 @@ class GenreController extends Controller
             'dashboard.genreList',
             [
                 'genres' => $genreList->allPaginated(),
-                'amount' => 2000
+                'stats' => $genreList->stats()
             ]
         );
     }
@@ -46,6 +46,6 @@ class GenreController extends Controller
 
         return redirect()
             ->route('admin.get.genres')
-            ->with('success', 'Rekord został usunięty pomyślnie.');
+            ->with('success', 'Gatunek został usunięty pomyślnie.');
     }
 }

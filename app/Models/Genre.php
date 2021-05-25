@@ -28,4 +28,10 @@ class Genre extends Model
     {
         $this->attributes['name'] = ucwords($name);
     }
+
+    /* ===> Methods <=== */
+    public function countBooks(): int
+    {
+        return $this->books()->count();
+    }
 }

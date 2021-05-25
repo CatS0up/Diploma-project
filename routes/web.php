@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\AuthorController;
 use App\Http\Controllers\Admin\BookController as AdminBookController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GenreController;
+use App\Http\Controllers\Admin\PublisherController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -87,6 +89,24 @@ Route::prefix('admin')
 
         Route::delete('genres/{id}',  [GenreController::class, 'destroy'])
             ->name('delete.genre');
+
+        Route::get('authors', [AuthorController::class, 'list'])
+            ->name('get.authors');
+
+        Route::post('authors/new', [AuthorController::class, 'insert'])
+            ->name('insert.author');
+
+        Route::delete('authors/{id}', [AuthorController::class, 'destroy'])
+            ->name('delete.author');
+
+        Route::get('publishers', [PublisherController::class, 'list'])
+            ->name('get.publishers');
+
+        Route::post('publishers/new', [PublisherController::class, 'insert'])
+            ->name('insert.publisher');
+
+        Route::delete('publishers/{id}', [PublisherController::class, 'destroy'])
+            ->name('delete.publisher');
     });
 
 /* ===> GUEST-LEVEL ROUTES <=== */

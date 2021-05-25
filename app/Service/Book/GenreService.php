@@ -11,20 +11,22 @@ class GenreService
     private const FIELD_NAMES = ['genre'];
 
     private Genre $genreModel;
+    private GenreStatsService $stats;
 
-    public function __construct(Genre $genreModel)
+    public function __construct(Genre $genreModel, GenreStatsService $stats)
     {
         $this->genreModel = $genreModel;
+        $this->stats = $stats;
     }
 
     public function create(array $data): Genre
     {
-        return $this->genreModel->firstOrCreate(['name' => $data['genre']]);
+        return $this->genreModel->firstOrCreate(['name' => $data['name']]);
     }
 
     public function update(array $data): Genre
     {
-        return $this->genreModel->firstOrCreate(['name' => $data['genre']]);
+        return $this->genreModel->firstOrCreate(['name' => $data['name']]);
     }
 
     public function delete(int $id): bool

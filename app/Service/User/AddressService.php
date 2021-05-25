@@ -19,13 +19,12 @@ class AddressService
 
     final public function create(array $data): Address
     {
-        $this->addressModel->town = $data['town'];
-        $this->addressModel->street = $data['street'] ?? null;
-        $this->addressModel->zipcode = $data['zipcode'];
-        $this->addressModel->house_number = $data['house_number'];
-        $this->addressModel->save();
-
-        return $this->addressModel;
+        return $this->addressModel->firstOrCreate([
+            'town' => $data['town'],
+            'street' =>  $data['street'] ?? null,
+            'zipcode' => $data['zipcode'],
+            'house_number' => $data['house_number'],
+        ]);
     }
 
     final public function update(int $id, array $data): Address

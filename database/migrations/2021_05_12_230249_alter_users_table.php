@@ -16,7 +16,7 @@ class AlterUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->boolean('blocked')->default(false)->after('description');
-            $table->dateTime('actived_at')->default(Carbon::now())->after('blocked');
+            $table->timestamp('actived_at')->useCurrent();
         });
     }
 

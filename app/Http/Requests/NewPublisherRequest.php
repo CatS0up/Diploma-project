@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class NewGenreRequest extends FormRequest
+class NewPublisherRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,16 +24,15 @@ class NewGenreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:genres|max:70'
+            'name' => 'required|regex:/^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ0-9\- ]+$/'
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Gatunek nie może być pusty.',
-            'name.unique' => 'Taki gatunek juz istnieje.',
-            'name.max' => 'Maksymalna długość nazyw gatunku :max.'
+            'name.required' => 'Nazwa wydawcy nie może być pusta.',
+            'name.regex' => 'Nazwa wydawcy może składać się z liter, spacji, - oraz cyfr/'
         ];
     }
 }

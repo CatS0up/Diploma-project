@@ -30,7 +30,7 @@ class RegisterRequest extends FormRequest
             'pwd' => 'required|min:10|regex:/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{10,}$/|confirmed',
             'phone' => 'required|numeric|digits:9|unique:users',
             'firstname' => 'required|regex:/^[A-ZŻŹĆĄŚĘŁÓŃ]+[a-zzżźćńółęąś]*$/',
-            'lastname' => 'required|regex:/^[A-ZŻŹĆĄŚĘŁÓŃ]+[a-zzżźćńółęąś]*$/',
+            'lastname' => 'required|regex:/^[A-ZŻŹĆĄŚĘŁÓŃ]+[a-zzżźćńółęąś\-]*$/',
             'birthday' => 'required|date|before:today',
             'gender' => 'nullable',
             'town' => 'required|regex:/^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ\- ]*$/',
