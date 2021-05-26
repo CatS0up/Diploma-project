@@ -15,7 +15,7 @@ class ReviewService
         $this->reviewModel = $reviewModel;
     }
 
-    public function create(array $data): bool
+    public function create(array $data): Review
     {
         $this->reviewModel->user_id = $data['user_id'];
         $this->reviewModel->book_id = $data['book_id'];
@@ -24,6 +24,13 @@ class ReviewService
         $this->reviewModel->text_content = $data['review'];
         $this->reviewModel->save();
 
-        return (bool) $this->reviewModel->id;
+        return $this->reviewModel;
+    }
+
+    public function delete(int $id): bool
+    {
+        $this->reviewModel->find($id)->delete();
+
+        return (bool) $this->reviewModel->findOrFail($id);
     }
 }

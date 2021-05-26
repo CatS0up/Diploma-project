@@ -68,11 +68,11 @@ class BookService
 
         $this->bookModel
             ->genres()
-            ->save($this->genre->create($data['genre']));
+            ->saveMany($this->genre->createMany($data['genres']));
 
         $this->bookModel
             ->authors()
-            ->save($this->author->create($data['author']));
+            ->saveMany($this->author->createMany($data['authors']));
 
         return $this->bookModel;
     }
@@ -88,16 +88,42 @@ class BookService
         $this->bookModel->title = $bookFields['title'] ?? $this->bookModel->title;
         $this->bookModel->isbn = $bookFields['isbn'] ?? $this->bookModel->isbn;
         $this->bookModel->file = $this->updatePdf($bookFields['pdf'] ?? null);
+        $this->bookModel->description = $bookFields['description']
+            ?? $this->bookModel->description;
         $this->bookModel->publishing_date = $bookFields['publishing_date']
             ?? $this->bookModel->publishing_date;
         $this->bookModel->cover =
             $this->updateCover($bookFields['cover'] ?? null, $bookFields['reset_cover']);
         $this->bookModel->save();
 
-        $this->bookModel->genres()->save($this->genre->update($data['genre']));
-        $this->bookModel->authors()->save($this->author->update($data['author']));
+        $this->bookModel
+            ->genres()
+            ->saveMany($this->genre->createMany($data['genres']));
+
+        $this->bookModel
+            ->authors()
+            ->saveMany($this->author->createMany($data['authors']));
 
         return $this->bookModel;
+    }
+
+    public function delete(int $id): bool
+    {
+        $book = $this->bookModel->find($id);
+
+        if ($book->hasCover())
+            $this->file->delete($book->cover);
+
+        $this->file->disk('local')->delete($book->file);
+
+        $book->delete();
+
+        return (bool) $this->bookModel->find($id);
+    }
+
+    public function acceptableFields(): array
+    {
+        return self::FIELD_NAMES;
     }
 
     private function updateCover(?UploadedFile $cover, string $confirmation): ?string
@@ -120,16 +146,11 @@ class BookService
         return $this->bookModel->file;
     }
 
-    public function acceptableFields(): array
-    {
-        return self::FIELD_NAMES;
-    }
-
     private function splitData(array $data): array
     {
         return [
-            'genre' => array_intersect_key($data, array_flip($this->genre->acceptableFields())),
-            'author' => array_intersect_key($data, array_flip($this->author->acceptableFields())),
+            'genres' => array_intersect_key($data, array_flip($this->genre->acceptableFields())),
+            'authors' => array_intersect_key($data, array_flip($this->author->acceptableFields())),
             'book' => array_intersect_key($data, array_flip($this->acceptableFields()))
         ];
     }

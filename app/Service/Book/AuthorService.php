@@ -8,7 +8,7 @@ use App\Models\Author;
 
 class AuthorService
 {
-    private const FIELD_NAMES = ['author'];
+    private const FIELD_NAMES = ['authors'];
 
     private Author $authorModel;
 
@@ -25,14 +25,27 @@ class AuthorService
         ]);
     }
 
-    public function create(array $data): Author
+    public function createMany(array $data): array
     {
-        $dataExploded = explode(' ', $data['author']);
-        $this->authorModel->firstname = $dataExploded[0];
-        $this->authorModel->lastname = $dataExploded[1];
-        $this->authorModel->save();
+        $authors = preg_split('/ ?[,]{1} ?/', $data['authors']);
 
-        return $this->authorModel;
+        $authorModels = [];
+        foreach ($authors as $author) {
+            /**
+             * $authosComponents[0] - Firstname
+             * $authosComponents[1] - Lastname
+             */
+            $authorComponents = explode(' ', $author);
+
+            $authorModels[] =  $this->authorModel->firstOrCreate(
+                [
+                    'firstname' =>  $authorComponents[0],
+                    'lastname' =>  $authorComponents[1]
+                ]
+            );
+        }
+
+        return $authorModels;
     }
 
     public function update(array $data): Author

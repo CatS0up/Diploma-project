@@ -33,7 +33,7 @@ class BookController extends Controller
 
         return view('book.show', [
             'book' => $book,
-            'reviews' => $book->reviews()->get(),
+            'reviews' => $book->reviews()->paginate(5),
             'userHasBook' => !isset($user) ?: $user->hasBook($book->id)
         ]);
     }
@@ -55,7 +55,7 @@ class BookController extends Controller
         return view('book.list', [
             'genres' => $genreList->all(),
             'publishers' => $publisherList->all(),
-            'books' => $this->bookList->filterBy($filters),
+            'books' => $this->bookList->filterBy($filters, 1),
             'filters' =>  $filters
         ]);
     }

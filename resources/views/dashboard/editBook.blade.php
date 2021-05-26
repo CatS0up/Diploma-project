@@ -159,10 +159,10 @@
                                     Autor
                                     <span class="forms__required-info">*</span>
                                 </label>
-                                <input id="authors" class="forms__input" type="text" name="author"
-                                    value="{{ old('author', $book->authors->implode('fullname', '')) }}">
+                                <input id="authors" class="forms__input" type="text" name="authors"
+                                    value="{{ old('authors', $book->authors->implode('fullname', ', ')) }}">
 
-                                @error('author')
+                                @error('authors')
                                     <span class="forms__input-feedback">
                                         {{ $message }}
                                     </span>
@@ -174,10 +174,10 @@
                                     Gatunek
                                     <span class="forms__required-info">*</span>
                                 </label>
-                                <input id="genres" class="forms__input" type="text" name="genre"
-                                    value="{{ old('genre', $book->genres->implode('name', '')) }}">
+                                <input id="genres" class="forms__input" type="text" name="genres"
+                                    value="{{ old('genres', $book->genres->implode('name', ', ')) }}">
 
-                                @error('genre')
+                                @error('genres')
                                     <span class="forms__input-feedback">
                                         {{ $message }}
                                     </span>

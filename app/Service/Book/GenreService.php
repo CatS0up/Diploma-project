@@ -8,10 +8,9 @@ use App\Models\Genre;
 
 class GenreService
 {
-    private const FIELD_NAMES = ['genre'];
+    private const FIELD_NAMES = ['genres'];
 
     private Genre $genreModel;
-    private GenreStatsService $stats;
 
     public function __construct(Genre $genreModel, GenreStatsService $stats)
     {
@@ -19,9 +18,21 @@ class GenreService
         $this->stats = $stats;
     }
 
-    public function create(array $data): Genre
+    public function createSingle(array $data): Genre
     {
         return $this->genreModel->firstOrCreate(['name' => $data['name']]);
+    }
+
+    public function createMany(array $data): array
+    {
+        $genres = preg_split('/ ?[,]{1} ?/', $data['genres']);
+
+        $genreModels = [];
+        foreach ($genres as $genre) {
+            $genreModels[] = $this->genreModel->firstOrCreate(['name' =>  $genre]);
+        }
+
+        return $genreModels;
     }
 
     public function update(array $data): Genre

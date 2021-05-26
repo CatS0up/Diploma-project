@@ -80,13 +80,13 @@
                 </div>
 
                 <div class="forms__group">
-                    <label class="forms__group-title" for="author">
+                    <label class="forms__group-title" for="authors">
                         Autor
                         <span class="forms__required-info">*</span>
                     </label>
-                    <input id="author" class="forms__input" type="text" name="author" value="{{ old('author') }}">
+                    <input id="authors" class="forms__input" type="text" name="authors" value="{{ old('authors') }}">
 
-                    @error('author')
+                    @error('authors')
                         <span class="forms__input-feedback">
                             {{ $message }}
                         </span>
@@ -94,13 +94,13 @@
                 </div>
 
                 <div class="forms__group">
-                    <label class="forms__group-title" for="genre">
+                    <label class="forms__group-title" for="genres">
                         Gatunek
                         <span class="forms__required-info">*</span>
                     </label>
-                    <input id="genre" class="forms__input" type="text" name="genre" value="{{ old('genre') }}">
+                    <input id="genres" class="forms__input" type="text" name="genres" value="{{ old('genres') }}">
 
-                    @error('genre')
+                    @error('genres')
                         <span class="forms__input-feedback">
                             {{ $message }}
                         </span>

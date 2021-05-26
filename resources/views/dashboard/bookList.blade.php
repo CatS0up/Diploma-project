@@ -168,9 +168,7 @@
                                 </td>
 
                                 <td class="tables__cell" data-label="Autorzy">
-                                    @foreach ($book->authors as $author)
-                                        {{ $author->firstname . ' ' . $author->lastname }}
-                                    @endforeach
+                                    {{ $book->authors->implode('fullname', ', ') }}
                                 </td>
 
                                 <td class="tables__cell" data-label="Wydawca">
@@ -178,9 +176,7 @@
                                 </td>
 
                                 <td class="tables__cell" data-label="Gatunki">
-                                    @foreach ($book->genres as $genre)
-                                        {{ $genre->name }}
-                                    @endforeach
+                                    {{ $book->genres->implode('name', ', ') }}
                                 </td>
 
                                 <td class="tables__cell" data-label="Opcje">

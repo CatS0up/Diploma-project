@@ -23,7 +23,9 @@ class VerifyBookExist
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!$this->bookModel->where('id', $request->route('id'))->orWhere('slug', $request->route('slug')))
+        if (!$this->bookModel
+            ->where('id', $request->route('id'))
+            ->orWhere('slug', $request->route('slug')->first()))
             abort('404');
 
         return $next($request);

@@ -40,6 +40,9 @@
                                 <span class="icons icons--small rate__star rate__icons fas fa-star"></span>
                             @endfor
                         </div>
+                        {{ $book->rateAvg() }}
+                        <br>
+                        {{ $book->countRates() }}
                     </li>
 
                     <li class="lists__item lists__item--labeled-vertical">
@@ -76,7 +79,7 @@
                 </p>
 
                 <div class="book-info__options">
-                    <a href="{{ route('book.download', ['id' => $book->id]) }}"
+                    <a href="{{ route('book.download', ['slug' => $book->slug]) }}"
                         class="buttons buttons--primary book-info__books">
                         Pobierz
                     </a>
@@ -154,6 +157,8 @@
                         </li>
                     @endforeach
                 </ul>
+
+                {{ $reviews->links() }}
             </section>
 
             <section class="reviews__actions">

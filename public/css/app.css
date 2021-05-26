@@ -6691,29 +6691,12 @@ select {
 }
 @media (min-width: 560px) {
   .app__lists {
-    grid-template-columns: repeat(auto-fit, 300px);
+    grid-template-columns: repeat(auto-fit, max(300px));
   }
 }
 
 .categories__titles {
   font-size: 1.4rem;
-}
-
-.book-preview {
-  padding: 20px 40px;
-  border: 1px solid lightgray;
-  transition: 0.2s linear;
-}
-.book-preview:hover {
-  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.15);
-  transform: scale(1.05);
-}
-.book-preview__body {
-  color: #808080;
-}
-.book-preview__pictures {
-  padding: 10px;
-  min-height: 310px;
 }
 
 .book-info {
@@ -6732,6 +6715,11 @@ select {
   }
 }
 .book-info__thumbnail {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
   padding: 10px;
   border: 1px solid lightgray;
 }

@@ -31,8 +31,8 @@ class UpdateBookRequest extends FormRequest
             'title' => 'required|regex:/^[a-zA-ZzżźćńółęąśŻŹĆĄŚĘŁÓŃ\- ]*$/',
             'isbn' => ['required', 'numeric', new Isbn(), Rule::unique('books')->ignore($this->route('id'))],
             'publisher' => 'required',
-            'author' => 'required',
-            'genre' => 'required',
+            'authors' => 'required',
+            'genres' => 'required',
             'publishing_date' => 'required|date|before_or_equal:today',
             'description' => 'required'
         ];
@@ -57,9 +57,9 @@ class UpdateBookRequest extends FormRequest
 
             'publisher.required' => 'Nazwa wydawcy nie może być pusta.',
 
-            'author.required' => 'Dane autora nie mogą być puste.',
+            'authors.required' => 'Dane autora nie mogą być puste.',
 
-            'genre.required' => 'Nazwa gatunku nie może być pusta.',
+            'genres.required' => 'Nazwa gatunku nie może być pusta.',
 
             'publishing_date.required' => 'Data wydania nie może być pusta.',
             'publishing_date.date' => 'Proszę wprowadzić poprawną datę.',

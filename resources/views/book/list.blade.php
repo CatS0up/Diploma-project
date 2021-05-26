@@ -80,62 +80,36 @@
                 </div>
 
                 <div class="app__items">
-                    @if ($books->total() > 0)
+                    @if ($books->isNotEmpty())
                         <ul class="lists app__lists">
                             @foreach ($books as $book)
                                 <li class="lists__item">
-                                    <div class="book-preview lists__book-preview">
-                                        <div class="book-preview__header">
-                                            <h3 class="titles book-preview__titles">
+                                    <div class="book-item">
+                                        <header class="header book-item__headers">
+                                            <div class="pictures book-item__pictures">
+                                                <div class="pictures book-item__pictures">
+                                                    @if ($book->cover)
+                                                        <img class="pictures__img" src="{{ Storage::url($book->cover) }}"
+                                                            alt="Okładka książki.">
+                                                    @else
+                                                        <img class="pictures__img"
+                                                            src="{{ asset('img/book_cover.png') }}"
+                                                            alt="Okładka książki.">
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <h3 class="titles book-item__titles">
                                                 {{ $book->title }}
                                             </h3>
+                                        </header>
 
-                                            <div class="pictures book-preview__pictures">
-                                                @if ($book->cover)
-                                                    <img class="pictures__img" src="{{ Storage::url($book->cover) }}"
-                                                        alt="Okładka książki.">
-                                                @else
-                                                    <img class="pictures__img"
-                                                        src="{{ asset('img/book_cover.png') }}"
-                                                        alt="Okładka książki.">
-                                                @endif
-                                            </div>
-                                        </div>
+                                        <div class="book-item__body">
+                                            <ul class="lists book-item__lists">
+                                                <li class="lists__item">
 
-                                        <div class="book-preview__body">
-                                            <div class="book-preview__info">
-                                                <ul class="lists book-preview__lists">
-                                                    <li class="lists__item lists__item--labeled-horizontal">
-                                                        <span class="lists__item-label">ISBN</span>
-                                                        {{ $book->isbn }}
-                                                    </li>
-
-                                                    <li class="lists__item lists__item--labeled-horizontal">
-                                                        <span class="lists__item-label">Wydawca</span>
-                                                        {{ $book->publisher->name }}
-                                                    </li>
-
-                                                    <li class="lists__item lists__item--labeled-vertical">
-                                                        <span class="lists__item-label">Autorzy</span>
-                                                        @foreach ($book->authors as $author)
-                                                            {{ $author->firstname . ' ' . $author->lastname }}
-                                                            @if (!$loop->last)
-                                                                {{ ', ' }}
-                                                            @endif
-                                                        @endforeach
-                                                    </li>
-
-                                                    <li class="lists__item lists__item--labeled-vertical">
-                                                        <span class="lists__item-label">Gatunki</span>
-                                                        {{ $book->genres->implode('name', ',') }}
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-                                            <div class="book-preview__options">
-                                                <a href="{{ route('book.show', ['slug' => $book->slug]) }}"
-                                                    class="links links--light book-preview__links">Szczegóły</a>
-                                            </div>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </li>
@@ -150,6 +124,7 @@
                     @endif
                 </div>
 
+                {{ $books->links() }}
             </section>
 
         </section>

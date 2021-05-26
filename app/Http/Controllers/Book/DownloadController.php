@@ -18,10 +18,11 @@ class DownloadController extends Controller
         $this->file = $file;
     }
 
-    public function __invoke(int $bookId)
+    public function __invoke(string $slug)
     {
         return $this->file->download(
-            $this->book->findById($bookId)->file
+            $this->book->findBySlug($slug)->file,
+            $slug
         );
     }
 }

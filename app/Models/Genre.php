@@ -28,6 +28,4 @@ class Genre extends Model
     {
         $this->attributes['name'] = ucwords($name);
     }
-
-    /* ===> Methods <=== */
 }

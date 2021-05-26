@@ -54,7 +54,7 @@
         padding-top: 20px;
 
         @include media("small") {
-            grid-template-columns: repeat(auto-fit, 300px);
+            grid-template-columns: repeat(auto-fit, max(300px));
         }
     }
 }

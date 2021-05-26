@@ -93,9 +93,9 @@ class BookController extends Controller
 
     public function destroy(int $id): RedirectResponse
     {
-        $this->bookResposiotry->delete($id);
+        $this->book->delete($id);
 
-        return redirect()->route('admin.get.books')
+        return redirect()->route('home')
             ->with('success', 'Książka została pomyślnie usunięta.');
     }
 }

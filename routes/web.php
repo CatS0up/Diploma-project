@@ -73,7 +73,7 @@ Route::prefix('admin')
         Route::put('books/{id}/edit', [AdminBookController::class, 'update'])
             ->name('update.book');
 
-        Route::delete('books/{id}/delete', [AdminBookController::class, 'destroy'])
+        Route::delete('books/{id}', [AdminBookController::class, 'destroy'])
             ->name('delete.book');
 
         Route::get('books/{id}', [AdminBookController::class, 'show'])
@@ -124,7 +124,7 @@ Route::prefix('books')
 
             Route::middleware('auth')
                 ->get('books/{slug}/download', DownloadController::class)
-                ->name('download.book');
+                ->name('download');
         });
     });
 

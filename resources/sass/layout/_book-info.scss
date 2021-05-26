@@ -12,6 +12,7 @@
     }
 
     &__thumbnail {
+        @include flex($align: center);
         padding: 10px;
 
         border: 1px solid lightgray;
