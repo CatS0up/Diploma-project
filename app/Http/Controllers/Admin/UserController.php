@@ -6,7 +6,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserUpdateByAdminRequest;
-use App\Repository\Filterable;
 use App\Service\FiltersFormatter;
 use App\Service\User\ListingService;
 use App\Service\User\UserService;
@@ -36,7 +35,7 @@ class UserController extends Controller
     {
         $filters = $filtersFormatter->format(
             ['q', 'sort'],
-            ['sort' => Filterable::SORT_DEFAULT]
+            ['sort' => 'asc']
         );
         return view(
             'dashboard.userList',

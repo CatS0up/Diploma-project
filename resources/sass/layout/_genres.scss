@@ -1,0 +1,30 @@
+.genres {
+    border: 1px solid lightgray;
+
+    // mixins
+    &__headers {
+        padding: 5px 10px;
+    }
+
+    &__titles {
+        @include flex($justify: space-between, $align: center);
+    }
+
+    &__menu {
+        padding: 15px;
+    }
+
+    &__links {
+        display: block;
+        padding: 5px 10px;
+
+        transition: 0.2s;
+
+        &:hover {
+            padding-left: 25px;
+
+            color: #fff;
+            background-color: $primary-color;
+        }
+    }
+}

@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('inner-content')
-    <div class="container app__container">
+    <div class="container main__container">
 
-        <header class="headers app__headers">
+        <header class="headers main__headers">
             <ol class="breadcrumbs dashboard__breadcrumbs">
                 <li class="breadcrumbs__item breadcrumbs__item--active">
                     Strona główna
@@ -11,150 +11,52 @@
             </ol>
         </header>
 
+        <section class="books main__books">
 
-        <section class="app__sections app__sections--columns-2">
-            <aside class="categories app__categories">
-                <h2 class="titles categories__titles">
-                    Kategorie
-                </h2>
+            <aside class="genres books__genres">
+                <header class="headers headers--dark genres__headers">
+                    <h3 class="titles titles--transform-none genres__titles">
+                        Kategorie
+                        <span class="icons titles__icons fas fa-bars" aria-hidden="true"></span>
+                    </h3>
+                </header>
 
-                <ul class="menu categories__menu">
-                    @foreach ($genres as $genre)
+                <ul class="menu genres__menu">
+                    @forelse ($genres as $genre)
                         <li class="menu__item">
-                            <a href="{{ url()->full() }}" class="links menu__links">
-                                {{ $genre->name }}
-                            </a>
+                            <a href="#" class="links genres__links">{{ $genre->name }}</a>
                         </li>
-                    @endforeach
+                    @empty
+                        <li class="menu__item menu__item--underlined">
+                            Brak gatunków :(
+                        </li>
+                    @endforelse
                 </ul>
             </aside>
 
-            <section class="app__book-list">
 
-                <div class="app__actions">
-                    <form class="forms forms--inline app__forms" action="{{ url()->full() }}" method="get">
-                        @csrf
-                        <div class="forms__group">
-                            <label class="forms__group-title" for="search">
-                                Wyszukiwarka
-                            </label>
-                            <input id="search" class="forms__input forms__input--bordered" type="search" name="q"
-                                value="{{ $filters['q'] }}">
+
+            <div class="books__items">
+                <article class="book-item books__book-item">
+
+                    <header class="headers book-item__headers">
+
+                        <div class="pictures book-item__pictures">
+
                         </div>
 
-                        <div class="forms__group">
-                            <label class="forms__group-title" for="publisher">
-                                Wydawnictwo
-                            </label>
-                            <select id="publisher" class="forms__input forms__input--bordered" name="publisher">
-                                <option value="all">Wszyscy</option>
-                                @foreach ($publishers as $publisher)
-                                    <option value="{{ $publisher->name }}"
-                                        {{ !($publisher->name == $filters['publisher']) ?: 'selected' }}>
-                                        {{ $publisher->name }}</option>
-                                @endforeach
-                            </select>
+                    </header>
+
+                    <div class="book-item__body">
+                        <h3 class="titles book-item__titles">Książka</h3>
+
+                        <div class="book-item__options">
+
                         </div>
+                    </div>
 
-                        <div class="forms__inline-section">
-                            <span class="forms__section-name forms__section-name--all-cols">Sortuj (Po tytule)</span>
-
-                            <div class="forms__check">
-                                <input id="ascending" class="forms__radio" type="radio" name="sort" value="asc"
-                                    {{ !($filters['sort'] === 'asc') ?: 'checked' }}>
-                                <label for="ascending" class="forms__radio-title">Rosnąco</label>
-                            </div>
-
-                            <div class="forms__check">
-                                <input id="descending" class="forms__radio" type="radio" name="sort" value="desc"
-                                    {{ !($filters['sort'] === 'desc') ?: 'checked' }}>
-                                <label for="descending" class="forms__radio-title">Malejąco</label>
-                            </div>
-                        </div>
-
-                        <div class="forms__buttons-group forms__buttons-group--content-to-left">
-                            <button class="buttons buttons--primary forms__buttons" type="submit">Filtruj</button>
-                        </div>
-                    </form>
-
-                </div>
-
-                <div class="app__items">
-                    @if ($books->isNotEmpty())
-                        <ul class="lists app__lists">
-                            @foreach ($books as $book)
-                                <li class="lists__item">
-                                    <div class="book-item">
-                                        <header class="header book-item__headers">
-                                            <div class="pictures book-item__pictures">
-                                                <div class="pictures book-item__pictures">
-                                                    @if ($book->cover)
-                                                        <img class="pictures__img" src="{{ Storage::url($book->cover) }}"
-                                                            alt="Okładka książki.">
-                                                    @else
-                                                        <img class="pictures__img"
-                                                            src="{{ asset('img/book_cover.png') }}"
-                                                            alt="Okładka książki.">
-                                                    @endif
-                                                </div>
-                                            </div>
-
-                                            <h3 class="titles book-item__titles">
-                                                {{ $book->title }}
-                                            </h3>
-                                        </header>
-
-                                        <div class="book-item__body">
-                                            <ul class="lists book-item__lists">
-                                                <li class="lists__item lists__item--labeled-horizontal">
-                                                    <span class="lists__item-label">Ocena</span>
-
-                                                    <div class="rate book-item__rate">
-                                                        @for ($i = 0; $i < 5; $i++)
-                                                            <span
-                                                                class="icons icons--small rate__star rate__icons fas fa-star"></span>
-                                                        @endfor
-
-                                                        <span class="rate__details">
-                                                            {{ $book->rateAvg() . " ({$book->countRates()})" }}
-                                                        </span>
-                                                    </div>
-                                                </li>
-
-                                                <li class="lists__item lists__item--labeled-horizontal">
-                                                    <span class="lists__item-label">Wydawca</span>
-
-                                                    {{ $book->publisher->name }}
-                                                </li>
-
-                                                <li class="lists__item lists__item--labeled-vertical">
-                                                    <span class="lists__item-label">Autorzy</span>
-
-                                                    {{ $book->authors->implode('fullname', ', ') }}
-                                                </li>
-                                            </ul>
-
-                                            <div class="book-item__options">
-                                                <a href="{{ route('book.show', ['slug' => $book->slug]) }}"
-                                                    class="links links--light book-item__links">Pokaż</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            @endforeach
-                        </ul>
-                    @else
-                        <div class="notifications dashboard__notifications">
-                            <span class="icons icons--x-large notifications__icons far fa-folder-open"
-                                aria-hidden="true"></span>
-                            Brak książek
-                        </div>
-                    @endif
-                </div>
-
-                {{ $books->links() }}
-            </section>
-
+                </article>
+            </div>
         </section>
     </div>
 @endsection

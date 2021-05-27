@@ -17,9 +17,9 @@ class PublisherService
         $this->publisherModel = $publisherModel;
     }
 
-    public function create(array $data): Publisher
+    public function createSingle(array $data): Publisher
     {
-        $this->publisherModel->firstOrCreate(['name' => $data['publisher']]);
+        $this->publisherModel->firstOrCreate(['name' => $data['name']]);
 
         return $this->publisherModel;
     }

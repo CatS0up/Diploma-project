@@ -3,6 +3,11 @@
         background-color: #fff;
     }
 
+    &--dark {
+        color: #fff;
+        background-color: $dark-theme-color;
+    }
+
     &--border-bottom {
         border-bottom: 1px solid lightgray;
     }

@@ -1,5 +1,11 @@
 .site {
+    @include flex($direction: column);
+
     &__inner {
+        display: grid;
+        align-items: stretch;
+        flex-grow: 1;
+        width: 100%;
         max-width: $max-page-width;
         margin: 0 auto;
     }

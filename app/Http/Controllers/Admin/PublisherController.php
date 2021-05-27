@@ -29,7 +29,7 @@ class PublisherController extends Controller
 
     public function insert(NewPublisherRequest $request): RedirectResponse
     {
-        $this->publisher->create($request->validated());
+        $this->publisher->createSingle($request->validated());
 
         return redirect()
             ->route('admin.get.publishers')

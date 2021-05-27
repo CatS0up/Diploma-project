@@ -43,7 +43,7 @@
                         <input id="bookGenre" class="forms__input forms__input--bordered" type="text" name="name"
                             value="{{ old('name') }}" placeholder="Nowy wydawca">
 
-                        @error('genre')
+                        @error('name')
                             <span class="forms__input-feedback">
                                 {{ $message }}
                             </span>
@@ -56,61 +56,68 @@
                 </form>
             </div>
 
-            <table class="tables dashboard__tables">
-                <thead class="tables__header">
-                    <tr class="tables__row">
-                        <th class="tables__header-cell">
-                            #
-                        </th>
-                        <th class="tables__header-cell">
-                            Wydawca
-                        </th>
-                        <th class="tables__header-cell">
-                            Opcje
-                        </th>
-                    </tr>
-                </thead>
-
-                <tbody class="tables__body">
-                    @foreach ($publishers as $publisher)
+            @if ($publishers->isNotEmpty())
+                <table class="tables dashboard__tables">
+                    <thead class="tables__header">
                         <tr class="tables__row">
                             <th class="tables__header-cell">
-                                {{ $loop->iteration }}
+                                #
                             </th>
-
-                            <td class="tables__cell" data-label="Wydawca">
-                                {{ $publisher->name }}
-                            </td>
-                            <td class="tables__cell" data-label="Opcje">
-                                <div class="tables__group">
-                                    <form class="forms tables__forms"
-                                        action="{{ route('admin.delete.publisher', ['id' => $publisher->id]) }}"
-                                        method="post">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="buttons buttons--danger forms__buttons">Usuń</button>
-                                    </form>
-                                </div>
-                            </td>
+                            <th class="tables__header-cell">
+                                Wydawca
+                            </th>
+                            <th class="tables__header-cell">
+                                Opcje
+                            </th>
                         </tr>
-                    @endforeach
-                </tbody>
+                    </thead>
 
-                <tfoot class="tables__footer">
-                    <tr class="tables__row">
-                        <th class="tables__header-cell">
-                            #
-                        </th>
-                        <th class="tables__header-cell">
-                            Wydawca
-                        </th>
-                        <th class="tables__header-cell">
-                            Opcje
-                        </th>
-                    </tr>
-                </tfoot>
-            </table>
+                    <tbody class="tables__body">
+                        @foreach ($publishers as $publisher)
+                            <tr class="tables__row">
+                                <th class="tables__header-cell">
+                                    {{ $loop->iteration }}
+                                </th>
 
-            {{ $publishers->links() }}
+                                <td class="tables__cell" data-label="Wydawca">
+                                    {{ $publisher->name }}
+                                </td>
+                                <td class="tables__cell" data-label="Opcje">
+                                    <div class="tables__group">
+                                        <form class="forms tables__forms"
+                                            action="{{ route('admin.delete.publisher', ['id' => $publisher->id]) }}"
+                                            method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="buttons buttons--danger forms__buttons">Usuń</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+
+                    <tfoot class="tables__footer">
+                        <tr class="tables__row">
+                            <th class="tables__header-cell">
+                                #
+                            </th>
+                            <th class="tables__header-cell">
+                                Wydawca
+                            </th>
+                            <th class="tables__header-cell">
+                                Opcje
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                {{ $publishers->links() }}
+            @else
+                <div class="notifications dashboard__notifications">
+                    <span class="icons icons--x-large notifications__icons far fa-folder-open" aria-hidden="true"></span>
+                    Brak wydawców
+                </div>
+            @endif
     </div>
 @endsection

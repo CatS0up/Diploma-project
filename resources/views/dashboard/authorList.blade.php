@@ -133,6 +133,8 @@
                         </tr>
                     </tfoot>
                 </table>
+
+                {{ $authors->links() }}
             @else
                 <div class="notifications dashboard__notifications">
                     <span class="icons icons--x-large notifications__icons far fa-folder-open" aria-hidden="true"></span>

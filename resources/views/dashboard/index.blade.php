@@ -142,36 +142,44 @@
                     </div>
                 @endif
 
-                <ul class="lists dashboard__lists">
-                    @foreach ($latest['users'] as $user)
-                        <li class="lists__item">
-                            <div class="info-item lists__info-item">
-                                <div class="picutres pictures--small info-item__pictures">
-                                    @if ($user->avatar)
-                                        <img class="pictures__img" src="{{ Storage::url($user->avatar) }}"
-                                            alt="Avatar użytkownika.">
-                                    @else
-                                        <img class="pictures__img" src="{{ asset('img/avatar_placeholder.jpg') }}"
-                                            alt="Avatar użytkownika.">
-                                    @endif
-                                </div>
+                @if ($latest['users']->isNotEmpty())
+                    <ul class="lists dashboard__lists">
+                        @foreach ($latest['users'] as $user)
+                            <li class="lists__item">
+                                <div class="info-item lists__info-item">
+                                    <div class="picutres pictures--small info-item__pictures">
+                                        @if ($user->avatar)
+                                            <img class="pictures__img" src="{{ Storage::url($user->avatar) }}"
+                                                alt="Avatar użytkownika.">
+                                        @else
+                                            <img class="pictures__img" src="{{ asset('img/avatar_placeholder.jpg') }}"
+                                                alt="Avatar użytkownika.">
+                                        @endif
+                                    </div>
 
-                                <div class="info-item__body">
-                                    <span class="info-item__timestamp">
-                                        {{ $user->created_at }}
-                                    </span>
+                                    <div class="info-item__body">
+                                        <span class="info-item__timestamp">
+                                            {{ $user->created_at }}
+                                        </span>
 
-                                    <p class="info-item__message">
-                                        <a href="{{ route('admin.show.user', ['id' => $user->id]) }}"
-                                            class="links links--light info-item__links">{{ $user->uid }}</a>
-                                        założył konto w
-                                        serwisie.
-                                    </p>
+                                        <p class="info-item__message">
+                                            <a href="{{ route('admin.show.user', ['id' => $user->id]) }}"
+                                                class="links links--light info-item__links">{{ $user->uid }}</a>
+                                            założył konto w
+                                            serwisie.
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                    @endforeach
-                </ul>
+                            </li>
+                        @endforeach
+                    </ul>
+                @else
+                    <div class="notifications dashboard__notifications">
+                        <span class="icons icons--x-large notifications__icons far fa-folder-open"
+                            aria-hidden="true"></span>
+                        Brak użytkowników
+                    </div>
+                @endif
             </div>
         </section>
 

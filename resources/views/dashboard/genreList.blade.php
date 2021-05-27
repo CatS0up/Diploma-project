@@ -111,14 +111,14 @@
                         </tr>
                     </tfoot>
                 </table>
+
+                {{ $genres->links() }}
             @else
                 <div class="notifications dashboard__notifications">
                     <span class="icons icons--x-large notifications__icons far fa-folder-open" aria-hidden="true"></span>
                     Brak gatunków
                 </div>
             @endif
-
-            {{ $genres->links() }}
     </div>
 
 @endsection

@@ -24,7 +24,7 @@ class NewPublisherRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|regex:/^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ0-9\- ]+$/'
+            'name' => 'required|regex:/^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ0-9\- ]+$/|unique:publishers'
         ];
     }
 
@@ -32,7 +32,8 @@ class NewPublisherRequest extends FormRequest
     {
         return [
             'name.required' => 'Nazwa wydawcy nie może być pusta.',
-            'name.regex' => 'Nazwa wydawcy może składać się z liter, spacji, - oraz cyfr/'
+            'name.regex' => 'Nazwa wydawcy może składać się z liter, spacji, - oraz cyfr.',
+            'name.unique' => 'Wydawca o podanej nazwie już istnieje.',
         ];
     }
 }

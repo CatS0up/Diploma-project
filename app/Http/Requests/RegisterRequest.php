@@ -29,8 +29,8 @@ class RegisterRequest extends FormRequest
             'email' => 'required|email|min:3|unique:users|max:320|confirmed',
             'pwd' => 'required|min:10|regex:/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{10,}$/|confirmed',
             'phone' => 'required|numeric|digits:9|unique:users',
-            'firstname' => 'required|regex:/^[A-ZŻŹĆĄŚĘŁÓŃ]+[a-zzżźćńółęąś]*$/',
-            'lastname' => 'required|regex:/^[A-ZŻŹĆĄŚĘŁÓŃ]+[a-zzżźćńółęąś\-]*$/',
+            'firstname' => 'required|regex:/^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]*$/',
+            'lastname' => 'required|regex:/^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ\-]*$/',
             'birthday' => 'required|date|before:today',
             'gender' => 'nullable',
             'town' => 'required|regex:/^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ\- ]*$/',
@@ -68,7 +68,7 @@ class RegisterRequest extends FormRequest
             'phone.unique' => 'Podany numer jest już przypisany do innego użytkownika.',
 
             'firstname.required' =>  'Imię nie może być puste.',
-            'firstname.regex' =>  'Imię powinno zaczynać się od wielkiej litery oraz może składać się wyłącznie z liter.',
+            'firstname.regex' =>  'Imię może składać się.',
 
             'lastname.required' =>  'Nazwisko nie może być puste.',
             'lastname.regex' =>  'Nazwisko powinno zaczynać się od wielkiej litery oraz może składać się wyłącznie z liter.',

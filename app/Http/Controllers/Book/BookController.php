@@ -55,7 +55,7 @@ class BookController extends Controller
         return view('book.list', [
             'genres' => $genreList->all(),
             'publishers' => $publisherList->all(),
-            'books' => $this->bookList->filterBy($filters, 1),
+            'books' => $this->bookList->filterBy($filters),
             'filters' =>  $filters
         ]);
     }

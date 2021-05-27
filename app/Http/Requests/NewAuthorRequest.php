@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class NewAuthorRequest extends FormRequest
 {
@@ -24,7 +25,13 @@ class NewAuthorRequest extends FormRequest
     public function rules()
     {
         return [
-            'firstname' => 'required|regex:/^[A-ZŻŹĆĄŚĘŁÓŃ]+[a-zzżźćńółęąś]*$/',
+            'firstname' => [
+                'required',
+                'regex:/^[A-ZŻŹĆĄŚĘŁÓŃ]+[a-zzżźćńółęąś]*$/',
+                Rule::unique('authors')->where(fn ($q) =>
+                $q->where('lastname', $this->input('lastname')))
+            ],
+
             'lastname' => 'required|regex:/^[A-ZŻŹĆĄŚĘŁÓŃ]+[a-zzżźćńółęąś\-]*$/'
         ];
     }
@@ -33,10 +40,13 @@ class NewAuthorRequest extends FormRequest
     {
         return [
             'firstname.required' =>  'Imię nie może być puste.',
-            'firstname.regex' =>  'Imię powinno zaczynać się od wielkiej litery oraz może składać się wyłącznie z liter.',
+            'firstname.regex' =>  'Imię powinno zaczynać się od '
+                . 'wielkiej litery oraz może składać się wyłącznie z liter.',
+            'firstname.unique' => 'Autor o podanych danych już istnieje.',
 
             'lastname.required' =>  'Nazwisko nie może być puste.',
-            'lastname.regex' =>  'Nazwisko powinno zaczynać się od wielkiej litery oraz może składać się wyłącznie z liter.',
+            'lastname.regex' =>  'Nazwisko powinno zaczynać się od '
+                . 'wielkiej litery oraz może składać się wyłącznie z liter.',
         ];
     }
 }

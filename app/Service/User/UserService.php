@@ -49,7 +49,7 @@ class UserService
             $avatar = $this->file->save('avatars', $avatar);
 
         $this->userModel->uid = $accountFields['uid'];
-        $this->userModel->pwd = Hash::make($accountFields['pwd']);
+        $this->userModel->pwd = $accountFields['pwd'];
         $this->userModel->email = $accountFields['email'];
         $this->userModel->phone = $accountFields['phone'];
         $this->userModel->avatar = $avatar;

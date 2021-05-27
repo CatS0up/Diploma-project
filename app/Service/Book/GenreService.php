@@ -6,6 +6,7 @@ namespace App\Service\Book;
 
 use App\Models\Genre;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class GenreService
 {
@@ -21,7 +22,12 @@ class GenreService
 
     public function createSingle(array $data): Genre
     {
-        return $this->genreModel->firstOrCreate(['name' => $data['name']]);
+        return $this->genreModel->firstOrCreate(
+            [
+                'name' => $data['name'],
+                'slug' => Str::slug($data['name'])
+            ]
+        );
     }
 
     public function createMany(array $data): Collection
@@ -30,7 +36,7 @@ class GenreService
 
         $genreModels = [];
         foreach ($genres as $genre) {
-            $genreModels[] = $this->genreModel->firstOrCreate(['name' =>  $genre]);
+            $genreModels[] = $this->createSingle(['name' => $genre]);
         }
 
         return collect(array_unique($genreModels));

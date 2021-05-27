@@ -66,13 +66,8 @@ class BookService
         $this->bookModel->cover = $bookFields['cover'] ?? null;
         $this->bookModel->save();
 
-        $this->bookModel
-            ->genres()
-            ->saveMany($this->genre->createMany($data['genres']));
-
-        $this->bookModel
-            ->authors()
-            ->saveMany($this->author->createMany($data['authors']));
+        $this->addGenres($data['genres']);
+        $this->addAuthors($data['authors']);
 
         return $this->bookModel;
     }

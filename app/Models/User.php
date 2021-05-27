@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -86,8 +87,13 @@ class User extends Authenticatable
             ->where('role_id', 1);
     }
 
-    /* ===> Methods <=== */
+    /* ===> Mutators <=== */
+    public function setPwdAttribute(string $pwd): void
+    {
+        $this->attributes['pwd'] = Hash::make($pwd);
+    }
 
+    /* ===> Methods <=== */
     public function addBook(Book $book): void
     {
         $this->books()->save($book);

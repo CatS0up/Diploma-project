@@ -26,12 +26,10 @@
 @import "layout/dashboard";
 @import "layout/forms";
 @import "layout/tables";
-@import "layout/profile";
+@import "layout/show";
 @import "layout/lists";
-@import "layout/app";
-@import "layout/categories";
-@import "layout/book-info";
-@import "layout/user-profile";
+@import "layout/genres";
+@import "layout/books";
 @import "layout/pagination";
 
 // Components
@@ -51,7 +49,3 @@
 @import "components/notifications";
 @import "components/messages";
 @import "components/rate";
-@import "components/reviews";
-@import "components/review";
-@import "components/info-item";
-@import "components/book-item";

@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <main class="app site__app">
+    <main class="main site__main">
         <section class="app__content">
             @include('shared.messages')
 
