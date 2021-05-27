@@ -100,21 +100,27 @@ class UsersSeeder extends Seeder
 
 
             DB::table('users')->insert(
-                $users['superadmin']['account_data'],
-                $users['admin']['account_data'],
-                $users['user']['account_data']
+                [
+                    $users['superadmin']['account_data'],
+                    $users['admin']['account_data'],
+                    $users['user']['account_data']
+                ]
             );
 
             DB::table('personal_details')->insert(
-                $users['superadmin']['personal_details'],
-                $users['admin']['personal_details'],
-                $users['user']['personal_details']
+                [
+                    $users['superadmin']['personal_details'],
+                    $users['admin']['personal_details'],
+                    $users['user']['personal_details']
+                ]
             );
 
             DB::table('addresses')->insert(
-                $users['superadmin']['address'],
-                $users['admin']['address'],
-                $users['user']['address']
+                [
+                    $users['superadmin']['address'],
+                    $users['admin']['address'],
+                    $users['user']['address']
+                ]
             );
         });
     }
