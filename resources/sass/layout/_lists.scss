@@ -1,6 +1,6 @@
 .lists {
     &__item {
-        @include flex();
+        @include flex($justify: stretch);
 
         &--labeled-vertical {
             flex-direction: column;

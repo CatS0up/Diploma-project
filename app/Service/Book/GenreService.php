@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Service\Book;
 
 use App\Models\Genre;
+use Illuminate\Support\Collection;
 
 class GenreService
 {
@@ -23,7 +24,7 @@ class GenreService
         return $this->genreModel->firstOrCreate(['name' => $data['name']]);
     }
 
-    public function createMany(array $data): array
+    public function createMany(array $data): Collection
     {
         $genres = preg_split('/ ?[,]{1} ?/', $data['genres']);
 
@@ -32,7 +33,7 @@ class GenreService
             $genreModels[] = $this->genreModel->firstOrCreate(['name' =>  $genre]);
         }
 
-        return $genreModels;
+        return collect(array_unique($genreModels));
     }
 
     public function update(array $data): Genre

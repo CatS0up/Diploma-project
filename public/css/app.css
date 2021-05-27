@@ -6623,7 +6623,7 @@ select {
 .lists__item {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: stretch;
   align-items: stretch;
   flex-wrap: nowrap;
 }
@@ -6743,6 +6743,10 @@ select {
   .book-info__description {
     padding: 0;
   }
+}
+.book-info__description-title {
+  color: #000;
+  font-weight: 700;
 }
 .book-info__options {
   grid-column: 1/-1;
@@ -7227,6 +7231,9 @@ select {
 .rate__star {
   color: orange;
 }
+.rate__details {
+  color: #808080;
+}
 
 .reviews {
   max-width: 1000px;
@@ -7304,4 +7311,12 @@ select {
   align-self: flex-end;
   color: #808080;
   font-size: 0.8rem;
+}
+
+.book-item {
+  padding: 40px;
+  border: 1px solid lightgray;
+}
+.book-item__body {
+  color: #808080;
 }

@@ -96,13 +96,8 @@ class BookService
             $this->updateCover($bookFields['cover'] ?? null, $bookFields['reset_cover']);
         $this->bookModel->save();
 
-        $this->bookModel
-            ->genres()
-            ->saveMany($this->genre->createMany($data['genres']));
-
-        $this->bookModel
-            ->authors()
-            ->saveMany($this->author->createMany($data['authors']));
+        $this->addGenres($data['genres']);
+        $this->addAuthors($data['authors']);
 
         return $this->bookModel;
     }
@@ -119,6 +114,27 @@ class BookService
         $book->delete();
 
         return (bool) $this->bookModel->find($id);
+    }
+
+    public function addAuthors(array $authors): void
+    {
+        $bookAuthors = $this->bookModel->authors()->get();
+        $newAuthors = $this->author->createMany($authors);
+
+        $this->bookModel
+            ->authors()
+            ->saveMany($newAuthors->diffKeys($bookAuthors));
+    }
+
+
+    public function addGenres(array $genres): void
+    {
+        $bookGenres = $this->bookModel->genres()->get();
+        $newGenres = $this->genre->createMany($genres);
+
+        $this->bookModel
+            ->genres()
+            ->saveMany($newGenres->diffKeys($bookGenres));
     }
 
     public function acceptableFields(): array

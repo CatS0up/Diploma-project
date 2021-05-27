@@ -39,6 +39,11 @@
         @include media("large") {
             padding: 0;
         }
+
+        &-title {
+            color: #000;
+            font-weight: 700;
+        }
     }
 
     &__options {

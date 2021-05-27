@@ -106,10 +106,38 @@
 
                                         <div class="book-item__body">
                                             <ul class="lists book-item__lists">
-                                                <li class="lists__item">
+                                                <li class="lists__item lists__item--labeled-horizontal">
+                                                    <span class="lists__item-label">Ocena</span>
 
+                                                    <div class="rate book-item__rate">
+                                                        @for ($i = 0; $i < 5; $i++)
+                                                            <span
+                                                                class="icons icons--small rate__star rate__icons fas fa-star"></span>
+                                                        @endfor
+
+                                                        <span class="rate__details">
+                                                            {{ $book->rateAvg() . " ({$book->countRates()})" }}
+                                                        </span>
+                                                    </div>
+                                                </li>
+
+                                                <li class="lists__item lists__item--labeled-horizontal">
+                                                    <span class="lists__item-label">Wydawca</span>
+
+                                                    {{ $book->publisher->name }}
+                                                </li>
+
+                                                <li class="lists__item lists__item--labeled-vertical">
+                                                    <span class="lists__item-label">Autorzy</span>
+
+                                                    {{ $book->authors->implode('fullname', ', ') }}
                                                 </li>
                                             </ul>
+
+                                            <div class="book-item__options">
+                                                <a href="{{ route('book.show', ['slug' => $book->slug]) }}"
+                                                    class="links links--light book-item__links">Pokaż</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </li>

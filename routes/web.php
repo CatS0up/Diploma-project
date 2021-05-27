@@ -140,7 +140,8 @@ Route::prefix('reviews')
     ->name('reviews.')
     ->group(function () {
 
-        Route::post('reviews/new', [ReviewController::class, 'add'])
+        Route::middleware(['can:create,review'])
+            ->post('reviews/new', [ReviewController::class, 'add'])
             ->name('add');
     });
 

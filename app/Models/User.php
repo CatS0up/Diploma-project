@@ -122,4 +122,9 @@ class User extends Authenticatable
     {
         return (bool) $this->books()->where('userBooks.book_id', $bookId)->first();
     }
+
+    public function hasReview(): bool
+    {
+        return (bool) $this->review()->exists();
+    }
 }

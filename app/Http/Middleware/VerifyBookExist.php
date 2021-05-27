@@ -25,7 +25,7 @@ class VerifyBookExist
     {
         if (!$this->bookModel
             ->where('id', $request->route('id'))
-            ->orWhere('slug', $request->route('slug')->first()))
+            ->orWhere('slug', $request->route('slug'))->first())
             abort('404');
 
         return $next($request);

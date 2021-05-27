@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Service\Book;
 
 use App\Models\Author;
+use Illuminate\Support\Collection;
 
 class AuthorService
 {
@@ -25,7 +26,7 @@ class AuthorService
         ]);
     }
 
-    public function createMany(array $data): array
+    public function createMany(array $data): Collection
     {
         $authors = preg_split('/ ?[,]{1} ?/', $data['authors']);
 
@@ -45,7 +46,7 @@ class AuthorService
             );
         }
 
-        return $authorModels;
+        return collect(array_unique($authorModels));
     }
 
     public function update(array $data): Author

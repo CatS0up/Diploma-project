@@ -35,14 +35,16 @@
                 <ul class="lists book-info__lists">
                     <li class="lists__item lists__item--labeled-vertical">
                         <span class="lists__item-label">Ocena</span>
+
                         <div class="rate book-info__rate">
                             @for ($i = 0; $i < 5; $i++)
                                 <span class="icons icons--small rate__star rate__icons fas fa-star"></span>
                             @endfor
+
+                            <span class="rate__details">
+                                {{ $book->rateAvg() . " ({$book->countRates()})" }}
+                            </span>
                         </div>
-                        {{ $book->rateAvg() }}
-                        <br>
-                        {{ $book->countRates() }}
                     </li>
 
                     <li class="lists__item lists__item--labeled-vertical">
@@ -57,9 +59,7 @@
 
                     <li class="lists__item lists__item--labeled-vertical">
                         <span class="lists__item-label">Autorzy</span>
-                        @foreach ($book->authors as $author)
-                            {{ $author->firstname . ' ' . $author->lastname }}
-                        @endforeach
+                        {{ $book->authors->implode('fullname', ', ') }}
                     </li>
 
                     <li class="lists__item lists__item--labeled-vertical">
@@ -74,9 +74,13 @@
                     </li>
                 </ul>
 
-                <p class="book-info__description">
-                    {{ $book->description }}
-                </p>
+                <div class="book-info__description">
+                    <span class="book-info__description-title">Opis</span>
+
+                    <p class="book-info__description-content">
+                        {{ $book->description }}
+                    </p>
+                </div>
 
                 <div class="book-info__options">
                     <a href="{{ route('book.download', ['slug' => $book->slug]) }}"
@@ -161,63 +165,66 @@
                 {{ $reviews->links() }}
             </section>
 
-            <section class="reviews__actions">
-                <h3 class="titles reviews__titles">Dodaj recenzję</h3>
-                <form class="forms reviews__forms" action="{{ route('reviews.add') }}" method="post">
-                    @csrf
-                    <div class="forms__group">
-                        <input id="bookId" class="forms__input-hidden" type="hidden" name="book_id"
-                            value="{{ $book->id }}">
-                    </div>
-
-                    <div class="forms__inline-section">
-                        <div class="forms__check">
-                            @for ($i = 0; $i < 5; $i++)
-                                <input id="rate{{ $i + 1 }}" class="forms__radio forms__radio--hidden" type="radio"
-                                    name="rate" value="{{ $i + 1 }}" {{ $i === 4 ? 'checked' : null }}>
-                                <label for="rate{{ $i + 1 }}" class="forms__radio-title">
-                                    <span class="icons icons--small rate__star rate__icons far fa-star"
-                                        data-rating="icon"></span>
-                                </label>
-                            @endfor
+            @can('create', 'App\\Models\Review')
+                <section class="reviews__actions">
+                    <h3 class="titles reviews__titles">Dodaj recenzję</h3>
+                    <form class="forms reviews__forms" action="{{ route('reviews.add') }}" method="post">
+                        @csrf
+                        <div class="forms__group">
+                            <input id="bookId" class="forms__input-hidden" type="hidden" name="book_id"
+                                value="{{ $book->id }}">
                         </div>
-                    </div>
 
-                    <div class="forms__group">
-                        <label class="forms__group-title" for="genres">
-                            Tytuł
-                            <span class="forms__required-info">*</span>
-                        </label>
-                        <input id="title" class="forms__input" type="text" name="title" value="{{ old('title') }}">
+                        <div class="forms__inline-section">
+                            <div class="forms__check">
+                                @for ($i = 0; $i < 5; $i++)
+                                    <input id="rate{{ $i + 1 }}" class="forms__radio forms__radio--hidden" type="radio"
+                                        name="rate" value="{{ $i + 1 }}" {{ $i === 4 ? 'checked' : null }}>
+                                    <label for="rate{{ $i + 1 }}" class="forms__radio-title">
+                                        <span class="icons icons--small rate__star rate__icons far fa-star"
+                                            data-rating="icon"></span>
+                                    </label>
+                                @endfor
+                            </div>
+                        </div>
 
-                        @error('title')
-                            <span class="forms__input-feedback">
-                                {{ $message }}
-                            </span>
-                        @enderror
-                    </div>
+                        <div class="forms__group">
+                            <label class="forms__group-title" for="genres">
+                                Tytuł
+                                <span class="forms__required-info">*</span>
+                            </label>
+                            <input id="title" class="forms__input" type="text" name="title" value="{{ old('title') }}">
 
-                    <div class="forms__group">
-                        <label class="forms__group-title" for="review">
-                            Recenzja
-                            <span class="forms__required-info">*</span>
-                        </label>
-                        <textarea id="review" class="forms__input forms__input--textarea" name="review"
-                            rows="10"></textarea>
+                            @error('title')
+                                <span class="forms__input-feedback">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
 
-                        @error('review')
-                            <span class="forms__input-feedback">
-                                {{ $message }}
-                            </span>
-                        @enderror
-                    </div>
+                        <div class="forms__group">
+                            <label class="forms__group-title" for="review">
+                                Recenzja
+                                <span class="forms__required-info">*</span>
+                            </label>
+                            <textarea id="review" class="forms__input forms__input--textarea" name="review"
+                                rows="10"></textarea>
+
+                            @error('review')
+                                <span class="forms__input-feedback">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
 
 
-                    <div class="forms__buttons-group">
-                        <button class="buttons buttons--primary forms__buttons" type="submit">Dodaj</button>
-                    </div>
-                </form>
-            </section>
+                        <div class="forms__buttons-group">
+                            <button class="buttons buttons--primary forms__buttons" type="submit">Dodaj</button>
+                        </div>
+                    </form>
+                </section>
+
+            @endcan
         </header>
     </section>
 @endsection
