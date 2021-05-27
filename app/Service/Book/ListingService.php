@@ -55,7 +55,7 @@ class ListingService implements BookListing
         }
 
         if ($filters['genre'] !== self::TYPE_ALL) {
-            $query->whereHas('genres', fn (Builder $q) => $q->where('name', $filters['genre']));
+            $query->whereHas('genres', fn (Builder $q) => $q->where('slug', $filters['genre']));
         }
 
         if ($sort = $filters['sort']) {

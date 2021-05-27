@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\DB;
 
 class PublishersSeeder extends Seeder
 {
+    private const INITIAL_PUBLISHERS = [
+        'Pearson', 'Reed Elsevier', 'Wolters Kluwer',
+        'Random House', 'Hachette Livre', 'Grupo Planeta',
+        'McGraw-Hill Education', 'Holtzbrinck', 'Scholastic'
+    ];
     /**
      * Run the database seeds.
      *
@@ -15,16 +20,10 @@ class PublishersSeeder extends Seeder
     public function run()
     {
         DB::table('publishers')
-            ->insert([
-                ['name' => 'Pearson'],
-                ['name' => 'Reed Elsevier'],
-                ['name' => 'Wolters Kluwer'],
-                ['name' => 'Random House'],
-                ['name' => 'Hachette Livre'],
-                ['name' => 'Grupo Planeta'],
-                ['name' => 'McGraw-Hill Education'],
-                ['name' => 'Holtzbrinck'],
-                ['name' => 'Scholastic ']
-            ]);
+            ->insert(
+                array_map(fn ($name) => [
+                    'name' => $name
+                ], self::INITIAL_PUBLISHERS)
+            );
     }
 }

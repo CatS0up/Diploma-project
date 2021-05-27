@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class RolesSeeder extends Seeder
 {
+    private const INITIAL_ROLES = ['user', 'admin', 'superadmin'];
     /**
      * Run the database seeds.
      *
@@ -15,10 +16,8 @@ class RolesSeeder extends Seeder
     public function run()
     {
         DB::table('roles')
-            ->insert([
-                ['name' => 'user'],
-                ['name' => 'admin'],
-                ['name' => 'superadmin']
-            ]);
+            ->insert(array_map(fn ($name) => [
+                'name' => $name
+            ], self::INITIAL_ROLES));
     }
 }

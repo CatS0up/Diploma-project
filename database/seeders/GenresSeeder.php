@@ -3,11 +3,16 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
 class GenresSeeder extends Seeder
 {
+    private const INITIAL_GENRES = [
+        'Fantasy', 'SF', 'Kryminał', 'Thriller',
+        'Romans', 'Historyczne', 'Biograficzne',
+        'Naukowe', 'Komis', 'Prasa'
+    ];
     /**
      * Run the database seeds.
      *
@@ -16,17 +21,14 @@ class GenresSeeder extends Seeder
     public function run()
     {
         DB::table('genres')
-            ->insert([
-                ['name' => 'Fantasy'],
-                ['name' => 'SF'],
-                ['name' => 'Kryminał'],
-                ['name' => 'Thriller'],
-                ['name' => 'Romans'],
-                ['name' => 'Historyczne'],
-                ['name' => 'Biografia'],
-                ['name' => 'Naukowe'],
-                ['name' => 'Komiks'],
-                ['name' => 'Prasa']
-            ]);
+            ->insert(
+                array_map(
+                    fn ($name) =>  [
+                        'name' => $name,
+                        'slug' => Str::slug($name)
+                    ],
+                    self::INITIAL_GENRES
+                )
+            );
     }
 }

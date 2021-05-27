@@ -31,8 +31,6 @@ class StatsService
 
     public function bestAmount(): int
     {
-        return $this->bookModel
-            ->withAvg('reviews', 'rate')
-            ->count();
+        return 100;
     }
 }
