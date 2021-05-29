@@ -2,9 +2,9 @@
 
 @section('inner-content')
 
-    <div class="container app__container">
-        <header class="headers app__headers">
-            <ol class="breadcrumbs app__breadcrumbs">
+    <div class="container main__container">
+        <header class="headers main__headers">
+            <ol class="breadcrumbs main__breadcrumbs">
                 <li class="breadcrumbs__item">
                     <a href="/" class="links links--light breadcrumbs__links">
                         Strona główna
@@ -16,7 +16,7 @@
             </ol>
         </header>
 
-        <section class="auth-form app__register-form">
+        <section class="auth-forms auth-forms--small main__auth-form">
             <form class="forms forms--two-columns profile__forms" action="{{ route('auth.register') }}" method="post"
                 enctype="multipart/form-data">
                 @csrf

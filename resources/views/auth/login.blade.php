@@ -2,9 +2,9 @@
 
 @section('inner-content')
 
-    <div class="container app__container">
-        <header class="headers app__headers">
-            <ol class="breadcrumbs app__breadcrumbs">
+    <div class="container main__container">
+        <header class="headers main__headers">
+            <ol class="breadcrumbs main__breadcrumbs">
                 <li class="breadcrumbs__item">
                     <a href="/" class="links links--light breadcrumbs__links">
                         Strona główna
@@ -16,8 +16,8 @@
             </ol>
         </header>
 
-        <section class="app__auth-form  app__auth-form--decorated">
-            <form class="forms app__forms" action="{{ route('auth.login') }}" method="post">
+        <section class="auth-forms auth-forms--small auth-forms--pictured main__auth-forms">
+            <form class="forms main__forms" action="{{ route('auth.login') }}" method="post">
                 @csrf
                 <div class="forms__group">
                     <label class="forms__group-title" for="uid">
@@ -51,7 +51,7 @@
                 </div>
             </form>
 
-            <div class="pictures app__pictures">
+            <div class="pictures main__pictures">
                 <img class="pictures__img" src="{{ asset('img/registration_img.jpg') }}" alt="Stos książek.">
             </div>
         </section>

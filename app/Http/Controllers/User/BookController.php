@@ -32,8 +32,7 @@ class BookController extends Controller
     {
         $this->userLibrary->addBook($this->book->findBySlug($slug));
 
-        return redirect()
-            ->route('book.show', ['slug' => $slug])
+        return back()
             ->with('success', 'Książka zostałą dodana do twojej biblioteki.');
     }
 
@@ -41,8 +40,7 @@ class BookController extends Controller
     {
         $this->userLibrary->removeBook($this->book->findBySlug($slug));
 
-        return redirect()
-            ->route('book.show', ['slug' => $slug])
+        return back()
             ->with('success', 'Książka zostałą usunięta z twojej bilbioteki.');
     }
 }

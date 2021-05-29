@@ -1,3 +1,46 @@
 .book-item {
+    display: grid;
+    grid-template-rows: 3fr 1fr;
+
+    padding: 30px;
+
     border: 1px solid lightgray;
+
+    @include media("large") {
+        padding: 15px;
+    }
+
+    &__options {
+        @include flex($justify: center, $align: center);
+        gap: 20px;
+        padding-top: 10px;
+
+        border-top: 1px solid lightgray;
+    }
+
+    // mixins
+    &__pictures {
+        height: 100%;
+    }
+
+    &__titles {
+        padding: 5px;
+    }
+
+    &__links,
+    &__buttons {
+        width: 35px;
+        line-height: 35px;
+
+        border-radius: 50%;
+        text-align: center;
+        color: $text-muted-color;
+
+        transition: 0.2s;
+
+        &:hover {
+            background-color: $dashboard-bg-color;
+            color: #000;
+        }
+    }
 }

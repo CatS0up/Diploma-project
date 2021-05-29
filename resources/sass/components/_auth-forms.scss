@@ -1,0 +1,22 @@
+.auth-forms {
+    margin: 15px auto 0 auto;
+    padding: 20px 10px;
+
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 10px 1px rgba($color: #000000, $alpha: 0.15);
+
+    &--small {
+        max-width: 800px;
+    }
+
+    &--large {
+        max-width: 1000px;
+    }
+
+    &--pictured {
+        display: grid;
+        grid-template-columns: 60% auto;
+        align-items: center;
+    }
+}

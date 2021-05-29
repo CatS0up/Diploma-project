@@ -6555,7 +6555,7 @@ select {
     grid-template-columns: 2fr 3fr;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1024px) {
   .show {
     grid-template-columns: 1fr 2fr;
   }
@@ -6683,6 +6683,66 @@ select {
   padding-left: 25px;
   color: #fff;
   background-color: #0082e6;
+}
+
+.books {
+  padding: 20px 0;
+}
+@media (min-width: 560px) {
+  .books {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+@media (min-width: 760px) {
+  .books {
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: repeat(2, auto);
+  }
+}
+@media (min-width: 960px) {
+  .books {
+    grid-template-columns: minmax(245px, 1fr) 4fr;
+  }
+}
+.books__filters {
+  grid-column: 2/-1;
+  grid-row: 1/span 1;
+}
+@media (min-width: 560px) {
+  .books__items {
+    grid-column: 1/-1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+@media (min-width: 760px) {
+  .books__items {
+    grid-column: 2/-1;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 960px) {
+  .books__items {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .books__items {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (min-width: 560px) {
+  .books__genres {
+    grid-column: 1/span 1;
+  }
+}
+@media (min-width: 760px) {
+  .books__genres {
+    grid-row: 1/4;
+  }
 }
 
 .pagination {
@@ -7112,4 +7172,63 @@ select {
 }
 .rate__details {
   color: #808080;
+}
+
+.book-item {
+  display: grid;
+  grid-template-rows: 3fr 1fr;
+  padding: 30px;
+  border: 1px solid lightgray;
+}
+@media (min-width: 960px) {
+  .book-item {
+    padding: 15px;
+  }
+}
+.book-item__options {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 20px;
+  padding-top: 10px;
+  border-top: 1px solid lightgray;
+}
+.book-item__pictures {
+  height: 100%;
+}
+.book-item__titles {
+  padding: 5px;
+}
+.book-item__links, .book-item__buttons {
+  width: 35px;
+  line-height: 35px;
+  border-radius: 50%;
+  text-align: center;
+  color: #808080;
+  transition: 0.2s;
+}
+.book-item__links:hover, .book-item__buttons:hover {
+  background-color: #eee;
+  color: #000;
+}
+
+.auth-forms {
+  margin: 15px auto 0 auto;
+  padding: 20px 10px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.15);
+}
+.auth-forms--small {
+  max-width: 800px;
+}
+.auth-forms--large {
+  max-width: 1000px;
+}
+.auth-forms--pictured {
+  display: grid;
+  grid-template-columns: 60% auto;
+  align-items: center;
 }

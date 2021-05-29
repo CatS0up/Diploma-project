@@ -1,0 +1,57 @@
+.books {
+    padding: 20px 0;
+
+    @include media("small") {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    @include media("medium") {
+        grid-template-columns: 1fr 2fr;
+        grid-template-rows: repeat(2, auto);
+    }
+
+    @include media("large") {
+        grid-template-columns: minmax(245px, 1fr) 4fr;
+    }
+
+    &__filters {
+        grid-column: 2 / -1;
+        grid-row: 1 / span 1;
+    }
+
+    &__items {
+        @include media("small") {
+            grid-column: 1 / -1;
+
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        @include media("medium") {
+            grid-column: 2/-1;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include media("large") {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @include media("extra-large") {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+
+    // mixins
+    &__genres {
+        @include media("small") {
+            grid-column: 1 / span 1;
+        }
+
+        @include media("medium") {
+            grid-row: 1 / 4;
+        }
+    }
+}
