@@ -7,7 +7,6 @@ namespace App\Http\Controllers\Book;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddReviewRequest;
 use App\Service\ReviewService;
-use Illuminate\Auth\AuthManager;
 use Illuminate\Http\RedirectResponse;
 
 class ReviewController extends Controller
@@ -19,10 +18,9 @@ class ReviewController extends Controller
         $this->review = $review;
     }
 
-    public function add(AddReviewRequest $request, AuthManager $auth): RedirectResponse
+    public function add(AddReviewRequest $request): RedirectResponse
     {
         $data = $request->validated();
-        $data['user_id'] = $auth->id();
 
         $this->review->create($data);
 

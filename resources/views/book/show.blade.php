@@ -14,217 +14,193 @@
         </ol>
     </header>
 
-    <section class="app__sections app__sections--medium-width">
-
-        <div class="book-info app__book-info">
-            <div class="book-info__thumbnail">
-                <div class="pictures book-info__pictures">
-                    @if ($book->cover)
-                        <img class="pictures__img" src="{{ Storage::url($book->cover) }}" alt="Okładka książki.">
-                    @else
-                        <img class="pictures__img" src="{{ asset('img/book_cover.png') }}" alt="Okładka książki.">
-                    @endif
-                </div>
-            </div>
-
-            <div class="book-info__details">
-                <h1 class="titles titles--transform-none book-info__titles">
-                    {{ $book->title }}
-                </h1>
-
-                <ul class="lists book-info__lists">
-                    <li class="lists__item lists__item--labeled-vertical">
-                        <span class="lists__item-label">Ocena</span>
-
-                        <div class="rate book-info__rate">
-                            @for ($i = 0; $i < 5; $i++)
-                                <span class="icons icons--small rate__star rate__icons fas fa-star"></span>
-                            @endfor
-
-                            <span class="rate__details">
-                                {{ $book->rateAvg() . " ({$book->countRates()})" }}
-                            </span>
-                        </div>
-                    </li>
-
-                    <li class="lists__item lists__item--labeled-vertical">
-                        <span class="lists__item-label">ISBN</span>
-                        {{ $book->isbn }}
-                    </li>
-
-                    <li class="lists__item lists__item--labeled-vertical">
-                        <span class="lists__item-label">Wydawca</span>
-                        {{ $book->publisher->name }}
-                    </li>
-
-                    <li class="lists__item lists__item--labeled-vertical">
-                        <span class="lists__item-label">Autorzy</span>
-                        {{ $book->authors->implode('fullname', ', ') }}
-                    </li>
-
-                    <li class="lists__item lists__item--labeled-vertical">
-                        <span class="lists__item-label">Data wydania</span>
-                        {{ $book->publishing_date }}
-                    </li>
-
-
-                    <li class="lists__item lists__item--labeled-vertical">
-                        <span class="lists__item-label">Gatunki</span>
-                        {{ $book->genres->implode('name', ',') }}
-                    </li>
-                </ul>
-
-                <div class="book-info__description">
-                    <span class="book-info__description-title">Opis</span>
-
-                    <p class="book-info__description-content">
-                        {{ $book->description }}
-                    </p>
-                </div>
-
-                <div class="book-info__options">
-                    <a href="{{ route('book.download', ['slug' => $book->slug]) }}"
-                        class="buttons buttons--primary book-info__books">
-                        Pobierz
-                    </a>
-
-                    @auth
-                        @if ($userHasBook)
-                            <form class="forms tables__forms" action="{{ route('me.remove.book', ['slug' => $book->slug]) }}"
-                                method="post">
-                                @csrf
-                                @method('delete')
-                                <button class="buttons buttons--danger forms__buttons">Usuń z biblioteki</button>
-                            </form>
-                        @else
-                            <form class="forms tables__forms" action="{{ route('me.add.book', ['slug' => $book->slug]) }}"
-                                method="post">
-                                @csrf
-                                <button class="buttons buttons--primary forms__buttons">Dodaj do biblioteki</button>
-                            </form>
-                        @endif
-                    @endauth
-                </div>
+    <section class="book-page main__book-page main__section--tight">
+        <div class="book-page__thumbnail">
+            <div class="pictures book-page__pictures">
+                @if ($book->cover)
+                    <img class="pictures__img" src="{{ Storage::url($book->cover) }}" alt="Okładka książki.">
+                @else
+                    <img class="pictures__img" src="{{ asset('img/book_cover.png') }}" alt="Okładka książki.">
+                @endif
             </div>
         </div>
 
+        <div class="book-page__details">
+            <header class="headers book-page__headers">
+                <h1 class="titles titles--transform-none book-page__titles">
+                    {{ $book->title }}
+                </h1>
+            </header>
+
+            <div class="book-page__details-body">
+                <div class="book-page__info">
+                    <ul class="lists book-page__lists">
+                        <li class="lists__item lists__item--labeled-horizontal">
+                            <span class="lists__item-label">Ocena</span>
+                            <x-rate parentName="book-page" :rate=4.5 />
+                        </li>
+
+                        <li class="lists__item lists__item--labeled-horizontal">
+                            <span class="lists__item-label">ISBN</span>
+                            {{ $book->isbn }}
+                        </li>
+
+                        <li class="lists__item lists__item--labeled-horizontal">
+                            <span class="lists__item-label">Ilość stron</span>
+                            1234
+                        </li>
+
+                        <li class="lists__item lists__item--labeled-horizontal">
+                            <span class="lists__item-label">Data wydania</span>
+                            {{ $book->publishing_date }}
+                        </li>
+                    </ul>
+
+                    <ul class="lists book-page__lists">
+                        <li class="lists__item lists__item--labeled-vertical">
+                            <span class="lists__item-label">Wydawnictwo</span>
+                            {{ $book->publisher->name }}
+                        </li>
+
+                        <li class="lists__item lists__item--labeled-vertical">
+                            <span class="lists__item-label">Gatunek/Gatunki</span>
+                            {{ $book->genres->implode('name', ', ') }}
+                        </li>
+
+                        <li class="lists__item lists__item--labeled-vertical">
+                            <span class="lists__item-label">Autor/Autorzy</span>
+                            {{ $book->authors->implode('fullname', ', ') }}
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="book-page__description">
+                    <h4 class="titles titles--transform-none book-page__titles">
+                        Opis
+                    </h4>
+
+                    <p class="book-page__description-content">
+                        {{ $book->description }}
+                    </p>
+                </div>
+            </div>
+
+            <div class="book-page__options">
+                @auth
+                    @if (Auth::user()->hasBook($book->id))
+                        <form class="forms tables__forms" action="{{ route('me.remove.book', ['slug' => $book->slug]) }}"
+                            method="post">
+                            @csrf
+                            @method('delete')
+                            <button class="buttons buttons--bg-no book-item__buttons">
+                                <span role="img" class="icons icons--small fas fa-minus" aria-label="Usuń"></span>
+                            </button>
+                        </form>
+                    @else
+                        <form class="forms tables__forms" action="{{ route('me.add.book', ['slug' => $book->slug]) }}"
+                            method="post">
+                            @csrf
+                            <button class="buttons buttons--bg-no  book-item__buttons">
+                                <span role="img" class="icons icons--small fas fa-plus" aria-label="Dodaj"></span>
+                            </button>
+                        </form>
+                    @endif
+                @endauth
+
+                <a href="{{ route('book.download', ['slug' => $book->slug]) }}" class="links book-item__links">
+                    <span role="img" class="icons icons--small fas fa-file-download" aria-label="Pobierz"></span>
+                </a>
+            </div>
+        </div>
     </section>
 
-    <section class="reviews app__reviews">
-        <header class="headers reviews__headers">
-            <h2 class="titles app__titles">Recenzje</h2>
+    <section class="comments main__section--tight">
+        <h3 class="titles titles--transform-none comments__titles">
+            Recenzje ({{ $book->countReviews() }})
+        </h3>
 
-            <section class="reviews__list">
-                <ul class="lists reviews__lists">
-                    @foreach ($reviews as $review)
-                        <li class="lists__item">
-                            <div class="review reviews__review">
-                                <header class="headers review__headers">
-                                    <h3 class="titles review__titles">{{ $review->title }}</h3>
+        @auth
+            <div class="comments__add-section">
+                <form class="forms comments__forms" action="#" method="post">
+                    @csrf
+                    <input class="forms__hidden-input" type="hidden" name="id" value="{{ Auth::id() }}">
 
-                                    <div class="rate review__rate">
-                                        @for ($i = 0; $i < 5; $i++)
-                                            <span
-                                                class="icons icons--small rate__star rate__icons {{ $i < $review->rate ? 'fas fa-star' : 'far fa-star' }}"></span>
-                                        @endfor
-                                    </div>
-                                </header>
+                    <div class="forms__group">
+                        <label class="forms__group-title" for="description">
+                            Komentarz
+                            <span class="forms__required-info">*</span>
+                        </label>
+                        <textarea id="description" class="forms__input forms__input--textarea" name="description"
+                            rows="10">{{ old('description') }}</textarea>
+                        @error('description')
+                            <span class="forms__input-feedback">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
 
-                                <section class="review__body">
-                                    <div class="pictures pictures--small review__pictures">
-                                        @if ($review->user->avatar)
-                                            <img class="pictures__img" src="{{ Storage::url($review->user->avatar) }}"
-                                                alt="Avatar użytkownika.">
-                                        @else
-                                            <img class="pictures__img" src="{{ asset('img/avatar_placeholder.jpg') }}"
-                                                alt="Avatar użytkownika.">
-                                        @endif
-                                    </div>
+                    <div class="forms__buttons-group">
+                        <button class="buttons buttons--primary forms__buttons">Skomentuj</button>
+                    </div>
+                </form>
+            </div>
+        @else
+            <div class="messages comments__messages">
+                <div class="messages__icon-container messages__icon-container--info">
+                    <span class="icons icons messages__icons fas fas fa-info-circle" aria-hidden="true"></span>
+                </div>
 
-                                    <div class="review__info-group">
-                                        <section class="review__info">
-                                            <span class="review__author-info">
-                                                {{ $review->user->uid }}
-                                            </span>
-                                            <br>
-                                            <span class="review__info-item">
-                                                {{ $review->added_at }}
-                                            </span>
-                                        </section>
-                                    </div>
+                <div class="messages__body">
 
-                                    <p class="review__text">
-                                        {{ $review->text_content }}
-                                    </p>
-                                </section>
+                    <h4 class="titles messages__titles">Info</h4>
+
+                    <p class="messages__text">
+                        Zaloguj się aby dodać recenzję.
+                    </p>
+
+                </div>
+            </div>
+        @endauth
+
+        @if ($book->countReviews() === 0)
+            @for ($i = 1; $i < 5; $i++)
+                <article class="comments__item">
+                    <header class="headers comments__headers">
+                        <div class="comments__author">
+                            <div class="pictures pictures--small comment__pictures">
+                                {{-- @if ($book->avatar)
+                                <img class="pictures__img" src="{{ Storage::url($user->avatar) }}"
+                                    alt="Avatar użytkownika.">
+                            @else --}}
+                                <img class="pictures__img" src="{{ asset('img/avatar_placeholder.jpg') }}"
+                                    alt="Avatar użytkownika.">
+                                {{-- @endif --}}
                             </div>
-                        </li>
-                    @endforeach
-                </ul>
 
-                {{ $reviews->links() }}
-            </section>
-
-            @can('create', 'App\\Models\Review')
-                <section class="reviews__actions">
-                    <h3 class="titles reviews__titles">Dodaj recenzję</h3>
-                    <form class="forms reviews__forms" action="{{ route('reviews.add') }}" method="post">
-                        @csrf
-                        <div class="forms__group">
-                            <input id="bookId" class="forms__input-hidden" type="hidden" name="book_id"
-                                value="{{ $book->id }}">
+                            <span class="comments__nickname">
+                                jdoe77
+                            </span>
                         </div>
 
-                        <div class="forms__inline-section">
-                            <div class="forms__check">
-                                @for ($i = 0; $i < 5; $i++)
-                                    <input id="rate{{ $i + 1 }}" class="forms__radio forms__radio--hidden" type="radio"
-                                        name="rate" value="{{ $i + 1 }}" {{ $i === 4 ? 'checked' : null }}>
-                                    <label for="rate{{ $i + 1 }}" class="forms__radio-title">
-                                        <span class="icons icons--small rate__star rate__icons far fa-star"
-                                            data-rating="icon"></span>
-                                    </label>
-                                @endfor
-                            </div>
-                        </div>
+                        <span class="comments__timestamp">2021-02-31 12:30:24</span>
+                    </header>
 
-                        <div class="forms__group">
-                            <label class="forms__group-title" for="genres">
-                                Tytuł
-                                <span class="forms__required-info">*</span>
-                            </label>
-                            <input id="title" class="forms__input" type="text" name="title" value="{{ old('title') }}">
+                    <section class="comments__item-body">
+                        <x-rate parentName="comments" :rate=4.5 />
 
-                            @error('title')
-                                <span class="forms__input-feedback">
-                                    {{ $message }}
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="forms__group">
-                            <label class="forms__group-title" for="review">
-                                Recenzja
-                                <span class="forms__required-info">*</span>
-                            </label>
-                            <textarea id="review" class="forms__input forms__input--textarea" name="review"
-                                rows="10"></textarea>
-
-                            @error('review')
-                                <span class="forms__input-feedback">
-                                    {{ $message }}
-                                </span>
-                            @enderror
-                        </div>
-
-
-                        <div class="forms__buttons-group">
-                            <button class="buttons buttons--primary forms__buttons" type="submit">Dodaj</button>
-                        </div>
-                    </form>
-                </section>
-
-            @endcan
-        </header>
+                        <p class="comments__item-content">
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus ullam exercitationem alias
+                            adipisci dolorem reiciendis nostrum deserunt perferendis. Error doloremque rerum doloribus omnis
+                            quis magni eaque porro distinctio debitis! Mollitia?
+                        </p>
+                    </section>
+                </article>
+            @endfor
+        @else
+            <div class="notifications dashboard__notifications">
+                <span class="icons icons--x-large notifications__icons far fa-folder-open" aria-hidden="true"></span>
+                Brak komentarzy
+            </div>
+        @endif
     </section>
 @endsection

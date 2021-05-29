@@ -23,7 +23,10 @@ class VerifyUserExist
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!$this->userModel->find($request->route('id')))
+        if (!$this->userModel
+            ->where('id', $request->route('id'))
+            ->orWhere('uid', $request->route('uid'))
+            ->first())
             abort('404');
 
         return $next($request);

@@ -32,6 +32,7 @@
 
         @include media("medium") {
             grid-column: 2/-1;
+            grid-row: 2;
             grid-template-columns: repeat(2, 1fr);
         }
 
@@ -51,7 +52,7 @@
         }
 
         @include media("medium") {
-            grid-row: 1 / 4;
+            grid-row: 1;
         }
     }
 }

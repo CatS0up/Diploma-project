@@ -1,0 +1,11 @@
+.main {
+    &__section--tight {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    // mixins
+    &__messages {
+        margin: 20px;
+    }
+}

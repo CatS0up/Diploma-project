@@ -32,6 +32,11 @@ class UserService
         $this->file = $file;
     }
 
+    public function findByUid(string $uid): User
+    {
+        return $this->userModel->firstWhere('uid', $uid);
+    }
+
     public function findById(int $id): User
     {
         return $this->userModel->find($id);

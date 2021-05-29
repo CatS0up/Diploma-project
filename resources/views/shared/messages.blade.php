@@ -1,5 +1,5 @@
 @if ($message = Session::get('warning'))
-    <div class="messages app__messages">
+    <div class="messages main__messages">
         <div class="messages__icon-container messages__icon-container--warning">
             <span class="icons icons messages__icons fas fas fa-exclamation-circle" aria-hidden="true"></span>
         </div>
@@ -22,7 +22,7 @@
 @endif
 
 @if ($message = Session::get('success'))
-    <div class="messages app__messages">
+    <div class="messages main__messages">
         <div class="messages__icon-container messages__icon-container--success">
             <span class="icons icons messages__icons fas fas fa-check-circle" aria-hidden="true"></span>
         </div>
@@ -45,7 +45,7 @@
 @endif
 
 @if ($message = Session::get('info'))
-    <div class="messages app__messages">
+    <div class="messages main__messages">
         <div class="messages__icon-container messages__icon-container--info">
             <span class="icons icons messages__icons fas fas fa-info-circle" aria-hidden="true"></span>
         </div>
@@ -68,7 +68,7 @@
 @endif
 
 @if ($message = Session::get('danger'))
-    <div class="messages app__messages">
+    <div class="messages main__messages">
         <div class="messages__icon-container messages__icon-container--danger">
             <span class="icons icons messages__icons fas fas fa-exclamation-triangle" aria-hidden="true"></span>
         </div>

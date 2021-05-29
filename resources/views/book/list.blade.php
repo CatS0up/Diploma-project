@@ -103,7 +103,7 @@
                         </header>
 
                         <div class="book-item__body">
-                            <h3 class="titles book-item__titles">{{ $book->title }}</h3>
+                            <h3 class="titles titles--transform-none book-item__titles">{{ $book->title }}</h3>
 
                             <div class="book-item__options">
                                 <a href="{{ route('book.show', ['slug' => $book->slug]) }}"

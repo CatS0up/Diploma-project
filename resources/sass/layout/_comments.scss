@@ -1,0 +1,33 @@
+.comments {
+    padding-top: 50px;
+
+    &__item {
+        padding: 15px;
+        margin-top: 15px;
+
+        box-shadow: 0 0 10px 1px rgba($color: #000000, $alpha: 0.15);
+    }
+
+    &__author {
+        @include flex($align: center);
+        gap: 15px;
+    }
+
+    &__timestamp {
+        font-size: 0.7rem;
+        color: $text-muted-color;
+    }
+
+    // mixins
+    &__headers {
+        @include flex($justify: space-between);
+    }
+
+    &__forms {
+        padding: 0;
+    }
+
+    &__messages {
+        margin: 10px 0;
+    }
+}

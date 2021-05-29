@@ -51,4 +51,9 @@ class Book extends Model
     {
         return $this->reviews->count();
     }
+
+    public function countReviews(): int
+    {
+        return $this->reviews->count();
+    }
 }

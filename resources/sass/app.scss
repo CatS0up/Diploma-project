@@ -23,6 +23,7 @@
 @import "layout/navigation";
 @import "layout/sidebar";
 @import "layout/menu";
+@import "layout/main";
 @import "layout/dashboard";
 @import "layout/forms";
 @import "layout/tables";
@@ -30,7 +31,9 @@
 @import "layout/lists";
 @import "layout/genres";
 @import "layout/books";
+@import "layout/book-page";
 @import "layout/pagination";
+@import "layout/comments";
 
 // Components
 @import "components/headers";

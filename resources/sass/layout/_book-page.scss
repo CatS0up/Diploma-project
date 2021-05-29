@@ -1,0 +1,62 @@
+.book-page {
+    @include media("small") {
+        display: grid;
+        grid-template-columns: 2fr 3fr;
+        gap: 20px;
+    }
+
+    &__thumbnail {
+        padding: 70px;
+
+        @include media("small") {
+            padding: 20px;
+        }
+    }
+
+    &__details {
+        @include flex($direction: column);
+        overflow: hidden;
+
+        border-radius: 10px 10px 0 0;
+        box-shadow: 0 0 10px 1px rgba($color: #000000, $alpha: 0.15);
+    }
+
+    &__details-body {
+        flex-grow: 1;
+        padding: 20px;
+    }
+
+    &__info {
+        grid-column: 1/-1;
+
+        color: $text-muted-color;
+    }
+
+    &__description {
+        grid-column: 1/-1;
+    }
+
+    &__description-content {
+        color: $text-muted-color;
+    }
+
+    &__options {
+        @include flex($justify: center, $align: center);
+        padding: 10px 0;
+        gap: 20px;
+
+        border-top: 1px solid lightgray;
+    }
+
+    // mixins
+    &__headers {
+        padding: 15px 10px;
+
+        color: #fff;
+        background-color: $primary-color;
+    }
+
+    &__lists {
+        padding-bottom: 20px;
+    }
+}
