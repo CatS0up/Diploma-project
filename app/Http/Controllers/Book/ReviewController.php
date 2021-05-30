@@ -24,17 +24,15 @@ class ReviewController extends Controller
 
         $this->review->create($data);
 
-        return redirect()
-            ->back()
+        return back()
             ->with('success', 'Recenzja została dodana.');
     }
 
-    public function destroy(int $bookId): RedirectResponse
+    public function destroy(int $id): RedirectResponse
     {
-        $this->review->delete($bookId);
+        $this->review->delete($id);
 
-        return redirect()
-            ->route('book.show', ['id' => $bookId])
-            ->with('success', 'Recenzja została dodana.');
+        return back()
+            ->with('success', 'Recenzja została usunięta.');
     }
 }

@@ -1,6 +1,7 @@
 .book-item {
     display: grid;
     grid-template-rows: 3fr 1fr;
+    min-width: 250px;
 
     padding: 30px;
 

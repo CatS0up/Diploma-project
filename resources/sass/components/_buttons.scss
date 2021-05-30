@@ -48,4 +48,10 @@
         color: $text-muted-color;
         background-color: transparent;
     }
+
+    &__text {
+        &--muted {
+            @include color-behaviour($text-muted-color, 20%);
+        }
+    }
 }

@@ -131,8 +131,15 @@ Route::prefix('books')
 /* ===> PROFILE ROUTES <=== */
 Route::prefix('users')
     ->middleware(['auth', 'verifyUserExist'])
-    ->get('{uid}', [ProfileController::class, 'show'])
-    ->name('profile.show');
+    ->name('profile.')
+    ->group(function () {
+
+        Route::get('{uid}', [ProfileController::class, 'show'])
+            ->name('show');
+
+        Route::delete('{uid}/delete', [ProfileController::class, 'destroy'])
+            ->name('delete');;
+    });
 
 /* ===> REVIEWS ROUTES <=== */
 Route::prefix('reviews')
@@ -140,9 +147,11 @@ Route::prefix('reviews')
     ->name('reviews.')
     ->group(function () {
 
-        Route::middleware(['can:create,review'])
-            ->post('reviews/new', [ReviewController::class, 'add'])
+        Route::post('reviews/new', [ReviewController::class, 'add'])
             ->name('add');
+
+        Route::delete('reviews/{id}/delete', [ReviewController::class, 'destroy'])
+            ->name('delete');
     });
 
 /* ===> LOGGED USER ROUTES <=== */

@@ -6399,6 +6399,13 @@ select {
     align-content: center;
   }
 }
+.forms__inline-section--content-to-left {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: nowrap;
+}
 .forms__section-name {
   padding: 0 10px;
 }
@@ -6762,6 +6769,7 @@ select {
   .book-page {
     display: grid;
     grid-template-columns: 2fr 3fr;
+    align-items: center;
     gap: 20px;
   }
 }
@@ -6857,9 +6865,15 @@ select {
   padding-top: 50px;
 }
 .comments__item {
+  position: relative;
   padding: 15px;
   margin-top: 15px;
   box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.15);
+}
+.comments__item-options {
+  position: absolute;
+  bottom: 5%;
+  right: 2%;
 }
 .comments__author {
   display: flex;
@@ -6890,6 +6904,17 @@ select {
 .profile-page {
   padding-top: 20px;
 }
+@media (min-width: 560px) {
+  .profile-page {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 760px) {
+  .profile-page {
+    grid-template-columns: 1fr 3fr;
+  }
+}
 .profile-page__main-info {
   display: flex;
   flex-direction: column;
@@ -6901,14 +6926,60 @@ select {
   background-color: #0082e6;
   color: #fff;
 }
+@media (min-width: 560px) {
+  .profile-page__main-info {
+    border-radius: 10px 0 0 10px;
+  }
+}
+.profile-page__main-detail {
+  font-weight: 500;
+}
+.profile-page__name {
+  font-size: 1.3rem;
+}
 .profile-page__details {
   padding: 20px;
   border-left: 1px solid lightgray;
   border-bottom: 1px solid lightgray;
   border-right: 1px solid lightgray;
 }
-.profile-page__name {
-  font-size: 1.3rem;
+@media (min-width: 560px) {
+  .profile-page__details {
+    border-top: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+  }
+}
+@media (min-width: 760px) {
+  .profile-page__details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+.profile-page__description {
+  grid-column: 1/span 1;
+  grid-row: 2;
+}
+.profile-page__description-text {
+  color: #808080;
+}
+.profile-page__options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: nowrap;
+  padding-top: 20px;
+}
+@media (min-width: 760px) {
+  .profile-page__options {
+    justify-content: flex-end;
+    gap: 20px;
+  }
+}
+.profile-page__lists {
+  color: #808080;
 }
 
 .headers--light {
@@ -7026,6 +7097,13 @@ select {
   color: #808080;
   background-color: transparent;
 }
+.buttons__text--muted {
+  color: #808080;
+  transition: 0.2s linear;
+}
+.buttons__text--muted:hover, .buttons__text--muted:focus {
+  color: #b3b3b3;
+}
 
 .links--light {
   color: #0082e6;
@@ -7099,6 +7177,9 @@ select {
   padding: 45px 25px 25px 25px;
   background-color: #fff;
   box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.15);
+}
+.cards--single {
+  max-width: 40%;
 }
 .cards__body {
   display: flex;
@@ -7308,6 +7389,7 @@ select {
 .book-item {
   display: grid;
   grid-template-rows: 3fr 1fr;
+  min-width: 250px;
   padding: 30px;
   border: 1px solid lightgray;
 }

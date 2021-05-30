@@ -6,6 +6,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Service\User\UserService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -23,5 +24,14 @@ class ProfileController extends Controller
             'me.profile',
             ['user' => $this->user->findByUid($uid)]
         );
+    }
+
+    public function destroy(string $uid): RedirectResponse
+    {
+        $this->user->delete($this->user->findByUid($uid)->id);
+
+        return redirect()
+            ->route('home')
+            ->with('success', 'Konto zostało usunięte.');
     }
 }

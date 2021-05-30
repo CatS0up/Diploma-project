@@ -7,12 +7,11 @@ namespace App\Service\Book;
 use App\Models\Book;
 use App\Service\File\FileService;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Str;
 
 class BookService
 {
     private const FIELD_NAMES = [
-        'publisher', 'title', 'isbn', 'pdf', 'avatar', 'description', 'publishing_date',
+        'publisher', 'title', 'isbn', 'pages', 'pdf', 'avatar', 'description', 'publishing_date',
         'cover', 'reset_cover'
     ];
 
@@ -57,9 +56,10 @@ class BookService
             $bookFields['cover'] = $this->file->disk('public')->save('covers', $bookFields['cover']);
 
         $this->bookModel->publisher_id = $bookFields['publisher'];
-        $this->bookModel->slug = Str::slug($bookFields['title']);
+        $this->bookModel->slug = $bookFields['title'];
         $this->bookModel->title = $bookFields['title'];
         $this->bookModel->isbn = $bookFields['isbn'];
+        $this->bookModel->pages = $bookFields['pages'];
         $this->bookModel->file = $bookFields['pdf'];
         $this->bookModel->description = $bookFields['description'];
         $this->bookModel->publishing_date = $bookFields['publishing_date'];
@@ -82,6 +82,7 @@ class BookService
 
         $this->bookModel->title = $bookFields['title'] ?? $this->bookModel->title;
         $this->bookModel->isbn = $bookFields['isbn'] ?? $this->bookModel->isbn;
+        $this->bookModel->pages = $bookFields['pages'] ?? $this->bookModel->pages;
         $this->bookModel->file = $this->updatePdf($bookFields['pdf'] ?? null);
         $this->bookModel->description = $bookFields['description']
             ?? $this->bookModel->description;

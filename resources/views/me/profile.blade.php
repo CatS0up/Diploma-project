@@ -46,21 +46,22 @@
                 <h4 class="titles profile-page__titles">
                     Dane osobowe
                 </h4>
+                <ul class="lists profile-page__lists">
+                    <li class="lists__item lists__item--labeled-horizontal">
+                        <span class="lists__item-label">Imię i nazwisko</span>
+                        {{ $user->personalDetails->fullname }}
+                    </li>
 
-                <li class="lists__item lists__item--labeled-vertical">
-                    <span class="lists__item-label">Imię i nazwisko</span>
-                    {{ $user->personalDetails->fullname }}
-                </li>
+                    <li class="lists__item lists__item--labeled-horizontal">
+                        <span class="lists__item-label">Data urodzenia</span>
+                        {{ $user->personalDetails->birthday }}
+                    </li>
 
-                <li class="lists__item lists__item--labeled-vertical">
-                    <span class="lists__item-label">Data urodzenia</span>
-                    {{ $user->personalDetails->birthday }}
-                </li>
-
-                <li class="lists__item lists__item--labeled-vertical">
-                    <span class="lists__item-label">Płeć</span>
-                    {{ $user->personalDetails->gender }}
-                </li>
+                    <li class="lists__item lists__item--labeled-horizontal">
+                        <span class="lists__item-label">Płeć</span>
+                        {{ $user->personalDetails->gender }}
+                    </li>
+                </ul>
             </div>
 
             <div class="profile-page__details-info">
@@ -69,30 +70,52 @@
                 </h4>
 
                 <ul class="lists profile-page__lists">
-                    <li class="lists__item lists__item--labeled-vertical">
+                    <li class="lists__item lists__item--labeled-horizontal">
                         <span class="lists__item-label">Miasto</span>
                         {{ $user->address->town }}
                     </li>
 
-                    <li class="lists__item lists__item--labeled-vertical">
+                    <li class="lists__item lists__item--labeled-horizontal">
                         <span class="lists__item-label">Kod pocztowy</span>
                         {{ $user->address->zipcode }}
                     </li>
 
-                    <li class="lists__item lists__item--labeled-vertical">
+                    <li class="lists__item lists__item--labeled-horizontal">
                         <span class="lists__item-label">Ulica</span>
                         {{ $user->address->street }}
                     </li>
 
-                    <li class="lists__item lists__item--labeled-vertical">
+                    <li class="lists__item lists__item--labeled-horizontal">
                         <span class="lists__item-label">Numer domu</span>
                         {{ $user->address->house_number }}
                     </li>
                 </ul>
+            </div>
 
-                <div class="description">
-                    h5.titles.
-                </div>
+            <div class="profile-page__description">
+                <h4 class="titles titles--transform-none profile-page__titles">Opis</h4>
+
+                <p class="profile-page__description-text">
+                    {{ $user->description }}
+                </p>
+            </div>
+
+            <div class="profile-page__options">
+                <a class="buttons buttons--success profile-page__buttons"
+                    href="{{ route('admin.edit.user', ['id' => $user->id]) }}">
+                    Edycja
+                </a>
+
+                @can('delete', $user)
+                    <form class="forms tables__forms" action="{{ route('profile.delete', ['uid' => $user->uid]) }}"
+                        method="post">
+                        @csrf
+                        @method('delete')
+                        <button class="buttons buttons--danger profile-page__buttons">
+                            Usuń
+                        </button>
+                    </form>
+                @endcan
             </div>
         </div>
     </section>

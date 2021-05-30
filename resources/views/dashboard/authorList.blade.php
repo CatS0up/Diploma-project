@@ -17,8 +17,8 @@
         </header>
 
         <section class="stats dashboard__stats">
-            <div class="cards cards dashboard__cards">
-                <span class="icons icons--xx-large cards__icons cards__icons--orange fas fa-book" aria-hidden="true">
+            <div class="cards cards--single dashboard__cards">
+                <span class="icons icons--xx-large cards__icons cards__icons--red fas fa-at" aria-hidden="true">
                 </span>
 
                 <div class="cards__body">

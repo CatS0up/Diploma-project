@@ -5,15 +5,16 @@ declare(strict_types=1);
 namespace App\Service\Book;
 
 use App\Models\Book;
-use Illuminate\Support\Facades\DB;
+use App\Models\Review;
 
 class StatsService
 {
     private Book $bookModel;
 
-    public function __construct(Book $bookModel)
+    public function __construct(Book $bookModel, Review $reviewModel)
     {
         $this->bookModel = $bookModel;
+        $this->reviewModel = $reviewModel;
     }
 
     public function countStats(): array
@@ -31,7 +32,6 @@ class StatsService
 
     public function bestAmount(): int
     {
-        return (int) DB::table('reviews')
-            ->avg('rate');
+        return 100;
     }
 }

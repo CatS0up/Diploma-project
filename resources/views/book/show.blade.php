@@ -51,7 +51,7 @@
 
                         <li class="lists__item lists__item--labeled-horizontal">
                             <span class="lists__item-label">Ilość stron</span>
-                            1234
+                            {{ $book->pages }}
                         </li>
 
                         <li class="lists__item lists__item--labeled-horizontal">
@@ -125,17 +125,84 @@
 
         @auth
             <div class="comments__add-section">
-                <form class="forms comments__forms" action="#" method="post">
+                @error('book_id')
+                    <div class="messages comments__messages">
+                        <div class="messages__icon-container messages__icon-container--warning">
+                            <span class="icons icons messages__icons fas fas fa-exclamation-circle" aria-hidden="true"></span>
+                        </div>
+
+                        <div class="messages__body">
+
+                            <h4 class="titles messages__titles">Ostrzeżenie</h4>
+
+                            <p class="messages__text">
+                                {{ $message }}
+                            </p>
+
+                        </div>
+
+                        <button class="buttons buttons--bg-no  buttons--delete-text  messages__buttons" data-dismiss="alert">
+                            <span role="img" class="icons icons--small buttons__icons fas fa-times" aria-label="Zamknij alert.">
+                            </span>
+                        </button>
+                    </div>
+                @enderror
+
+                @error('user_id')
+                    <div class="messages comments__messages">
+                        <div class="messages__icon-container messages__icon-container--warning">
+                            <span class="icons icons messages__icons fas fas fa-exclamation-circle" aria-hidden="true"></span>
+                        </div>
+
+                        <div class="messages__body">
+
+                            <h4 class="titles messages__titles">Ostrzeżenie</h4>
+
+                            <p class="messages__text">
+                                {{ $message }}
+                            </p>
+
+                        </div>
+
+                        <button class="buttons buttons--bg-no  buttons--delete-text  messages__buttons" data-dismiss="alert">
+                            <span role="img" class="icons icons--small buttons__icons fas fa-times" aria-label="Zamknij alert.">
+                            </span>
+                        </button>
+                    </div>
+                @enderror
+
+                <form class="forms comments__forms" action="{{ route('reviews.add') }}" method="post">
                     @csrf
-                    <input class="forms__hidden-input" type="hidden" name="id" value="{{ Auth::id() }}">
+                    <div class="forms__group">
+                        <input class="forms__hidden-input" type="hidden" name="user_id" value="{{ Auth::id() }}">
+                    </div>
+
+                    <div class="forms__group">
+                        <input class="forms__hidden-input" type="hidden" name="book_id" value="{{ $book->id }}">
+                    </div>
+
+                    <div class="forms__inline-section forms__inline-section--content-to-left">
+                        @for ($i = 0; $i < 5; $i++)
+                            <div class="forms__check">
+                                <input id="rate{{ $i + 1 }}" class="forms__radio forms__radio--hidden" type="radio"
+                                    name="rate" value="{{ $i + 1 }}">
+                                <label for="rate{{ $i + 1 }}" class="forms__radio-title">
+                                    <span role="img"
+                                        class="rate rate__star
+                                                                                                                                                                                                                                                                                                                                                                                    rate__icons far fa-star"
+                                        data-rating="icon" aria-label="Gwiadka ocena"></span>
+                                </label>
+                            </div>
+                        @endfor
+                    </div>
 
                     <div class="forms__group">
                         <label class="forms__group-title" for="description">
                             Komentarz
                             <span class="forms__required-info">*</span>
                         </label>
-                        <textarea id="description" class="forms__input forms__input--textarea" name="description"
-                            rows="10">{{ old('description') }}</textarea>
+                        <textarea id="description" class="forms__input forms__input--textarea" name="comment"
+                            rows="10">{{ old('comment') }}</textarea>
                         @error('description')
                             <span class="forms__input-feedback">
                                 {{ $message }}
@@ -191,18 +258,37 @@
                 </header>
 
                 <section class="comments__item-body">
-                    <x-rate parentName="comments" :rate=4.5 />
+                    @php
+                        $rate = $review->rate;
+                    @endphp
+                    <x-rate parentName="comments" :rate="$rate" />
 
                     <p class="comments__item-content">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus ullam exercitationem alias
-                        adipisci dolorem reiciendis nostrum deserunt perferendis. Error doloremque rerum doloribus omnis
-                        quis magni eaque porro distinctio debitis! Mollitia?
+                        {{ $review->text_content }}
                     </p>
                 </section>
+
+                @can('delete', $review)
+                    <div class="comments__item-options">
+                        <form class="forms tables__forms" action="{{ route('reviews.delete', ['id' => $review->id]) }}"
+                            method="post">
+                            @csrf
+                            @method('delete')
+                            <button class="buttons buttons--danger-text buttons--bg-no forms__buttons">
+                                <span class="buttons__text buttons__text--muted">
+                                    Usuń
+                                </span>
+
+                                <span role="img" class="icons icons--small buttons__icons fas fa-times"
+                                    aria-label="Usuń"></span>
+                            </button>
+                        </form>
+                    </div>
+                @endcan
             </article>
         @empty
             <div class="notifications dashboard__notifications">
-                <span class="icons icons--x-large notifications__icons far fa-folder-open" aria-hidden="true"></span>
+                <span class="icons icons--x-large notifications__icons fas fa-folder-open" aria-hidden="true"></span>
                 Brak recenzji
             </div>
         @endforelse

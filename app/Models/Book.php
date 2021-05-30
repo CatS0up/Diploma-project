@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Book extends Model
 {
@@ -34,6 +35,11 @@ class Book extends Model
     public function setTitleAttribute(string $title): void
     {
         $this->attributes['title'] = ucwords($title);
+    }
+
+    public function setSlugAttribute(string $title): void
+    {
+        $this->attributes['slug'] = Str::slug($title . '-' . $this->publisher->name);
     }
 
     /* ===> Methods <=== */

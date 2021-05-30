@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Policies;
 
+use App\Models\Review;
 use App\Models\Reviews;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Auth\Access\Response;
 
 class ReviewPolicy
 {
@@ -16,8 +18,8 @@ class ReviewPolicy
         return !$user->hasReview();
     }
 
-    // public function delete(User $user, Reviews $reviews)
-    // {
-    //     //
-    // }
+    public function delete(User $user, Review $reviews)
+    {
+        return $user->id === $reviews->user_id || $user->isAdmin();
+    }
 }

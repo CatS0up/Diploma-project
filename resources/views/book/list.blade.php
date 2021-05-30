@@ -22,9 +22,12 @@
                 </header>
 
                 <ul class="menu genres__menu">
+                    <li class="menu__item">
+                        <a href="{{ url()->full() . '?genre=' . 'all' }}" class="links genres__links">Wszystkie</a>
+                    </li>
                     @forelse ($genres as $genre)
                         <li class="menu__item">
-                            <a href="{{ url()->full() . '?genre=' . $genre->slug }}"
+                            <a href="{{ url()->current() . '?genre=' . $genre->slug }}"
                                 class="links genres__links">{{ $genre->name }}</a>
                         </li>
                     @empty
@@ -35,7 +38,7 @@
                 </ul>
             </aside>
 
-            <div class="books__filters">
+            <div class="filters books__filters">
                 <form class="forms forms--inline main__forms" action="{{ url()->current() }}" method="get">
                     @csrf
                     <div class="forms__group">
@@ -78,7 +81,6 @@
 
                     <div class="forms__buttons-group forms__buttons-group--content-to-left">
                         <button class="buttons buttons--primary forms__buttons" type="submit">Filtruj</button>
-                        <a class="buttons buttons--success forms__buttons" href="{{ route('admin.add.book') }}">Dodaj</a>
                     </div>
                 </form>
 

@@ -28,6 +28,10 @@
             grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
             align-content: center;
         }
+
+        &--content-to-left {
+            @include flex();
+        }
     }
 
     &__section-name {

@@ -113,6 +113,23 @@ class UserService
         return $this->userModel;
     }
 
+    public function delete(int $id): bool
+    {
+        $user = $this->userModel->find($id);
+
+        if ($user->hasAvatar())
+            $this->file->delete($user->avatar);
+
+        $user->delete();
+
+        return (bool) $this->userModel->find($id);
+    }
+
+    public function acceptableFields(): array
+    {
+        return self::FIELD_NAMES;
+    }
+
     private function updatePwd(?string $pwd): ?string
     {
         return empty($pwd) ? $this->userModel->pwd : Hash::make($pwd);
@@ -127,11 +144,6 @@ class UserService
         }
 
         return null;
-    }
-
-    public function acceptableFields(): array
-    {
-        return self::FIELD_NAMES;
     }
 
     private function splitData(array $data): array

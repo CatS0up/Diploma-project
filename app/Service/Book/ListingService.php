@@ -42,12 +42,7 @@ class ListingService implements BookListing
             $phrase = "{$filters['q']}%";
 
             $query->where('title', 'like', $phrase)
-                ->orWhere('isbn', 'like', $phrase)
-                ->orWhereHas(
-                    'authors',
-                    fn (Builder $q) => $q->where('firstname', 'like', $phrase)
-                        ->orWhere('lastname', 'like', $phrase)
-                );
+                ->orWhere('isbn', 'like', $phrase);
         }
 
         if ($filters['publisher'] !== self::TYPE_ALL) {

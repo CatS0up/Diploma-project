@@ -10,7 +10,7 @@ class Rating extends Component
 {
     public float $rate;
     public string $parentName;
-    public int $ratesAmount;
+    public ?int $ratesAmount;
     /**
      * Create a new component instance.
      *

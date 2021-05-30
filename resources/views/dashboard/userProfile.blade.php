@@ -154,7 +154,7 @@
                                 @csrf
                                 @method('delete')
                                 <button class="buttons buttons--bg-no buttons--delete-text show__buttons">
-                                    <span role="img" class="icons show__icons fas fa-trash" aria-label="Usuń"></span>
+                                    <span role="img" class="icons buttons__icons fas fa-trash" aria-label="Usuń"></span>
                                 </button>
                             </form>
                         @endcan
