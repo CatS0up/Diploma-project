@@ -6700,6 +6700,7 @@ select {
   .books {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    align-items: flex-start;
     gap: 20px;
   }
 }
@@ -6722,14 +6723,14 @@ select {
   .books__items {
     grid-column: 1/-1;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, auto);
     gap: 20px;
   }
 }
 @media (min-width: 760px) {
   .books__items {
     grid-column: 2/-1;
-    grid-row: 2;
+    grid-row: 2/span 2;
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -6750,8 +6751,11 @@ select {
 }
 @media (min-width: 760px) {
   .books__genres {
-    grid-row: 1;
+    grid-row: 1/span 2;
   }
+}
+.books__notifications {
+  grid-column: 1/-1;
 }
 
 @media (min-width: 560px) {
@@ -6881,6 +6885,30 @@ select {
 }
 .comments__messages {
   margin: 10px 0;
+}
+
+.profile-page {
+  padding-top: 20px;
+}
+.profile-page__main-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: 30px;
+  border-radius: 10px 10px 0 0;
+  background-color: #0082e6;
+  color: #fff;
+}
+.profile-page__details {
+  padding: 20px;
+  border-left: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+  border-right: 1px solid lightgray;
+}
+.profile-page__name {
+  font-size: 1.3rem;
 }
 
 .headers--light {
@@ -7155,6 +7183,9 @@ select {
 .pictures--small {
   max-width: 50px;
 }
+.pictures--medium {
+  max-width: 150px;
+}
 .pictures__img {
   display: block;
   width: 100%;
@@ -7292,7 +7323,7 @@ select {
   align-items: center;
   flex-wrap: nowrap;
   gap: 20px;
-  padding-top: 10px;
+  padding-top: 15px;
   border-top: 1px solid lightgray;
 }
 .book-item__pictures {

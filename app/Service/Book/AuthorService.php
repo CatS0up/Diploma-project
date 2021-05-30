@@ -29,6 +29,7 @@ class AuthorService
     public function createMany(array $data): Collection
     {
         $authors = preg_split('/ ?[,]{1} ?/', $data['authors']);
+        $authors = array_unique($authors);
 
         $authorModels = [];
         foreach ($authors as $author) {

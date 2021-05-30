@@ -4,6 +4,7 @@
     @include media("small") {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
+        align-items: flex-start;
         gap: 20px;
     }
 
@@ -24,15 +25,14 @@
     &__items {
         @include media("small") {
             grid-column: 1 / -1;
-
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2, auto);
             gap: 20px;
         }
 
         @include media("medium") {
             grid-column: 2/-1;
-            grid-row: 2;
+            grid-row: 2 / span 2;
             grid-template-columns: repeat(2, 1fr);
         }
 
@@ -52,7 +52,11 @@
         }
 
         @include media("medium") {
-            grid-row: 1;
+            grid-row: 1 / span 2;
         }
+    }
+
+    &__notifications {
+        grid-column: 1 / -1;
     }
 }

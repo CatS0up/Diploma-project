@@ -144,7 +144,7 @@
 
                     </article>
                 @empty
-                    <div class="notifications dashboard__notifications">
+                    <div class="notifications books__notifications">
                         <span class="icons icons--x-large notifications__icons far fa-folder-open"
                             aria-hidden="true"></span>
                         Brak książek

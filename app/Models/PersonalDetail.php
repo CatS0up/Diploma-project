@@ -26,4 +26,11 @@ class PersonalDetail extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /* ===> Accesors <=== */
+
+    public function getFullNameAttribute(): string
+    {
+        return "{$this->firstname} {$this->lastname}";
+    }
 }

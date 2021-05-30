@@ -37,10 +37,14 @@
                     <ul class="lists book-page__lists">
                         <li class="lists__item lists__item--labeled-horizontal">
                             <span class="lists__item-label">Ocena</span>
-                            <x-rate parentName="book-page" :rate=4.5 />
+                            @php
+                                $rate = $book->rateAvg();
+                                $amount = $book->countRates();
+                            @endphp
+                            <x-rate parentName="book-page" :rate="$rate" :ratesAmount="$amount" />
                         </li>
 
-                        <li class="lists__item lists__item--labeled-horizontal">
+                        <li class=" lists__item lists__item--labeled-horizontal">
                             <span class="lists__item-label">ISBN</span>
                             {{ $book->isbn }}
                         </li>
@@ -162,45 +166,45 @@
             </div>
         @endauth
 
-        @if ($book->countReviews() === 0)
-            @for ($i = 1; $i < 5; $i++)
-                <article class="comments__item">
-                    <header class="headers comments__headers">
-                        <div class="comments__author">
-                            <div class="pictures pictures--small comment__pictures">
-                                {{-- @if ($book->avatar)
-                                <img class="pictures__img" src="{{ Storage::url($user->avatar) }}"
+        @forelse ($book->reviews as $review)
+            <article class="comments__item">
+                <header class="headers comments__headers">
+                    <div class="comments__author">
+                        <div class="pictures pictures--small comment__pictures">
+                            @if ($book->avatar)
+                                <img class="pictures__img" src="{{ Storage::url($review->user->avatar) }}"
                                     alt="Avatar użytkownika.">
-                            @else --}}
+                            @else
                                 <img class="pictures__img" src="{{ asset('img/avatar_placeholder.jpg') }}"
                                     alt="Avatar użytkownika.">
-                                {{-- @endif --}}
-                            </div>
-
-                            <span class="comments__nickname">
-                                jdoe77
-                            </span>
+                            @endif
                         </div>
 
-                        <span class="comments__timestamp">2021-02-31 12:30:24</span>
-                    </header>
+                        <span class="comments__nickname">
+                            {{ $review->user->uid }}
+                        </span>
+                    </div>
 
-                    <section class="comments__item-body">
-                        <x-rate parentName="comments" :rate=4.5 />
+                    <span class="comments__timestamp">
+                        {{ $review->user->created_at }}
+                    </span>
+                </header>
 
-                        <p class="comments__item-content">
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus ullam exercitationem alias
-                            adipisci dolorem reiciendis nostrum deserunt perferendis. Error doloremque rerum doloribus omnis
-                            quis magni eaque porro distinctio debitis! Mollitia?
-                        </p>
-                    </section>
-                </article>
-            @endfor
-        @else
+                <section class="comments__item-body">
+                    <x-rate parentName="comments" :rate=4.5 />
+
+                    <p class="comments__item-content">
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus ullam exercitationem alias
+                        adipisci dolorem reiciendis nostrum deserunt perferendis. Error doloremque rerum doloribus omnis
+                        quis magni eaque porro distinctio debitis! Mollitia?
+                    </p>
+                </section>
+            </article>
+        @empty
             <div class="notifications dashboard__notifications">
                 <span class="icons icons--x-large notifications__icons far fa-folder-open" aria-hidden="true"></span>
-                Brak komentarzy
+                Brak recenzji
             </div>
-        @endif
+        @endforelse
     </section>
 @endsection

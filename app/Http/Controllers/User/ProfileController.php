@@ -20,7 +20,7 @@ class ProfileController extends Controller
     public function show(string $uid): View
     {
         return view(
-            'user.profile',
+            'me.profile',
             ['user' => $this->user->findByUid($uid)]
         );
     }

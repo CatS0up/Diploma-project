@@ -33,6 +33,7 @@ class GenreService
     public function createMany(array $data): Collection
     {
         $genres = preg_split('/ ?[,]{1} ?/', $data['genres']);
+        $genres = array_unique($genres);
 
         $genreModels = [];
         foreach ($genres as $genre) {

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Service\Book;
 
 use App\Models\Book;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 
 class StatsService
 {
@@ -31,6 +31,7 @@ class StatsService
 
     public function bestAmount(): int
     {
-        return 100;
+        return (int) DB::table('reviews')
+            ->avg('rate');
     }
 }

@@ -21,7 +21,7 @@ class CreateReviewsTable extends Migration
             $table->string('title', 255);
             $table->tinyInteger('rate');
             $table->text('text_content');
-            $table->timestamp('added_at')->useCurrent();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

@@ -93,6 +93,11 @@ class User extends Authenticatable
         $this->attributes['pwd'] = Hash::make($pwd);
     }
 
+    public function setGenderAttribute(string $gender): void
+    {
+        $this->attributes['gender'] = strtoupper($gender);
+    }
+
     /* ===> Methods <=== */
     public function addBook(Book $book): void
     {

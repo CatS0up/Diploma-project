@@ -1,0 +1,24 @@
+.profile-page {
+    padding-top: 20px;
+
+    &__main-info {
+        @include flex($direction: column, $align: center);
+        padding: 30px;
+
+        border-radius: 10px 10px 0 0;
+        background-color: $primary-color;
+        color: #fff;
+    }
+
+    &__details {
+        padding: 20px;
+
+        border-left: 1px solid lightgray;
+        border-bottom: 1px solid lightgray;
+        border-right: 1px solid lightgray;
+    }
+
+    &__name {
+        font-size: 1.3rem;
+    }
+}

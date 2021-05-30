@@ -19,6 +19,7 @@ class CreateBooksTable extends Migration
             $table->string('slug')->unique();
             $table->string('title', 100)->index();
             $table->string('isbn', 13)->unique();
+            $table->smallInteger('pages');
             $table->string('file');
             $table->text('description');
             $table->timestamps();

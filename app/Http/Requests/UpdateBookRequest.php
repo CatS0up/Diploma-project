@@ -29,7 +29,13 @@ class UpdateBookRequest extends FormRequest
             'cover' => 'nullable|file|image',
             'pdf' => 'nullable|file|mimes:pdf',
             'title' => 'required|regex:/^[a-zA-ZzżźćńółęąśŻŹĆĄŚĘŁÓŃ\- ]*$/',
-            'isbn' => ['required', 'numeric', new Isbn(), Rule::unique('books')->ignore($this->route('id'))],
+            'isbn' => [
+                'required',
+                'numeric',
+                new Isbn(),
+                Rule::unique('books')->ignore($this->route('id'))
+            ],
+            'pages' => 'required|numeric|integer',
             'publisher' => 'required',
             'authors' => 'required',
             'genres' => 'required',
@@ -54,6 +60,10 @@ class UpdateBookRequest extends FormRequest
             'isbn.required' => 'Numer ISBN nie może być pusty.',
             'isbn.numeric' => 'Pole akceptuje jedynie wartości numeryczne.',
             'isbn.unique' => 'Numer ISBN jest przypisany do innej książki.',
+
+            'pages.required' => 'Liczba stron nie może być pusta',
+            'pages.numeric' => 'Pole akceptuje jedynie wartości numeryczne.',
+            'pages.integer' => 'Pole akceptuje jedynie liczby całkowite.',
 
             'publisher.required' => 'Nazwa wydawcy nie może być pusta.',
 
