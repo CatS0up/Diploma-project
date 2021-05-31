@@ -38,7 +38,7 @@
                         <li class="lists__item lists__item--labeled-horizontal">
                             <span class="lists__item-label">Ocena</span>
                             @php
-                                $rate = $book->rateAvg();
+                                $rate = $book->rateAvg;
                                 $amount = $book->countRates();
                             @endphp
                             <x-rate parentName="book-page" :rate="$rate" :ratesAmount="$amount" />
@@ -189,7 +189,7 @@
                                 <label for="rate{{ $i + 1 }}" class="forms__radio-title">
                                     <span role="img"
                                         class="rate rate__star
-                                                                                                                                                                                                                                                                                                                                                                                    rate__icons far fa-star"
+                                                                                                                                                                                                                                                                                                                                                                                                    rate__icons far fa-star"
                                         data-rating="icon" aria-label="Gwiadka ocena"></span>
                                 </label>
                             </div>
@@ -233,7 +233,7 @@
             </div>
         @endauth
 
-        @forelse ($book->reviews as $review)
+        @forelse ($reviews as $review)
             <article class="comments__item">
                 <header class="headers comments__headers">
                     <div class="comments__author">

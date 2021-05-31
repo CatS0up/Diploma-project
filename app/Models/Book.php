@@ -42,6 +42,12 @@ class Book extends Model
         $this->attributes['slug'] = Str::slug($title . '-' . $this->publisher->name);
     }
 
+    /* ===> Accessors <=== */
+    public function getRateAvgAttribute(): float
+    {
+        return round($this->reviews()->avg('rate'), 2);
+    }
+
     /* ===> Methods <=== */
     public function hasCover(): bool
     {

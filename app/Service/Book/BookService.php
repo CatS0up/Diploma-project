@@ -39,7 +39,7 @@ class BookService
 
     public function findBySlug(string $slug): Book
     {
-        return $this->bookModel->firstWhere('slug', $slug);
+        return $this->bookModel->with(['genres', 'authors'])->firstWhere('slug', $slug);
     }
 
     public function create(array $data): Book

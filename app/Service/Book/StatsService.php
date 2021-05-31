@@ -6,6 +6,7 @@ namespace App\Service\Book;
 
 use App\Models\Book;
 use App\Models\Review;
+use Illuminate\Support\Facades\DB;
 
 class StatsService
 {
@@ -32,6 +33,14 @@ class StatsService
 
     public function bestAmount(): int
     {
-        return 100;
+        $subquery = DB::table('reviews')
+            ->selectRaw(DB::raw('AVG(rate) as avg_rate'))
+            ->groupBy('reviews.book_id')
+            ->havingRaw('avg_rate >= 4');
+
+        $count = DB::table(DB::raw("({$subquery->toSql()}) as bestTable"))
+            ->count();
+
+        return $count;
     }
 }

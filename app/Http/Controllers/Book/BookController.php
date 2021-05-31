@@ -33,7 +33,7 @@ class BookController extends Controller
 
         return view('book.show', [
             'book' => $book,
-            'reviews' => $book->reviews()->paginate(5),
+            'reviews' => $book->reviews()->with('user')->paginate(5),
             'userHasBook' => !isset($user) ?: $user->hasBook($book->id)
         ]);
     }
