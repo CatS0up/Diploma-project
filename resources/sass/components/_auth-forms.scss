@@ -15,8 +15,10 @@
     }
 
     &--pictured {
-        display: grid;
-        grid-template-columns: 60% auto;
-        align-items: center;
+        @include media("small") {
+            display: grid;
+            grid-template-columns: 60% auto;
+            align-items: center;
+        }
     }
 }

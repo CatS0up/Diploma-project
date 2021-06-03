@@ -23,7 +23,7 @@
 
                 <ul class="menu genres__menu">
                     <li class="menu__item">
-                        <a href="{{ url()->full() . '?genre=' . 'all' }}" class="links genres__links">Wszystkie</a>
+                        <a href="{{ url()->current() . '?genre=' . 'all' }}" class="links genres__links">Wszystkie</a>
                     </li>
                     @forelse ($genres as $genre)
                         <li class="menu__item">

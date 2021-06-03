@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Policies;
 
 use App\Models\Review;
-use App\Models\Reviews;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 

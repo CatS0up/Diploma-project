@@ -6726,19 +6726,18 @@ select {
   grid-column: 2/-1;
   grid-row: 1/span 1;
 }
-@media (min-width: 560px) {
-  .books__items {
-    grid-column: 1/-1;
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    gap: 20px;
-  }
+.books__items {
+  display: grid;
+  gap: 20px;
+  grid-column: 1/-1;
+  grid-template-columns: repeat(2, auto);
+  align-items: flex-start;
 }
 @media (min-width: 760px) {
   .books__items {
     grid-column: 2/-1;
     grid-row: 2/span 2;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 @media (min-width: 960px) {
@@ -7440,8 +7439,10 @@ select {
 .auth-forms--large {
   max-width: 1000px;
 }
-.auth-forms--pictured {
-  display: grid;
-  grid-template-columns: 60% auto;
-  align-items: center;
+@media (min-width: 560px) {
+  .auth-forms--pictured {
+    display: grid;
+    grid-template-columns: 60% auto;
+    align-items: center;
+  }
 }

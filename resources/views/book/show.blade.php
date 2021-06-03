@@ -189,7 +189,7 @@
                                 <label for="rate{{ $i + 1 }}" class="forms__radio-title">
                                     <span role="img"
                                         class="rate rate__star
-                                                                                                                                                                                                                                                                                                                                                                                                    rate__icons far fa-star"
+                                                                                                                                                                                                                                                                                                                                                                                                                    rate__icons far fa-star"
                                         data-rating="icon" aria-label="Gwiadka ocena"></span>
                                 </label>
                             </div>

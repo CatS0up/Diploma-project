@@ -20,7 +20,7 @@ class Authentication
         if (Auth::guest())
             return redirect()
                 ->route('auth.login')
-                ->with('info', 'Sekcja dostępna jedynie dla zalogowanych użytkoników.');
+                ->with('info', 'Sekcja dostępna jedynie dla zalogowanych użytkowników.');
 
         return $next($request);
     }
