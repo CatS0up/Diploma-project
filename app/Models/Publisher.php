@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Publisher extends Model
 {
@@ -12,7 +13,7 @@ class Publisher extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'name',
+        'name', 'slug'
     ];
 
     /* ===> Relations <=== */
@@ -25,5 +26,11 @@ class Publisher extends Model
     public function setNameAttribute(string $name): void
     {
         $this->attributes['name'] = ucwords($name);
+        $this->attributes['slug'] = Str::slug($name);
+    }
+
+    public function setSlugAttribute(string $name): void
+    {
+        $this->attributes['slug'] = Str::slug($name);
     }
 }

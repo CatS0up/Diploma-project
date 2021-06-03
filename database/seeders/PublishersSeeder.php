@@ -22,7 +22,8 @@ class PublishersSeeder extends Seeder
         DB::table('publishers')
             ->insert(
                 array_map(fn ($name) => [
-                    'name' => $name
+                    'name' => $name,
+                    'slug' => $name
                 ], self::INITIAL_PUBLISHERS)
             );
     }

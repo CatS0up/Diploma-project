@@ -38,22 +38,22 @@ class ListingService implements BookListing
     {
         $query = $this->bookModel->with(self::RELATIONS);
 
-        if ($filters['q']) {
+        if (isset($filters['q'])) {
             $phrase = "{$filters['q']}%";
 
             $query->where('title', 'like', $phrase)
                 ->orWhere('isbn', 'like', $phrase);
         }
 
-        if ($filters['publisher'] !== self::TYPE_ALL) {
+        if ($filters['publisher'] ?? self::TYPE_ALL !== self::TYPE_ALL) {
             $query->whereHas('publisher', fn (Builder $q) => $q->where('name', $filters['publisher']));
         }
 
-        if ($filters['genre'] !== self::TYPE_ALL) {
+        if ($filters['genre'] ?? self::TYPE_ALL !== self::TYPE_ALL) {
             $query->whereHas('genres', fn (Builder $q) => $q->where('slug', $filters['genre']));
         }
 
-        if ($sort = $filters['sort']) {
+        if ($sort = $filters['sort'] ?? self::SORT_DEFAULT) {
             $sort = in_array($sort, ['asc', 'desc']) ? $sort : self::SORT_DEFAULT;
 
             $query->orderBy('title', $sort);

@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Genre;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\DB;
 
 class GenresSeeder extends Seeder
 {
@@ -20,15 +19,11 @@ class GenresSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('genres')
-            ->insert(
-                array_map(
-                    fn ($name) =>  [
-                        'name' => $name,
-                        'slug' => Str::slug($name)
-                    ],
-                    self::INITIAL_GENRES
-                )
-            );
+        foreach (self::INITIAL_GENRES as $genre)
+            Genre::factory()
+                ->create([
+                    'name' => $genre,
+                    'slug' => $genre
+                ]);
     }
 }

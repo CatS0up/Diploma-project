@@ -17,13 +17,23 @@ class UsersSeeder extends Seeder
     {
         // Initial privilaged users
         User::factory()
-            ->count(2)
             ->hasAddress()
             ->hasPersonalDetails()
             ->create(
                 [
                     'role_id' => '3',
                     'uid' => 'jdoe77',
+                    'pwd' => self::INITIAL_PWD
+                ]
+            );
+
+        User::factory()
+            ->hasAddress()
+            ->hasPersonalDetails()
+            ->create(
+                [
+                    'role_id' => '2',
+                    'uid' => 'johndoe23',
                     'pwd' => self::INITIAL_PWD
                 ]
             );
