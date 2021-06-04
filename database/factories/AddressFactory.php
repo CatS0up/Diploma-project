@@ -25,7 +25,7 @@ class AddressFactory extends Factory
             'town' => $this->faker->city(),
             'zipcode' => $this->faker->postcode(),
             'street' => $this->faker->streetName(),
-            'house_number' => $this->faker->buildingNumber()
+            'local_number' => $this->faker->buildingNumber()
         ];
     }
 }

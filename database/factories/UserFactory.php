@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Address;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,6 +23,8 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
+            'role_id' => 1,
+            'address_id' => $this->faker->numberBetween(1, 500),
             'uid' => $this->faker->unique()->userName(),
             'email' => $this->faker->unique()->email(),
             'phone' => $this->faker->unique()->numberBetween(1000000, 99999999),

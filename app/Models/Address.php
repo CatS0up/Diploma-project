@@ -18,12 +18,12 @@ class Address extends Model
         'street',
         'zipcode',
         'building_number',
-        'house_number'
+        'local_number'
     ];
 
     /* ===> Relations <=== */
-    public function user()
+    public function users()
     {
-        $this->belongsTo(User::class);
+        $this->hasMany(User::class);
     }
 }

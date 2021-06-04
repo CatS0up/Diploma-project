@@ -25,8 +25,10 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function authenticate(LoginRequest $request, User $userModel): RedirectResponse
-    {
+    public function authenticate(
+        LoginRequest $request,
+        User $userModel
+    ): RedirectResponse {
 
         $this->auth->authenticate($request->validated(), $userModel);
 

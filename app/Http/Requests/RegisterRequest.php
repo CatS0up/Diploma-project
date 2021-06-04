@@ -36,7 +36,7 @@ class RegisterRequest extends FormRequest
             'town' => 'required|regex:/^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ\- ]*$/',
             'street' => 'nullable',
             'zipcode' => new Zipcode(),
-            'house_number' => ['required', 'regex:/^([A-Za-z0-9]+)|([A-Za-z0-9]+\/[A-Za-z0-9]+)$/'],
+            'local_number' => ['required', 'regex:/^([A-Za-z0-9]+)|([A-Za-z0-9]+\/[A-Za-z0-9]+)$/'],
             'avatar' => 'nullable|file|image',
             'description' => 'nullable|max:255'
         ];
@@ -80,8 +80,8 @@ class RegisterRequest extends FormRequest
             'town.required' => 'Miasto nie może być puste.',
             'town.regex' => 'Nazwa miasta może składać się jedynie z liter i spacji.',
 
-            'house_number.required' => 'Numer domu nie może być pusty.',
-            'house_number.regex' => 'Numer domu powinien być zgodny z formatem xx/xx lub xx.',
+            'local_number.required' => 'Numer lokalu nie może być pusty.',
+            'local_number.regex' => 'Numer lokalu powinien być zgodny z formatem xx/xx lub xx.',
 
             'avatar.file' => 'Wysyłanie pliku nie powiodło się.',
             'avatar.image' => 'Avatar musi być plikiem graficznym.',

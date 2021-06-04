@@ -2,12 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Address;
 use Illuminate\Database\Seeder;
 
-class UsersSeeder extends Seeder
+class AddressesSeeder extends Seeder
 {
-    private const INITIAL_PWD = 'FooBar12345%';
     /**
      * Run the database seeds.
      *
@@ -15,9 +14,8 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()
-            ->count(1234)
-            ->hasPersonalDetails()
+        Address::factory()
+            ->count(500)
             ->create();
     }
 }
