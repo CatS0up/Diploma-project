@@ -4,66 +4,75 @@ declare(strict_types=1);
 
 namespace App\Services\Book;
 
-use App\Models\Publisher;
-use App\Services\Book\BookListing;
-use App\Services\Book\Genres\GenreListing;
+use App\Repositories\BookRepository;
+use App\Repositories\GenreRepository;
+use App\Repositories\PublisherRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
 class BookCatalog
 {
     private const EXPECTED_FILTERS = ['q', 'genre', 'publisher', 'sort'];
+    private const DEFAULT_FILTERS = [
+        'genre' => 'all',
+        'publisher' => 'all',
+        'sort' => 'asc'
+    ];
 
-    private BookListing $bookList;
-    private GenreListing $genreList;
-    private Publisher $publisherList;
+    private BookRepository $bookRepository;
+    private GenreRepository $genreRepository;
+    private PublisherRepository $publisherRepository;
 
     private array $filters = [];
 
     public function __construct(
-        BookListing $bookListing,
-        GenreListing $genreList,
-        Publisher $publisherList
+        BookRepository $bookRepository,
+        GenreRepository $genreRepository,
+        PublisherRepository $publisherRepository
     ) {
-        $this->bookList = $bookListing;
-        $this->genreList = $genreList;
-        $this->publisherList = $publisherList;
+        $this->bookRepository = $bookRepository;
+        $this->genreRepository = $genreRepository;
+        $this->publisherRepository = $publisherRepository;
     }
 
     public function genres(): Collection
     {
-        return $this->genreList->all();
+        return $this->genreRepository->all();
     }
 
     public function publishers(): Collection
     {
-        return $this->publisherListnig->all();
+        return $this->publisherRepository->all();
     }
 
-    public function filteredBooks(array $filters): LengthAwarePaginator
-    {
-        $this->prepareFilters($filters);
+    public function filteredBooks(
+        array $filters,
+        array $chosedFilters = self::EXPECTED_FILTERS
+    ): LengthAwarePaginator {
 
-        return $this->bookList->filterBy($this->filters());
+        $this->prepareFilters($filters, $chosedFilters);
+
+        return $this->bookRepository
+            ->filterBy($this->filters())
+            ->appends($this->filters);
     }
 
     public function filters(): array
     {
-        return $this->filters();
+        return $this->filters;
     }
 
-    private function prepareFilters(array $filters): void
+    private function prepareFilters(array $filters, array $chosedFilters): void
     {
-        $this->filters = array_map(
-            function ($excpectedFiler) use ($filters) {
+        $filters = array_intersect_key($chosedFilters, self::EXPECTED_FILTERS);
 
-                if (!array_key_exists($excpectedFiler, $filters)) {
-                    return $filters[$excpectedFiler] = null;
-                }
+        foreach ($filters as $name) {
 
-                return $filters[$excpectedFiler];
-            },
-            self::EXPECTED_FILTERS,
-        );
+            if (!array_key_exists($name, $filters)) {
+                $this->filters[$name] = self::DEFAULT_FILTERS[$name] ?? null;
+            } else {
+                $this->filters[$name] = $filters[$name];
+            }
+        }
     }
 }

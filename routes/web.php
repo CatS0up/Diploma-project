@@ -32,6 +32,7 @@ Route::get('/', [BookController::class, 'list'])
     ->name('home');
 
 /* ==, ADMIN-LEVEL ROUTES <=== */
+
 Route::prefix('admin')
     ->middleware(['auth', 'can:admin-level'])
     ->name('admin.')

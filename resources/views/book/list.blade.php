@@ -40,7 +40,9 @@
 
             <div class="filters books__filters">
                 <form class="forms forms--inline main__forms" action="{{ url()->current() }}" method="get">
-                    @csrf
+                    {{-- @csrf --}}
+                    <input class="forms__hidden-input" type="hidden" name="genre" value="{{ $activeGenre }}">
+
                     <div class="forms__group">
                         <label class="forms__group-title" for="search">
                             Wyszukiwarka

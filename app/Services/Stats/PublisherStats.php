@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Book;
+namespace App\Services\Stats;
 
 use App\Models\Publisher;
-use Illuminate\Support\Collection;
 
-class PublisherListing
+class PublisherStats
 {
     private Publisher $publisher;
 
@@ -16,8 +15,8 @@ class PublisherListing
         $this->publisher = $publisher;
     }
 
-    public function all(): Collection
+    public function coun(): int
     {
-        return $this->publisher->all();
+        return $this->publisher->count();
     }
 }

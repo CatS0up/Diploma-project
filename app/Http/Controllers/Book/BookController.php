@@ -31,17 +31,16 @@ class BookController extends Controller
 
     public function list(Request $request, BookCatalog $catalog): View
     {
-        $filters = $request->only(['q', 'gender', 'publisher', 'sort']);
+        $expectedFilters = ['q', 'genre', 'publisher', 'sort'];
 
-        $catalog->filteredBooks($filters);
-
-        dd($catalog->filters());
+        $filters = $request->only($expectedFilters);
 
         return view('book.list', [
-            'books' => $catalog->filteredBooks($filters),
+            'books' => $catalog->filteredBooks($filters, $expectedFilters),
             'genres' => $catalog->genres(),
             'publishers' => $catalog->publishers(),
-            'filters' => $catalog->filters()
+            'filters' => $catalog->filters(),
+            'activeGenre' => $request->query('genre')
         ]);
     }
 }

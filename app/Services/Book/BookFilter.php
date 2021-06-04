@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Services\Book;
 
-use Illuminate\Database\Eloquent\Builder;
+use App\Models\Book;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class BookFilter
 {
-    private Builder $query;
+    private Book $query;
 
-    public function __construct(Builder $query)
+    public function __construct(Book $query)
     {
         $this->query = $query;
     }
@@ -32,7 +32,7 @@ class BookFilter
         $this->query
             ->whereHas(
                 'publisher',
-                fn (Builder $q) => $q->where('name', $publisherName)
+                fn ($q) => $q->where('name', $publisherName)
             );
 
         return $this;
@@ -43,7 +43,7 @@ class BookFilter
         $this->query
             ->whereHas(
                 'genres',
-                fn (Builder $q) => $q->where('name', $genreName)
+                fn ($q) => $q->where('name', $genreName)
             );
 
         return $this;
