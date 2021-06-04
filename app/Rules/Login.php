@@ -23,9 +23,9 @@ class Login implements Rule
     public function passes($attribute, $value)
     {
         $record = User::uid($value)
-            ->get();
+            ->first();
 
-        return $record->isNotEmpty();
+        return (bool) $record;
     }
 
     /**

@@ -15,8 +15,39 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
+        /* Initial users */
+
+        // Superadmin
         User::factory()
-            ->count(1234)
+            ->hasPersonalDetails()
+            ->create([
+                'role_id' => 3,
+                'uid' => 'johndoe77',
+                'pwd' => self::INITIAL_PWD
+            ]);
+
+        // Admin
+        User::factory()
+            ->hasPersonalDetails()
+            ->create([
+                'role_id' => 2,
+                'uid' => 'jdoe21',
+                'pwd' => self::INITIAL_PWD
+            ]);
+
+        // User
+        User::factory()
+            ->hasPersonalDetails()
+            ->create([
+                'role_id' => 1,
+                'uid' => 'dummyuser',
+                'pwd' => self::INITIAL_PWD
+            ]);
+
+
+        /* Other users */
+        User::factory()
+            ->count(1754)
             ->hasPersonalDetails()
             ->create();
     }

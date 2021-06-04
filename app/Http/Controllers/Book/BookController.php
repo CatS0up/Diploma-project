@@ -5,25 +5,15 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Book;
 
 use App\Http\Controllers\Controller;
-use App\Service\Book\BookService;
-use App\Service\Book\ListingGenreService;
-use App\Service\Book\ListingPublisherService;
-use App\Service\Book\ListingService;
-use App\Service\BookListing;
-use App\Service\FiltersFormatter;
+use App\Services\Book\BookCatalog;
 use Illuminate\Auth\AuthManager;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class BookController extends Controller
 {
-    private BookService $book;
-    private ListingService $bookList;
-
-    public function __construct(BookService $book, ListingService $bookList)
+    public function __construct()
     {
-        $this->book = $book;
-        $this->bookList = $bookList;
     }
 
     public function show(AuthManager $auth, string $slug): View
@@ -39,19 +29,19 @@ class BookController extends Controller
         ]);
     }
 
-    public function list(
-        Request $request,
-        ListingGenreService $genreList,
-        ListingPublisherService $publisherList
-    ): View {
-
+    public function list(Request $request, BookCatalog $catalog): View
+    {
         $filters = $request->only(['q', 'gender', 'publisher', 'sort']);
 
+        $catalog->filteredBooks($filters);
+
+        dd($catalog->filters());
+
         return view('book.list', [
-            'genres' => $genreList->all(),
-            'publishers' => $publisherList->all(),
-            'books' => $this->bookList->filterBy($filters),
-            'filters' => $filters
+            'books' => $catalog->filteredBooks($filters),
+            'genres' => $catalog->genres(),
+            'publishers' => $catalog->publishers(),
+            'filters' => $catalog->filters()
         ]);
     }
 }

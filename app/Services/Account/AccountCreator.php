@@ -15,7 +15,8 @@ class AccountCreator
     [
         'account' => [
             'uid', 'email', 'phone',
-            'pwd', 'avatar', 'description'
+            'pwd', 'avatar', 'description',
+            'address_id'
         ],
 
         'address' =>
@@ -48,11 +49,10 @@ class AccountCreator
     {
         $fields = $this->groupFields($fields);
 
-        $user = $this->user->create($fields['account']);
+        $address = $this->address->create($fields['address']);
+        $fields['account']['address_id'] = $address->id;
 
-        $user
-            ->address()
-            ->associate($this->address->create($fields['address']));
+        $user = $this->user->create($fields['account']);
 
         $user
             ->personalDetails()

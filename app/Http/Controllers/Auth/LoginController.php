@@ -6,16 +6,15 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
-use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
-use App\Service\User\AuthService;
+use App\Services\Account\Authenticator;
 
 class LoginController extends Controller
 {
-    private AuthService $auth;
+    private Authenticator $auth;
 
-    public function __construct(AuthService $auth)
+    public function __construct(Authenticator $auth)
     {
         $this->auth = $auth;
     }
@@ -27,10 +26,9 @@ class LoginController extends Controller
 
     public function authenticate(
         LoginRequest $request,
-        User $userModel
     ): RedirectResponse {
 
-        $this->auth->authenticate($request->validated(), $userModel);
+        $this->auth->apply($request->validated());
 
         return redirect()
             ->route('home')

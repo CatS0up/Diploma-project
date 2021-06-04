@@ -23,6 +23,7 @@ class UserService
     {
         return $this->user->create(
             [
+                'address_id' => $fields['address_id'],
                 'uid' => $fields['uid'],
                 'pwd' => $fields['pwd'],
                 'email' => $fields['email'],
