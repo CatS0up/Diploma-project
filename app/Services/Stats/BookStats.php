@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Stats;
 
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\DatabaseManager;
 
 class BookStats
 {
@@ -13,15 +13,15 @@ class BookStats
      * because @method countBest() is hard to implementation
      * by Eloquent
      */
-    private Builder $builder;
+    private DatabaseManager $builder;
 
-    public function __construct(Builder $builder)
+    public function __construct(DatabaseManager $builder)
     {
         $this->builder = $builder;
     }
 
     public function count(): int
     {
-        return $this->builder->table('books')
+        return $this->builder->table('books')->count();
     }
 }

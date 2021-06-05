@@ -2,27 +2,27 @@
 
 declare(strict_types=1);
 
-namespace App\Services\User\Address;
+namespace App\Services\User\PersonalDetails;
 
-use App\Models\Address;
+use App\Models\PersonalDetail;
 
-class AddressService
+class PersonalDetailsService
 {
-    private Address $address;
+    private PersonalDetail $personalDetails;
 
-    public function __construct(Address $address)
+    public function __construct(PersonalDetail $personalDetails)
     {
-        $this->address = $address;
+        $this->personalDetails = $personalDetails;
     }
 
-    public function create(array $fields): Address
+    public function create(array $fields): PersonalDetail
     {
-        return $this->address->firstOrCreate(
+        return $this->personalDetails->create(
             [
-                'town' => $fields['town'],
-                'street' =>  $fields['street'] ?? null,
-                'zipcode' => $fields['zipcode'],
-                'house_number' => $fields['house_number'],
+                'firstname' => $fields['firstname'],
+                'lastname' =>  $fields['lastname'],
+                'birthday' => $fields['birthday'],
+                'gender' => $fields['gender'] ?? null,
             ]
         );
     }

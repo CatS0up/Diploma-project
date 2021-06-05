@@ -64,9 +64,9 @@ class BookCatalog
 
     private function prepareFilters(array $filters, array $chosedFilters): void
     {
-        $filters = array_intersect_key($chosedFilters, self::EXPECTED_FILTERS);
+        $chosedFilters = array_intersect_key($chosedFilters, self::EXPECTED_FILTERS);
 
-        foreach ($filters as $name) {
+        foreach ($chosedFilters as $name) {
 
             if (!array_key_exists($name, $filters)) {
                 $this->filters[$name] = self::DEFAULT_FILTERS[$name] ?? null;

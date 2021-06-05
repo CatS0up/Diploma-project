@@ -1,7 +1,9 @@
 <?php
 
 use App\Providers\BookServiceProvider;
+use App\Providers\DashboardStatsServiceProvider;
 use App\Providers\RatingComponentProvider;
+use App\Providers\UserServiceProvider;
 
 return [
 
@@ -179,6 +181,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         BookServiceProvider::class,
+        UserServiceProvider::class,
+        DashboardStatsServiceProvider::class,
         RatingComponentProvider::class
 
     ],

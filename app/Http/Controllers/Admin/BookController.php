@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NewBookRequest;
 use App\Http\Requests\UpdateBookRequest;
+use App\Repositories\BookRepository;
 use App\Service\Book\BookService;
 use App\Service\Book\ListingGenreService;
 use App\Service\Book\ListingPublisherService;
@@ -18,13 +19,9 @@ use Illuminate\View\View;
 
 class BookController extends Controller
 {
-    private BookService $book;
-    private ListingService $bookList;
-
-    public function __construct(BookService $book, ListingService $bookList)
+    public function __construct(BookRepository $bookRepository)
     {
-        $this->book = $book;
-        $this->bookList = $bookList;
+        $this->bookRepository = $bookRepository;
     }
 
     public function show(int $id): View
@@ -32,11 +29,8 @@ class BookController extends Controller
         return view('dashboard.bookItem', ['book' => $this->book->findById($id)]);
     }
 
-    public function list(
-        FiltersFormatter $filtersFormatter,
-        ListingPublisherService $publisherList,
-        ListingGenreService $genreList
-    ): View {
+    public function list(): View
+    {
         $filters = $filtersFormatter->format(
             ['q', 'publisher', 'genre', 'sort'],
             [

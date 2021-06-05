@@ -15,7 +15,7 @@ class PublisherStats
         $this->publisher = $publisher;
     }
 
-    public function coun(): int
+    public function count(): int
     {
         return $this->publisher->count();
     }

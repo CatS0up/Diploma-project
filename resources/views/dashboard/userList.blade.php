@@ -26,7 +26,7 @@
                         Użytkownicy:
                     </h2>
                     <p class="cards__text">
-                        {{ $stats['all_amount'] }}
+                        {{ $stats['all_count'] }}
                     </p>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                         Członkowie zespołu:
                     </h2>
                     <p class="cards__text">
-                        {{ $stats['privilaged_amount'] }}
+                        {{ $stats['privilaged_count'] }}
                     </p>
                 </div>
             </div>
@@ -182,7 +182,7 @@
                         </label>
                         <select id="sortBy" class="forms__input forms__input--bordered" name="sort_by">
                             <option value="id">ID</option>
-                            <option value="all">Login</option>
+                            <option value="uid">Login</option>
                             <option value="email">Email</option>
                             <option value="firstname">Imię</option>
                             <option value="lastname">Nazwisko</option>

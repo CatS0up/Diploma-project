@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
-use App\Services\Account\AccountCreator;
+use App\Services\Account\AccountManager;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -19,7 +19,7 @@ class RegisterController extends Controller
 
     public function register(
         RegisterRequest $request,
-        AccountCreator $account,
+        AccountManager $account,
     ): RedirectResponse {
         $data = $request->validated();
 

@@ -21,7 +21,7 @@
                         Książki:
                     </h2>
                     <p class="cards__text">
-                        {{ $stats['books_amount'] }}
+                        {{ $countStats['books'] }}
                     </p>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                         Użytkownicy:
                     </h2>
                     <p class="cards__text">
-                        {{ $stats['users_amount'] }}
+                        {{ $countStats['users'] }}
                     </p>
                 </div>
             </div>
@@ -49,7 +49,7 @@
                         Członkowie zespołu:
                     </h2>
                     <p class="cards__text">
-                        {{ $stats['privilaged_amount'] }}
+                        {{ $countStats['privilaged_users'] }}
                     </p>
                 </div>
             </div>
@@ -64,7 +64,7 @@
                         Gatunki:
                     </h2>
                     <p class="cards__text">
-                        {{ $stats['genres_amount'] }}
+                        {{ $countStats['genres'] }}
                     </p>
                 </div>
             </div>
@@ -78,7 +78,7 @@
                         Autorzy:
                     </h2>
                     <p class="cards__text">
-                        {{ $stats['authors_amount'] }}
+                        1000
                     </p>
                 </div>
             </div>
@@ -93,7 +93,7 @@
                         Wydawcy:
                     </h2>
                     <p class="cards__text">
-                        {{ $stats['publishers_amount'] }}
+                        {{ $countStats['publishers'] }}
                     </p>
                 </div>
             </div>

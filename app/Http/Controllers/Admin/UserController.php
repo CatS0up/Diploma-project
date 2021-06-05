@@ -6,44 +6,42 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserUpdateByAdminRequest;
-use App\Service\FiltersFormatter;
-use App\Service\User\ListingService;
-use App\Service\User\UserService;
+use App\Repositories\UserRepository;
+use App\Services\User\UserListing;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class UserController extends Controller
 {
-    private UserService $user;
-    private ListingService $userList;
+    private UserRepository $userReposiotry;
 
-    public function __construct(UserService $user, ListingService $userList)
+    public function __construct(UserRepository $userRepository)
     {
-        $this->user = $user;
-        $this->userList = $userList;
+        $this->userRepository = $userRepository;
     }
 
     public function show(int $id): View
     {
         return view(
             'dashboard.userProfile',
-            ['user' => $this->user->findById($id)]
+            ['user' => $this->userRepository->findById($id)]
         );
     }
 
-    public function list(FiltersFormatter $filtersFormatter): View
+    public function list(Request $request, UserListing $userList): View
     {
-        $filters = $filtersFormatter->format(
-            ['q', 'sort'],
-            ['sort' => 'asc']
-        );
+        $expectedFilters = ['q', 'sort', 'sort_by'];
+
+        $filters = $request->only($expectedFilters);
+
         return view(
             'dashboard.userList',
             [
-                'users' => $this->userList->filterBy($filters),
-                'privilaged' => $this->userList->allPrivilaged(),
-                'stats' => $this->userList->stats(),
-                'filters' => $filters
+                'users' => $userList->filteredUsers($filters, $expectedFilters),
+                'privilaged' => $userList->allPrivilaged(),
+                'stats' => $userList->stats(),
+                'filters' => $userList->filters()
             ]
         );
     }

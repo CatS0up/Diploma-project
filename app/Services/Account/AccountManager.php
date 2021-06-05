@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Services\Account;
 
 use App\Models\User;
-use App\Service\User\PersonalDataService;
 use App\Services\User\Address\AddressService;
+use App\Services\User\PersonalDetails\PersonalDetailsService;
 use App\Services\User\UserService;
 
-class AccountCreator
+class AccountManager
 {
     private const EXPECTED_FIELDS =
     [
@@ -33,12 +33,12 @@ class AccountCreator
 
     private UserService $user;
     private AddressService $address;
-    private PersonalDataService $personalInfo;
+    private PersonalDetailsService $personalInfo;
 
     public function __construct(
         UserService $user,
         AddressService $address,
-        PersonalDataService $personalInfo
+        PersonalDetailsService $personalInfo
     ) {
         $this->user = $user;
         $this->address = $address;
