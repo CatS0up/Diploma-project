@@ -213,115 +213,118 @@
 
             </div>
 
-            @if ($users->total() > 0)
-                <table class="tables dashboard__tables">
-                    <thead class="tables__header">
-                        <tr class="tables__row">
-                            <th class="tables__header-cell">
-                                ID
-                            </th>
-                            <th class="tables__header-cell">
-                                Użytkownik
-                            </th>
-                            <th class="tables__header-cell">
-                                E-mail
-                            </th>
-                            <th class="tables__header-cell">
-                                Imię
-                            </th>
-                            <th class="tables__header-cell">
-                                Nazwisko
-                            </th>
-                            <th class="tables__header-cell">
-                                Książki
-                            </th>
-                            <th class="tables__header-cell">
-                                Opcje
-                            </th>
-                        </tr>
-                    </thead>
-
-                    <tbody class="tables__body">
-                        @foreach ($users as $user)
+            <div class="dashboard__table-container">
+                @if ($users->isNotEmpty())
+                    <table class="tables dashboard__tables">
+                        <thead class="tables__header">
                             <tr class="tables__row">
-                                <th class="tables__header-cell" data-label="ID">
-                                    {{ $user->id }}
+                                <th class="tables__header-cell">
+                                    ID
                                 </th>
-
-                                <td class="tables__cell" data-label="Użytkownik">
-                                    <div class="tables__item">
-                                        <div class="pictures pictures--small pictures--avatar tables__pictures">
-                                            @if ($user->avatar)
-                                                <img class="pictures__img" src="{{ Storage::url($user->avatar) }}"
-                                                    alt="Avatar użytkownika.">
-                                            @else
-                                                <img class="pictures__img"
-                                                    src="{{ asset('img/avatar_placeholder.jpg') }}"
-                                                    alt="Avatar użytkownika.">
-                                            @endif
-                                        </div>
-                                        {{ $user->uid }}
-                                    </div>
-                                </td>
-                                <td class="tables__cell" data-label="E-mail">
-                                    {{ $user->email }}
-                                </td>
-                                <td class="tables__cell" data-label="Nr. telefonu">
-                                    {{ $user->personalDetails->firstname }}
-                                </td>
-                                <td class="tables__cell" data-label="Ostatnia aktywność">
-                                    {{ $user->personalDetails->lastname }}
-                                </td>
-                                <td class="tables__cell" data-label="Aktywny">
-                                    {{ $user->bookAmount() }}
-                                </td>
-                                <td class="tables__cell" data-label="Opcje">
-                                    <div class="tables__group">
-                                        <a href="{{ route('admin.show.user', ['id' => $user->id]) }}"
-                                            class="buttons buttons--primary forms__buttons">Profil</a>
-                                        <form class="forms tables__forms"
-                                            action="{{ route('admin.delete.user', ['id' => $user->id]) }}" method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button class="buttons buttons--danger forms__buttons">Usuń</button>
-                                        </form>
-                                    </div>
-                                </td>
+                                <th class="tables__header-cell">
+                                    Użytkownik
+                                </th>
+                                <th class="tables__header-cell">
+                                    E-mail
+                                </th>
+                                <th class="tables__header-cell">
+                                    Imię
+                                </th>
+                                <th class="tables__header-cell">
+                                    Nazwisko
+                                </th>
+                                <th class="tables__header-cell">
+                                    Książki
+                                </th>
+                                <th class="tables__header-cell">
+                                    Opcje
+                                </th>
                             </tr>
-                        @endforeach
-                    </tbody>
+                        </thead>
 
-                    <tfoot class="tables__footer">
-                        <tr class="tables__row">
-                            <th class="tables__header-cell">
-                                ID
-                            </th>
-                            <th class="tables__header-cell">
-                                Użytkownik
-                            </th>
-                            <th class="tables__header-cell">
-                                E-mail
-                            </th>
-                            <th class="tables__header-cell">
-                                Imię
-                            </th>
-                            <th class="tables__header-cell">
-                                Nazwisko
-                            </th>
-                            <th class="tables__header-cell">
-                                Książki
-                            </th>
-                            <th class="tables__header-cell">
-                                Opcje
-                            </th>
-                        </tr>
-                    </tfoot>
-                </table>
-            @else
-                <div class="notifications dashboard__notifications">
-                    <span class="icons icons--x-large notifications__icons far fa-folder-open" aria-hidden="true"></span>
-                    Brak zarejestrowanych użytkowników
-                </div>
+                        <tbody class="tables__body">
+                            @foreach ($users as $user)
+                                <tr class="tables__row">
+                                    <th class="tables__header-cell" data-label="ID">
+                                        {{ $user->id }}
+                                    </th>
+
+                                    <td class="tables__cell" data-label="Użytkownik">
+                                        <div class="tables__item">
+                                            <div class="pictures pictures--small pictures--avatar tables__pictures">
+                                                @if ($user->avatar)
+                                                    <img class="pictures__img" src="{{ Storage::url($user->avatar) }}"
+                                                        alt="Avatar użytkownika.">
+                                                @else
+                                                    <img class="pictures__img"
+                                                        src="{{ asset('img/avatar_placeholder.jpg') }}"
+                                                        alt="Avatar użytkownika.">
+                                                @endif
+                                            </div>
+                                            {{ $user->uid }}
+                                        </div>
+                                    </td>
+                                    <td class="tables__cell" data-label="E-mail">
+                                        {{ $user->email }}
+                                    </td>
+                                    <td class="tables__cell" data-label="Nr. telefonu">
+                                        {{ $user->personalDetails->firstname }}
+                                    </td>
+                                    <td class="tables__cell" data-label="Ostatnia aktywność">
+                                        {{ $user->personalDetails->lastname }}
+                                    </td>
+                                    <td class="tables__cell" data-label="Aktywny">
+                                        {{ $user->bookAmount() }}
+                                    </td>
+                                    <td class="tables__cell" data-label="Opcje">
+                                        <div class="tables__group">
+                                            <a href="{{ route('admin.show.user', ['id' => $user->id]) }}"
+                                                class="buttons buttons--primary forms__buttons">Profil</a>
+                                            <form class="forms tables__forms"
+                                                action="{{ route('admin.delete.user', ['id' => $user->id]) }}"
+                                                method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="buttons buttons--danger forms__buttons">Usuń</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+
+                        <tfoot class="tables__footer">
+                            <tr class="tables__row">
+                                <th class="tables__header-cell">
+                                    ID
+                                </th>
+                                <th class="tables__header-cell">
+                                    Użytkownik
+                                </th>
+                                <th class="tables__header-cell">
+                                    E-mail
+                                </th>
+                                <th class="tables__header-cell">
+                                    Imię
+                                </th>
+                                <th class="tables__header-cell">
+                                    Nazwisko
+                                </th>
+                                <th class="tables__header-cell">
+                                    Książki
+                                </th>
+                                <th class="tables__header-cell">
+                                    Opcje
+                                </th>
+                            </tr>
+                        </tfoot>
+                    </table>
+            </div>
+        @else
+            <div class="notifications dashboard__notifications">
+                <span class="icons icons--x-large notifications__icons far fa-folder-open" aria-hidden="true"></span>
+                Brak zarejestrowanych użytkowników
+            </div>
             @endif
 
             {{ $users->links() }}

@@ -5,11 +5,11 @@ namespace App\Providers;
 use App\Repositories\BookRepository;
 use App\Repositories\UserRepository;
 use App\Services\Dashboard\AdminInfo;
-use App\Services\Stats\AuthorStats;
-use App\Services\Stats\BookStats;
-use App\Services\Stats\GenreStats;
-use App\Services\Stats\PublisherStats;
-use App\Services\Stats\UserStats;
+use App\Services\Book\Author\AuthorStats;
+use App\Services\Book\BookStats;
+use App\Services\Book\Genre\GenreStats;
+use App\Services\Book\Publisher\PublisherStats;
+use App\Services\User\UserStats;
 use Illuminate\Support\ServiceProvider;
 
 class DashboardStatsServiceProvider extends ServiceProvider

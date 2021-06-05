@@ -47,10 +47,10 @@ class BookCatalog
 
     public function filteredBooks(
         array $filters,
-        array $chosedFilters = self::EXPECTED_FILTERS
+        array $expectedFilters = self::EXPECTED_FILTERS
     ): LengthAwarePaginator {
 
-        $this->prepareFilters($filters, $chosedFilters);
+        $this->prepareFilters($filters, $expectedFilters);
 
         return $this->bookRepository
             ->filterBy($this->filters())
@@ -62,11 +62,11 @@ class BookCatalog
         return $this->filters;
     }
 
-    private function prepareFilters(array $filters, array $chosedFilters): void
+    private function prepareFilters(array $filters, array $expectedFilters): void
     {
-        $chosedFilters = array_intersect_key($chosedFilters, self::EXPECTED_FILTERS);
+        $expectedFilters = $this->extractExpectedFiltersNames($expectedFilters);
 
-        foreach ($chosedFilters as $name) {
+        foreach ($expectedFilters as $name) {
 
             if (!array_key_exists($name, $filters)) {
                 $this->filters[$name] = self::DEFAULT_FILTERS[$name] ?? null;
@@ -74,5 +74,10 @@ class BookCatalog
                 $this->filters[$name] = $filters[$name];
             }
         }
+    }
+
+    private function extractExpectedFiltersNames(array $expectedFilters): array
+    {
+        return array_intersect_key($expectedFilters, self::EXPECTED_FILTERS);
     }
 }

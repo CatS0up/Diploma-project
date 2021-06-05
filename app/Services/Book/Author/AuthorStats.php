@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Stats;
+namespace App\Services\Book\Author;
 
 use App\Models\Author;
 

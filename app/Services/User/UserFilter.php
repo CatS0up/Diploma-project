@@ -5,15 +5,19 @@ declare(strict_types=1);
 namespace App\Services\User;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserFilter
 {
-    private User $query;
+    private User $user;
+    private Builder $query;
 
-    public function __construct(User $query)
+    public function __construct(User $user)
     {
-        $this->query = $query;
+        $this->user = $user;
+
+        $this->query = $this->user->with(['role', 'personalDetails', 'books']);
     }
 
     public function setPhrase(string $phrase): UserFilter
@@ -22,9 +26,7 @@ class UserFilter
 
         $this->query
             ->where('uid', 'like', $phrase)
-            ->orWhere('email', 'like', $phrase)
-            ->orWhere('firstname', 'like', $phrase)
-            ->orWhere('lastname', 'like', $phrase);
+            ->orWhere('email', 'like', $phrase);
 
         return $this;
     }

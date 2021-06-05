@@ -78,7 +78,7 @@
                         Autorzy:
                     </h2>
                     <p class="cards__text">
-                        1000
+                        {{ $countStats['authors'] }}
                     </p>
                 </div>
             </div>

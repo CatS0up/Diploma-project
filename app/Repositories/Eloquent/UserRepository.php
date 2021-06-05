@@ -33,7 +33,11 @@ class UserRepository implements UserRepositoryInterface
 
     public function allPrivilaged(): ?Collection
     {
-        return $this->user->privilaged()->get();
+        return $this->user
+            ->with('role', 'personalDetails')
+            ->privilaged()
+            ->orderBy('users.id')
+            ->get();
     }
 
     public function filterBy(array $filters, int $limit = self::PAGE_SIZE): LengthAwarePaginator

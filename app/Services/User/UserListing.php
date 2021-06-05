@@ -35,10 +35,10 @@ class UserListing
 
     public function filteredUsers(
         array $filters,
-        array $chosedFilters = self::EXPECTED_FILTERS
+        array $expectedFilters = self::EXPECTED_FILTERS
     ): LengthAwarePaginator {
 
-        $this->prepareFilters($filters, $chosedFilters);
+        $this->prepareFilters($filters, $expectedFilters);
 
         return $this->userReposiotry
             ->filterBy($this->filters())
@@ -58,11 +58,11 @@ class UserListing
         return $this->filters;
     }
 
-    private function prepareFilters(array $filters, array $chosedFilters): void
+    private function prepareFilters(array $filters, array $expectedFilters): void
     {
-        $filters = array_intersect_key($chosedFilters, self::EXPECTED_FILTERS);
+        $expectedFilters = $this->extractExpectedFiltersNames($expectedFilters);
 
-        foreach ($filters as $name) {
+        foreach ($expectedFilters as $name) {
 
             if (!array_key_exists($name, $filters)) {
                 $this->filters[$name] = self::DEFAULT_FILTERS[$name] ?? null;
@@ -70,5 +70,10 @@ class UserListing
                 $this->filters[$name] = $filters[$name];
             }
         }
+    }
+
+    private function extractExpectedFiltersNames(array $expectedFilters): array
+    {
+        return array_intersect_key($expectedFilters, self::EXPECTED_FILTERS);
     }
 }

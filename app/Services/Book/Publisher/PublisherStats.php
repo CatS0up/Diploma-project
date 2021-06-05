@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Stats;
+namespace App\Services\Book\Publisher;
 
 use App\Models\Publisher;
 

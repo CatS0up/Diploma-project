@@ -7261,6 +7261,7 @@ select {
   margin: 0 auto;
 }
 .pictures--small {
+  min-width: 50px;
   max-width: 50px;
 }
 .pictures--medium {
