@@ -8,13 +8,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\NewBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Repositories\BookRepository;
-use App\Service\Book\BookService;
-use App\Service\Book\ListingGenreService;
 use App\Service\Book\ListingPublisherService;
-use App\Service\Book\ListingService;
-use App\Service\BookListing;
-use App\Service\FiltersFormatter;
+use App\Services\Book\BookCatalog;
+use App\Services\Book\BookStats;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class BookController extends Controller
@@ -29,23 +27,20 @@ class BookController extends Controller
         return view('dashboard.bookItem', ['book' => $this->book->findById($id)]);
     }
 
-    public function list(): View
-    {
-        $filters = $filtersFormatter->format(
-            ['q', 'publisher', 'genre', 'sort'],
-            [
-                'sort' => BookListing::SORT_DEFAULT,
-                'publisher' => BookListing::TYPE_ALL,
-                'genre' => BookListing::TYPE_ALL
-            ]
-        );
+    public function list(
+        Request $request,
+        BookCatalog $catalog,
+        BookStats $stats
+    ): View {
+        $expectedFilters = ['q', 'genre', 'publisher', 'sort'];
+
+        $filters = $request->only($expectedFilters);
 
         return view('dashboard.bookList', [
-            'books' => $this->bookList->filterBy($filters),
-            'stats' => $this->bookList->stats(),
-            'publishers' => $publisherList->all(),
-            'genres' => $genreList->all(),
-            'filters' => $filters
+            'books' => $catalog->filteredBooks($filters, $expectedFilters),
+            'genres' => $catalog->genres(),
+            'publishers' => $catalog->publishers(),
+            'filters' => $catalog->filters()
         ]);
     }
 

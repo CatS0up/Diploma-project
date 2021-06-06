@@ -9,14 +9,14 @@ use Illuminate\Support\Collection;
 class AdminInfo
 {
     private Collection $stats;
-    private Collection $repos;
+    private Collection $models;
 
     public function __construct(
         Collection $stats,
-        Collection $repos
+        Collection $models
     ) {
         $this->stats = $stats;
-        $this->repos = $repos;
+        $this->models = $models;
     }
 
     public function countStats(): array
@@ -33,6 +33,6 @@ class AdminInfo
 
     public function getLatest(string $repoName, int $limit = 5): ?Collection
     {
-        return $this->repos->get($repoName)->latest($limit);
+        return $this->models->get($repoName)->latest()->take($limit)->get();
     }
 }

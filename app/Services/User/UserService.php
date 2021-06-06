@@ -57,12 +57,15 @@ class UserService
 
     public function delete(int $id): bool
     {
-        if ($this->user->hasAvatar())
+        $user = $this->user->find($id);
+
+        if (!$user->address->hasUsers())
+            $user->address->delete();
+
+        if ($user->hasAvatar())
             $this->avatarFile->delete('public/' . $this->user->avatar);
 
-        $this->user->find($id)->delete();
-
-        return !$this->user->find($id)->exists();
+        return $user->delete();
     }
 
     public function changeAvatar(?UploadedFile $avatar, ?bool $reset = false): ?string

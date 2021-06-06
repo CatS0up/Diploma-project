@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\Book;
 
+use App\Models\Genre;
+use App\Models\Publisher;
 use App\Repositories\BookRepository;
 use App\Repositories\GenreRepository;
 use App\Repositories\PublisherRepository;
@@ -12,27 +14,14 @@ use Illuminate\Support\Collection;
 
 class BookCatalog
 {
-    private const EXPECTED_FILTERS = ['q', 'genre', 'publisher', 'sort'];
-    private const DEFAULT_FILTERS = [
-        'genre' => 'all',
-        'publisher' => 'all',
-        'sort' => 'asc'
-    ];
 
-    private BookRepository $bookRepository;
-    private GenreRepository $genreRepository;
-    private PublisherRepository $publisherRepository;
+    private BookFilteredList $bookList;
 
-    private array $filters = [];
-
-    public function __construct(
-        BookRepository $bookRepository,
-        GenreRepository $genreRepository,
-        PublisherRepository $publisherRepository
-    ) {
-        $this->bookRepository = $bookRepository;
-        $this->genreRepository = $genreRepository;
-        $this->publisherRepository = $publisherRepository;
+    public function __construct(BookFilteredList $bookList)
+    {
+        $this->bookList = $bookList;
+        $this->genre = $genre;
+        $this->publisher = $publisher;
     }
 
     public function genres(): Collection
@@ -60,24 +49,5 @@ class BookCatalog
     public function filters(): array
     {
         return $this->filters;
-    }
-
-    private function prepareFilters(array $filters, array $expectedFilters): void
-    {
-        $expectedFilters = $this->extractExpectedFiltersNames($expectedFilters);
-
-        foreach ($expectedFilters as $name) {
-
-            if (!array_key_exists($name, $filters)) {
-                $this->filters[$name] = self::DEFAULT_FILTERS[$name] ?? null;
-            } else {
-                $this->filters[$name] = $filters[$name];
-            }
-        }
-    }
-
-    private function extractExpectedFiltersNames(array $expectedFilters): array
-    {
-        return array_intersect_key($expectedFilters, self::EXPECTED_FILTERS);
     }
 }

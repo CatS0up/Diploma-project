@@ -26,24 +26,4 @@ class AddressService
             ]
         );
     }
-
-    public function delete(int $id): bool
-    {
-        if ($this->hasUsers())
-            return true;
-
-        $this->address->find($id)->delete();
-
-        return $this->isExist($id);
-    }
-
-    private function hasUsers(): bool
-    {
-        return $this->address->has('users')->exists();
-    }
-
-    private function isExist(int $id): bool
-    {
-        return  $this->address->find($id)->exists();
-    }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Repositories\BookRepository;
-use App\Repositories\UserRepository;
+use App\Models\Book;
+use App\Models\User;
 use App\Services\Dashboard\AdminInfo;
 use App\Services\Book\Author\AuthorStats;
 use App\Services\Book\BookStats;
@@ -43,12 +43,12 @@ class DashboardStatsServiceProvider extends ServiceProvider
                     ]
                 );
 
-                $repos = collect([
-                    'users' => $app->make(UserRepository::class),
-                    'books' => $app->make(BookRepository::class)
+                $models = collect([
+                    'users' => $app->make(User::class),
+                    'books' => $app->make(Book::class)
                 ]);
 
-                return new AdminInfo($stats, $repos);
+                return new AdminInfo($stats, $models);
             }
         );
     }

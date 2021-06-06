@@ -26,4 +26,10 @@ class Address extends Model
     {
         $this->hasMany(User::class);
     }
+
+    /* ===> Methods <=== */
+    public function hasUsers(): bool
+    {
+        return $this->has('users')->exists();
+    }
 }

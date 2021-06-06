@@ -25,7 +25,7 @@
                     <li class="menu__item">
                         <a href="{{ url()->current() . '?genre=' . 'all' }}" class="links genres__links">Wszystkie</a>
                     </li>
-                    @forelse ($genres as $genre)
+                    @forelse ($inputValues['genres'] as $genre)
                         <li class="menu__item">
                             <a href="{{ url()->current() . '?genre=' . $genre->slug }}"
                                 class="links genres__links">{{ $genre->name }}</a>
@@ -57,7 +57,7 @@
                         </label>
                         <select id="publisher" class="forms__input forms__input--bordered" name="publisher">
                             <option value="all">Wszyscy</option>
-                            @foreach ($publishers as $publisher)
+                            @foreach ($inputValues['publishers'] as $publisher)
                                 <option value="{{ $publisher->name }}"
                                     {{ !($publisher->name == $filters['publisher']) ?: 'selected' }}>
                                     {{ $publisher->name }}</option>
