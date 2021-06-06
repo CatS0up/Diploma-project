@@ -6,30 +6,33 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserUpdateByAdminRequest;
-use App\Repositories\UserRepository;
-use App\Services\User\UserListing;
+use App\Models\User;
+use App\Services\User\UserCatalog;
+use App\Services\User\UserService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class UserController extends Controller
 {
-    private UserRepository $userReposiotry;
+    private User $user;
+    private UserService $userService;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(User $user, UserService $userService)
     {
-        $this->userRepository = $userRepository;
+        $this->user = $user;
+        $this->userService = $userService;
     }
 
     public function show(int $id): View
     {
         return view(
             'dashboard.userProfile',
-            ['user' => $this->userRepository->findById($id)]
+            ['user' => $this->user->find($id)]
         );
     }
 
-    public function list(Request $request, UserListing $userList): View
+    public function list(Request $request, UserCatalog $catalog): View
     {
         $expectedFilters = ['q', 'sort', 'sort_by'];
 
@@ -38,10 +41,10 @@ class UserController extends Controller
         return view(
             'dashboard.userList',
             [
-                'users' => $userList->filteredUsers($filters, $expectedFilters),
-                'privilaged' => $userList->allPrivilaged(),
-                'stats' => $userList->stats(),
-                'filters' => $userList->filters()
+                'users' => $catalog->allFiltered($filters, $expectedFilters),
+                'privilaged' => $this->user->privilaged()->get(),
+                'stats' => $catalog->stats(),
+                'filters' => $catalog->filters()
             ]
         );
     }
@@ -50,15 +53,18 @@ class UserController extends Controller
     {
         return view(
             'dashboard.editUser',
-            ['user' => $this->user->findById($id)]
+            ['user' => $this->user->find($id)]
         );
     }
 
-    public function update(UserUpdateByAdminRequest $request, int $id): RedirectResponse
-    {
+    public function update(
+        UserUpdateByAdminRequest $request,
+        int $id
+    ): RedirectResponse {
+
         $data = $request->validated();
 
-        $this->user->update($id, $data);
+        $this->userService->update($id, $data);
 
         return redirect()
             ->route(
@@ -69,7 +75,7 @@ class UserController extends Controller
 
     public function destroy(int $id): RedirectResponse
     {
-        $this->userRepository->delete($id);
+        $this->userService->delete($id);
 
         return back()->with('success', 'Użytkownik został pomyślnie usunięty.');
     }

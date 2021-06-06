@@ -24,12 +24,12 @@ class Address extends Model
     /* ===> Relations <=== */
     public function users()
     {
-        $this->hasMany(User::class);
+        return $this->hasMany(User::class);
     }
 
     /* ===> Methods <=== */
     public function hasUsers(): bool
     {
-        return $this->has('users')->exists();
+        return (bool) $this->has('users');
     }
 }

@@ -4,11 +4,11 @@ namespace App\Providers;
 
 use App\Models\Book;
 use App\Models\User;
-use App\Services\Dashboard\AdminInfo;
 use App\Services\Book\Author\AuthorStats;
 use App\Services\Book\BookStats;
 use App\Services\Book\Genre\GenreStats;
 use App\Services\Book\Publisher\PublisherStats;
+use App\Services\Dashboard\AdminInfoService;
 use App\Services\User\UserStats;
 use Illuminate\Support\ServiceProvider;
 
@@ -31,7 +31,7 @@ class DashboardStatsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app->singleton(
-            AdminInfo::class,
+            AdminInfoService::class,
             function ($app) {
                 $stats = collect(
                     [
@@ -48,7 +48,7 @@ class DashboardStatsServiceProvider extends ServiceProvider
                     'books' => $app->make(Book::class)
                 ]);
 
-                return new AdminInfo($stats, $models);
+                return new AdminInfoService($stats, $models);
             }
         );
     }

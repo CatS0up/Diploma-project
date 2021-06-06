@@ -5,77 +5,111 @@ declare(strict_types=1);
 namespace App\Services\User;
 
 use App\Models\User;
-use App\Services\Files\FilesManager;
-use Illuminate\Http\UploadedFile;
+use App\Services\Files\UserFilesService;
 
 class UserService
 {
     private User $user;
-    private FilesManager $avatarFile;
+    private UserFilesService $file;
 
-    public function __construct(User $user, FilesManager $avatarFile)
+    public function __construct(User $user, UserFilesService $file)
     {
         $this->user = $user;
-        $this->avatarFile = $avatarFile;
+        $this->file = $file;
     }
 
     public function create(array $fields): User
     {
-        return $this->user->create(
-            [
-                'address_id' => $fields['address_id'],
-                'uid' => $fields['uid'],
-                'pwd' => $fields['pwd'],
-                'email' => $fields['email'],
-                'phone' => $fields['phone'],
-                'avatar' => $this
-                    ->avatarFile
-                    ->save($fields['avatar'] ?? null, 'public/avatars'),
-                'description' => $fields['description'],
-            ]
-        );
-    }
-
-    public function update(int $userId, array $fields): bool
-    {
-        $this->user = $this->user->find($userId);
-
-        return $this->user->update(
+        $user = $this->user->create(
             [
                 'uid' => $fields['uid'],
                 'pwd' => $fields['pwd'],
                 'email' => $fields['email'],
                 'phone' => $fields['phone'],
-                'avatar' => $this->changeAvatar(
-                    $fields['reset_avatar'],
-                    $fields['avatar'] ?? null
-                ),
                 'description' => $fields['description'],
             ]
         );
+
+        if (isset($fields['avatar']))
+            $this->file->setOwner($user->id)->addAvatar($fields['avatar']);
+
+        $user->address()->firstOrCreate(
+            [
+                'town' => $fields['town'],
+                'street' =>  $fields['street'] ?? null,
+                'zipcode' => $fields['zipcode'],
+                'local_number' => $fields['local_number'],
+            ]
+        )
+            ->users()
+            ->save($user);
+
+        $user->personalDetails()->create(
+            [
+                'firstname' => $fields['firstname'],
+                'lastname' =>  $fields['lastname'],
+                'birthday' => $fields['birthday'],
+                'gender' => $fields['gender'] ?? null,
+            ]
+        );
+
+        return $user;
     }
 
     public function delete(int $id): bool
     {
         $user = $this->user->find($id);
 
-        if (!$user->address->hasUsers())
-            $user->address->delete();
-
-        if ($user->hasAvatar())
-            $this->avatarFile->delete('public/' . $this->user->avatar);
+        $this->file->setOwner($user->id)->deleteAvatar();
 
         return $user->delete();
     }
 
-    public function changeAvatar(?UploadedFile $avatar, ?bool $reset = false): ?string
+
+    public function update(int $id, array $fields): bool
     {
-        return match (true) {
-            $reset => $this->avatar->reset(),
-            !$reset => $this->avatar->update(
-                $this->user->avatar,
-                $avatar
-            ),
-        };
+
+        $user = $this->user->find($id);
+
+        $address = $user->address->firstOrCreate(
+            [
+                'town' => $fields['town'],
+                'street' =>  $fields['street'] ?? null,
+                'zipcode' => $fields['zipcode'],
+                'local_number' => $fields['local_number'],
+            ]
+        );
+
+        $isUpdated = $user->update(
+            [
+                'address_id' => $address->id,
+                'uid' => $fields['uid'] ?? $user->uid,
+                'pwd' => $fields['pwd'] ?? $user->pwd,
+                'email' => $fields['email'] ?? $user->email,
+                'phone' => $fields['phone'] ?? $user->phone,
+                'description' => $fields['description'] ?? $user->description,
+            ]
+        );
+
+        if (filter_var($fields['reset_avatar'], FILTER_VALIDATE_BOOLEAN)) {
+
+            $this->file->setOwner($user->id)->deleteAvatar();
+        } else {
+
+            if (isset($fields['avatar']))
+
+                $this->file->setOwner($user->id)->updateAvatar($fields['avatar']);
+        }
+
+        $user->personalDetails->update(
+            [
+                'firstname' => $fields['firstname'],
+                'lastname' =>  $fields['lastname'],
+                'birthday' => $fields['birthday'],
+                'gender' => $fields['gender'] ?? null,
+            ]
+        );
+
+        return $isUpdated;
     }
 }

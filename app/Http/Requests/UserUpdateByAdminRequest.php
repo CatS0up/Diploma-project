@@ -57,7 +57,7 @@ class UserUpdateByAdminRequest extends FormRequest
             'street' => 'nullable',
             'zipcode' => new Zipcode(),
             'building_number' => 'nullable|alpha_num',
-            'house_number' =>  ['required', 'regex:/([A-Za-z0-9]+)|([A-Za-z0-9]+\/[A-Za-z0-9]+)/'],
+            'local_number' =>  ['required', 'regex:/([A-Za-z0-9]+)|([A-Za-z0-9]+\/[A-Za-z0-9]+)/'],
             'description' => 'nullable|max:255'
         ];
     }
@@ -106,8 +106,8 @@ class UserUpdateByAdminRequest extends FormRequest
 
             'building_number.alpha_num' => 'Numer budynku może składać się jedynie z liter oraz cyfr.',
 
-            'house_number.required' => 'Numer mieszkania nie może być pusty.',
-            'house_number.regex' => 'Numer domu powinien być zgodny z formatem xx/xx lub xx.',
+            'local_number.required' => 'Numer mieszkania nie może być pusty.',
+            'local_number.regex' => 'Numer domu powinien być zgodny z formatem xx/xx lub xx.',
 
             'description.max' => 'Opis może składać się maksymalnie z :max znaków.'
         ];

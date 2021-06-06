@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace App\Services\User;
+
 use App\Services\Listing\FilteredList;
 use App\Services\User\UserFilter;
 use Illuminate\Pagination\LengthAwarePaginator;

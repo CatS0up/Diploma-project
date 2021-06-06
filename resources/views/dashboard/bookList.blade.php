@@ -67,7 +67,7 @@
                         </label>
                         <select id="publisher" class="forms__input forms__input--bordered" name="publisher">
                             <option value="all">Wszyscy</option>
-                            @foreach ($publishers as $publisher)
+                            @foreach ($inputValues['publishers'] as $publisher)
                                 <option value="{{ $publisher->name }}"
                                     {{ !($publisher->name == $filters['publisher']) ?: 'selected' }}>
                                     {{ $publisher->name }}</option>
@@ -81,7 +81,7 @@
                         </label>
                         <select class="forms__input forms__input--bordered" name="genre">
                             <option value="all">Wszystkie</option>
-                            @foreach ($genres as $genre)
+                            @foreach ($inputValues['genres'] as $genre)
                                 <option value="{{ $genre->name }}"
                                     {{ !($genre->name == $filters['genre']) ?: 'selected' }}>
                                     {{ $genre->name }}</option>

@@ -6,7 +6,7 @@ namespace App\Services\Dashboard;
 
 use Illuminate\Support\Collection;
 
-class AdminInfo
+class AdminInfoService
 {
     private Collection $stats;
     private Collection $models;

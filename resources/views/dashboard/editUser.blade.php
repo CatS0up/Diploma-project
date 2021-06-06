@@ -294,10 +294,10 @@
                                     <label class="forms__group-title" for="houseNumber">
                                         Numer domu
                                     </label>
-                                    <input id="houseNumber" class="forms__input" type="text" name="house_number"
-                                        value="{{ old('house_number', $user->address->house_number) }}">
+                                    <input id="localNumber" class="forms__input" type="text" name="local_number"
+                                        value="{{ old('local_number', $user->address->local_number) }}">
 
-                                    @error('house_number')
+                                    @error('local_number')
                                         <span class="forms__input-feedback">
                                             {{ $message }}
                                         </span>

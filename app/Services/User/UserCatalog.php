@@ -2,17 +2,18 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Book;
+namespace App\Services\User;
 
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
-class BookCatalog
+class UserCatalog
 {
 
-    private BookFilteredList $list;
-    private BookStats $stats;
+    private UserFilteredList $list;
+    private UserStats $stats;
 
-    public function __construct(BookFilteredList $list, BookStats $stats)
+    public function __construct(UserFilteredList $list, UserStats $stats)
     {
         $this->list = $list;
         $this->stats = $stats;
@@ -26,16 +27,16 @@ class BookCatalog
             ->filter();
     }
 
-    public function inputValues(): array
+    public function allPrivilaged(): Collection
     {
-        return $this->list->inputValues();
+        return $this->user->privilaged()->get();
     }
 
     public function stats(): array
     {
         return [
             'all_amount' => $this->stats->count(),
-            'best_amount' => 0
+            'privilaged_amount' => 0
         ];
     }
 

@@ -26,7 +26,7 @@
                         Użytkownicy:
                     </h2>
                     <p class="cards__text">
-                        {{ $stats['all_count'] }}
+                        {{ $stats['all_amount'] }}
                     </p>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                         Członkowie zespołu:
                     </h2>
                     <p class="cards__text">
-                        {{ $stats['privilaged_count'] }}
+                        {{ $stats['privilaged_amount'] }}
                     </p>
                 </div>
             </div>

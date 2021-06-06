@@ -5,23 +5,23 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Book;
 
 use App\Http\Controllers\Controller;
-use App\Service\Book\BookService;
-use App\Service\File\FileService;
+use App\Models\Book;
+use App\Services\Files\FilesManager;
 
 class DownloadController extends Controller
 {
-    private BookService $book;
+    private Book $book;
 
-    public function __construct(BookService $book, FileService $file)
+    public function __construct(Book $book, FilesManager $fileManager)
     {
         $this->book = $book;
-        $this->file = $file;
+        $this->fileManager = $fileManager;
     }
 
     public function __invoke(string $slug)
     {
-        return $this->file->download(
-            $this->book->findBySlug($slug)->file,
+        return $this->fileManager->download(
+            $this->book->findWhere('slug', $slug),
             $slug
         );
     }
