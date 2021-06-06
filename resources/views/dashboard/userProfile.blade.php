@@ -132,20 +132,15 @@
 
                             <li class="lists__item lists__item--labeled-vertical">
                                 <span class="lists__item-label">Numer domu:</span>
-                                {{ $user->address->house_number }}
+                                {{ $user->address->local_number }}
                             </li>
                         </ul>
                     </div>
 
                     <div class="show__options">
-                        <a class="buttons buttons--bg-no buttons--success-text show__buttons"
+                        <a class="buttons buttons--success show__buttons"
                             href="{{ route('admin.edit.user', ['id' => $user->id]) }}">
-                            <span role="img" class="icons show__icons fas fa-user-edit" aria-label="Edycja"></span>
-                        </a>
-
-                        <a class="buttons buttons--bg-no buttons--danger-text show__buttons"
-                            href="{{ route('admin.edit.user', ['id' => $user->id]) }}">
-                            <span role="img" class="icons show__icons fas fa-ban" aria-label="Banuj"></span>
+                            Edycja
                         </a>
 
                         @can('delete', $user)
@@ -153,8 +148,8 @@
                                 method="post">
                                 @csrf
                                 @method('delete')
-                                <button class="buttons buttons--bg-no buttons--delete-text show__buttons">
-                                    <span role="img" class="icons buttons__icons fas fa-trash" aria-label="Usuń"></span>
+                                <button class="buttons buttons--danger show__buttons">
+                                    Usuń
                                 </button>
                             </form>
                         @endcan

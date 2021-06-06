@@ -291,7 +291,7 @@
                                 </div>
 
                                 <div class="forms__group">
-                                    <label class="forms__group-title" for="houseNumber">
+                                    <label class="forms__group-title" for="localNumber">
                                         Numer domu
                                     </label>
                                     <input id="localNumber" class="forms__input" type="text" name="local_number"

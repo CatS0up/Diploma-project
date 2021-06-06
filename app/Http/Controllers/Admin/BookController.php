@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\NewBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Models\Book;
+use App\Models\Publisher;
 use App\Services\Book\BookCatalog;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -35,23 +37,28 @@ class BookController extends Controller
         ]);
     }
 
-    // public function insert(NewBookRequest $request): RedirectResponse
-    // {
-    //     $data = $request->validated();
+    public function create(Publisher $publisher): View
+    {
+        return view('dashboard.addBook', ['publishers' => $publisher->get()]);
+    }
 
-    //     $this->book->create($data);
+    public function insert(NewBookRequest $request): RedirectResponse
+    {
+        $data = $request->validated();
 
-    //     return redirect()->route('admin.get.books')
-    //         ->with('success', 'Nowa książka została dodana.');
-    // }
+        $this->book->create($data);
 
-    // public function edit(ListingPublisherService $publisherList, int $id): View
-    // {
-    //     return view('dashboard.editBook', [
-    //         'book' => $this->book->findById($id),
-    //         'publishers' => $publisherList->all()
-    //     ]);
-    // }
+        return redirect()->route('admin.get.books')
+            ->with('success', 'Nowa książka została dodana.');
+    }
+
+    public function edit(Publisher $publisher, int $id): View
+    {
+        return view('dashboard.editBook', [
+            'book' => $this->book->findById($id),
+            'publishers' => $publisher->get()
+        ]);
+    }
 
     public function update(UpdateBookRequest $request, int $id): RedirectResponse
     {
