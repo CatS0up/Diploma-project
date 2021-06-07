@@ -171,11 +171,15 @@
                     </div>
                 @enderror
 
-                <form class="forms comments__forms" action="{{ route('reviews.add', ['book_id' => $book->id]) }}"
+                <form class="forms comments__forms" action="{{ route('reviews.add', ['slug' => $book->slug]) }}"
                     method="post">
                     @csrf
                     <div class="forms__group">
                         <input class="forms__hidden-input" type="hidden" name="user_id" value="{{ Auth::id() }}">
+                    </div>
+
+                    <div class="forms__group">
+                        <input class="forms__hidden-input" type="hidden" name="book_id" value="{{ $book->id }}">
                     </div>
 
                     <div class="forms__inline-section forms__inline-section--content-to-left">
@@ -186,7 +190,7 @@
                                 <label for="rate{{ $i + 1 }}" class="forms__radio-title">
                                     <span role="img"
                                         class="rate rate__star
-                                                                                                                                                                                                                                                                                                                                                                                                                                    rate__icons far fa-star"
+                                                                                                                                                                                                                                                                                                                                                                                                                                            rate__icons far fa-star"
                                         data-rating="icon" aria-label="Gwiadka ocena"></span>
                                 </label>
                             </div>
@@ -267,7 +271,8 @@
 
                 @can('delete', $review)
                     <div class="comments__item-options">
-                        <form class="forms tables__forms" action="{{ route('reviews.delete', ['id' => $review->id]) }}"
+                        <form class="forms tables__forms"
+                            action="{{ route('reviews.delete', ['slug' => $book->slug, 'id' => $review->id]) }}"
                             method="post">
                             @csrf
                             @method('delete')

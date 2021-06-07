@@ -9,6 +9,13 @@ class Review extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'book_id',
+        'user_id',
+        'rate',
+        'text_content'
+    ];
+
     public $timestamps = false;
 
     /* ===> Relations <=== */

@@ -6,26 +6,25 @@ namespace App\Http\Controllers\Book;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddReviewRequest;
-use App\Models\Review;
-
+use App\Services\Book\Review\ReviewService;
 use Illuminate\Http\RedirectResponse;
 
 class ReviewController extends Controller
 {
-    private Review $review;
+    private ReviewService $reviewService;
 
-    public function __construct(Review $review)
+    public function __construct(ReviewService $reviewService)
     {
-        $this->review = $review;
+        $this->reviewService = $reviewService;
     }
 
     public function add(AddReviewRequest $request, string $bookSlug): RedirectResponse
     {
         $data = $request->validated();
 
-        $data['book_id'] = $bookId;
+        $data['book_slug'] = $bookSlug;
 
-        $this->review->create($data);
+        $this->reviewService->create($data);
 
         return back()
             ->with('success', 'Recenzja została dodana.');
