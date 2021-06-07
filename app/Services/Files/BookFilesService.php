@@ -24,9 +24,9 @@ class BookFilesService
 
     public function setBook(int $id): BookFilesService
     {
-        $this->owner = $this->owner->find($id);
+        $this->book = $this->book->find($id);
 
-        $this->ownerIsAssigned = !$this->ownerIsAssigned;
+        $this->bookIsAssigned = !$this->bookIsAssigned;
 
         return $this;
     }
@@ -36,7 +36,7 @@ class BookFilesService
         if (!$this->bookIsAssigned())
             return false;
 
-        $this->owner->update(['cover' => $this->file
+        $this->book->update(['cover' => $this->file
             ->disk('public')
             ->put('cover', $cover)]);
 
@@ -63,7 +63,7 @@ class BookFilesService
         if ($this->book->hasCover())
             $isDeleted = $this->file->delete($this->book->cover);
 
-        $this->owner->update(['cover' => null]);
+        $this->book->update(['cover' => null]);
 
         return $isDeleted && !$this->book->hasCover();
     }
@@ -73,7 +73,7 @@ class BookFilesService
         if (!$this->bookIsAssigned())
             return false;
 
-        $this->owner->update(['file' => $this->file
+        $this->book->update(['file' => $this->file
             ->disk('local')
             ->put('pdfs', $file)]);
 
@@ -90,7 +90,7 @@ class BookFilesService
         if ($this->book->hasFile())
             $isDeleted = $this->file->delete($this->book->file);
 
-        $this->owner->update(['file' => null]);
+        $this->book->update(['file' => null]);
 
         return $isDeleted && !$this->book->hasFile();
     }

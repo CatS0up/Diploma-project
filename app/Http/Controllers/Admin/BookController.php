@@ -10,15 +10,25 @@ use App\Http\Requests\UpdateBookRequest;
 use App\Models\Book;
 use App\Models\Publisher;
 use App\Services\Book\BookCatalog;
+use App\Services\Book\BookService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class BookController extends Controller
 {
-    public function show(Book $book, int $id): View
+    private Book $book;
+    private BookService $bookService;
+
+    public function __construct(Book $book, BookService $bookService)
     {
-        return view('dashboard.bookItem', ['book' => $book->find($id)]);
+        $this->book = $book;
+        $this->bookService = $bookService;
+    }
+
+    public function show(int $id): View
+    {
+        return view('dashboard.bookItem', ['book' => $this->boo->find($id)]);
     }
 
     public function list(
@@ -46,7 +56,7 @@ class BookController extends Controller
     {
         $data = $request->validated();
 
-        $this->book->create($data);
+        $this->bookService->create($data);
 
         return redirect()->route('admin.get.books')
             ->with('success', 'Nowa książka została dodana.');
@@ -55,7 +65,7 @@ class BookController extends Controller
     public function edit(Publisher $publisher, int $id): View
     {
         return view('dashboard.editBook', [
-            'book' => $this->book->findById($id),
+            'book' => $this->book->find($id),
             'publishers' => $publisher->get()
         ]);
     }

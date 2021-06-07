@@ -5,33 +5,49 @@ declare(strict_types=1);
 namespace App\Services\Book;
 
 use App\Models\Book;
-use App\Services\Files\FilesManager;
+use App\Services\Files\BookFilesService;
 
 class BookService
 {
     private Book $book;
-    private FilesManager $fileManager;
+    private BookFilesService $file;
+    private BookDetailsService $details;
 
-    public function __construct(Book $book, FilesManager $fileManager)
-    {
+    public function __construct(
+        Book $book,
+        BookFilesService $file,
+        BookDetailsService $details,
+
+    ) {
         $this->book = $book;
-        $this->fileManager = $fileManager;
+        $this->file = $file;
+        $this->details = $details;
     }
 
     public function create(array $fields): Book
     {
-        return $this->book->create(
+        $book = $this->book->create(
             [
-                'title' => $fields['uid'],
-                'isbn' => $fields['pwd'],
-                'pages' => $fields['email'],
-                'file' => $fields['phone'],
-                'cover' => $this
-                    ->fileManager
-                    ->save($fields['cover'] ?? null, 'public/covers'),
+                'publisher_id' => $fields['publisher'],
+                'title' => $fields['title'],
+                'slug' => $fields['title'],
+                'isbn' => $fields['isbn'],
+                'pages' => $fields['pages'],
                 'description' => $fields['description'],
+                'publishing_date' => $fields['publishing_date']
             ]
         );
+
+        if (isset($fields['cover']))
+            $this->file->setBook($book->id)->addCover($fields['cover']);
+
+        $this->file->setBook($book->id)->addTextFile($fields['pdf']);
+
+        $this->details->addGenres($book, $fields['genres']);
+
+        $this->details->addAuthors($book, $fields['authors']);
+
+        return $book;
     }
 
     public function delete(int $id): bool

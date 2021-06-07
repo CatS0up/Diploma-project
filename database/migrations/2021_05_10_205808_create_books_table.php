@@ -20,10 +20,10 @@ class CreateBooksTable extends Migration
             $table->string('title', 100)->index();
             $table->string('isbn', 13)->unique();
             $table->smallInteger('pages');
-            $table->string('file');
             $table->text('description');
             $table->timestamps();
             $table->date('publishing_date')->nullable();
+            $table->string('file')->nullable();
             $table->string('cover')->nullable();
         });
     }
