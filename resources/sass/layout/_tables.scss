@@ -14,7 +14,7 @@
     &__row {
         @include flex($direction: column);
 
-        @include media("large") {
+        @include media("extra-large") {
             display: table-row;
         }
 
@@ -33,28 +33,29 @@
 
         color: $text-muted-color;
 
-        @include media("large") {
+        @include media("extra-large") {
             display: table-cell;
         }
 
         &:before {
+            padding-right: 20px;
+
             content: attr(data-label);
             text-transform: uppercase;
             font-weight: bold;
 
-            @include media("large") {
-                content: "";
+            @include media("extra-large") {
+                display: none;
             }
         }
     }
 
     &__item {
         @include flex($direction: column, $align: center);
-        gap: 10px;
 
-        @include media("large") {
-            flex-direction: row;
-            align-items: center;
+        @include media("extra-large") {
+            @include flex($direction: row, $align: center);
+            gap: 15px;
         }
     }
 
@@ -72,6 +73,15 @@
     }
 
     // mixins
+    &__pictures {
+        min-width: 50px;
+        max-width: 50px;
+
+        &--medium {
+            max-width: 150px;
+            min-height: 100px;
+        }
+    }
 
     &__forms {
         padding: 0;

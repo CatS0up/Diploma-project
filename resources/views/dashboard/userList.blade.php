@@ -250,7 +250,7 @@
 
                                 <td class="tables__cell" data-label="Użytkownik">
                                     <div class="tables__item">
-                                        <div class="pictures pictures--small pictures--avatar tables__pictures">
+                                        <div class="pictures tables__pictures">
                                             @if ($user->avatar)
                                                 <img class="pictures__img" src="{{ Storage::url($user->avatar) }}"
                                                     alt="Avatar użytkownika.">

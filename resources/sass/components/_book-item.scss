@@ -1,8 +1,4 @@
 .book-item {
-    display: grid;
-    grid-template-rows: 3fr 1fr;
-    min-width: 225px;
-
     padding: 30px;
 
     border: 1px solid lightgray;
@@ -21,7 +17,8 @@
 
     // mixins
     &__pictures {
-        height: 100%;
+        min-height: 270px;
+        max-height: 270px;
     }
 
     &__titles {

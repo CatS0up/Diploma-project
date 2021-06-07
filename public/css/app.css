@@ -6490,7 +6490,7 @@ select {
   align-items: stretch;
   flex-wrap: nowrap;
 }
-@media (min-width: 960px) {
+@media (min-width: 1024px) {
   .tables__row {
     display: table-row;
   }
@@ -6510,19 +6510,20 @@ select {
   padding: 10px 15px;
   color: #808080;
 }
-@media (min-width: 960px) {
+@media (min-width: 1024px) {
   .tables__cell {
     display: table-cell;
   }
 }
 .tables__cell:before {
+  padding-right: 20px;
   content: attr(data-label);
   text-transform: uppercase;
   font-weight: bold;
 }
-@media (min-width: 960px) {
+@media (min-width: 1024px) {
   .tables__cell:before {
-    content: "";
+    display: none;
   }
 }
 .tables__item {
@@ -6531,12 +6532,15 @@ select {
   justify-content: flex-start;
   align-items: center;
   flex-wrap: nowrap;
-  gap: 10px;
 }
-@media (min-width: 960px) {
+@media (min-width: 1024px) {
   .tables__item {
+    display: flex;
     flex-direction: row;
+    justify-content: flex-start;
     align-items: center;
+    flex-wrap: nowrap;
+    gap: 15px;
   }
 }
 .tables__group {
@@ -6554,6 +6558,14 @@ select {
   .tables__footer {
     display: table-footer-group;
   }
+}
+.tables__pictures {
+  min-width: 50px;
+  max-width: 50px;
+}
+.tables__pictures--medium {
+  max-width: 150px;
+  min-height: 100px;
 }
 .tables__forms {
   padding: 0;
@@ -6731,7 +6743,6 @@ select {
   gap: 20px;
   grid-column: 1/-1;
   grid-template-columns: repeat(2, auto);
-  align-items: flex-start;
 }
 @media (min-width: 760px) {
   .books__items {
@@ -6813,6 +6824,10 @@ select {
   padding: 10px 0;
   gap: 20px;
   border-top: 1px solid lightgray;
+}
+.book-page__pictures {
+  min-height: 480px;
+  max-height: 480px;
 }
 .book-page__headers {
   padding: 15px 10px;
@@ -7269,6 +7284,7 @@ select {
 }
 .pictures__img {
   display: block;
+  height: 100%;
   width: 100%;
 }
 
@@ -7387,9 +7403,6 @@ select {
 }
 
 .book-item {
-  display: grid;
-  grid-template-rows: 3fr 1fr;
-  min-width: 225px;
   padding: 30px;
   border: 1px solid lightgray;
 }
@@ -7409,7 +7422,8 @@ select {
   border-top: 1px solid lightgray;
 }
 .book-item__pictures {
-  height: 100%;
+  min-height: 270px;
+  max-height: 270px;
 }
 .book-item__titles {
   padding: 5px;

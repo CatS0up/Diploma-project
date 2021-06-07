@@ -50,6 +50,11 @@
     }
 
     // mixins
+    &__pictures {
+        min-height: 480px;
+        max-height: 480px;
+    }
+
     &__headers {
         padding: 15px 10px;
 

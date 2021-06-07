@@ -29,7 +29,7 @@ class Authenticator
 
     public function logout(): bool
     {
-        $this->authManager->logout();
+        $this->auth->logout();
 
         return $this->userIsLogged();
     }
