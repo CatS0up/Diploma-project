@@ -72,9 +72,9 @@ class BookController extends Controller
 
     public function update(UpdateBookRequest $request, int $id): RedirectResponse
     {
-        $data = $request->all();
+        $data = $request->validated();
 
-        $this->book->update($id, $data);
+        $this->bookService->update($id, $data);
 
         return redirect()
             ->route(
@@ -85,7 +85,7 @@ class BookController extends Controller
 
     public function destroy(int $id): RedirectResponse
     {
-        $this->book->delete($id);
+        $this->bookService->delete($id);
 
         return redirect()->route('admin.get.books')
             ->with('success', 'Książka została pomyślnie usunięta.');

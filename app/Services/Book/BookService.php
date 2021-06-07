@@ -38,10 +38,12 @@ class BookService
             ]
         );
 
-        if (isset($fields['cover']))
-            $this->file->setBook($book->id)->addCover($fields['cover']);
+        $this->file->setBook($book->id);
 
-        $this->file->setBook($book->id)->addTextFile($fields['pdf']);
+        if (isset($fields['cover']))
+            $this->file->addCover($fields['cover']);
+
+        $this->file->addTextFile($fields['pdf']);
 
         $this->details->addGenres($book, $fields['genres']);
 
@@ -54,12 +56,47 @@ class BookService
     {
         $book = $this->book->find($id);
 
-        if ($book->hasCover())
-            $this->fileManager->delete('public/' . $book->cover);
+        $this->file->setBook($book->id);
 
-
-        $this->fileManager->delete('public/' . $book->file);
+        $this->file->deleteCover();
+        $this->file->deleteTextFile();
 
         return $book->delete();
+    }
+
+    public function update(int $id, array $fields): bool
+    {
+
+        $book = $this->book->find($id);
+
+        $isUpdated = $book->update(
+            [
+                'publisher_id'    => $fields['publisher']        ?? $book->publisher,
+                'title'           => $fields['title']            ?? $book->title,
+                'slug'            => $fields['title']            ?? $book->title,
+                'isbn'            => $fields['isbn']             ?? $book->isbn,
+                'pages'           => $fields['pages']            ?? $book->pages,
+                'description'     => $fields['description']      ?? $book->description,
+                'publishing_date' => $fields['publishing_datee'] ?? $book->publishing_date
+            ]
+        );
+
+        if (filter_var($fields['reset_cover'], FILTER_VALIDATE_BOOLEAN)) {
+
+            $this->file->setBook($book->id)->deleteCover();
+        } else {
+
+            if (isset($fields['avatar']))
+                $this->file->setBook($book->id)->updateCover($fields['cover']);
+        }
+
+        if (isset($fields['pdf']))
+            $this->file->setBook($book->id)->updateTextFile($fields['pdf']);
+
+        $this->details->addGenres($book, $fields['genres']);
+
+        $this->details->addAuthors($book, $fields['authors']);
+
+        return $isUpdated;
     }
 }

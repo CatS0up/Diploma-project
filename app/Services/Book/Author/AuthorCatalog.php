@@ -9,21 +9,20 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class AuthorCatalog
 {
-    private Author $genre;
+    private Author $author;
 
-    public function __construct(Author $genre, AuthorStats $stats)
+    public function __construct(Author $author)
     {
-        $this->genre = $genre;
-        $this->stats = $stats;
+        $this->author = $author;
     }
 
     public function allPaginated(int $limit = 10): LengthAwarePaginator
     {
-        return $this->genre->paginate($limit);
+        return $this->author->paginate($limit);
     }
 
     public function stats(): array
     {
-        return ['all_amount' => $this->genre->count()];
+        return ['all_amount' => $this->author->count()];
     }
 }

@@ -28,6 +28,7 @@ class UpdateBookRequest extends FormRequest
         return [
             'cover' => 'nullable|file|image',
             'pdf' => 'nullable|file|mimes:pdf',
+            'reset_cover' => 'required',
             'title' => 'required|regex:/^[a-zA-ZzżźćńółęąśŻŹĆĄŚĘŁÓŃ\- ]*$/',
             'isbn' => [
                 'required',

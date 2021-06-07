@@ -171,14 +171,11 @@
                     </div>
                 @enderror
 
-                <form class="forms comments__forms" action="{{ route('reviews.add') }}" method="post">
+                <form class="forms comments__forms" action="{{ route('reviews.add', ['book_id' => $book->id]) }}"
+                    method="post">
                     @csrf
                     <div class="forms__group">
                         <input class="forms__hidden-input" type="hidden" name="user_id" value="{{ Auth::id() }}">
-                    </div>
-
-                    <div class="forms__group">
-                        <input class="forms__hidden-input" type="hidden" name="book_id" value="{{ $book->id }}">
                     </div>
 
                     <div class="forms__inline-section forms__inline-section--content-to-left">
@@ -189,7 +186,7 @@
                                 <label for="rate{{ $i + 1 }}" class="forms__radio-title">
                                     <span role="img"
                                         class="rate rate__star
-                                                                                                                                                                                                                                                                                                                                                                                                                    rate__icons far fa-star"
+                                                                                                                                                                                                                                                                                                                                                                                                                                    rate__icons far fa-star"
                                         data-rating="icon" aria-label="Gwiadka ocena"></span>
                                 </label>
                             </div>

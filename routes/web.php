@@ -124,7 +124,7 @@ Route::prefix('books')
                 ->name('show');
 
             Route::middleware('auth')
-                ->get('books/{slug}/download', DownloadController::class)
+                ->get('{slug}/download', DownloadController::class)
                 ->name('download');
         });
     });
@@ -148,10 +148,10 @@ Route::prefix('reviews')
     ->name('reviews.')
     ->group(function () {
 
-        Route::post('reviews/new', [ReviewController::class, 'add'])
+        Route::post('books/{slug}/reviews/new', [ReviewController::class, 'add'])
             ->name('add');
 
-        Route::delete('reviews/{id}/delete', [ReviewController::class, 'destroy'])
+        Route::delete('books/{slug}/reviews/{id}/delete', [ReviewController::class, 'destroy'])
             ->name('delete');
     });
 

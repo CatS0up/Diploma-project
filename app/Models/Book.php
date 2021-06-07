@@ -65,6 +65,11 @@ class Book extends Model
         return (bool) $this->cover;
     }
 
+    public function hasFile(): bool
+    {
+        return (bool) $this->file;
+    }
+
     public function rateAvg(): float
     {
         return (float) $this->reviews()->avg('rate');

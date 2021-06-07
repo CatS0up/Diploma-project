@@ -31,6 +31,8 @@
 
         <div class="show dashboard__show">
 
+            @dump($errors);
+
             <div class="show__main-info">
                 <div class="show__main-info-group show__main-info-group--text-centered">
 
@@ -137,19 +139,36 @@
                             @enderror
                         </div>
 
-                        <div class="forms__group">
-                            <label class="forms__group-title" for="isbn">
-                                ISBN
-                                <span class="forms__required-info">*</span>
-                            </label>
-                            <input id="isbn" class="forms__input" type="text" name="isbn"
-                                value="{{ old('isbn', $book->isbn) }}">
+                        <div class="forms__inline-section">
+                            <div class="forms__group">
+                                <label class="forms__group-title" for="isbn">
+                                    ISBN
+                                    <span class="forms__required-info">*</span>
+                                </label>
+                                <input id="isbn" class="forms__input" type="text" name="isbn"
+                                    value="{{ old('isbn', $book->isbn) }}">
 
-                            @error('isbn')
-                                <span class="forms__input-feedback">
-                                    {{ $message }}
-                                </span>
-                            @enderror
+                                @error('isbn')
+                                    <span class="forms__input-feedback">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="forms__group">
+                                <label class="forms__group-title" for="pagesAmount">
+                                    Ilość stron
+                                    <span class="forms__required-info">*</span>
+                                </label>
+                                <input id="pagesAmount" class="forms__input" type="pagesAmount" name="pages"
+                                    value="{{ old('pages', $book->pages) }}">
+
+                                @error('pages')
+                                    <span class="forms__input-feedback">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
 
                         <div class="forms__group">

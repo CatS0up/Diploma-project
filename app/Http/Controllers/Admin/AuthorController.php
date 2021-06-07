@@ -6,35 +6,46 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NewAuthorRequest;
-use App\Service\Book\ListingAuthorService;
+use App\Models\Author;
+use App\Services\Book\Author\AuthorCatalog;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class AuthorController extends Controller
 {
-    public function list(ListingAuthorService $authorList): View
+    private Author $author;
+
+    public function __construct(Author $author)
     {
-        return view('dashboard.authorList', [
-            'authors' => $authorList->allPaginated(),
-            'stats' => $authorList->stats()
-        ]);
+        $this->author = $author;
+    }
+
+    public function list(AuthorCatalog $catalog): View
+    {
+        return view(
+            'dashboard.authorList',
+            [
+                'authors' => $catalog->allPaginated(),
+                'stats' => $catalog->stats()
+            ]
+        );
     }
 
     public function insert(NewAuthorRequest $request): RedirectResponse
     {
-        $this->author->createSingle($request->validated());
+        $this->author->firstOrCreate($request->validated());
 
         return redirect()
             ->route('admin.get.authors')
-            ->with('success', 'Autor został pomyślnie dodany.');
+            ->with('success', 'Gatunek został pomyslnie dodany.');
     }
 
     public function destroy(int $id): RedirectResponse
     {
-        $this->author->delete($id);
+        $this->author->find($id)->delete();
 
         return redirect()
             ->route('admin.get.authors')
-            ->with('success', 'Autor został pomyślnie usunięty.');
+            ->with('success', 'Gatunek został usunięty pomyślnie.');
     }
 }

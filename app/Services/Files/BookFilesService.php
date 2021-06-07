@@ -36,7 +36,6 @@ class BookFilesService
         if (!$this->bookIsAssigned())
             return false;
 
-        dump('git');
         $this->book->update(['cover' => $this->file
             ->disk('public')
             ->put('covers', $cover)]);
@@ -78,7 +77,7 @@ class BookFilesService
             ->disk('local')
             ->put('pdfs', $file)]);
 
-        return $this->book->hasCover();
+        return $this->book->hasFile();
     }
 
     public function deleteTextFile(): bool

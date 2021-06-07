@@ -83,10 +83,10 @@ class UserService
         $isUpdated = $user->update(
             [
                 'address_id'  => $address->id,
-                'uid'         => $fields['uid'] ?? $user->uid,
-                'pwd'         => $fields['pwd'] ?? $user->pwd,
-                'email'       => $fields['email'] ?? $user->email,
-                'phone'       => $fields['phone'] ?? $user->phone,
+                'uid'         => $fields['uid']         ?? $user->uid,
+                'pwd'         => $fields['pwd']         ?? $user->pwd,
+                'email'       => $fields['email']       ?? $user->email,
+                'phone'       => $fields['phone']       ?? $user->phone,
                 'description' => $fields['description'] ?? $user->description,
             ]
         );

@@ -11,10 +11,9 @@ class GenreCatalog
 {
     private Genre $genre;
 
-    public function __construct(Genre $genre, GenreStats $stats)
+    public function __construct(Genre $genre)
     {
         $this->genre = $genre;
-        $this->stats = $stats;
     }
 
     public function allPaginated(int $limit = 10): LengthAwarePaginator

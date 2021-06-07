@@ -6325,6 +6325,9 @@ select {
 .dashboard__header {
   padding-bottom: 10px;
 }
+.dashboard__table-container {
+  max-width: 100%;
+}
 .dashboard__stats {
   padding-top: 50px;
 }
