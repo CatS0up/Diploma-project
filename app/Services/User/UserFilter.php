@@ -10,7 +10,6 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserFilter
 {
-    private User $user;
     private Builder $query;
 
     public function __construct(User $user)

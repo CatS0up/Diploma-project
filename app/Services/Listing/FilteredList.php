@@ -11,7 +11,7 @@ abstract class FilteredList
     protected array $acceptableFilters;
     protected array $defaultFiletrs;
 
-    protected array $filters;
+    protected array $filters = [];
     protected array $chosenFilters;
 
     abstract public function filter(): LengthAwarePaginator;

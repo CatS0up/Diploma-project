@@ -43,13 +43,15 @@ class BookFilteredList extends FilteredList
         if (isset($this->filters['q']))
             $this->filter->setPhrase($this->filters['q']);
 
-        if ($this->filters['genre'] = $this->filters['genre'] ?? null)
+        if (isset($filters['genre']) && $filters['genre'] !== 'all')
             $this->filter->setGenre($this->filters['genre']);
 
-        if ($this->filters['publisher'] = $this->filters['publisher'] ?? null)
+        if (isset($filters['publisher']) && $filters['publisher'] !== 'all')
             $this->filter->setPublisher($this->filters['publisher']);
 
 
-        return $this->filter->getPaginated();
+        return $this->filter
+            ->setSort('title', $this->filters['sort'] ?? 'asc')
+            ->getPaginated();
     }
 }

@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Service\User\UserService;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    private UserService $user;
+    private User $user;
 
-    public function __construct(UserService $user)
+    public function __construct(User $user)
     {
         $this->user = $user;
     }
@@ -22,7 +22,7 @@ class ProfileController extends Controller
     {
         return view(
             'me.profile',
-            ['user' => $this->user->findByUid($uid)]
+            ['user' => $this->user->firstWhere('uid', $uid)]
         );
     }
 

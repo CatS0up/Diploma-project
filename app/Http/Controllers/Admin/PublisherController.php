@@ -6,20 +6,20 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NewPublisherRequest;
-use App\Service\Book\ListingPublisherService;
-use App\Service\Book\PublisherService;
+use App\Models\Publisher;
+use App\Services\Book\Publisher\PublisherCatalog;
 use Illuminate\Http\RedirectResponse;
 
 class PublisherController extends Controller
 {
-    private PublisherService $publisher;
+    private Publisher $publisher;
 
-    public function __construct(PublisherService $publisher)
+    public function __construct(Publisher $publisher)
     {
         $this->publisher = $publisher;
     }
 
-    public function list(ListingPublisherService $publisherList)
+    public function list(PublisherCatalog $publisherList)
     {
         return view('dashboard.publisherList', [
             'publishers' => $publisherList->allPaginated(),
@@ -29,7 +29,7 @@ class PublisherController extends Controller
 
     public function insert(NewPublisherRequest $request): RedirectResponse
     {
-        $this->publisher->createSingle($request->validated());
+        $this->publisher->fill($request->validated());
 
         return redirect()
             ->route('admin.get.publishers')
@@ -38,7 +38,7 @@ class PublisherController extends Controller
 
     public function destroy(int $id): RedirectResponse
     {
-        $this->publisher->delete($id);
+        $this->publisher->find($id)->delete();
 
         return redirect()
             ->route('admin.get.publishers')
