@@ -24,18 +24,18 @@ class BookDetailsService
     {
         $genres = $this->genresPrepare($list);
 
-        $existing = $book->genres()->get();
+        $assigned = $book->genres()->get();
 
-        $book->genres()->saveMany($genres->diffAssoc($existing)->all());
+        $book->genres()->saveMany($genres->diffAssoc($assigned)->all());
     }
 
     public function addAuthors(Book $book, string $list)
     {
         $authors = $this->authorsPrepare($list);
 
-        $existing = $book->authors()->get();
+        $assigned = $book->authors()->get();
 
-        $book->authors()->saveMany($authors->diffAssoc($existing)->all());
+        $book->authors()->saveMany($authors->diffAssoc($assigned)->all());
     }
 
     private function genresPrepare(string $genres): Collection

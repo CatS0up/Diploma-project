@@ -22,10 +22,10 @@ class UserService
     {
         $user = $this->user->create(
             [
-                'uid' => $fields['uid'],
-                'pwd' => $fields['pwd'],
-                'email' => $fields['email'],
-                'phone' => $fields['phone'],
+                'uid'         => $fields['uid'],
+                'pwd'         => $fields['pwd'],
+                'email'       => $fields['email'],
+                'phone'       => $fields['phone'],
                 'description' => $fields['description'],
             ]
         );
@@ -35,9 +35,9 @@ class UserService
 
         $user->address()->firstOrCreate(
             [
-                'town' => $fields['town'],
-                'street' =>  $fields['street'] ?? null,
-                'zipcode' => $fields['zipcode'],
+                'town'         => $fields['town'],
+                'street'       => $fields['street'] ?? null,
+                'zipcode'      => $fields['zipcode'],
                 'local_number' => $fields['local_number'],
             ]
         )
@@ -47,9 +47,9 @@ class UserService
         $user->personalDetails()->create(
             [
                 'firstname' => $fields['firstname'],
-                'lastname' =>  $fields['lastname'],
-                'birthday' => $fields['birthday'],
-                'gender' => $fields['gender'] ?? null,
+                'lastname'  => $fields['lastname'],
+                'birthday'  => $fields['birthday'],
+                'gender'    => $fields['gender'] ?? null,
             ]
         );
 
@@ -73,20 +73,20 @@ class UserService
 
         $address = $user->address->firstOrCreate(
             [
-                'town' => $fields['town'],
-                'street' =>  $fields['street'] ?? null,
-                'zipcode' => $fields['zipcode'],
+                'town'         => $fields['town'],
+                'street'       => $fields['street'] ?? null,
+                'zipcode'      => $fields['zipcode'],
                 'local_number' => $fields['local_number'],
             ]
         );
 
         $isUpdated = $user->update(
             [
-                'address_id' => $address->id,
-                'uid' => $fields['uid'] ?? $user->uid,
-                'pwd' => $fields['pwd'] ?? $user->pwd,
-                'email' => $fields['email'] ?? $user->email,
-                'phone' => $fields['phone'] ?? $user->phone,
+                'address_id'  => $address->id,
+                'uid'         => $fields['uid'] ?? $user->uid,
+                'pwd'         => $fields['pwd'] ?? $user->pwd,
+                'email'       => $fields['email'] ?? $user->email,
+                'phone'       => $fields['phone'] ?? $user->phone,
                 'description' => $fields['description'] ?? $user->description,
             ]
         );
@@ -97,16 +97,15 @@ class UserService
         } else {
 
             if (isset($fields['avatar']))
-
                 $this->file->setOwner($user->id)->updateAvatar($fields['avatar']);
         }
 
         $user->personalDetails->update(
             [
                 'firstname' => $fields['firstname'],
-                'lastname' =>  $fields['lastname'],
-                'birthday' => $fields['birthday'],
-                'gender' => $fields['gender'] ?? null,
+                'lastname'  => $fields['lastname'],
+                'birthday'  => $fields['birthday'],
+                'gender'    => $fields['gender'] ?? null,
             ]
         );
 

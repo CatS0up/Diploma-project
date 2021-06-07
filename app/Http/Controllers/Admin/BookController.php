@@ -28,7 +28,7 @@ class BookController extends Controller
 
     public function show(int $id): View
     {
-        return view('dashboard.bookItem', ['book' => $this->boo->find($id)]);
+        return view('dashboard.bookItem', ['book' => $this->book->find($id)]);
     }
 
     public function list(

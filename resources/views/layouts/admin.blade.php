@@ -10,7 +10,9 @@
         <section class="dashboard__content">
             @include('shared.messages')
 
-            @yield('inner-content')
+            <div class="container dashboard__container">
+                @yield('inner-content')
+            </div>
         </section>
     </main>
 

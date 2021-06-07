@@ -17,6 +17,8 @@ class Book extends Model
         'isbn',
         'pages',
         'description',
+        'cover',
+        'file'
     ];
 
     /* ===> Relations <=== */

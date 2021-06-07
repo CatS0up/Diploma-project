@@ -36,9 +36,10 @@ class BookFilesService
         if (!$this->bookIsAssigned())
             return false;
 
+        dump('git');
         $this->book->update(['cover' => $this->file
             ->disk('public')
-            ->put('cover', $cover)]);
+            ->put('covers', $cover)]);
 
         return $this->book->hasCover();
     }

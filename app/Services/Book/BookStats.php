@@ -24,4 +24,21 @@ class BookStats
     {
         return $this->builder->table('books')->count();
     }
+
+    public function countBest(): int
+    {
+        $subquery = $this->builder
+            ->table('reviews')
+            ->selectRaw('AVG(rate) as avg_rate')
+            ->groupBy('book_id')
+            ->havingRaw('avg_rate > 4')
+            ->toSql();
+
+        return $this->builder
+            ->table(
+                $this->builder
+                    ->raw("({$subquery}) as sub")
+            )
+            ->count();
+    }
 }

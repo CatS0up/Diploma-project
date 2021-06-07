@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Book;
 
 use App\Http\Controllers\Controller;
+use App\Models\Book;
 use App\Services\Book\BookFilteredList;
 use Illuminate\Auth\AuthManager;
 use Illuminate\Http\Request;
@@ -12,15 +13,18 @@ use Illuminate\View\View;
 
 class BookController extends Controller
 {
-    public function __construct()
+    private Book $book;
+
+    public function __construct(Book $book)
     {
+        $this->book = $book;
     }
 
     public function show(AuthManager $auth, string $slug): View
     {
         $user = $auth->user();
 
-        $book = $this->book->findBySlug($slug);
+        $book = $this->book->firstWhere('slug', $slug);
 
         return view('book.show', [
             'book' => $book,

@@ -28,12 +28,12 @@ class BookService
     {
         $book = $this->book->create(
             [
-                'publisher_id' => $fields['publisher'],
-                'title' => $fields['title'],
-                'slug' => $fields['title'],
-                'isbn' => $fields['isbn'],
-                'pages' => $fields['pages'],
-                'description' => $fields['description'],
+                'publisher_id'    => $fields['publisher'],
+                'title'           => $fields['title'],
+                'slug'            => $fields['title'],
+                'isbn'            => $fields['isbn'],
+                'pages'           => $fields['pages'],
+                'description'     => $fields['description'],
                 'publishing_date' => $fields['publishing_date']
             ]
         );

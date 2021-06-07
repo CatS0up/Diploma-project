@@ -35,7 +35,7 @@ class BookCatalog
     {
         return [
             'all_amount' => $this->stats->count(),
-            'best_amount' => 0
+            'best_amount' => $this->stats->countBest()
         ];
     }
 
