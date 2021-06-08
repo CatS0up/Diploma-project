@@ -22,6 +22,11 @@ class Book extends Model
     ];
 
     /* ===> Relations <=== */
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'UserBooks');
+    }
+
     public function authors()
     {
         return $this->belongsToMany(Author::class, 'BookAuthors');

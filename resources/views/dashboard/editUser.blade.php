@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 
 @section('inner-content')
-
     <header class="headers dashboard__headers">
         <ol class="breadcrumbs dashboard__breadcrumbs">
             <li class="breadcrumbs__item">

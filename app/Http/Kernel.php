@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\VerifyBookExist;
+use App\Http\Middleware\VerifyCommentAuthor;
 use App\Http\Middleware\VerifyUserExist;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -65,6 +66,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'verifyUserExist' => VerifyUserExist::class,
-        'verifyBookExist' => VerifyBookExist::class
+        'verifyBookExist' => VerifyBookExist::class,
+        'verifyCommentAuthor' => VerifyCommentAuthor::class
     ];
 }

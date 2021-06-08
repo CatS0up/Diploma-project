@@ -5,61 +5,55 @@ declare(strict_types=1);
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Service\Book\BookService;
-use App\Service\Book\ListingGenreService;
-use App\Service\Book\ListingPublisherService;
-use App\Service\BookListing;
-use App\Service\FiltersFormatter;
-use App\Service\User\UserLibraryService;
+use App\Models\Book;
+use App\Models\User;
+use App\Services\Book\BookFilteredList;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class BookController extends Controller
 {
-    private UserLibraryService $userLibrary;
-    private BookService $book;
+    private User $user;
 
-    public function __construct(
-        UserLibraryService $userLibrary,
-        BookService $book
-    ) {
-        $this->userLibrary = $userLibrary;
-        $this->book = $book;
+    public function __construct(User $user)
+    {
+        $this->user = $user;
     }
 
     public function list(
-        FiltersFormatter $filters,
-        ListingGenreService $genreList,
-        ListingPublisherService $publisherList
+        Request $request,
+        BookFilteredList $list,
+        string $uid
     ): View {
-        $filters = $filters->format(
-            ['q', 'publisher', 'genre', 'sort'],
-            [
-                'sort' => BookListing::SORT_DEFAULT,
-                'publisher' => BookListing::TYPE_ALL,
-                'genre' => BookListing::TYPE_ALL
-            ]
-        );
+        $expectedFilters = ['q', 'genre', 'publisher', 'sort', 'user_id'];
 
-        return view('me.list', [
-            'genres' => $genreList->all(),
-            'publishers' => $publisherList->all(),
-            'books' => $this->bookList->filterBy($filters),
-            'filters' =>  $filters
+        $filters = $request->only($expectedFilters);
+
+        $filters['user_id'] = $this->user->firstWhere('uid', $uid)->id;
+
+        return view('user.list', [
+            'books' => $list->setFilters($filters)
+                ->qualifyFilters($expectedFilters)
+                ->filter(),
+            'inputValues' => $list->inputValues(),
+            'filters' => $list->filters(),
+            'current_user' => $uid
         ]);
     }
 
-    public function add(string $slug): RedirectResponse
+    public function add(Book $book, string $slug): RedirectResponse
     {
-        $this->userLibrary->addBook($this->book->findBySlug($slug));
+        Auth::user()->addBook($book->firstWhere('slug', $slug));
 
         return back()
             ->with('success', 'Książka zostałą dodana do twojej biblioteki.');
     }
 
-    public function remove(string $slug): RedirectResponse
+    public function remove(Book $book, string $slug): RedirectResponse
     {
-        $this->userLibrary->removeBook($this->book->findBySlug($slug));
+        Auth::user()->removeBook($book->firstWhere('slug', $slug));
 
         return back()
             ->with('success', 'Książka zostałą usunięta z twojej bilbioteki.');

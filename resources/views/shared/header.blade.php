@@ -62,7 +62,7 @@
                                 </li>
 
                                 <li class="menu__item">
-                                    <a href="{{ route('me.get.books') }}"
+                                    <a href="{{ route('user.get.books', ['uid' => Auth::user()->uid]) }}"
                                         class="links links--dropdown menu__links">Książki</a>
                                 </li>
 

@@ -31,4 +31,9 @@ class ReviewService
             ]
         );
     }
+
+    public function delete(int $id): bool
+    {
+        return $this->review->find($id)->delete();
+    }
 }

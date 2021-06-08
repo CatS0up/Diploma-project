@@ -19,6 +19,16 @@ class BookFilter
         $this->query = $this->book->with(['authors', 'genres', 'reviews']);
     }
 
+    public function setOwner(int $userId): BookFilter
+    {
+        $this->query->whereHas(
+            'users',
+            fn (Builder $q) => $q->where('id', $userId)
+        );
+
+        return $this;
+    }
+
     public function setPhrase(string $phrase): BookFilter
     {
         $phrase = "$phrase%";

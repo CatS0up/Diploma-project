@@ -30,9 +30,9 @@ class ReviewController extends Controller
             ->with('success', 'Recenzja została dodana.');
     }
 
-    public function destroy(int $id): RedirectResponse
+    public function destroy(string $slug, int $id): RedirectResponse
     {
-        $this->review->delete($id);
+        $this->reviewService->delete($id);
 
         return back()
             ->with('success', 'Recenzja została usunięta.');

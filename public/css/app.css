@@ -6999,6 +6999,21 @@ select {
   color: #808080;
 }
 
+.user-library__items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(auto, 300px));
+  justify-content: center;
+}
+@media (min-width: 560px) {
+  .user-library__items {
+    grid-template-columns: repeat(auto-fit, minmax(auto, 250px));
+    justify-content: flex-start;
+  }
+}
+.user-library__notifications {
+  grid-column: 1/-1;
+}
+
 .headers--light {
   background-color: #fff;
 }

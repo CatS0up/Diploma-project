@@ -126,6 +126,19 @@ Route::prefix('books')
             Route::middleware('auth')
                 ->get('{slug}/download', DownloadController::class)
                 ->name('download');
+
+            /* ===> REVIEWS ROUTES <=== */
+            Route::middleware(['auth'])
+                ->name('reviews.')
+                ->group(function () {
+
+                    Route::post('books/{slug}/reviews/new', [ReviewController::class, 'add'])
+                        ->middleware('verifyCommentAuthor')
+                        ->name('add');
+
+                    Route::delete('books/{slug}/reviews/{id}/delete', [ReviewController::class, 'destroy'])
+                        ->name('delete');
+                });
         });
     });
 
@@ -142,26 +155,13 @@ Route::prefix('users')
             ->name('delete');;
     });
 
-/* ===> REVIEWS ROUTES <=== */
-Route::prefix('reviews')
-    ->middleware(['auth'])
-    ->name('reviews.')
-    ->group(function () {
-
-        Route::post('books/{slug}/reviews/new', [ReviewController::class, 'add'])
-            ->name('add');
-
-        Route::delete('books/{slug}/reviews/{id}/delete', [ReviewController::class, 'destroy'])
-            ->name('delete');
-    });
-
 /* ===> LOGGED USER ROUTES <=== */
-Route::prefix('me')
+Route::prefix('user')
     ->middleware(['auth'])
-    ->name('me.')
+    ->name('user.')
     ->group(function () {
 
-        Route::get('books', [UserBookController::class, 'list'])
+        Route::get('{uid}/books', [UserBookController::class, 'list'])
             ->name('get.books');
 
         Route::post('books/{slug}/add', [UserBookController::class, 'add'])

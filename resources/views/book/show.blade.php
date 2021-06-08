@@ -92,7 +92,7 @@
             <div class="book-page__options">
                 @auth
                     @if (Auth::user()->hasBook($book->id))
-                        <form class="forms tables__forms" action="{{ route('me.remove.book', ['slug' => $book->slug]) }}"
+                        <form class="forms tables__forms" action="{{ route('user.remove.book', ['slug' => $book->slug]) }}"
                             method="post">
                             @csrf
                             @method('delete')
@@ -101,7 +101,7 @@
                             </button>
                         </form>
                     @else
-                        <form class="forms tables__forms" action="{{ route('me.add.book', ['slug' => $book->slug]) }}"
+                        <form class="forms tables__forms" action="{{ route('user.add.book', ['slug' => $book->slug]) }}"
                             method="post">
                             @csrf
                             <button class="buttons buttons--bg-no  book-item__buttons">
@@ -171,16 +171,12 @@
                     </div>
                 @enderror
 
-                <form class="forms comments__forms" action="{{ route('reviews.add', ['slug' => $book->slug]) }}"
+                <form class="forms comments__forms" action="{{ route('book.reviews.add', ['slug' => $book->slug]) }}"
                     method="post">
                     @csrf
-                    <div class="forms__group">
-                        <input class="forms__hidden-input" type="hidden" name="user_id" value="{{ Auth::id() }}">
-                    </div>
+                    <input class="forms__hidden-input" type="hidden" name="user_id" value="{{ Auth::id() }}">
 
-                    <div class="forms__group">
-                        <input class="forms__hidden-input" type="hidden" name="book_id" value="{{ $book->id }}">
-                    </div>
+                    <input class="forms__hidden-input" type="hidden" name="book_id" value="{{ $book->id }}">
 
                     <div class="forms__inline-section forms__inline-section--content-to-left">
                         @for ($i = 0; $i < 5; $i++)
@@ -190,7 +186,7 @@
                                 <label for="rate{{ $i + 1 }}" class="forms__radio-title">
                                     <span role="img"
                                         class="rate rate__star
-                                                                                                                                                                                                                                                                                                                                                                                                                                            rate__icons far fa-star"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            rate__icons far fa-star"
                                         data-rating="icon" aria-label="Gwiadka ocena"></span>
                                 </label>
                             </div>
@@ -272,7 +268,7 @@
                 @can('delete', $review)
                     <div class="comments__item-options">
                         <form class="forms tables__forms"
-                            action="{{ route('reviews.delete', ['slug' => $book->slug, 'id' => $review->id]) }}"
+                            action="{{ route('book.reviews.delete', ['slug' => $book->slug, 'id' => $review->id]) }}"
                             method="post">
                             @csrf
                             @method('delete')

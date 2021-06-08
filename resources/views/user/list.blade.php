@@ -1,46 +1,30 @@
 @extends('layouts.app')
 
 @section('inner-content')
-    <header class="headers main__headers">
+    <header class="headers dashboard__headers">
         <ol class="breadcrumbs dashboard__breadcrumbs">
+            <li class="breadcrumbs__item">
+                <a href="{{ route('home') }}" class="links links--light breadcrumbs__links">
+                    Strona główna
+                </a>
+            </li>
+            <li class="breadcrumbs__item">
+                <a href="{{ route('profile.show', ['uid' => $current_user]) }}"
+                    class="links links--light breadcrumbs__links">
+                    {{ $current_user }}
+                </a>
+            </li>
             <li class="breadcrumbs__item breadcrumbs__item--active">
-                Strona główna
+                Biblioteka
             </li>
         </ol>
     </header>
 
-    <section class="books main__books">
+    <section class="user-library main__user-library  main__section--tight">
 
-        <aside class="genres books__genres">
-            <header class="headers headers--dark genres__headers">
-                <h3 class="titles titles--transform-none genres__titles">
-                    Kategorie
-                    <span class="icons titles__icons fas fa-bars" aria-hidden="true"></span>
-                </h3>
-            </header>
-
-            <ul class="menu genres__menu">
-                <li class="menu__item">
-                    <a href="{{ url()->current() . '?genre=' . 'all' }}" class="links genres__links">Wszystkie</a>
-                </li>
-                @forelse ($inputValues['genres'] as $genre)
-                    <li class="menu__item">
-                        <a href="{{ url()->current() . '?genre=' . $genre->slug }}"
-                            class="links genres__links">{{ $genre->name }}</a>
-                    </li>
-                @empty
-                    <li class="menu__item menu__item--underlined">
-                        Brak gatunków :(
-                    </li>
-                @endforelse
-            </ul>
-        </aside>
-
-        <div class="filters books__filters">
+        <div class="filters user-library__filters">
             <form class="forms forms--inline main__forms" action="{{ url()->current() }}" method="get">
-                {{-- @csrf --}}
-                <input class="forms__hidden-input" type="hidden" name="genre" value="{{ $activeGenre }}">
-
+                @csrf
                 <div class="forms__group">
                     <label class="forms__group-title" for="search">
                         Wyszukiwarka
@@ -59,6 +43,19 @@
                             <option value="{{ $publisher->name }}"
                                 {{ !($publisher->name == $filters['publisher']) ?: 'selected' }}>
                                 {{ $publisher->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="forms__group">
+                    <label class="forms__group-title" for="publisher">
+                        Gatunek
+                    </label>
+                    <select id="publisher" class="forms__input forms__input--bordered" name="publisher">
+                        <option value="all">Wszystkie</option>
+                        @foreach ($inputValues['genres'] as $genre)
+                            <option value="{{ $genre->name }}" {{ !($genre->name == $filters['genre']) ?: 'selected' }}>
+                                {{ $genre->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -86,7 +83,7 @@
 
         </div>
 
-        <div class="books__items">
+        <div class="user-library__items">
             @forelse ($books as $book)
                 <article class="book-item books__book-item">
 
@@ -142,7 +139,7 @@
 
                 </article>
             @empty
-                <div class="notifications books__notifications">
+                <div class="notifications user-library__notifications">
                     <span class="icons icons--x-large notifications__icons far fa-folder-open" aria-hidden="true"></span>
                     Brak książek
                 </div>

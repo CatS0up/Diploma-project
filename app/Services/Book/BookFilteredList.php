@@ -43,6 +43,9 @@ class BookFilteredList extends FilteredList
         if (isset($this->filters['q']))
             $this->filter->setPhrase($this->filters['q']);
 
+        if (isset($this->filters['user_id']))
+            $this->filter->setOwner((int) $this->filters['user_id']);
+
         if (isset($filters['genre']) && $filters['genre'] !== 'all')
             $this->filter->setGenre($this->filters['genre']);
 

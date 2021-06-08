@@ -1,0 +1,16 @@
+.user-library {
+    &__items {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(auto, 300px));
+        justify-content: center;
+
+        @include media("small") {
+            grid-template-columns: repeat(auto-fit, minmax(auto, 250px));
+            justify-content: flex-start;
+        }
+    }
+
+    &__notifications {
+        grid-column: 1/-1;
+    }
+}
