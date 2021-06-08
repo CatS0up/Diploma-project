@@ -7479,3 +7479,28 @@ select {
     align-items: center;
   }
 }
+
+.info-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  gap: 15px;
+  padding: 15px;
+  background-color: #fff;
+  border: 1px solid lightgray;
+}
+.info-item__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  flex-grow: 1;
+}
+.info-item__timestamp {
+  align-self: flex-end;
+  color: #808080;
+  font-size: 0.8rem;
+}

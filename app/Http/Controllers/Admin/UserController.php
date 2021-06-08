@@ -27,7 +27,7 @@ class UserController extends Controller
     public function show(int $id): View
     {
         return view(
-            'dashboard.userProfile',
+            'dashboard.user.show',
             ['user' => $this->user->find($id)]
         );
     }
@@ -39,7 +39,7 @@ class UserController extends Controller
         $filters = $request->only($expectedFilters);
 
         return view(
-            'dashboard.userList',
+            'dashboard.user.list',
             [
                 'users' => $catalog->allFiltered($filters, $expectedFilters),
                 'privilaged' => $this->user->privilaged()->get(),
@@ -52,7 +52,7 @@ class UserController extends Controller
     public function edit(int $id): View
     {
         return view(
-            'dashboard.editUser',
+            'dashboard.user.edit',
             ['user' => $this->user->find($id)]
         );
     }

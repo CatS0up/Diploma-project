@@ -110,22 +110,36 @@
                                 {{ $user->uid }}
                             </div>
                         </td>
+
                         <td class="tables__cell" data-label="Rola">
                             {{ $user->email }}
                         </td>
+
                         <td class="tables__cell" data-label="Rola">
                             {{ $user->personalDetails->firstname }}
                         </td>
+
                         <td class="tables__cell" data-label="Rola">
                             {{ $user->personalDetails->lastname }}
                         </td>
+
                         <td class="tables__cell" data-label="Rola">
                             {{ $user->role->name }}
                         </td>
+
                         <td class="tables__cell" data-label="Opcje">
                             <div class="tables__group">
                                 <a href="{{ route('admin.show.user', ['id' => $user->id]) }}"
                                     class="buttons buttons--primary forms__buttons">Profil</a>
+
+                                @can('delete', $user)
+                                    <form class="forms tables__forms"
+                                        action="{{ route('admin.delete.user', ['id' => $user->id]) }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="buttons buttons--danger forms__buttons">Usuń</button>
+                                    </form>
+                                @endcan
                             </div>
                         </td>
                     </tr>
@@ -263,28 +277,37 @@
                                         {{ $user->uid }}
                                     </div>
                                 </td>
+
                                 <td class="tables__cell" data-label="E-mail">
                                     {{ $user->email }}
                                 </td>
+
                                 <td class="tables__cell" data-label="Nr. telefonu">
                                     {{ $user->personalDetails->firstname }}
                                 </td>
+
                                 <td class="tables__cell" data-label="Ostatnia aktywność">
                                     {{ $user->personalDetails->lastname }}
                                 </td>
+
                                 <td class="tables__cell" data-label="Aktywny">
                                     {{ $user->bookAmount() }}
                                 </td>
+
                                 <td class="tables__cell" data-label="Opcje">
                                     <div class="tables__group">
+
                                         <a href="{{ route('admin.show.user', ['id' => $user->id]) }}"
                                             class="buttons buttons--primary forms__buttons">Profil</a>
-                                        <form class="forms tables__forms"
-                                            action="{{ route('admin.delete.user', ['id' => $user->id]) }}" method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button class="buttons buttons--danger forms__buttons">Usuń</button>
-                                        </form>
+
+                                        @can('delete', $user)
+                                            <form class="forms tables__forms"
+                                                action="{{ route('admin.delete.user', ['id' => $user->id]) }}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="buttons buttons--danger forms__buttons">Usuń</button>
+                                            </form>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

@@ -24,4 +24,9 @@ class UserPolicy
 
         return $user->isAdmin() || $user->id === $model->id;
     }
+
+    public function updateByUser(User $user, User $model)
+    {
+        return $user->id === $model->id;
+    }
 }

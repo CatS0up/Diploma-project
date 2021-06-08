@@ -21,7 +21,7 @@ class PublisherController extends Controller
 
     public function list(PublisherCatalog $publisherList)
     {
-        return view('dashboard.publisherList', [
+        return view('dashboard.publisher.list', [
             'publishers' => $publisherList->allPaginated(),
             'stats' =>  $publisherList->stats()
         ]);

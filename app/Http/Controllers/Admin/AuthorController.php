@@ -23,7 +23,7 @@ class AuthorController extends Controller
     public function list(AuthorCatalog $catalog): View
     {
         return view(
-            'dashboard.authorList',
+            'dashboard.author.list',
             [
                 'authors' => $catalog->allPaginated(),
                 'stats' => $catalog->stats()

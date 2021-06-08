@@ -25,16 +25,20 @@ class ProfileController extends Controller
     public function show(string $uid): View
     {
         return view(
-            'me.profile',
+            'user.show',
             ['user' => $this->user->firstWhere('uid', $uid)]
         );
     }
 
     public function edit(string $uid): View
     {
+        $user = $this->user->firstWhere('uid', $uid);
+
+        $this->authorize('updateByUser', $user);
+
         return view(
             'user.edit',
-            ['user' => $this->user->firstWhere('uid', $uid)]
+            ['user' => $user]
         );
     }
 
@@ -42,10 +46,13 @@ class ProfileController extends Controller
         UserUpdateRequest $request,
         string $uid
     ): RedirectResponse {
+        $user = $this->user->firstWhere('uid', $uid);
+
+        $this->authorize('updateByUser', $user);
 
         $data = $request->validated();
 
-        $this->userService->basicUpdate($this->user->firstWhere('uid', $uid)->id, $data);
+        $this->userService->basicUpdate($user->id, $data);
 
         return redirect()
             ->route(
@@ -56,7 +63,11 @@ class ProfileController extends Controller
 
     public function destroy(string $uid): RedirectResponse
     {
-        $this->userService->delete($this->user->firstWhere('uid', $uid)->id);
+        $user = $this->user->firstWhere('uid', $uid);
+
+        $this->authorize('delete', $user);
+
+        $this->userService->delete($user->id);
 
         return redirect()
             ->route('home')

@@ -23,7 +23,7 @@ class GenreController extends Controller
     public function list(GenreCatalog $catalog): View
     {
         return view(
-            'dashboard.genreList',
+            'dashboard.genre.list',
             [
                 'genres' => $catalog->allPaginated(),
                 'stats' => $catalog->stats()

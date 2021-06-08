@@ -28,7 +28,7 @@ class BookController extends Controller
 
     public function show(int $id): View
     {
-        return view('dashboard.bookItem', ['book' => $this->book->find($id)]);
+        return view('dashboard.book.show', ['book' => $this->book->find($id)]);
     }
 
     public function list(
@@ -39,7 +39,7 @@ class BookController extends Controller
 
         $filters = $request->only($expectedFilters);
 
-        return view('dashboard.bookList', [
+        return view('dashboard.book.list', [
             'books' => $catalog->allFiltered($filters, $expectedFilters),
             'inputValues' => $catalog->inputValues(),
             'filters' => $catalog->filters(),
@@ -49,7 +49,7 @@ class BookController extends Controller
 
     public function create(Publisher $publisher): View
     {
-        return view('dashboard.addBook', ['publishers' => $publisher->get()]);
+        return view('dashboard.book.add', ['publishers' => $publisher->get()]);
     }
 
     public function insert(NewBookRequest $request): RedirectResponse
@@ -64,7 +64,7 @@ class BookController extends Controller
 
     public function edit(Publisher $publisher, int $id): View
     {
-        return view('dashboard.editBook', [
+        return view('dashboard.book.edit', [
             'book' => $this->book->find($id),
             'publishers' => $publisher->get()
         ]);
