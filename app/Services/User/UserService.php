@@ -65,6 +65,30 @@ class UserService
         return $user->delete();
     }
 
+    public function basicUpdate(int $id, array $fields): bool
+    {
+        $user = $this->user->find($id);
+
+        return $user->update(
+            [
+                'uid'         => $fields['uid']         ?? $user->uid,
+                'pwd'         => $fields['new_pwd']     ?? $user->pwd,
+                'email'       => $fields['email']       ?? $user->email,
+                'phone'       => $fields['phone']       ?? $user->phone,
+                'description' => $fields['description'] ?? $user->description,
+            ]
+        );
+
+        if (filter_var($fields['reset_avatar'], FILTER_VALIDATE_BOOLEAN)) {
+
+            $this->file->setOwner($user->id)->deleteAvatar();
+        } else {
+
+            if (isset($fields['avatar']))
+                $this->file->setOwner($user->id)->updateAvatar($fields['avatar']);
+        }
+    }
+
 
     public function update(int $id, array $fields): bool
     {
@@ -82,7 +106,7 @@ class UserService
 
         $isUpdated = $user->update(
             [
-                'address_id'  => $address->id,
+                'address_id'  => $address->id           ?? $user->address_id,
                 'uid'         => $fields['uid']         ?? $user->uid,
                 'pwd'         => $fields['pwd']         ?? $user->pwd,
                 'email'       => $fields['email']       ?? $user->email,

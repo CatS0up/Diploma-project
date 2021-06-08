@@ -46,12 +46,11 @@ class BookFilteredList extends FilteredList
         if (isset($this->filters['user_id']))
             $this->filter->setOwner((int) $this->filters['user_id']);
 
-        if (isset($filters['genre']) && $filters['genre'] !== 'all')
+        if (isset($this->filters['genre']) && $this->filters['genre'] !== 'all')
             $this->filter->setGenre($this->filters['genre']);
 
-        if (isset($filters['publisher']) && $filters['publisher'] !== 'all')
+        if (isset($this->filters['publisher']) && $this->filters['publisher'] !== 'all')
             $this->filter->setPublisher($this->filters['publisher']);
-
 
         return $this->filter
             ->setSort('title', $this->filters['sort'] ?? 'asc')

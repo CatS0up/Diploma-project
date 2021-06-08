@@ -32,8 +32,8 @@ class NewGenreRequest extends FormRequest
     {
         return [
             'name.required' => 'Gatunek nie może być pusty.',
-            'name.unique' => 'Taki gatunek juz istnieje.',
-            'name.max' => 'Maksymalna długość nazyw gatunku :max.'
+            'name.unique'   => 'Taki gatunek juz istnieje.',
+            'name.max'      => 'Maksymalna długość nazyw gatunku :max.'
         ];
     }
 }

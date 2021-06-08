@@ -14,10 +14,12 @@ use Illuminate\View\View;
 class ProfileController extends Controller
 {
     private User $user;
+    private UserService $userService;
 
-    public function __construct(User $user)
+    public function __construct(User $user, UserService $userService)
     {
         $this->user = $user;
+        $this->userService = $userService;
     }
 
     public function show(string $uid): View
@@ -28,33 +30,33 @@ class ProfileController extends Controller
         );
     }
 
-    public function edit(int $id): View
+    public function edit(string $uid): View
     {
         return view(
-            'dashboard.editUser',
-            ['user' => $this->user->find($id)]
+            'user.edit',
+            ['user' => $this->user->firstWhere('uid', $uid)]
         );
     }
 
     public function update(
         UserUpdateRequest $request,
-        int $id
+        string $uid
     ): RedirectResponse {
 
         $data = $request->validated();
 
-        $this->userService->update($id, $data);
+        $this->userService->basicUpdate($this->user->firstWhere('uid', $uid)->id, $data);
 
         return redirect()
             ->route(
                 'admin.show.user',
-                ['id' => $id]
+                ['uid' => $uid]
             )->with('success', 'Profil użytkownika został zaktualizowany.');
     }
 
-    public function destroy(UserService $userService, string $uid): RedirectResponse
+    public function destroy(string $uid): RedirectResponse
     {
-        $userService->delete($this->user->firstWhere('uid', $uid)->id);
+        $this->userService->delete($this->user->firstWhere('uid', $uid)->id);
 
         return redirect()
             ->route('home')

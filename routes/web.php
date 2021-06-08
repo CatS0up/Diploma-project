@@ -151,6 +151,12 @@ Route::prefix('users')
         Route::get('{uid}', [ProfileController::class, 'show'])
             ->name('show');
 
+        Route::get('{uid}/edit', [ProfileController::class, 'edit'])
+            ->name('edit');
+
+        Route::put('{uid}/edit', [ProfileController::class, 'update'])
+            ->name('update');
+
         Route::delete('{uid}/delete', [ProfileController::class, 'destroy'])
             ->name('delete');;
     });

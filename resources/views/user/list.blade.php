@@ -48,10 +48,10 @@
                 </div>
 
                 <div class="forms__group">
-                    <label class="forms__group-title" for="publisher">
+                    <label class="forms__group-title" for="genre">
                         Gatunek
                     </label>
-                    <select id="publisher" class="forms__input forms__input--bordered" name="publisher">
+                    <select id="genre" class="forms__input forms__input--bordered" name="genre">
                         <option value="all">Wszystkie</option>
                         @foreach ($inputValues['genres'] as $genre)
                             <option value="{{ $genre->name }}" {{ !($genre->name == $filters['genre']) ?: 'selected' }}>

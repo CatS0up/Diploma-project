@@ -25,16 +25,16 @@ class NewBookRequest extends FormRequest
     public function rules()
     {
         return [
-            'cover' => 'nullable|file|image',
-            'pdf' => 'required|file|mimes:pdf',
-            'title' => 'required|regex:/^[a-zA-ZzżźćńółęąśŻŹĆĄŚĘŁÓŃ\- ]*$/',
-            'isbn' => ['required', 'numeric', new Isbn(), 'unique:books'],
-            'pages' => 'required|numeric|integer',
-            'publisher' => 'required',
-            'authors' => 'required',
-            'genres' => 'required',
+            'cover'           => 'nullable|file|image',
+            'pdf'             => 'required|file|mimes:pdf',
+            'title'           => 'required|regex:/^[a-zA-ZzżźćńółęąśŻŹĆĄŚĘŁÓŃ\- ]*$/',
+            'isbn'            => ['required', 'numeric', new Isbn(), 'unique:books'],
+            'pages'           => 'required|numeric|integer',
+            'publisher'       => 'required',
+            'authors'         => 'required',
+            'genres'          => 'required',
             'publishing_date' => 'required|date|before_or_equal:today',
-            'description' => 'required'
+            'description'     => 'required'
         ];
     }
 

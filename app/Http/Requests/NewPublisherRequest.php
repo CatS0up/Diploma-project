@@ -32,8 +32,8 @@ class NewPublisherRequest extends FormRequest
     {
         return [
             'name.required' => 'Nazwa wydawcy nie może być pusta.',
-            'name.regex' => 'Nazwa wydawcy może składać się z liter, spacji, - oraz cyfr.',
-            'name.unique' => 'Wydawca o podanej nazwie już istnieje.',
+            'name.regex'    => 'Nazwa wydawcy może składać się z liter, spacji, - oraz cyfr.',
+            'name.unique'   => 'Wydawca o podanej nazwie już istnieje.',
         ];
     }
 }
