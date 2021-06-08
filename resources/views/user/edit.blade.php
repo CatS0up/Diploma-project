@@ -101,6 +101,7 @@
                 <div class="forms__group">
                     <label class="forms__group-title" for="pwd">
                         Hasło
+                        <span class="forms__required-info">*</span>
                     </label>
                     <input id="pwd" class="forms__input" type="password" name="pwd" value="{{ old('pwd') }}">
                     @error('pwd')

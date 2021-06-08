@@ -100,23 +100,25 @@
                 </p>
             </div>
 
-            <div class="profile-page__options">
-                <a class="buttons buttons--success profile-page__buttons"
-                    href="{{ route('admin.edit.user', ['id' => $user->id]) }}">
-                    Edycja
-                </a>
+            @can('update', $user)
+                <div class="profile-page__options">
+                    <a class="buttons buttons--success profile-page__buttons"
+                        href="{{ route('profile.update', ['uid' => $user->uid]) }}">
+                        Edycja
+                    </a>
 
-                @can('delete', $user)
-                    <form class="forms tables__forms" action="{{ route('profile.delete', ['uid' => $user->uid]) }}"
-                        method="post">
-                        @csrf
-                        @method('delete')
-                        <button class="buttons buttons--danger profile-page__buttons">
-                            Usuń
-                        </button>
-                    </form>
-                @endcan
-            </div>
+                    @can('delete', $user)
+                        <form class="forms tables__forms" action="{{ route('profile.delete', ['uid' => $user->uid]) }}"
+                            method="post">
+                            @csrf
+                            @method('delete')
+                            <button class="buttons buttons--danger profile-page__buttons">
+                                Usuń
+                            </button>
+                        </form>
+                    @endcan
+                </div>
+            @endcan
         </div>
     </section>
 @endsection

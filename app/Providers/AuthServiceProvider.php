@@ -2,9 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\Review;
 use App\Models\User;
-use App\Policies\ReviewPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -26,13 +24,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->registerPolicies(
-            [Review::class => ReviewPolicy::class]
-        );
-
-        Gate::define('superadmin-level', function (User $user) {
-            return $user->isSuperadmin();
-        });
+        $this->registerPolicies();
 
         Gate::define('admin-level', function (User $user) {
             return $user->isAdmin();

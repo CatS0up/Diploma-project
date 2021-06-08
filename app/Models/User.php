@@ -90,9 +90,9 @@ class User extends Authenticatable
     }
 
     /* ===> Mutators <=== */
-    public function setPwdAttribute(string $pwd): void
+    public function setPwdAttribute(?string $pwd): void
     {
-        $this->attributes['pwd'] = Hash::make($pwd);
+        $this->attributes['pwd'] = $pwd ? Hash::make($pwd) : $this->pwd;
     }
 
     public function setGenderAttribute(string $gender): void

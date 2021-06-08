@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Policies;
 
 use App\Models\Review;
@@ -14,11 +12,11 @@ class ReviewPolicy
 
     public function create(User $user)
     {
-        return !$user->hasReview();
+        return !$user->has('review');
     }
 
-    public function delete(User $user, Review $reviews)
+    public function delete(User $user, Review $model)
     {
-        return $user->id === $reviews->user_id || $user->isAdmin();
+        return $user->isAdmin() || $user->id === $model->user_id;
     }
 }

@@ -72,7 +72,7 @@ class UserService
         return $user->update(
             [
                 'uid'         => $fields['uid']         ?? $user->uid,
-                'pwd'         => $fields['new_pwd']     ?? $user->pwd,
+                'pwd'         => $fields['new_pwd']     ?? null,
                 'email'       => $fields['email']       ?? $user->email,
                 'phone'       => $fields['phone']       ?? $user->phone,
                 'description' => $fields['description'] ?? $user->description,

@@ -49,7 +49,7 @@ class ProfileController extends Controller
 
         return redirect()
             ->route(
-                'admin.show.user',
+                'profile.show',
                 ['uid' => $uid]
             )->with('success', 'Profil użytkownika został zaktualizowany.');
     }
