@@ -10,13 +10,14 @@ Do poprawnego działania aplikacji należy posiadać zainstalowne:
 Kolejnymi krokami instalacji są
 
 :warning: **Użytkownik bazy danych powinien posiadać uprawnienia do akcji takich jak:**
-* SELECT
-* INSERT
-* UPDATE
-* DELETE
-* CREATE
-* DROP
-* ALTER
+
+-   SELECT
+-   INSERT
+-   UPDATE
+-   DELETE
+-   CREATE
+-   DROP
+-   ALTER
 
 ```
 # Przejście do katalogu z aplikacją
