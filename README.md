@@ -9,7 +9,14 @@ Do poprawnego działania aplikacji należy posiadać zainstalowne:
 
 Kolejnymi krokami instalacji są
 
-:warning: **If you are using mobile browser**: Be very careful here!
+:warning: **Użytkownik bazy danych powinien posiadać uprawnienia do akcji takich jak:**
+* SELECT
+* INSERT
+* UPDATE
+* DELETE
+* CREATE
+* DROP
+* ALTER
 
 ```
 # Przejście do katalogu z aplikacją
