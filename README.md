@@ -32,9 +32,9 @@ $ DB_PASSWORD= "HASŁO UŻYTKOWNIKA"
 
 # Uruchomienie migracji, w tym przypadku mamy do wyboru 2 opcje
 
-# Migrację samej struktury bazy danych
+* Migrację samej struktury bazy danych
 php artisan migrate
 
-# Migrację bazy danych wypełnionej użytkownikami
+* Migrację bazy danych wypełnionej użytkownikami
 php artisan migrate --seed
 ```
