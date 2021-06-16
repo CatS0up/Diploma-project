@@ -9,6 +9,8 @@ Do poprawnego działania aplikacji należy posiadać zainstalowne:
 
 Kolejnymi krokami instalacji są
 
+:warning: **If you are using mobile browser**: Be very careful here!
+
 ```
 # Przejście do katalogu z aplikacją
 $ cd Diploma-project
